@@ -430,6 +430,14 @@ sub,sup{font-size:.72em}
 }
 .ar-note ul{padding-right:1.2em;padding-left:0;margin:6px 0 0;max-width:none}
 
+.ar-note p{margin:0 0 7px;max-width:none}
+.ar-note p:last-child{margin-bottom:0}
+.ar-note ol{padding-right:1.3em;padding-left:0;margin:6px 0 0;max-width:none}
+.ar-note li{margin-bottom:5px}
+.ar-note .v{font-size:.84em}
+.arn{display:block;font-family:var(--arabic);direction:rtl;unicode-bidi:isolate;text-align:left;font-size:.84rem;color:var(--fg-soft);font-weight:500;margin-top:2px;line-height:1.5}
+.subtitle-ar{font-family:var(--arabic);direction:rtl;text-align:right;color:var(--fg-soft);font-size:1.02rem;margin:0 0 8px;max-width:none;line-height:1.9}
+
 /* ---------- tables ---------- */
 .tbl-wrap{overflow-x:auto;margin:18px 0 22px;-webkit-overflow-scrolling:touch}
 table{
@@ -568,6 +576,7 @@ footer p{max-width:none}
   <p class="eyebrow">Sultan Qaboos University · College of Science · STAT 2101</p>
   <h1>Probability and Counting Rules</h1>
   <p class="subtitle">Chapter 4 — the complete, exam-weighted rebuild of Dr. Ahmed Al-Hadhrami's lecture notes, mapped line-by-line to the Fall 2026 course outline.</p>
+  <p class="subtitle-ar">الفصل الرابع: الاحتمالات وقواعد العدّ — ملخص شامل بالإنجليزية مع شرح عربي لكل مفهوم ومثال وقانون.</p>
   <div class="meta-strip">
     <span class="chip"><strong>Weeks</strong> 5–6</span>
     <span class="chip"><strong>Sections</strong> 4-1 → 4-5</span>
@@ -648,6 +657,11 @@ footer p{max-width:none}
 
   <h3>Grade arithmetic: what A actually costs</h3>
   <p>The A–F scale puts <strong>A at ≥ 90</strong> and A− at ≥ 86. With In-Class Quizzes 15%, Lab Quiz 10%, Active Learning 5%, Midterm 25% and Final 45%, Chapter 4 content appears in at least four of those five buckets. A clean Chapter 4 is worth more than any single other chapter in the first half of the course, because it is the last chapter on the midterm <em>and</em> the foundation of Chapters 5 and 6 on the final.</p>
+  <div class="ar-note">
+    <span class="lbl">لماذا هذا الفصل مهم لدرجتك؟</span>
+    <p>الـ A تبدأ من <span class="v" dir="ltr">90</span>. الفصل الرابع يدخل في أربعة من خمسة تقييمات على الأقل، وهو <b>آخر فصل في الميدتيرم</b>، و<b>الأساس الذي يُبنى عليه الفصلان الخامس والسادس</b> في النهائي (التوزيع ذو الحدين والتوزيع الطبيعي كلاهما احتمالات). أي ضعف هنا ينتقل معك إلى نهاية الفصل الدراسي، وأي إتقان هنا يسهّل عليك ما بعده.</p>
+  </div>
+
 </section>
 
 <!-- ============================================================ -->
@@ -670,12 +684,12 @@ footer p{max-width:none}
     <table>
       <thead><tr><th style="width:30%">Term</th><th>Definition (exam wording)</th><th style="width:26%">Example</th></tr></thead>
       <tbody>
-        <tr><td><span class="term">Probability experiment</span></td><td>A chance process that leads to well-defined results called outcomes.</td><td>Rolling two dice.</td></tr>
-        <tr><td><span class="term">Outcome</span></td><td>The result of a <em>single trial</em> of a probability experiment.</td><td>Getting (5, 4).</td></tr>
-        <tr><td><span class="term">Sample space <span class="v">S</span></span></td><td>The set of <em>all possible</em> outcomes of a probability experiment. The number of elements in <span class="v">S</span> is <span class="v">n(S)</span>.</td><td><span class="v">S</span> = all 36 dice pairs.</td></tr>
-        <tr><td><span class="term">Event</span></td><td>A set of outcomes of a probability experiment. Denoted <span class="v">A, B, C…</span> or <span class="v">E₁, E₂, E₃…</span></td><td><span class="v">E</span> = "sum is 7".</td></tr>
-        <tr><td><span class="term">Simple event</span></td><td>An event with <strong>one</strong> outcome.</td><td>"All three children are boys" = {BBB}.</td></tr>
-        <tr><td><span class="term">Compound event</span></td><td>An event consisting of <strong>two or more</strong> outcomes.</td><td>"Exactly two girls" = {BGG, GBG, GGB}.</td></tr>
+        <tr><td><span class="term">Probability experiment</span><span class="arn">التجربة الاحتمالية</span></td><td>A chance process that leads to well-defined results called outcomes.</td><td>Rolling two dice.</td></tr>
+        <tr><td><span class="term">Outcome</span><span class="arn">النتيجة</span></td><td>The result of a <em>single trial</em> of a probability experiment.</td><td>Getting (5, 4).</td></tr>
+        <tr><td><span class="term">Sample space <span class="v">S</span></span><span class="arn">فضاء العينة</span></td><td>The set of <em>all possible</em> outcomes of a probability experiment. The number of elements in <span class="v">S</span> is <span class="v">n(S)</span>.</td><td><span class="v">S</span> = all 36 dice pairs.</td></tr>
+        <tr><td><span class="term">Event</span><span class="arn">الحدث</span></td><td>A set of outcomes of a probability experiment. Denoted <span class="v">A, B, C…</span> or <span class="v">E₁, E₂, E₃…</span></td><td><span class="v">E</span> = "sum is 7".</td></tr>
+        <tr><td><span class="term">Simple event</span><span class="arn">الحدث البسيط</span></td><td>An event with <strong>one</strong> outcome.</td><td>"All three children are boys" = {BBB}.</td></tr>
+        <tr><td><span class="term">Compound event</span><span class="arn">الحدث المركّب</span></td><td>An event consisting of <strong>two or more</strong> outcomes.</td><td>"Exactly two girls" = {BGG, GBG, GGB}.</td></tr>
       </tbody>
     </table>
   </div>
@@ -687,7 +701,12 @@ footer p{max-width:none}
 
   <h3>2 · Writing sample spaces — the three standard devices</h3>
 
-  <h4>Device 1 — The grid (two dice)</h4>
+  
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — كيف أكتب فضاء العينة؟</span>
+    <p>قبل حساب أي احتمال يجب أن تكتب <b>فضاء العينة كاملًا</b> دون أن تنسى أي نتيجة، لأن المقام في كل قانون هو <span class="v" dir="ltr">n(S)</span>. توجد ثلاث طرق:</p><ol><li><b>الجدول:</b> مناسب لرمي حجري نرد — <span class="v" dir="ltr">6 × 6 = 36</span> نتيجة على شكل أزواج مرتبة.</li><li><b>السرد المنظّم:</b> تكتب النتائج بترتيب ثابت (كل الأولاد أولًا، ثم بنت واحدة في كل موقع، ثم بنتان...) حتى لا تسقط نتيجة.</li><li><b>شجرة الاحتمالات:</b> كل مرحلة تتفرع إلى احتمالاتها، وعدد الأطراف النهائية = عدد النتائج. الشجرة هي <b>الدليل</b> على أنك لم تنسَ شيئًا.</li></ol>
+  </div>
+<h4>Device 1 — The grid (two dice)</h4>
   <div class="ex">
     <div class="q"><span class="tag">Example 4-1 · Rolling Dice</span><p>Find the sample space for rolling two dice.</p></div>
     <div class="a">
@@ -743,6 +762,11 @@ footer p{max-width:none}
     <p class="fx"><strong>Complement</strong> &nbsp; Ā &nbsp;or&nbsp; A<sup>c</sup> &nbsp;—&nbsp; read "<strong>not A</strong>" — all outcomes in S that are <em>not</em> in A.</p>
     <p class="note">In probability, "or" is always <em>inclusive</em>: A or B or both. This is not the everyday English "or". It is the single most common source of lost marks in §4-2.</p>
   </div>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — مخطط فن والعمليات على الأحداث</span>
+    <p><b>مخطط فن (<b dir="ltr">Venn diagram</b>):</b> مستطيل يمثل فضاء العينة <span class="v" dir="ltr">S</span>، وبداخله دوائر تمثل الأحداث.</p><ul><li><b>الاتحاد</b> <span class="v" dir="ltr">A ∪ B</span> ويُقرأ <b dir="ltr">A or B</b>: كل العناصر الموجودة في <span class="v" dir="ltr">A</span> أو في <span class="v" dir="ltr">B</span> <b>أو في الاثنين معًا</b>.</li><li><b>التقاطع</b> <span class="v" dir="ltr">A ∩ B</span> ويُقرأ <b dir="ltr">A and B</b>: العناصر <b>المشتركة فقط</b> بين الحدثين.</li><li><b>المتمّمة</b> <span class="v" dir="ltr">Ā</span> أو <span class="v" dir="ltr">Aᶜ</span> وتُقرأ <b dir="ltr">not A</b>: كل عناصر <span class="v" dir="ltr">S</span> التي <b>ليست</b> في <span class="v" dir="ltr">A</span>.</li></ul><p><b>تنبيه:</b> كلمة <b dir="ltr">or</b> في الاحتمال تعني «أحدهما أو كلاهما» دائمًا، وليست «أحدهما فقط» كما في الكلام اليومي. والمتمّمة تُحسب من داخل <span class="v" dir="ltr">S</span> فقط — في المثال أعلاه الرقم <span class="v" dir="ltr">8</span> يدخل في <span class="v" dir="ltr">Ā</span> لأنه ليس من عوامل 12.</p>
+  </div>
+
 
   <div class="ex">
     <div class="q"><span class="tag">Worked example · 12-sided die</span><p>Roll a 12-sided die once. <span class="v">S</span> = {1,…,12}. Let <span class="v">A</span> = factors of 12 and <span class="v">B</span> = factors of 8. Represent S, A, B on a Venn diagram, then find (a) <span class="v">A ∪ B</span>, (b) <span class="v">A ∩ B</span>, (c) <span class="v">Ā</span>, (d) <span class="v">(A ∪ B)<sup>c</sup></span>.</p></div>
@@ -782,7 +806,12 @@ footer p{max-width:none}
     </div>
   </div>
 
-  <h4>Classical probability</h4>
+  
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — أنواع الاحتمال الثلاثة</span>
+    <ul><li><b>الكلاسيكي (<b dir="ltr">Classical</b>):</b> يُحسب من فضاء العينة <b>قبل</b> إجراء أي تجربة، بشرط أن تكون كل النتائج متساوية الفرص. مثال: احتمال ظهور <span class="v" dir="ltr">3</span> عند رمي نرد = <span class="v" dir="ltr">1/6</span>.</li><li><b>التجريبي (<b dir="ltr">Empirical</b>):</b> يُحسب من <b>بيانات جُمعت فعلًا</b> — جدول تكراري أو استبيان — ويساوي التكرار ÷ المجموع.</li><li><b>الشخصي (<b dir="ltr">Subjective</b>):</b> تقدير مبني على <b>رأي أو خبرة</b> شخص، بلا عدّ وبلا بيانات.</li></ul><p><b>طريقة التمييز في الامتحان:</b> فضاء عينة يُعدّ ← كلاسيكي. جدول أو «في استبيان شمل n شخصًا» ← تجريبي. رأي خبير ← شخصي.</p>
+  </div>
+<h4>Classical probability</h4>
   <p><span class="term">Equally likely events</span> are events that have the same probability of occurring. The classical probability of any event <span class="v">E</span> of a sample space <span class="v">S</span> is:</p>
   <div class="formula">
     <div class="label">Classical probability</div>
@@ -811,6 +840,11 @@ footer p{max-width:none}
     <p class="fx">(4) &nbsp; The sum of the probabilities of all outcomes in S equals 1.</p>
     <p class="note">The probability line: 0 = Impossible · ~0.25 = Unlikely · 0.5 = 50–50 · ~0.75 = Likely · 1 = Certain.</p>
   </div>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — القانون الكلاسيكي وقواعد الاحتمال</span>
+    <p><b>الاحتمال الكلاسيكي</b> = عدد النتائج التي تحقق الحدث ÷ عدد كل النتائج الممكنة: <span class="v" dir="ltr">P(E) = n(E) / n(S)</span>.</p><p><b>قواعد الاحتمال الأربع:</b></p><ol><li>الاحتمال دائمًا بين الصفر والواحد: <span class="v" dir="ltr">0 ≤ P(E) ≤ 1</span>.</li><li>إذا كان <span class="v" dir="ltr">P(E) = 0</span> فالحدث <b>مستحيل</b> (مثل ظهور 9 على نرد عادي).</li><li>إذا كان <span class="v" dir="ltr">P(E) = 1</span> فالحدث <b>مؤكد</b> (مثل ظهور عدد أقل من 7).</li><li>مجموع احتمالات كل النتائج في فضاء العينة = <span class="v" dir="ltr">1</span>.</li></ol><p>استخدم القاعدة الأولى لفحص كل إجابة: أي احتمال <b>سالب</b> أو <b>أكبر من 1</b> يعني أن في الحل خطأ. وتذكّر أن الدكتور يطلب كتابة فضاء العينة والحدث <b>بصيغة المجموعات</b> {…} — عليها درجات.</p>
+  </div>
+
 
   <div class="ex">
     <div class="q"><span class="tag">Examples 4-8 &amp; 4-9 · Rolling a Die</span><p>(a) When a single die is rolled, find the probability of getting a 9. &nbsp;(b) When a single die is rolled, what is the probability of getting a number less than 7?</p></div>
@@ -831,6 +865,11 @@ footer p{max-width:none}
     <p class="fx">P(Ē) = 1 − P(E) &nbsp;&nbsp;or&nbsp;&nbsp; P(E) = 1 − P(Ē) &nbsp;&nbsp;or&nbsp;&nbsp; P(E) + P(Ē) = 1</p>
     <p class="note">This is the highest-leverage formula in the chapter. Whenever a question contains "<strong>not</strong>", "<strong>at least one</strong>", "<strong>neither</strong>", or "<strong>none</strong>", reach for it before you do anything else.</p>
   </div>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — المتمّمة</span>
+    <p>متمّمة الحدث <span class="v" dir="ltr">E</span> هي كل النتائج التي <b>لا تحقق</b> <span class="v" dir="ltr">E</span>. وبما أن الحدث إما أن يقع أو لا يقع، فمجموع الاحتمالين = 1، ومنه:</p><p style="text-align:center"><span class="v" dir="ltr">P(Ē) = 1 − P(E)</span></p><p><b>متى تستخدمها؟</b> عندما ترى في السؤال: <b dir="ltr">not</b> (ليس)، <b dir="ltr">neither … nor</b> (لا هذا ولا ذاك)، <b dir="ltr">none</b> (ولا واحد)، <b dir="ltr">at least one</b> (واحد على الأقل). هذه القاعدة كثيرًا ما تحوّل سؤالًا طويلًا إلى عملية طرح واحدة. مثال: 23% يفضّلون الفانيلا، إذن احتمال <b>ليس</b> الفانيلا = <span class="v" dir="ltr">1 − 0.23 = 0.77</span>.</p>
+  </div>
+
 
   <div class="ex">
     <div class="q"><span class="tag">Example 4-10 · Finding Complements</span><p>Find the complement of each event: (a) selecting a month that has 30 days; (b) selecting a day of the week that begins with the letter S; (c) rolling two dice and getting a number whose sum is 7.</p></div>
@@ -862,6 +901,11 @@ footer p{max-width:none}
     <p class="fx">P(E) = <span class="frac"><span class="num">frequency for the class</span><span class="den">total frequencies in the distribution</span></span> = <span class="frac"><span class="num">f</span><span class="den">n</span></span></p>
     <p class="note"><span class="v">f</span> = frequency of the class (event); <span class="v">n</span> = the sample size. Based on <strong>observation</strong>, not on assuming equally likely outcomes.</p>
   </div>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — الاحتمال التجريبي</span>
+    <p>يُحسب من البيانات المجموعة: <span class="v" dir="ltr">P(E) = f / n</span>، حيث <span class="v" dir="ltr">f</span> تكرار الفئة و <span class="v" dir="ltr">n</span> حجم العينة الكلي. مثال: سألت 50 شخصًا وأجاب 3 منهم «قطار أو حافلة»، فالاحتمال <span class="v" dir="ltr">3/50 = 0.06</span>.</p><p><b>نصيحة:</b> اجمع عمود التكرارات وتأكد أنه يساوي <span class="v" dir="ltr">n</span>، واجمع عمود الاحتمالات وتأكد أنه يساوي <span class="v" dir="ltr">1</span>. وإذا طُلب احتمال فئتين معًا (A أو B) فاجمع تكراريهما ثم اقسم.</p>
+  </div>
+
 
   <div class="ex">
     <div class="q"><span class="tag">Example 4-12 · Travel Survey</span><p>A researcher asked 50 people who plan to travel over the Thanksgiving holiday how they will get to their destination: Drive 41, Fly 6, Train or bus 3. Find the probability that a person will travel by train or bus.</p></div>
@@ -954,6 +998,11 @@ footer p{max-width:none}
     <li>A physician might say that, on the basis of her diagnosis, there is a <strong>30% chance</strong> the patient will need an operation.</li>
     <li>A seismologist might say there is an <strong>80% probability</strong> that an earthquake will occur in a certain area.</li>
   </ul>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — الاحتمال الشخصي</span>
+    <p>رقم يعطيه شخص بناءً على <b>خبرته أو رأيه</b>، مثل قول محلل رياضي إن احتمال فوز منتخب عُمان بكأس الخليج <span class="v" dir="ltr">70%</span>، أو قول طبيب إن احتمال حاجة المريض لعملية <span class="v" dir="ltr">30%</span>. لا يوجد فضاء عينة يُعدّ ولا جدول بيانات — مجرد تقدير مدروس. غالبًا يأتي في الامتحان كسؤال: «ما نوع هذا الاحتمال؟»</p>
+  </div>
+
   <div class="callout tip">
     <span class="ct">How this is examined</span>
     <p>You will be shown a statement and asked <em>which type of probability is this?</em> The tell: counting a sample space → <strong>classical</strong>. A frequency table or "in a survey of n people" → <strong>empirical</strong>. An expert's opinion with no data behind it → <strong>subjective</strong>. One mark, two seconds, never miss it.</p>
@@ -980,6 +1029,11 @@ footer p{max-width:none}
     <p class="fx">A and B are mutually exclusive &nbsp;⟺&nbsp; A ∩ B = ∅</p>
     <p class="note"><span class="v">∅</span> is the null (empty) set. On a Venn diagram, mutually exclusive events are drawn as two circles that <strong>do not overlap</strong>.</p>
   </div>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — الأحداث المتنافية</span>
+    <p><b>الحدثان المتنافيان</b> (<b dir="ltr">mutually exclusive</b> أو <b dir="ltr">disjoint</b>) هما حدثان <b>لا يمكن أن يقعا في نفس الوقت</b>، أي لا يوجد بينهما أي عنصر مشترك: <span class="v" dir="ltr">A ∩ B = ∅</span>. على مخطط فن تكون الدائرتان منفصلتين تمامًا.</p><p><b>مثال:</b> عند رمي نرد، «عدد زوجي» <span class="v" dir="ltr">&#123;2, 4, 6&#125;</span> و«عدد فردي» <span class="v" dir="ltr">&#123;1, 3, 5&#125;</span> متنافيان. أما «عدد زوجي» و«عامل من عوامل 4» <span class="v" dir="ltr">&#123;1, 2, 4&#125;</span> فغير متنافيين لأن <span class="v" dir="ltr">2</span> و <span class="v" dir="ltr">4</span> مشتركان.</p><p><b>طريقة الإجابة الكاملة:</b> اكتب التقاطع صراحةً ثم احكم — لا تكتفِ بـ «نعم» أو «لا».</p>
+  </div>
+
 
   <div class="ex">
     <div class="q"><span class="tag">Worked example · Rolling one die</span><p>S = {1, 2, 3, 4, 5, 6}. A = getting an even number = {2, 4, 6}; B = getting an odd number = {1, 3, 5}; C = getting a factor of 4 = {1, 2, 4}. (a) Are A and B mutually exclusive? (b) Are A and C mutually exclusive?</p></div>
@@ -1014,6 +1068,11 @@ footer p{max-width:none}
     <p class="fx">P(A ∪ B) = P(A) + P(B) − P(A ∩ B)</p>
     <p class="note">The overlap gets counted once in P(A) and once again in P(B), so it must be subtracted once to be counted correctly. On the Venn diagram this is the shaded lens in the middle.</p>
   </div>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — قاعدتا الجمع</span>
+    <p>قاعدة الجمع تجيب عن سؤال واحد: <b>ما احتمال A أو B؟</b></p><ul><li><b>إذا كان الحدثان متنافيين:</b> نجمع مباشرة <span class="v" dir="ltr">P(A) + P(B)</span>.</li><li><b>إذا كانا غير متنافيين:</b> نجمع ثم <b>نطرح التقاطع مرة واحدة</b>: <span class="v" dir="ltr">P(A) + P(B) − P(A ∩ B)</span>، لأن المنطقة المشتركة حُسبت مرتين — مرة داخل A ومرة داخل B.</li></ul><p><b>مثال:</b> 8 ممرضين و 5 أطباء؛ منهم ممرض واحد ذكر وطبيبان ذكور. احتمال (ممرض أو ذكر) = <span class="v" dir="ltr">8/13 + 3/13 − 1/13 = 10/13</span>، لأن الممرض الذكر دخل في العدّ مرتين.</p>
+  </div>
+
 
   <div class="callout tip">
     <span class="ct">Use Rule #2 always — it is safe</span>
@@ -1131,6 +1190,11 @@ footer p{max-width:none}
     <p>These two ideas are constantly confused and the lecturer calls it out explicitly. When tossing a <strong>single</strong> coin, the result can be either heads or tails but <strong>cannot be both</strong> — those are <em>mutually exclusive</em> events. When tossing <strong>two</strong> coins, the result of one flip <strong>does not affect</strong> the result of the other — those are <em>independent</em> events.</p>
     <p style="margin-top:8px"><strong>The deeper point:</strong> mutually exclusive events (with non-zero probabilities) are in fact <em>dependent</em>. If A happens, you know for certain B did not — knowing about A changed everything about B. Mutually exclusive is about <em>overlap</em>; independent is about <em>influence</em>.</p>
   </div>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — أهم فكرة في القسم: الاستقلال والتبعية</span>
+    <ul><li><b>المستقلان (<b dir="ltr">independent</b>):</b> وقوع أحدهما <b>لا يغيّر</b> احتمال الآخر. مثال: رمي عملتين — نتيجة الأولى لا تؤثر في الثانية.</li><li><b>التابعان (<b dir="ltr">dependent</b>):</b> وقوع أحدهما <b>يغيّر</b> احتمال الآخر. مثال: سحب كرتين بدون إرجاع — السحبة الأولى تغيّر ما تبقى في الصندوق.</li></ul><p><b>لا تخلط بين المفهومين:</b> «متنافيان» سؤاله «هل يوجد تداخل؟»، و«مستقلان» سؤاله «هل يؤثر أحدهما في الآخر؟». بل إن الحدثين المتنافيين (باحتمالات غير صفرية) يكونان <b>تابعين</b>، لأن وقوع A يجعل وقوع B مستحيلًا — أي أنه أثّر فيه بالكامل.</p>
+  </div>
+
 
   <h4>Spotting dependence in a word problem</h4>
   <ul>
@@ -1139,6 +1203,11 @@ footer p{max-width:none}
     <li><strong>Separate devices</strong> (a coin <em>and</em> a die, three different people chosen from a large population) → independent.</li>
     <li><strong>"Of these clients…", "of those who…"</strong> → dependent; you are being given a conditional probability.</li>
   </ul>
+  <div class="ar-note">
+    <span class="lbl">كيف أعرف من صياغة السؤال؟</span>
+    <ul><li><b dir="ltr">with replacement</b> / <b dir="ltr">then it is replaced</b> (مع الإرجاع) ← <b>مستقلان</b>، الاحتمال يتكرر كما هو.</li><li><b dir="ltr">without replacement</b> (بدون إرجاع) ← <b>تابعان</b>، البسط والمقام يتغيران في السحبة الثانية.</li><li>أدوات منفصلة (عملة ونرد، أشخاص من مجتمع كبير) ← <b>مستقلان</b>.</li><li><b dir="ltr">of these</b> / <b dir="ltr">of those who</b> (من بين هؤلاء) ← هذا <b>احتمال شرطي</b>، والحدثان تابعان.</li></ul>
+  </div>
+
 
   <h3>2 · The multiplication rules</h3>
   <div class="formula">
@@ -1151,6 +1220,11 @@ footer p{max-width:none}
     <p class="fx">P(A ∩ B) = P(B | A) · P(A)</p>
     <p class="note">Both forms are correct — use whichever conditional probability the question hands you. In practice the question gives one unconditional probability and one conditional one; multiply them.</p>
   </div>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — قاعدتا الضرب</span>
+    <p>قاعدة الضرب تجيب عن سؤال: <b>ما احتمال A و B معًا؟</b></p><ul><li><b>إذا كانا مستقلين:</b> <span class="v" dir="ltr">P(A ∩ B) = P(A) × P(B)</span>. مثال: صورة في العملة و 4 في النرد = <span class="v" dir="ltr">1/2 × 1/6 = 1/12</span>.</li><li><b>إذا كانا تابعين:</b> <span class="v" dir="ltr">P(A ∩ B) = P(A) × P(B | A)</span>، أي احتمال الأول × احتمال الثاني <b>بشرط</b> وقوع الأول. مثال: 53% لديهم تأمين منزل، و<b>من بين هؤلاء</b> 27% لديهم تأمين سيارة ← <span class="v" dir="ltr">0.53 × 0.27 = 0.1431</span>.</li></ul><p><b>القاعدة الذهبية:</b> <b dir="ltr">and</b> تعني <b>ضرب</b>، و <b dir="ltr">or</b> تعني <b>جمع</b>.</p>
+  </div>
+
 
   <div class="ex">
     <div class="q"><span class="tag">Example 4-23 · Tossing a Coin</span><p>A coin is flipped and a die is rolled. Find the probability of getting a head on the coin <em>and</em> a 4 on the die.</p></div>
@@ -1235,6 +1309,11 @@ footer p{max-width:none}
 
   <h3>3 · Tree diagrams with branch probabilities</h3>
   <p>When an experiment happens in stages and the second stage depends on the first, a tree diagram is not optional decoration — it is the method. Multiply <em>along</em> branches, add <em>across</em> the branches that satisfy the event.</p>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — شجرة الاحتمالات</span>
+    <p>عندما تتم التجربة على <b>مراحل</b> (مثلًا: رمي عملة لاختيار صندوق، ثم سحب كرة منه)، ارسم شجرة:</p><ul><li><b>على طول الفرع:</b> اضرب الاحتمالات — هذا احتمال مسار واحد.</li><li><b>بين الفروع:</b> اجمع احتمالات كل المسارات التي تحقق الحدث المطلوب.</li><li><b>للتأكد:</b> مجموع احتمالات كل المسارات النهائية يجب أن يساوي <span class="v" dir="ltr">1</span>.</li></ul>
+  </div>
+
 
   <div class="ex">
     <div class="q"><span class="tag">Example 4-31 · Selecting Colored Balls</span><p>Box 1 contains 2 red balls and 1 blue ball. Box 2 contains 3 blue balls and 1 red ball. A coin is tossed: heads → box 1 is selected and a ball is drawn; tails → box 2 is selected and a ball is drawn. Find the probability of selecting a red ball.</p></div>
@@ -1268,6 +1347,11 @@ footer p{max-width:none}
     <p class="fx">If A and B are independent: &nbsp; P(B | A) = <span class="frac"><span class="num">P(A ∩ B)</span><span class="den">P(A)</span></span> = P(B)</p>
     <p class="note">Knowing A happened tells you nothing new about B — which is exactly what "independent" means. This doubles as the <strong>test for independence</strong>.</p>
   </div>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — الاحتمال الشرطي</span>
+    <p><span class="v" dir="ltr">P(B | A)</span> يُقرأ «احتمال B <b>بشرط</b> أن A قد وقع». معناه أننا نعرف مسبقًا أن A حدث، فنحصر أنفسنا داخل A فقط ونعتبره فضاء العينة الجديد.</p><p style="text-align:center"><span class="v" dir="ltr">P(B | A) = P(A ∩ B) ÷ P(A)</span> — <b>الشرط دائمًا في المقام</b></p><p><b>مثال:</b> احتمال أن يوقف سام سيارته في مكان ممنوع <b>و</b> يحصل على مخالفة <span class="v" dir="ltr">0.06</span>، واحتمال أن يوقفها في مكان ممنوع <span class="v" dir="ltr">0.20</span>. إذا أوقفها فعلًا في مكان ممنوع، فاحتمال المخالفة = <span class="v" dir="ltr">0.06 ÷ 0.20 = 0.30</span>.</p><p><b>اختبار الاستقلال:</b> إذا كان <span class="v" dir="ltr">P(B | A) = P(B)</span> — أو <span class="v" dir="ltr">P(A ∩ B) = P(A) × P(B)</span> — فالحدثان مستقلان، أي أن معرفة A لم تغيّر شيئًا.</p><p><b>كلمات الشرط في السؤال:</b> <b dir="ltr">given that</b>، <b dir="ltr">if</b>، <b dir="ltr">of those who</b>، أو حقيقة مذكورة على أنها وقعت («وصل سام واضطر للوقوف في مكان ممنوع»).</p>
+  </div>
+
 
   <div class="ex">
     <div class="q"><span class="tag">Example 4-32 · Selecting Colored Chips</span><p>A box contains black chips and white chips. A person selects two chips <strong>without replacement</strong>. If the probability of selecting a black chip and a white chip is 15/56, and the probability of selecting a black chip on the first draw is 3/8, find the probability of selecting the white chip on the second draw, <em>given</em> that the first chip selected was a black chip.</p></div>
@@ -1357,6 +1441,11 @@ footer p{max-width:none}
     <p class="fx">P(at least one) = 1 − P(none)</p>
     <p class="note">"At least one" has many ways to happen (exactly one, exactly two, exactly three, …) but its complement — "none" — has exactly one. Compute the easy side and subtract.</p>
   </div>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — «واحد على الأقل»</span>
+    <p>«واحد على الأقل» له طرق كثيرة للحدوث (واحد، اثنان، ثلاثة...)، لكن عكسه «ولا واحد» له طريقة <b>واحدة فقط</b>. لذلك:</p><p style="text-align:center"><span class="v" dir="ltr">P(at least one) = 1 − P(none)</span></p><p><b>مثال:</b> رمي نرد 3 مرات، احتمال ظهور 5 مرة واحدة على الأقل = <span class="v" dir="ltr">1 − (5/6)³ = 1 − 125/216 ≈ 0.4213</span>.</p><p>كلما رأيت <b dir="ltr">at least</b> في السؤال، فكّر في المتمّمة قبل أي شيء آخر.</p>
+  </div>
+
 
   <div class="ex">
     <div class="q"><span class="tag">Illustration · the standard shape</span><p>A single die is rolled 3 times. Find the probability of getting <strong>at least one</strong> 5.</p></div>
@@ -1396,6 +1485,11 @@ footer p{max-width:none}
     <p class="fx">In a sequence of <em>n</em> events in which the first has <em>k</em><sub>1</sub> possibilities, the second has <em>k</em><sub>2</sub>, the third has <em>k</em><sub>3</sub>, and so on, the total number of possibilities of the sequence is</p>
     <p class="fx">k<sub>1</sub> × k<sub>2</sub> × ⋯ × k<sub>n</sub></p>
   </div>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — قاعدة العدّ الأساسية</span>
+    <p>إذا كان لديك سلسلة من الاختيارات — الأول له <span class="v" dir="ltr">k₁</span> طريقة، والثاني <span class="v" dir="ltr">k₂</span>، والثالث <span class="v" dir="ltr">k₃</span>... — فعدد كل الاحتمالات = <b>حاصل ضربها</b>.</p><p><b>مثال:</b> 7 ألوان × 2 نوع × 3 ملمس × 2 استخدام = <span class="v" dir="ltr">84</span> نوع دهان.</p><ul><li><b>مع التكرار</b> (<b dir="ltr">repetition allowed</b>): الأرقام تبقى كما هي من اليسار لليمين ← <span class="v" dir="ltr">10 × 10 × 10 × 10 = 10,000</span>.</li><li><b>بدون تكرار</b> (<b dir="ltr">not allowed</b>): الأرقام تنقص واحدًا في كل خانة ← <span class="v" dir="ltr">10 × 9 × 8 × 7 = 5,040</span>.</li></ul>
+  </div>
+
 
   <div class="ex">
     <div class="q"><span class="tag">Example 4-38 · Tossing a Coin and Rolling a Die</span><p>A coin is tossed and a die is rolled. Find the number of outcomes for the sequence of events.</p></div>
@@ -1439,6 +1533,11 @@ footer p{max-width:none}
     <p class="fx">0! = 1</p>
     <p class="note">Examples: 5! = 5 · 4 · 3 · 2 · 1 = 120 &nbsp;·&nbsp; 9! = 9 · 8 · 7 · 6 · 5 · 4 · 3 · 2 · 1 = 362,880</p>
   </div>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — المضروب</span>
+    <p>المضروب <span class="v" dir="ltr">n!</span> (يُقرأ <b dir="ltr">n factorial</b>) هو حاصل ضرب كل الأعداد من <span class="v" dir="ltr">n</span> نزولًا إلى <span class="v" dir="ltr">1</span>، مثل <span class="v" dir="ltr">5! = 5×4×3×2×1 = 120</span>. وهو يساوي <b>عدد طرق ترتيب n أشياء مختلفة في صف</b>.</p><p><b>تعريف مهم جدًا:</b> <span class="v" dir="ltr">0! = 1</span> وليس صفرًا.</p>
+  </div>
+
 
   <div class="tbl-wrap">
     <table>
@@ -1465,6 +1564,11 @@ footer p{max-width:none}
     <p class="fx"><sub>n</sub>P<sub>r</sub> = <span class="frac"><span class="num">n!</span><span class="den">(n − r)!</span></span></p>
     <p class="note">Casio: to compute <span class="v"><sub>7</sub>P<sub>4</sub></span> → <span class="keypad">7 &nbsp;SHIFT&nbsp; × (nPr) &nbsp;4 &nbsp;=</span></p>
   </div>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — التباديل (الترتيب مهم)</span>
+    <p><span class="v" dir="ltr">nPr</span> = عدد طرق اختيار <span class="v" dir="ltr">r</span> من <span class="v" dir="ltr">n</span> <b>مع ترتيبها</b>. نستخدمها عندما يكون <b>الترتيب مهمًا</b>.</p><p><b>علامات أن الترتيب مهم:</b> ترتيب أو تصنيف (<b dir="ltr">rank</b>)، مراكز (أول/ثاني/ثالث)، مناصب مختلفة (رئيس/نائب/أمين سر)، ترتيب الظهور، خانات مسمّاة (خريف/ربيع)، أرقام كود أو لوحة.</p><p><b>مثال:</b> اختيار 3 ضيوف من 6 مع أهمية ترتيب ظهورهم = <span class="v" dir="ltr">6P3 = 6!/3! = 120</span>.</p>
+  </div>
+
 
   <div class="ex">
     <div class="q"><span class="tag">Example 4-43 · Business Location</span><p>(a) A business owner has a choice of 5 locations in which to establish her business. She decides to rank each location according to certain criteria, such as price of the store and parking facilities. How many different ways can she rank the 5 locations?<br>(b) Suppose she wishes to rank only the <strong>top 3 locations</strong> selected from 5 locations. How many different ways can she rank them?</p></div>
@@ -1508,6 +1612,11 @@ footer p{max-width:none}
     <p class="fx"><sub>n</sub>P<sub>r₁ r₂ r₃ … r<sub>p</sub></sub> = <span class="frac"><span class="num">n!</span><span class="den">r<sub>1</sub>! · r<sub>2</sub>! · r<sub>3</sub>! ⋯ r<sub>p</sub>!</span></span></p>
     <p class="note">where <span class="v">r<sub>1</sub> + r<sub>2</sub> + ⋯ + r<sub>p</sub> = n</span>. Divide out the arrangements you cannot tell apart.</p>
   </div>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — تباديل مع عناصر متكررة</span>
+    <p>إذا كانت بعض الأشياء <b>متطابقة</b> (مثل الحروف المكررة في كلمة)، نقسم <span class="v" dir="ltr">n!</span> على مضروب عدد تكرار كل عنصر، لأن تبديل عنصرين متطابقين لا يعطي ترتيبًا جديدًا.</p><p><b>مثال:</b> كلمة STATISTICS فيها 10 حروف: S ثلاث مرات، T ثلاث مرات، I مرتان ← <span class="v" dir="ltr">10! ÷ (3! × 3! × 2!) = 50,400</span>.</p><p><b>نصيحة:</b> عدّ الحروف أولًا وتأكد أن مجموع التكرارات يساوي <span class="v" dir="ltr">n</span>.</p>
+  </div>
+
 
   <div class="ex">
     <div class="q"><span class="tag">Example 4-46 · Letter Permutations</span><p>How many permutations of the letters can be made from the word <em>STATISTICS</em>?</p></div>
@@ -1537,6 +1646,11 @@ footer p{max-width:none}
     <p class="fx"><sub>n</sub>C<sub>r</sub> = <span class="frac"><span class="num">n!</span><span class="den">(n − r)! · r!</span></span></p>
     <p class="note"><strong>Important:</strong> in a combination, the order or arrangement of the objects is <em>not</em> important; order <em>is</em> important in a permutation. Casio: to compute <span class="v"><sub>10</sub>C<sub>4</sub></span> → <span class="keypad">10 &nbsp;SHIFT&nbsp; ÷ (nCr) &nbsp;4 &nbsp;=</span></p>
   </div>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — التوافيق (الترتيب غير مهم)</span>
+    <p><span class="v" dir="ltr">nCr</span> = عدد طرق اختيار <span class="v" dir="ltr">r</span> من <span class="v" dir="ltr">n</span> <b>بدون ترتيب</b> — مجرد اختيار.</p><p><b>علامات أن الترتيب غير مهم:</b> لجنة بدون مناصب، فريق، مجموعة، اختيار كتب أو أفلام أو مواضيع، سحب عدة قطع من صندوق دفعة واحدة.</p><p><b>العلاقة:</b> <span class="v" dir="ltr">nCr = nPr ÷ r!</span>، لذلك التوافيق دائمًا أصغر من أو تساوي التباديل.</p><p><b>مثال:</b> اختيار 4 أفلام من 10 = <span class="v" dir="ltr">10C4 = 210</span>. وإذا كان الاختيار من مجموعتين (3 نساء من 7 <b>و</b> رجلان من 5) فإننا <b>نضرب</b>: <span class="v" dir="ltr">7C3 × 5C2 = 35 × 10 = 350</span>.</p>
+  </div>
+
 
   <div class="callout tip">
     <span class="ct">The relationship worth seeing once</span>
@@ -1588,6 +1702,11 @@ footer p{max-width:none}
     <li><span class="k">STEP 2</span><span class="t"><b>Count the event.</b> How many of those ways satisfy the condition? Usually a product of smaller <span class="v">C</span>'s — one per category.</span></li>
     <li><span class="k">STEP 3</span><span class="t"><b>Divide.</b> <span class="v">P(E) = n(E) / n(S)</span>, then round sensibly and interpret in words.</span></li>
   </ol>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — الاحتمال باستخدام قواعد العدّ (أهم نوع أسئلة)</span>
+    <p>كل سؤال من هذا النوع له نفس الخطوات الثلاث:</p><ol><li><b>احسب <span class="v" dir="ltr">n(S)</span>:</b> عدد كل طرق الاختيار الممكنة — غالبًا <span class="v" dir="ltr">nCr</span> واحدة.</li><li><b>احسب <span class="v" dir="ltr">n(E)</span>:</b> عدد الطرق التي تحقق الشرط — غالبًا حاصل ضرب توافيق، واحدة لكل فئة.</li><li><b>اقسم:</b> <span class="v" dir="ltr">P(E) = n(E) ÷ n(S)</span>، ثم اكتب جملة تفسيرية.</li></ol><p><b>مثال:</b> 24 قطعة منها 4 معيبة، نختار 4. احتمال قطعتين معيبتين بالضبط = <span class="v" dir="ltr">(4C2 × 20C2) ÷ 24C4 = 1140 ÷ 10626 ≈ 0.1073</span>. وإذا طُلب «واحدة معيبة على الأقل» ← <span class="v" dir="ltr">1 − P(none) = 1 − 0.4560 = 0.5440</span>.</p><p><b>قاعدة الاتساق:</b> استخدم نفس نوع العدّ في البسط والمقام — لا تضع تباديل فوق توافيق.</p>
+  </div>
+
 
   <div class="ex">
     <div class="q"><span class="tag">Example 4-51 · Defective Integrated Circuits</span><p>A box contains 24 integrated circuits, 4 of which are defective. If 4 are sold at random, find: (a) exactly 2 are defective; (b) none is defective; (c) all are defective; (d) at least 1 is defective.</p></div>
@@ -1682,40 +1801,45 @@ footer p{max-width:none}
     </h2>
   </div>
   <p>Everything in Chapter 4 on one page. If you can reproduce this from memory in four minutes, you are ready.</p>
+  <div class="ar-note">
+    <span class="lbl">كيف تستخدم ورقة القوانين</span>
+    <p>اقرأها حسب القسم (الألوان نفسها في الملخص)، والعمود الأخير يخبرك <b>متى</b> تستخدم كل قانون، وتحت كل اسم إنجليزي اسمه بالعربي. التدريب الحقيقي: اكتبها من ذاكرتك على ورقة فارغة، ثم قارن وصحّح بالأحمر. إذا استطعت كتابتها كاملة في أربع دقائق فأنت جاهز.</p>
+  </div>
+
 
   <div class="tbl-wrap">
     <table>
       <thead><tr><th style="width:24%">Name</th><th style="width:38%">Formula</th><th>When</th></tr></thead>
       <tbody>
         <tr><td colspan="3" style="background:var(--ink-1-wash);font-weight:600;color:var(--ink-1)">§4-1 · Sample spaces and probability</td></tr>
-        <tr><td>Classical probability</td><td class="num">P(E) = n(E) / n(S)</td><td>Equally likely outcomes; you can count the sample space.</td></tr>
-        <tr><td>Empirical probability</td><td class="num">P(E) = f / n</td><td>A frequency distribution or survey data is given.</td></tr>
-        <tr><td>Probability range</td><td class="num">0 ≤ P(E) ≤ 1</td><td>Always. Use it to sanity-check every answer.</td></tr>
-        <tr><td>Total probability</td><td class="num">Σ P(all outcomes in S) = 1</td><td>Check on any frequency or tree table.</td></tr>
-        <tr><td>Complement rule</td><td class="num">P(Ē) = 1 − P(E)</td><td>"not", "neither", "none", "at least one".</td></tr>
+        <tr><td>Classical probability<span class="arn">الاحتمال الكلاسيكي</span></td><td class="num">P(E) = n(E) / n(S)</td><td>Equally likely outcomes; you can count the sample space.</td></tr>
+        <tr><td>Empirical probability<span class="arn">الاحتمال التجريبي</span></td><td class="num">P(E) = f / n</td><td>A frequency distribution or survey data is given.</td></tr>
+        <tr><td>Probability range<span class="arn">مدى الاحتمال</span></td><td class="num">0 ≤ P(E) ≤ 1</td><td>Always. Use it to sanity-check every answer.</td></tr>
+        <tr><td>Total probability<span class="arn">مجموع الاحتمالات</span></td><td class="num">Σ P(all outcomes in S) = 1</td><td>Check on any frequency or tree table.</td></tr>
+        <tr><td>Complement rule<span class="arn">قاعدة المتمّمة</span></td><td class="num">P(Ē) = 1 − P(E)</td><td>"not", "neither", "none", "at least one".</td></tr>
 
         <tr><td colspan="3" style="background:var(--ink-2-wash);font-weight:600;color:var(--ink-2)">§4-2 · Addition rules — "OR"</td></tr>
-        <tr><td>Mutually exclusive test</td><td class="num">A ∩ B = ∅</td><td>Can the two events happen together? No → mutually exclusive.</td></tr>
-        <tr><td>Addition rule 1</td><td class="num">P(A ∪ B) = P(A) + P(B)</td><td>A and B <strong>are</strong> mutually exclusive.</td></tr>
-        <tr><td>Addition rule 2</td><td class="num">P(A ∪ B) = P(A) + P(B) − P(A ∩ B)</td><td>A and B are <strong>not</strong> mutually exclusive. Safe in both cases.</td></tr>
-        <tr><td>Three mutually exclusive</td><td class="num">P(A∪B∪C) = P(A) + P(B) + P(C)</td><td>Three disjoint events.</td></tr>
-        <tr><td>Three general</td><td class="num">P(A∪B∪C) = ΣP(single) − ΣP(pairs) + P(A∩B∩C)</td><td>Three overlapping events.</td></tr>
+        <tr><td>Mutually exclusive test<span class="arn">اختبار التنافي</span></td><td class="num">A ∩ B = ∅</td><td>Can the two events happen together? No → mutually exclusive.</td></tr>
+        <tr><td>Addition rule 1<span class="arn">قاعدة الجمع الأولى</span></td><td class="num">P(A ∪ B) = P(A) + P(B)</td><td>A and B <strong>are</strong> mutually exclusive.</td></tr>
+        <tr><td>Addition rule 2<span class="arn">قاعدة الجمع الثانية</span></td><td class="num">P(A ∪ B) = P(A) + P(B) − P(A ∩ B)</td><td>A and B are <strong>not</strong> mutually exclusive. Safe in both cases.</td></tr>
+        <tr><td>Three mutually exclusive<span class="arn">ثلاثة أحداث متنافية</span></td><td class="num">P(A∪B∪C) = P(A) + P(B) + P(C)</td><td>Three disjoint events.</td></tr>
+        <tr><td>Three general<span class="arn">ثلاثة أحداث غير متنافية</span></td><td class="num">P(A∪B∪C) = ΣP(single) − ΣP(pairs) + P(A∩B∩C)</td><td>Three overlapping events.</td></tr>
 
         <tr><td colspan="3" style="background:var(--ink-3-wash);font-weight:600;color:var(--ink-3)">§4-3 · Multiplication rules — "AND" and "GIVEN"</td></tr>
-        <tr><td>Multiplication rule 1</td><td class="num">P(A ∩ B) = P(A) · P(B)</td><td>A and B independent (with replacement, separate devices).</td></tr>
-        <tr><td>Multiplication rule 2</td><td class="num">P(A ∩ B) = P(A|B)·P(B) = P(B|A)·P(A)</td><td>A and B dependent (without replacement, "of those who…").</td></tr>
-        <tr><td>Conditional probability</td><td class="num">P(B | A) = P(A ∩ B) / P(A)</td><td>"given that", "if", "of those who", a stated accomplished fact.</td></tr>
-        <tr><td>Independence test</td><td class="num">P(B|A) = P(B) &nbsp;or&nbsp; P(A∩B) = P(A)·P(B)</td><td>Asked directly, especially from a two-way table.</td></tr>
-        <tr><td>At least one</td><td class="num">P(at least one) = 1 − P(none)</td><td>Any question containing "at least".</td></tr>
+        <tr><td>Multiplication rule 1<span class="arn">قاعدة الضرب الأولى</span></td><td class="num">P(A ∩ B) = P(A) · P(B)</td><td>A and B independent (with replacement, separate devices).</td></tr>
+        <tr><td>Multiplication rule 2<span class="arn">قاعدة الضرب الثانية</span></td><td class="num">P(A ∩ B) = P(A|B)·P(B) = P(B|A)·P(A)</td><td>A and B dependent (without replacement, "of those who…").</td></tr>
+        <tr><td>Conditional probability<span class="arn">الاحتمال الشرطي</span></td><td class="num">P(B | A) = P(A ∩ B) / P(A)</td><td>"given that", "if", "of those who", a stated accomplished fact.</td></tr>
+        <tr><td>Independence test<span class="arn">اختبار الاستقلال</span></td><td class="num">P(B|A) = P(B) &nbsp;or&nbsp; P(A∩B) = P(A)·P(B)</td><td>Asked directly, especially from a two-way table.</td></tr>
+        <tr><td>At least one<span class="arn">واحد على الأقل</span></td><td class="num">P(at least one) = 1 − P(none)</td><td>Any question containing "at least".</td></tr>
 
         <tr><td colspan="3" style="background:var(--ink-4-wash);font-weight:600;color:var(--ink-4)">§4-4 &amp; §4-5 · Counting rules</td></tr>
-        <tr><td>Fundamental counting rule</td><td class="num">k<sub>1</sub> × k<sub>2</sub> × ⋯ × k<sub>n</sub></td><td>A sequence of independent choices; repetition allowed or not.</td></tr>
-        <tr><td>Factorial</td><td class="num">n! = n(n−1)(n−2)⋯(2)(1), &nbsp;0! = 1</td><td>Arranging all n objects.</td></tr>
-        <tr><td>Permutation rule 1</td><td class="num"><sub>n</sub>P<sub>r</sub> = n! / (n − r)!</td><td>Choose r from n, <strong>order matters</strong>.</td></tr>
-        <tr><td>Permutation rule 2</td><td class="num">n! / (r<sub>1</sub>! r<sub>2</sub>! ⋯ r<sub>p</sub>!)</td><td>Arrange n objects, some identical (letters, identical items).</td></tr>
-        <tr><td>Combination rule</td><td class="num"><sub>n</sub>C<sub>r</sub> = n! / [(n − r)! r!]</td><td>Choose r from n, <strong>order does not matter</strong>.</td></tr>
-        <tr><td>Link between them</td><td class="num"><sub>n</sub>C<sub>r</sub> = <sub>n</sub>P<sub>r</sub> / r!</td><td>Sanity check: C is always ≤ P.</td></tr>
-        <tr><td>Probability by counting</td><td class="num">P(E) = n(E) / n(S), both counted with the rules above</td><td><strong>The signature §4-5 question.</strong></td></tr>
+        <tr><td>Fundamental counting rule<span class="arn">قاعدة العدّ الأساسية</span></td><td class="num">k<sub>1</sub> × k<sub>2</sub> × ⋯ × k<sub>n</sub></td><td>A sequence of independent choices; repetition allowed or not.</td></tr>
+        <tr><td>Factorial<span class="arn">المضروب</span></td><td class="num">n! = n(n−1)(n−2)⋯(2)(1), &nbsp;0! = 1</td><td>Arranging all n objects.</td></tr>
+        <tr><td>Permutation rule 1<span class="arn">التباديل</span></td><td class="num"><sub>n</sub>P<sub>r</sub> = n! / (n − r)!</td><td>Choose r from n, <strong>order matters</strong>.</td></tr>
+        <tr><td>Permutation rule 2<span class="arn">التباديل مع عناصر متكررة</span></td><td class="num">n! / (r<sub>1</sub>! r<sub>2</sub>! ⋯ r<sub>p</sub>!)</td><td>Arrange n objects, some identical (letters, identical items).</td></tr>
+        <tr><td>Combination rule<span class="arn">التوافيق</span></td><td class="num"><sub>n</sub>C<sub>r</sub> = n! / [(n − r)! r!]</td><td>Choose r from n, <strong>order does not matter</strong>.</td></tr>
+        <tr><td>Link between them<span class="arn">العلاقة بينهما</span></td><td class="num"><sub>n</sub>C<sub>r</sub> = <sub>n</sub>P<sub>r</sub> / r!</td><td>Sanity check: C is always ≤ P.</td></tr>
+        <tr><td>Probability by counting<span class="arn">الاحتمال بالعدّ</span></td><td class="num">P(E) = n(E) / n(S), both counted with the rules above</td><td><strong>The signature §4-5 question.</strong></td></tr>
       </tbody>
     </table>
   </div>
@@ -1753,6 +1877,11 @@ footer p{max-width:none}
     <li><span class="k">Q5</span><span class="t"><b>Is the sample space too big to list?</b><br>→ Counting rules. Then ask: does order matter? Yes → <span class="v"><sub>n</sub>P<sub>r</sub></span>. No → <span class="v"><sub>n</sub>C<sub>r</sub></span>. Several categories combined → multiply them (Fundamental Counting Rule).</span></li>
     <li><span class="k">Q6</span><span class="t"><b>Is it asking for a probability after all that counting?</b><br>→ <span class="v">P(E) = n(E)/n(S)</span>. Count the event and the sample space with the same kind of rule — never mix a permutation numerator with a combination denominator.</span></li>
   </ol>
+  <div class="ar-note">
+    <span class="lbl">خطوات اختيار القانون بالعربي — طبّقها بالترتيب</span>
+    <ol><li>هل في السؤال <b dir="ltr">not</b> / <b dir="ltr">neither</b> / <b dir="ltr">none</b> / <b dir="ltr">at least</b>؟ ← استخدم المتمّمة <span class="v" dir="ltr">1 − P(العكس)</span>.</li><li>هل فيه <b dir="ltr">given that</b> / <b dir="ltr">if</b> / <b dir="ltr">of those who</b>، أو حقيقة وقعت مسبقًا؟ ← احتمال شرطي، والشرط في المقام.</li><li>هل فيه <b dir="ltr">or</b>؟ ← قاعدة الجمع. هل يمكن وقوعهما معًا؟ لا ← اجمع. نعم ← اجمع واطرح التقاطع.</li><li>هل فيه <b dir="ltr">and</b> أو مراحل متتالية؟ ← قاعدة الضرب. مع إرجاع ← اضرب مباشرة. بدون إرجاع ← الاحتمال الثاني يتغيّر.</li><li>هل فضاء العينة أكبر من أن يُسرد؟ ← قواعد العدّ. الترتيب مهم ← <span class="v" dir="ltr">nPr</span>. غير مهم ← <span class="v" dir="ltr">nCr</span>. عدة فئات ← اضرب.</li><li>هل المطلوب احتمال بعد العدّ؟ ← <span class="v" dir="ltr">n(E) ÷ n(S)</span>، بنفس نوع العدّ في البسط والمقام.</li></ol>
+  </div>
+
 
   <div class="callout trap">
     <span class="ct">The one consistency rule that catches most §4-5 errors</span>
@@ -1793,6 +1922,11 @@ footer p{max-width:none}
       </tbody>
     </table>
   </div>
+  <div class="ar-note">
+    <span class="lbl">الأخطاء الأربعة عشر بالعربي</span>
+    <ol><li>الخلط بين <b>متنافيين</b> (لا تداخل) و<b>مستقلين</b> (لا تأثير).</li><li>الجمع المباشر مع أحداث متداخلة — اطرح التقاطع.</li><li>فهم <b dir="ltr">or</b> على أنها «أحدهما فقط» — هي «أحدهما أو كلاهما».</li><li>تجاهل <b dir="ltr">without replacement</b> — المقام يتغير في السحبة الثانية.</li><li>وضع الشيء الخطأ في مقام الاحتمال الشرطي — <b>الشرط هو المقام</b>.</li><li>اعتبار <b dir="ltr">of those who</b> احتمالًا عاديًا — هو احتمال شرطي.</li><li>الخلط بين <b dir="ltr">at most</b> و <b dir="ltr">less than</b> — كلمة <b dir="ltr">at</b> تعني أن الرقم <b>داخل</b> الحساب.</li><li>حساب <b dir="ltr">at least one</b> بالطريقة الطويلة — استخدم <span class="v" dir="ltr">1 − P(none)</span>.</li><li>استخدام التباديل للجان — اللجنة بدون مناصب = <b>توافيق</b>.</li><li>الجمع بدل الضرب عند الاختيار من فئتين — <b dir="ltr">and</b> تعني <b>ضرب</b>.</li><li>كتابة <span class="v" dir="ltr">0! = 0</span> — الصحيح <span class="v" dir="ltr">0! = 1</span>.</li><li>خلط التباديل والتوافيق بين البسط والمقام.</li><li>كتابة الناتج النهائي فقط — اكتب فضاء العينة واسم القانون والتعويض.</li><li>احتمال أكبر من 1 أو سالب — يعني أن في الحل خطأ؛ راجعه قبل أن تنتقل.</li></ol>
+  </div>
+
 </section>
 
 <!-- ============================================================ -->
@@ -1806,6 +1940,11 @@ footer p{max-width:none}
     </h2>
   </div>
   <p>These are the three exercises Dr. Al-Hadhrami closes the chapter with, set for self-study. They are solved here step by step.</p>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي</span>
+    <p>هذه تمارين المراجعة الثلاثة في آخر ملف الدكتور. الفكرة المشتركة بينها: <b>ارسم مخطط فن واملأ المناطق الأربع بالأرقام</b> (A فقط، B فقط، المشترك، خارج الاثنين)، ثم يصبح كل فرع مجرد جمع لمناطق تراها أمامك. وتذكّر أن <b dir="ltr">neither … nor</b> تعني دائمًا <span class="v" dir="ltr">1 − P(A ∪ B)</span>.</p>
+  </div>
+
 
   <div class="ex">
     <div class="q"><span class="tag">Ex 1 · Burgers and pizza</span><p>A study shows that about 37 percent of school children eat burger, 17 percent eat pizza, and 10 percent eat both burger and pizza. What is the probability that a randomly selected school child eats <strong>neither</strong> burger nor pizza?</p></div>
