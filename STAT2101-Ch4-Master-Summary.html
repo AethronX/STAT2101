@@ -1,0 +1,1945 @@
+<title>Probability and Counting Rules</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+
+<style>
+/* Layout: single reading column with a sticky rail nav; four section inks mirror the
+   overprint of a Venn diagram — the chapter's own governing picture. */
+:root{
+  --bg:#fbfaf7;
+  --surface:#ffffff;
+  --surface-2:#f2f1ec;
+  --fg:#1b2027;
+  --fg-soft:#4c5663;
+  --fg-faint:#78828f;
+  --rule:#dddcd4;
+  --rule-soft:#eceae3;
+
+  --ink-1:#1f4e79;   /* 4-1  sample spaces      */
+  --ink-2:#0f6f5c;   /* 4-2  addition rules     */
+  --ink-3:#9a5b12;   /* 4-3  multiplication     */
+  --ink-4:#7b2d6b;   /* 4-4 / 4-5 counting      */
+  --accent:#b23b2e;  /* alarms, traps, must-know */
+
+  --ink-1-wash:#eaf0f7;
+  --ink-2-wash:#e5f1ee;
+  --ink-3-wash:#f8efe1;
+  --ink-4-wash:#f4e9f2;
+  --accent-wash:#f9eae7;
+
+  --display:"Spectral",Georgia,"Times New Roman",serif;
+  --body:"IBM Plex Sans","IBM Plex Sans Arabic",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --arabic:"IBM Plex Sans Arabic","IBM Plex Sans",-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  --measure:70ch;
+  --shadow:0 1px 2px rgba(27,32,39,.05),0 8px 24px -16px rgba(27,32,39,.25);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#13171c;
+    --surface:#1a1f26;
+    --surface-2:#222932;
+    --fg:#e8e6e0;
+    --fg-soft:#b3bac4;
+    --fg-faint:#8a929e;
+    --rule:#333b45;
+    --rule-soft:#272e37;
+
+    --ink-1:#7bb0e8;
+    --ink-2:#4fc4a8;
+    --ink-3:#e2a74e;
+    --ink-4:#d089c2;
+    --accent:#ef7f70;
+
+    --ink-1-wash:#182633;
+    --ink-2-wash:#132a26;
+    --ink-3-wash:#2b2314;
+    --ink-4-wash:#2a1b28;
+    --accent-wash:#2f1c19;
+
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#13171c;
+  --surface:#1a1f26;
+  --surface-2:#222932;
+  --fg:#e8e6e0;
+  --fg-soft:#b3bac4;
+  --fg-faint:#8a929e;
+  --rule:#333b45;
+  --rule-soft:#272e37;
+
+  --ink-1:#7bb0e8;
+  --ink-2:#4fc4a8;
+  --ink-3:#e2a74e;
+  --ink-4:#d089c2;
+  --accent:#ef7f70;
+
+  --ink-1-wash:#182633;
+  --ink-2-wash:#132a26;
+  --ink-3-wash:#2b2314;
+  --ink-4-wash:#2a1b28;
+  --accent-wash:#2f1c19;
+
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{
+  max-width:980px;
+  margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 72px;
+}
+
+/* ---------- masthead ---------- */
+.masthead{
+  padding-block:56px 36px;
+  border-bottom:3px double var(--rule);
+  margin-bottom:36px;
+}
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+}
+h1{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(2.1rem,6vw,3.4rem);
+  line-height:1.08;
+  margin:0 0 10px;
+  letter-spacing:-.015em;
+  text-wrap:balance;
+}
+.subtitle{
+  font-family:var(--display);
+  font-style:italic;
+  font-size:clamp(1.05rem,2.6vw,1.3rem);
+  color:var(--fg-soft);
+  margin:0 0 22px;
+  max-width:var(--measure);
+}
+.meta-strip{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 10px;
+  margin-top:20px;
+}
+.chip{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.04em;
+  padding:5px 10px;
+  border:1px solid var(--rule);
+  border-radius:3px;
+  color:var(--fg-soft);
+  background:var(--surface);
+}
+.chip strong{color:var(--fg);font-weight:600}
+
+/* ---------- nav ---------- */
+nav.toc{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:20px 22px;
+  margin-bottom:44px;
+  box-shadow:var(--shadow);
+}
+nav.toc h2{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+  font-weight:500;
+}
+nav.toc ol{
+  margin:0;padding:0;list-style:none;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:4px 26px;
+}
+nav.toc li{min-width:0}
+nav.toc a{
+  display:flex;
+  gap:10px;
+  align-items:baseline;
+  text-decoration:none;
+  color:var(--fg);
+  padding:5px 0;
+  border-bottom:1px solid var(--rule-soft);
+  font-size:.92rem;
+}
+nav.toc a:hover{color:var(--accent)}
+nav.toc a .num{
+  font-family:var(--mono);
+  font-size:.74rem;
+  color:var(--fg-faint);
+  flex:none;
+  min-width:2.4em;
+}
+
+/* ---------- sections ---------- */
+section{margin-bottom:64px;scroll-margin-top:24px}
+.sec-head{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+  padding-bottom:14px;
+  border-bottom:2px solid var(--sec,var(--fg));
+  margin-bottom:28px;
+}
+.sec-num{
+  font-family:var(--mono);
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.06em;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:5px 9px;
+  border-radius:3px;
+  flex:none;
+  margin-top:6px;
+}
+.sec-head h2{
+  font-family:var(--display);
+  font-size:clamp(1.5rem,4vw,2.05rem);
+  line-height:1.18;
+  margin:0;
+  font-weight:600;
+  text-wrap:balance;
+  min-width:0;
+}
+.sec-head .ar{
+  display:block;
+  font-family:var(--arabic);
+  font-size:.92rem;
+  font-style:normal;
+  color:var(--fg-soft);
+  direction:rtl;
+  margin-top:4px;
+  font-weight:400;
+}
+h3{
+  font-family:var(--body);
+  font-size:1.08rem;
+  font-weight:600;
+  letter-spacing:-.005em;
+  margin:36px 0 12px;
+  color:var(--fg);
+  display:flex;
+  align-items:baseline;
+  gap:9px;
+  flex-wrap:wrap;
+}
+h3::before{
+  content:"";
+  width:18px;height:3px;
+  background:var(--sec,var(--fg));
+  flex:none;
+  border-radius:2px;
+}
+h4{
+  font-family:var(--mono);
+  font-size:.74rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:26px 0 10px;
+  font-weight:500;
+}
+p{margin:0 0 14px;max-width:var(--measure)}
+ul,ol{max-width:var(--measure);padding-left:1.25em;margin:0 0 14px}
+li{margin-bottom:7px}
+li::marker{color:var(--sec,var(--fg-faint))}
+strong{font-weight:600}
+em{font-style:italic}
+code,.v{
+  font-family:var(--mono);
+  font-size:.9em;
+  background:var(--surface-2);
+  padding:1px 5px;
+  border-radius:3px;
+  white-space:nowrap;
+}
+.term{
+  font-weight:600;
+  color:var(--sec,var(--fg));
+}
+a{color:var(--accent)}
+
+/* ---------- maths ---------- */
+.fx{
+  font-family:var(--mono);
+  font-size:1.02rem;
+  line-height:2.1;
+  white-space:nowrap;
+}
+.frac{
+  display:inline-flex;
+  flex-direction:column;
+  vertical-align:middle;
+  text-align:center;
+  font-family:var(--mono);
+  line-height:1.25;
+  margin:0 .22em;
+  position:relative;
+  top:-.08em;
+}
+.frac .num{border-bottom:1.5px solid currentColor;padding:0 .4em .08em}
+.frac .den{padding:.08em .4em 0}
+sub,sup{font-size:.72em}
+
+.formula{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-left:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:18px 20px;
+  margin:18px 0 22px;
+  box-shadow:var(--shadow);
+  overflow-x:auto;
+}
+.formula .label{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg-faint));
+  margin-bottom:10px;
+  font-weight:600;
+}
+.formula .fx{margin:4px 0}
+.formula .note{
+  font-size:.88rem;
+  color:var(--fg-soft);
+  margin:10px 0 0;
+  white-space:normal;
+  max-width:none;
+}
+
+/* ---------- example cards ---------- */
+.ex{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:5px;
+  margin:20px 0;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.ex > .q{
+  padding:16px 20px;
+  border-bottom:1px dashed var(--rule);
+  background:var(--wash,var(--surface-2));
+}
+.ex .tag{
+  font-family:var(--mono);
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg));
+  display:block;
+  margin-bottom:6px;
+}
+.ex .q p{margin:0;max-width:none}
+.ex > .a{padding:16px 20px}
+.ex > .a p{max-width:none}
+.ex > .a p:last-child{margin-bottom:0}
+.ex .steps{margin:0;padding-left:1.2em;max-width:none}
+.ex .steps li{margin-bottom:9px}
+.ans{
+  display:inline-block;
+  font-family:var(--mono);
+  font-weight:600;
+  background:var(--sec,var(--fg));
+  color:#fff;
+  padding:3px 9px;
+  border-radius:3px;
+  font-size:.92em;
+  white-space:nowrap;
+}
+
+/* ---------- callouts ---------- */
+.callout{
+  border-radius:4px;
+  padding:16px 18px;
+  margin:20px 0;
+  border:1px solid;
+  font-size:.95rem;
+}
+.callout p{max-width:none}
+.callout p:last-child{margin-bottom:0}
+.callout .ct{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-weight:600;
+  display:block;
+  margin-bottom:8px;
+}
+.trap{background:var(--accent-wash);border-color:var(--accent)}
+.trap .ct{color:var(--accent)}
+.tip{background:var(--ink-2-wash);border-color:var(--ink-2)}
+.tip .ct{color:var(--ink-2)}
+.note{background:var(--surface-2);border-color:var(--rule)}
+.note .ct{color:var(--fg-faint)}
+
+.ar-note{
+  font-family:var(--arabic);
+  direction:rtl;
+  text-align:right;
+  background:var(--surface-2);
+  border-right:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:13px 16px;
+  margin:16px 0;
+  font-size:.96rem;
+  line-height:1.95;
+  color:var(--fg-soft);
+}
+.ar-note b{color:var(--fg);font-weight:600}
+.ar-note .lbl{
+  display:block;
+  font-size:.72rem;
+  letter-spacing:.04em;
+  color:var(--sec,var(--fg-faint));
+  font-weight:600;
+  margin-bottom:4px;
+}
+.ar-note ul{padding-right:1.2em;padding-left:0;margin:6px 0 0;max-width:none}
+
+/* ---------- tables ---------- */
+.tbl-wrap{overflow-x:auto;margin:18px 0 22px;-webkit-overflow-scrolling:touch}
+table{
+  border-collapse:collapse;
+  width:100%;
+  min-width:420px;
+  font-size:.93rem;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+}
+caption{
+  caption-side:top;
+  text-align:left;
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  padding-bottom:9px;
+  font-weight:500;
+}
+th,td{
+  padding:9px 13px;
+  border-bottom:1px solid var(--rule-soft);
+  text-align:left;
+  vertical-align:top;
+}
+thead th{
+  background:var(--sec,var(--surface-2));
+  color:#fff;
+  font-weight:600;
+  font-size:.78rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  border-bottom:none;
+}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even){background:var(--surface-2)}
+td.num,th.num{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+
+/* ---------- misc blocks ---------- */
+.grid2{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:16px;
+  margin:18px 0 22px;
+}
+.card{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-top:3px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:16px 18px;
+  min-width:0;
+}
+.card h5{
+  font-family:var(--body);
+  font-size:.97rem;
+  font-weight:600;
+  margin:0 0 8px;
+}
+.card p{font-size:.92rem;margin-bottom:0;max-width:none;color:var(--fg-soft)}
+
+.flow{
+  list-style:none;
+  padding:0;
+  margin:18px 0 22px;
+  max-width:none;
+  display:grid;
+  gap:10px;
+}
+.flow li{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:13px 16px;
+  margin:0;
+}
+.flow .k{
+  font-family:var(--mono);
+  font-size:.73rem;
+  font-weight:600;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:3px 8px;
+  border-radius:3px;
+  flex:none;
+  margin-top:3px;
+  white-space:nowrap;
+}
+.flow .t{min-width:0;font-size:.95rem}
+.flow .t b{display:block;margin-bottom:2px}
+
+.keypad{
+  font-family:var(--mono);
+  font-size:.86rem;
+  background:var(--surface-2);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:4px 9px;
+  display:inline-block;
+  white-space:nowrap;
+}
+
+hr.soft{border:none;border-top:1px solid var(--rule-soft);margin:34px 0}
+
+footer{
+  border-top:3px double var(--rule);
+  padding-top:24px;
+  margin-top:20px;
+  font-size:.86rem;
+  color:var(--fg-faint);
+}
+footer p{max-width:none}
+
+@media (max-width:520px){
+  .sec-head{gap:11px}
+  .fx{font-size:.94rem}
+  .ex > .q,.ex > .a{padding:14px 15px}
+}
+@media print{
+  body{background:#fff}
+  nav.toc{break-inside:avoid}
+  .ex,.formula,.callout,.card{break-inside:avoid}
+  section{break-before:auto}
+}
+</style>
+
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">Sultan Qaboos University · College of Science · STAT 2101</p>
+  <h1>Probability and Counting Rules</h1>
+  <p class="subtitle">Chapter 4 — the complete, exam-weighted rebuild of Dr. Ahmed Al-Hadhrami's lecture notes, mapped line-by-line to the Fall 2026 course outline.</p>
+  <div class="meta-strip">
+    <span class="chip"><strong>Weeks</strong> 5–6</span>
+    <span class="chip"><strong>Sections</strong> 4-1 → 4-5</span>
+    <span class="chip"><strong>CLO</strong> 4 (+1)</span>
+    <span class="chip"><strong>Midterm</strong> 3/11/2026 · 6:15–7:15 pm</span>
+    <span class="chip"><strong>Textbook</strong> Bluman 10e</span>
+    <span class="chip"><strong>Target</strong> A ≥ 90</span>
+  </div>
+</header>
+
+<nav class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#intel"><span class="num">00</span><span>What the outline actually tests</span></a></li>
+    <li><a href="#s41"><span class="num">4-1</span><span>Sample Spaces and Probability</span></a></li>
+    <li><a href="#s42"><span class="num">4-2</span><span>The Addition Rules</span></a></li>
+    <li><a href="#s43"><span class="num">4-3</span><span>Multiplication &amp; Conditional</span></a></li>
+    <li><a href="#s44"><span class="num">4-4/5</span><span>Counting Rules &amp; Probability</span></a></li>
+    <li><a href="#sheet"><span class="num">FS</span><span>Master formula sheet</span></a></li>
+    <li><a href="#decide"><span class="num">DT</span><span>Which rule do I use?</span></a></li>
+    <li><a href="#traps"><span class="num">TR</span><span>The 14 traps that cost marks</span></a></li>
+    <li><a href="#review"><span class="num">RV</span><span>Review exercises, solved</span></a></li>
+    <li><a href="#strategy"><span class="num">A+</span><span>The A+ study protocol</span></a></li>
+  </ol>
+</nav>
+
+<!-- ============================================================ -->
+<!-- 00 EXAM INTEL -->
+<!-- ============================================================ -->
+<section id="intel" style="--sec:var(--accent);--wash:var(--accent-wash)">
+  <div class="sec-head">
+    <span class="sec-num">00</span>
+    <h2>What the outline actually tests
+      <span class="ar">ما الذي يطلبه الكورس أوت لاين فعليًا من هذا الفصل</span>
+    </h2>
+  </div>
+
+  <p>Chapter 4 is not graded on how much you can recite. The outline pins it to one learning outcome with three assessment criteria, and every quiz, midterm and final question is built from those criteria. Read this box first; it tells you where the marks live.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <caption>Chapter 4 in the course schedule</caption>
+      <thead>
+        <tr><th>Week</th><th>Sections delivered</th><th>Assessment attached</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="num">5</td><td>4-1 Sample Spaces and Probability<br>4-2 The Addition Rules<br>4-3 Multiplication Rules &amp; Conditional Probability<br><em>Lab 5 — RStat2101: Descriptive Measures</em></td><td>Exercises Ch. 4, p. 247 <span class="v">{6, 8, 16, 40}</span><br>Moodle Exercises<br><strong>Lab Quiz I</strong></td></tr>
+        <tr><td class="num">6</td><td>4-4 Counting Rules<br>4-5 Probability and Counting Rules</td><td>Moodle Exercises (cont.)<br><strong>In-Class Quiz II</strong></td></tr>
+        <tr><td class="num">8</td><td>—</td><td><strong>Midterm Exam</strong> · 25% · 3/11/2026, Tue 6:15–7:15 pm · <strong>Chapters 1, 2, 3, 4</strong></td></tr>
+        <tr><td class="num">16</td><td>—</td><td><strong>Final Exam</strong> · 45% · 29/12/2026, 8:00–11:00 am · all chapters</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>CLO4 — Apply Fundamental Probability Concepts</h3>
+  <p>This is the outcome Chapter 4 serves. Its assessment criteria, verbatim from the outline:</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th style="width:42px">#</th><th>Criterion — "to achieve this objective, the student must…"</th><th>Covered by</th></tr></thead>
+      <tbody>
+        <tr><td class="num">A</td><td><strong>Calculate probabilities using counting rules and basic probability principles.</strong></td><td><strong>All of Chapter 4.</strong> This is the one that matters here.</td></tr>
+        <tr><td class="num">B</td><td>Distinguish between discrete and continuous probability distributions.</td><td>Chapter 5 — not Chapter 4.</td></tr>
+        <tr><td class="num">C</td><td>Compute and interpret expected value and variance for discrete random variables.</td><td>Chapter 5 — not Chapter 4.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>CLO4 is assessed by <strong>Tutorial Questions + In-Class Quiz + Active Learning Exercise + Midterm Exam + Final Exam</strong>. That is five separate hits. CLO1 (<em>Identify key statistical concepts and terms</em>) also runs through this chapter: definition questions — <em>what is a sample space, what does mutually exclusive mean</em> — are CLO1 marks and are the cheapest marks in the course.</p>
+
+  <div class="callout trap">
+    <span class="ct">The single highest-value sentence in this document</span>
+    <p>Criterion 4-A says "<strong>counting rules and basic probability principles</strong>" in the same breath. That is the examiner telling you in advance that §4-5 problems — where you compute <span class="v">n(E)</span> and <span class="v">n(S)</span> with combinations and <em>then</em> divide — are the signature Chapter 4 question. Sections 4-4 and 4-5 carry In-Class Quiz II on their own. Do not treat counting as an afterthought at the end of the chapter; it is the destination of the whole chapter.</p>
+  </div>
+
+  <div class="ar-note">
+    <span class="lbl">خلاصة سريعة</span>
+    <b>الفصل الرابع كله يخدم مخرج تعلم واحد (CLO4-A):</b> حساب الاحتمالات باستخدام قواعد العدّ والمبادئ الأساسية. يُقاس في خمسة تقييمات: التمارين، الكويز الصفي، نشاط التعلّم النشط، الميدتيرم (25%)، والنهائي (45%). الأقسام <b>4-4</b> و <b>4-5</b> (قواعد العدّ) تحمل <b>الكويز الصفي الثاني</b> بالكامل — لا تؤجلها.
+  </div>
+
+  <h3>Grade arithmetic: what A actually costs</h3>
+  <p>The A–F scale puts <strong>A at ≥ 90</strong> and A− at ≥ 86. With In-Class Quizzes 15%, Lab Quiz 10%, Active Learning 5%, Midterm 25% and Final 45%, Chapter 4 content appears in at least four of those five buckets. A clean Chapter 4 is worth more than any single other chapter in the first half of the course, because it is the last chapter on the midterm <em>and</em> the foundation of Chapters 5 and 6 on the final.</p>
+</section>
+
+<!-- ============================================================ -->
+<!-- 4-1 -->
+<!-- ============================================================ -->
+<section id="s41" style="--sec:var(--ink-1);--wash:var(--ink-1-wash)">
+  <div class="sec-head">
+    <span class="sec-num">4-1</span>
+    <h2>Sample Spaces and Probability
+      <span class="ar">فضاءات العينة والاحتمال</span>
+    </h2>
+  </div>
+
+  <p>The whole of probability is one idea executed carefully: <strong>name every outcome that could happen, name the ones you care about, compare the two counts.</strong> Everything in §4-1 is machinery for doing that without losing an outcome.</p>
+
+  <h3>1 · The five words you must define on command</h3>
+  <p>These are CLO1 marks. They are asked as short definition questions and they are asked as the first part of long questions. Learn them as sentences, not as feelings.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th style="width:30%">Term</th><th>Definition (exam wording)</th><th style="width:26%">Example</th></tr></thead>
+      <tbody>
+        <tr><td><span class="term">Probability experiment</span></td><td>A chance process that leads to well-defined results called outcomes.</td><td>Rolling two dice.</td></tr>
+        <tr><td><span class="term">Outcome</span></td><td>The result of a <em>single trial</em> of a probability experiment.</td><td>Getting (5, 4).</td></tr>
+        <tr><td><span class="term">Sample space <span class="v">S</span></span></td><td>The set of <em>all possible</em> outcomes of a probability experiment. The number of elements in <span class="v">S</span> is <span class="v">n(S)</span>.</td><td><span class="v">S</span> = all 36 dice pairs.</td></tr>
+        <tr><td><span class="term">Event</span></td><td>A set of outcomes of a probability experiment. Denoted <span class="v">A, B, C…</span> or <span class="v">E₁, E₂, E₃…</span></td><td><span class="v">E</span> = "sum is 7".</td></tr>
+        <tr><td><span class="term">Simple event</span></td><td>An event with <strong>one</strong> outcome.</td><td>"All three children are boys" = {BBB}.</td></tr>
+        <tr><td><span class="term">Compound event</span></td><td>An event consisting of <strong>two or more</strong> outcomes.</td><td>"Exactly two girls" = {BGG, GBG, GGB}.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ar-note">
+    <span class="lbl">تمييز سريع</span>
+    <b>Outcome</b> = نتيجة تجربة واحدة. <b>Sample space</b> = كل النتائج الممكنة. <b>Event</b> = مجموعة جزئية من فضاء العينة. إذا كانت تحتوي عنصرًا واحدًا فهي <b>simple</b>، وإذا احتوت عنصرين فأكثر فهي <b>compound</b>.
+  </div>
+
+  <h3>2 · Writing sample spaces — the three standard devices</h3>
+
+  <h4>Device 1 — The grid (two dice)</h4>
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-1 · Rolling Dice</span><p>Find the sample space for rolling two dice.</p></div>
+    <div class="a">
+      <p>Each die has 6 faces, and the dice are distinguishable (one red, one white). Lay them out as a 6 × 6 grid of ordered pairs:</p>
+      <p class="fx">S = {(1,1), (1,2), …, (1,6), (2,1), …, (6,6)}</p>
+      <p>So <span class="ans">n(S) = 36</span></p>
+      <p><strong>Why it matters:</strong> every dice question in the chapter divides by 36. Memorise the sum distribution now — sum 7 occurs 6 times, sums 6 and 8 occur 5 times each, 5 and 9 four times, 4 and 10 three times, 3 and 11 twice, 2 and 12 once. Total 36. ✔</p>
+    </div>
+  </div>
+
+  <h4>Device 2 — Systematic listing (gender of children)</h4>
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-3 · Gender of Children</span><p>Find the sample space for the gender of the children if a family has three children. Use B for boy and G for girl.</p></div>
+    <div class="a">
+      <p class="fx">S = {BBB, BBG, BGB, GBB, BGG, GBG, GGB, GGG}</p>
+      <p><span class="ans">n(S) = 8</span> &nbsp; (= 2 × 2 × 2, by the Fundamental Counting Rule of §4-4)</p>
+      <p>Note the ordering discipline: all-boys first, then one girl in each of three positions, then two girls in each of three positions, then all girls. Listing in a fixed order is how you avoid dropping an outcome under exam pressure.</p>
+    </div>
+  </div>
+
+  <h4>Device 3 — The tree diagram</h4>
+  <p>A <span class="term">tree diagram</span> is a device consisting of line segments emanating from a starting point and also from the outcome point. It is used to determine all possible outcomes of a probability experiment.</p>
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-4 · Gender of Children</span><p>Use a tree diagram to find the sample space for the gender of three children in a family.</p></div>
+    <div class="a">
+      <p>Branch on the first child (B / G); from each of those, branch on the second child; from each of those, branch on the third. You get 2 × 2 × 2 = 8 terminal branches, read left to right:</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>First child</th><th>Second child</th><th>Third child</th><th>Outcome</th></tr></thead>
+          <tbody>
+            <tr><td>B</td><td>B</td><td>B</td><td class="num">BBB</td></tr>
+            <tr><td>B</td><td>B</td><td>G</td><td class="num">BBG</td></tr>
+            <tr><td>B</td><td>G</td><td>B</td><td class="num">BGB</td></tr>
+            <tr><td>B</td><td>G</td><td>G</td><td class="num">BGG</td></tr>
+            <tr><td>G</td><td>B</td><td>B</td><td class="num">GBB</td></tr>
+            <tr><td>G</td><td>B</td><td>G</td><td class="num">GBG</td></tr>
+            <tr><td>G</td><td>G</td><td>B</td><td class="num">GGB</td></tr>
+            <tr><td>G</td><td>G</td><td>G</td><td class="num">GGG</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Same eight outcomes as Example 4-3 — the tree is the <em>proof</em> that nothing was missed.</p>
+    </div>
+  </div>
+
+  <h3>3 · Venn diagrams and set operations</h3>
+  <p>A <span class="term">Venn diagram</span> is a graphical way of representing the relationships between sets. The rectangle is <span class="v">S</span>; circles inside it are events. Three standard configurations: overlapping (<span class="v">A ∩ B ≠ ∅</span>), disjoint (<span class="v">A ∩ B = ∅</span>), and nested (<span class="v">B ⊂ A</span>).</p>
+
+  <div class="formula">
+    <div class="label">The three set operations</div>
+    <p class="fx"><strong>Union</strong> &nbsp; A ∪ B &nbsp;—&nbsp; read "<strong>A or B</strong>" — all outcomes in either event <em>or both</em>.</p>
+    <p class="fx"><strong>Intersection</strong> &nbsp; A ∩ B &nbsp;—&nbsp; read "<strong>A and B</strong>" — all outcomes in <em>both</em> events.</p>
+    <p class="fx"><strong>Complement</strong> &nbsp; Ā &nbsp;or&nbsp; A<sup>c</sup> &nbsp;—&nbsp; read "<strong>not A</strong>" — all outcomes in S that are <em>not</em> in A.</p>
+    <p class="note">In probability, "or" is always <em>inclusive</em>: A or B or both. This is not the everyday English "or". It is the single most common source of lost marks in §4-2.</p>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Worked example · 12-sided die</span><p>Roll a 12-sided die once. <span class="v">S</span> = {1,…,12}. Let <span class="v">A</span> = factors of 12 and <span class="v">B</span> = factors of 8. Represent S, A, B on a Venn diagram, then find (a) <span class="v">A ∪ B</span>, (b) <span class="v">A ∩ B</span>, (c) <span class="v">Ā</span>, (d) <span class="v">(A ∪ B)<sup>c</sup></span>.</p></div>
+    <div class="a">
+      <p><strong>First, build the sets.</strong> Factors of 12: 1, 2, 3, 4, 6, 12 → <span class="v">A = {1, 2, 3, 4, 6, 12}</span>. Factors of 8: 1, 2, 4, 8 → <span class="v">B = {1, 2, 4, 8}</span>.</p>
+      <p><strong>Venn layout.</strong> Inside A only: 3, 6, 12. Inside both: 1, 2, 4. Inside B only: 8. Outside both, still in S: 5, 7, 9, 10, 11.</p>
+      <ol class="steps">
+        <li>(a) <span class="v">A ∪ B</span> = {1, 2, 3, 4, 6, 8, 12} &nbsp;→&nbsp; <span class="ans">n = 7</span></li>
+        <li>(b) <span class="v">A ∩ B</span> = {1, 2, 4} &nbsp;→&nbsp; <span class="ans">n = 3</span></li>
+        <li>(c) <span class="v">Ā</span> = {5, 7, 8, 9, 10, 11} &nbsp;→&nbsp; <span class="ans">n = 6</span> &nbsp;(everything in S not in A — note 8 <em>is</em> included)</li>
+        <li>(d) <span class="v">(A ∪ B)<sup>c</sup></span> = {5, 7, 9, 10, 11} &nbsp;→&nbsp; <span class="ans">n = 5</span></li>
+      </ol>
+      <p class="note" style="font-size:.9rem;color:var(--fg-soft)"><strong>Check:</strong> n(A ∪ B) + n((A ∪ B)<sup>c</sup>) = 7 + 5 = 12 = n(S). ✔ Always run this check — it catches a dropped element in two seconds.</p>
+    </div>
+  </div>
+
+  <div class="callout trap">
+    <span class="ct">Trap — the complement must stay inside S</span>
+    <p><span class="v">Ā</span> is <em>not</em> "everything else in the universe". It is everything in <strong>this sample space</strong> that is not in A. In the example above, students routinely forget 8 belongs in <span class="v">Ā</span> because it "feels like it belongs to B". B is irrelevant to <span class="v">Ā</span>.</p>
+  </div>
+
+  <h3>4 · The three interpretations of probability</h3>
+  <p><span class="term">Probability</span> is used to quantify the likelihood, or chance, that an outcome of a random experiment will occur. The probability that event <span class="v">A</span> occurs is written <span class="v">P(A)</span>. There are three basic interpretations:</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h5>1 · Classical</h5>
+      <p>Uses sample spaces. Assumes <strong>all outcomes are equally likely</strong>. Computed before any data is collected — pure counting.</p>
+    </div>
+    <div class="card">
+      <h5>2 · Empirical (relative frequency)</h5>
+      <p>Based on <strong>observation</strong>. Computed from a frequency distribution of data already collected.</p>
+    </div>
+    <div class="card">
+      <h5>3 · Subjective</h5>
+      <p>A value based on an <strong>educated guess or estimate</strong>, employing opinions and inexact information.</p>
+    </div>
+  </div>
+
+  <h4>Classical probability</h4>
+  <p><span class="term">Equally likely events</span> are events that have the same probability of occurring. The classical probability of any event <span class="v">E</span> of a sample space <span class="v">S</span> is:</p>
+  <div class="formula">
+    <div class="label">Classical probability</div>
+    <p class="fx">P(E) = <span class="frac"><span class="num">n(E)</span><span class="den">n(S)</span></span></p>
+    <p class="note"><span class="v">n(E)</span> = the number of outcomes in E. &nbsp;<span class="v">n(S)</span> = the number of outcomes in S.</p>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-6 · Gender of Children</span><p>If a family has three children, find the probability that exactly two of the three children are girls.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>Sample space:</strong> S = {BBB, BBG, BGB, GBB, BGG, GBG, GGB, GGG}, so n(S) = 8.</li>
+        <li><strong>Event:</strong> E = "exactly two of the three children are girls" = {BGG, GBG, GGB}, so n(E) = 3.</li>
+        <li><strong>Divide:</strong> P(E) = n(E)/n(S) = 3/8 = <span class="ans">0.375</span></li>
+      </ol>
+      <p><strong>Important (the lecturer flags this explicitly):</strong> sample spaces and events must be <em>written out using set notation</em> as shown above. Marks are allocated to the set, not only to the final number. Writing just "3/8" loses method marks.</p>
+    </div>
+  </div>
+
+  <h4>The four probability rules</h4>
+  <div class="formula">
+    <div class="label">Probability rules — let event E be in sample space S</div>
+    <p class="fx">(1) &nbsp; 0 ≤ P(E) ≤ 1</p>
+    <p class="fx">(2) &nbsp; If P(E) = 0, then E <strong>cannot happen</strong> (impossible).</p>
+    <p class="fx">(3) &nbsp; If P(E) = 1, then E is <strong>certain</strong>.</p>
+    <p class="fx">(4) &nbsp; The sum of the probabilities of all outcomes in S equals 1.</p>
+    <p class="note">The probability line: 0 = Impossible · ~0.25 = Unlikely · 0.5 = 50–50 · ~0.75 = Likely · 1 = Certain.</p>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Examples 4-8 &amp; 4-9 · Rolling a Die</span><p>(a) When a single die is rolled, find the probability of getting a 9. &nbsp;(b) When a single die is rolled, what is the probability of getting a number less than 7?</p></div>
+    <div class="a">
+      <p><strong>(a)</strong> S = {1, 2, 3, 4, 5, 6}; E: getting a 9. It is impossible to get a 9, so E = { } and n(E) = 0.</p>
+      <p class="fx">P(E) = 0/6 = <span class="ans">0</span></p>
+      <p><strong>(b)</strong> S = {1, 2, 3, 4, 5, 6}; E: getting a number less than 7. Every face qualifies, so E = {1, 2, 3, 4, 5, 6} and n(E) = 6.</p>
+      <p class="fx">P(E) = 6/6 = <span class="ans">1</span> — the event is <strong>certain</strong>.</p>
+      <p>These two examples exist to demonstrate rules (2) and (3). An exam question that produces <span class="v">P = 0</span> or <span class="v">P = 1</span> is testing whether you <em>recognise</em> impossibility and certainty — say the words in your answer.</p>
+    </div>
+  </div>
+
+  <h3>5 · Complementary events</h3>
+  <p>The <span class="term">complement of an event E</span> is the set of outcomes in the sample space that are not included in the outcomes of event E. It is denoted <span class="v">Ē</span> (read "E bar").</p>
+
+  <div class="formula">
+    <div class="label">Rule for complementary events</div>
+    <p class="fx">P(Ē) = 1 − P(E) &nbsp;&nbsp;or&nbsp;&nbsp; P(E) = 1 − P(Ē) &nbsp;&nbsp;or&nbsp;&nbsp; P(E) + P(Ē) = 1</p>
+    <p class="note">This is the highest-leverage formula in the chapter. Whenever a question contains "<strong>not</strong>", "<strong>at least one</strong>", "<strong>neither</strong>", or "<strong>none</strong>", reach for it before you do anything else.</p>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-10 · Finding Complements</span><p>Find the complement of each event: (a) selecting a month that has 30 days; (b) selecting a day of the week that begins with the letter S; (c) rolling two dice and getting a number whose sum is 7.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>(a)</strong> Months have 28, 30 or 31 days. Complement = <span class="ans">selecting a month that has 28 or 31 days.</span></li>
+        <li><strong>(b)</strong> Days starting with S are Saturday and Sunday. Complement = <span class="ans">selecting a day that does not begin with the letter S</span> — that is, Monday, Tuesday, Wednesday, Thursday or Friday.</li>
+        <li><strong>(c)</strong> The possible sums of two dice are 2 through 12. Complement = <span class="ans">getting a sum of 2, 3, 4, 5, 6, 8, 9, 10, 11, or 12.</span></li>
+      </ol>
+      <div class="callout note" style="margin-top:14px">
+        <span class="ct">Note on the slide</span>
+        <p>The lecture slide for part (b) prints "does not begin with the letter <strong>T</strong>", which is a typo carried from an earlier version of the example. The event is "begins with S", so its complement is "does <em>not</em> begin with S". Write S in your answer and you are correct against the textbook.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-11 · Favorite Ice Cream Flavors</span><p>In a study, 23% of the people surveyed said that vanilla was their favorite flavor of ice cream. If a person is selected at random, find the probability that the person's favorite flavor is <em>not</em> vanilla.</p></div>
+    <div class="a">
+      <p>Let E be "favorite flavor is vanilla", with P(E) = 0.23.</p>
+      <p class="fx">P(not vanilla) = 1 − P(E) = 1 − 0.23 = <span class="ans">0.77</span> &nbsp;(or 77%)</p>
+    </div>
+  </div>
+
+  <h3>6 · Empirical probability</h3>
+  <p>Given a frequency distribution, the probability of an event being in a given class is the relative frequency of that class:</p>
+  <div class="formula">
+    <div class="label">Empirical (relative frequency) probability</div>
+    <p class="fx">P(E) = <span class="frac"><span class="num">frequency for the class</span><span class="den">total frequencies in the distribution</span></span> = <span class="frac"><span class="num">f</span><span class="den">n</span></span></p>
+    <p class="note"><span class="v">f</span> = frequency of the class (event); <span class="v">n</span> = the sample size. Based on <strong>observation</strong>, not on assuming equally likely outcomes.</p>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-12 · Travel Survey</span><p>A researcher asked 50 people who plan to travel over the Thanksgiving holiday how they will get to their destination: Drive 41, Fly 6, Train or bus 3. Find the probability that a person will travel by train or bus.</p></div>
+    <div class="a">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Method</th><th class="num">Frequency f</th><th class="num">Empirical probability f/n</th></tr></thead>
+          <tbody>
+            <tr><td>Drive</td><td class="num">41</td><td class="num">41/50 = 0.82</td></tr>
+            <tr><td>Fly</td><td class="num">6</td><td class="num">6/50 = 0.12</td></tr>
+            <tr><td>Train or bus</td><td class="num">3</td><td class="num">3/50 = 0.06</td></tr>
+            <tr><td><strong>Total</strong></td><td class="num"><strong>50</strong></td><td class="num"><strong>50/50 = 1.00</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="fx">P(train or bus) = f/n = 3/50 = <span class="ans">0.06</span></p>
+      <p>The total column summing to exactly 1.00 is probability rule (4) in action — use it as a check on every frequency table you build.</p>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-13 · Distribution of Blood Types</span><p>In a sample of 50 people, 21 had type O blood, 22 had type A, 5 had type B, and 2 had type AB. Set up a frequency distribution and find: (a) P(type O); (b) P(type A or type B); (c) P(neither type A nor type O); (d) P(not type AB).</p></div>
+    <div class="a">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Type</th><th class="num">Frequency</th></tr></thead>
+          <tbody>
+            <tr><td>A</td><td class="num">22</td></tr>
+            <tr><td>B</td><td class="num">5</td></tr>
+            <tr><td>AB</td><td class="num">2</td></tr>
+            <tr><td>O</td><td class="num">21</td></tr>
+            <tr><td><strong>Total</strong></td><td class="num"><strong>50</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ol class="steps">
+        <li><strong>(a)</strong> P(O) = f/n = 21/50 = <span class="ans">0.42</span></li>
+        <li><strong>(b)</strong> P(A or B) = 22/50 + 5/50 = 27/50 = <span class="ans">0.54</span> &nbsp;(add the frequencies of the two classes — the types are mutually exclusive)</li>
+        <li><strong>(c)</strong> "Neither A nor O" means the person has type B or type AB: P = 5/50 + 2/50 = 7/50 = <span class="ans">0.14</span></li>
+        <li><strong>(d)</strong> P(not AB) = 1 − P(AB) = 1 − 2/50 = 48/50 = <span class="ans">0.96</span></li>
+      </ol>
+      <p><strong>Read the structure:</strong> (b) is the addition rule, (c) is a translated complement ("neither…nor" = complement of a union), (d) is the complement rule. One table, three different tools. This is exactly how a long exam question is built.</p>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-14 · Sleep Hours</span><p>A survey found the following distribution for hours of sleep per night: Less than 6 h → 12; 6 h → 26; 7 h → 30; 8 h → 28; More than 8 h → 4. Total 100. Find, for a person selected at random: (a) sleeps 8 hours; (b) sleeps fewer than 7 hours; (c) sleeps <strong>at most</strong> 8 hours; (d) sleeps <strong>at least</strong> 7 hours.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>(a) Exactly 8 hours</strong> — one class only: P = 28/100 = <span class="ans">0.28</span></li>
+        <li><strong>(b) Fewer than 7 hours</strong> — strictly below 7, so "less than 6" and "6": P = (12 + 26)/100 = 38/100 = <span class="ans">0.38</span></li>
+        <li><strong>(c) At most 8 hours</strong> — 8 and everything below it: P = (12 + 26 + 30 + 28)/100 = 96/100 = <span class="ans">0.96</span><br><em>Faster:</em> 1 − P(more than 8) = 1 − 4/100 = 0.96 ✔</li>
+        <li><strong>(d) At least 7 hours</strong> — 7 and everything above it: P = (30 + 28 + 4)/100 = 62/100 = <span class="ans">0.62</span></li>
+      </ol>
+    </div>
+  </div>
+
+  <h3>7 · The five phrases — translate before you calculate</h3>
+  <p>The lecturer gives this as a standalone "Important Note" slide, which is a strong signal that it is examined. Consider the values <strong>3, 4, 5, 6, 7</strong>:</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th style="width:28%">Phrase</th><th style="width:30%">Values used</th><th>Symbol</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Exactly 5</strong></td><td class="num">5</td><td><span class="v">X = 5</span></td></tr>
+        <tr><td><strong>Less (fewer) than 5</strong></td><td class="num">3, 4</td><td><span class="v">X &lt; 5</span> — 5 is <em>excluded</em></td></tr>
+        <tr><td><strong>At most 5</strong> (5 or less)</td><td class="num">3, 4, 5</td><td><span class="v">X ≤ 5</span> — 5 is <em>included</em></td></tr>
+        <tr><td><strong>More (greater) than 5</strong></td><td class="num">6, 7</td><td><span class="v">X &gt; 5</span> — 5 is <em>excluded</em></td></tr>
+        <tr><td><strong>At least 5</strong></td><td class="num">5, 6, 7</td><td><span class="v">X ≥ 5</span> — 5 is <em>included</em></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ar-note">
+    <span class="lbl">الترجمة الحرفية — احفظها</span>
+    <ul>
+      <li><b>Exactly 5</b> = بالضبط 5 فقط.</li>
+      <li><b>Less / fewer than 5</b> = أقل من 5، <b>بدون</b> الـ 5.</li>
+      <li><b>At most 5</b> = 5 فأقل، <b>مع</b> الـ 5.</li>
+      <li><b>More / greater than 5</b> = أكثر من 5، <b>بدون</b> الـ 5.</li>
+      <li><b>At least 5</b> = 5 فأكثر، <b>مع</b> الـ 5.</li>
+    </ul>
+    القاعدة الذهبية: كلمة <b>at</b> (at most / at least) تعني أن الرقم نفسه <b>داخل</b> الحساب. وكلمة <b>than</b> (less than / more than) تعني أن الرقم نفسه <b>خارج</b> الحساب.
+  </div>
+
+  <h3>8 · Subjective probability</h3>
+  <p><span class="term">Subjective probability</span> uses a probability value based on an educated guess or estimate, employing opinions and inexact information. No sample space is counted and no data is tabulated — a qualified person simply assigns a number.</p>
+  <ul>
+    <li>A sportswriter may say there is a <strong>70% probability</strong> that the Oman football team will win the Gulf Cup next year.</li>
+    <li>A physician might say that, on the basis of her diagnosis, there is a <strong>30% chance</strong> the patient will need an operation.</li>
+    <li>A seismologist might say there is an <strong>80% probability</strong> that an earthquake will occur in a certain area.</li>
+  </ul>
+  <div class="callout tip">
+    <span class="ct">How this is examined</span>
+    <p>You will be shown a statement and asked <em>which type of probability is this?</em> The tell: counting a sample space → <strong>classical</strong>. A frequency table or "in a survey of n people" → <strong>empirical</strong>. An expert's opinion with no data behind it → <strong>subjective</strong>. One mark, two seconds, never miss it.</p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 4-2 -->
+<!-- ============================================================ -->
+<section id="s42" style="--sec:var(--ink-2);--wash:var(--ink-2-wash)">
+  <div class="sec-head">
+    <span class="sec-num">4-2</span>
+    <h2>The Addition Rules for Probability
+      <span class="ar">قواعد الجمع للاحتمال</span>
+    </h2>
+  </div>
+
+  <p>§4-2 answers exactly one question: <strong>what is P(A <em>or</em> B)?</strong> There are two formulas, and choosing between them depends on a single yes/no test.</p>
+
+  <h3>1 · Mutually exclusive events — the test</h3>
+  <p>Two events are said to be <span class="term">mutually exclusive events</span> (or <span class="term">disjoint</span>) if they <strong>cannot occur at the same time</strong> — that is, they have no elements in common.</p>
+  <div class="formula">
+    <div class="label">The test</div>
+    <p class="fx">A and B are mutually exclusive &nbsp;⟺&nbsp; A ∩ B = ∅</p>
+    <p class="note"><span class="v">∅</span> is the null (empty) set. On a Venn diagram, mutually exclusive events are drawn as two circles that <strong>do not overlap</strong>.</p>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Worked example · Rolling one die</span><p>S = {1, 2, 3, 4, 5, 6}. A = getting an even number = {2, 4, 6}; B = getting an odd number = {1, 3, 5}; C = getting a factor of 4 = {1, 2, 4}. (a) Are A and B mutually exclusive? (b) Are A and C mutually exclusive?</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>(a)</strong> A ∩ B = {2,4,6} ∩ {1,3,5} = ∅. &nbsp;<span class="ans">Yes — mutually exclusive.</span> A number cannot be even and odd at once.</li>
+        <li><strong>(b)</strong> A ∩ C = {2,4,6} ∩ {1,2,4} = {2, 4} ≠ ∅. &nbsp;<span class="ans">No — not mutually exclusive.</span> Rolling a 2 or a 4 satisfies both events simultaneously.</li>
+      </ol>
+      <p><strong>Method mark:</strong> always write the intersection out before you answer. "Yes/No" alone is worth less than "A ∩ C = {2, 4} ≠ ∅, therefore not mutually exclusive."</p>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-15 · Determining Mutually Exclusive Events</span><p>Determine whether the two events are mutually exclusive, and explain your answer.<br>(a) Randomly selecting a female student / randomly selecting a student who is a second year.<br>(b) Randomly selecting a person with type A blood / randomly selecting a person with type O blood.<br>(c) Rolling a die and getting an odd number / rolling a die and getting a number less than 3.<br>(d) Randomly selecting a person who is under 21 years of age / randomly selecting a person who is over 30 years of age.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>(a)</strong> <span class="ans">Not mutually exclusive.</span> A student can be female <em>and</em> a second year at the same time.</li>
+        <li><strong>(b)</strong> <span class="ans">Mutually exclusive.</span> A person has exactly one blood type; being type A excludes being type O.</li>
+        <li><strong>(c)</strong> <span class="ans">Not mutually exclusive.</span> Odd = {1, 3, 5}; less than 3 = {1, 2}. They share the outcome 1.</li>
+        <li><strong>(d)</strong> <span class="ans">Mutually exclusive.</span> No one is simultaneously under 21 and over 30.</li>
+      </ol>
+    </div>
+  </div>
+
+  <h3>2 · The two addition rules</h3>
+  <div class="formula">
+    <div class="label">Addition Rule #1 — A and B mutually exclusive</div>
+    <p class="fx">P(A ∪ B) = P(A) + P(B)</p>
+  </div>
+  <div class="formula">
+    <div class="label">Addition Rule #2 — A and B NOT mutually exclusive</div>
+    <p class="fx">P(A ∪ B) = P(A) + P(B) − P(A ∩ B)</p>
+    <p class="note">The overlap gets counted once in P(A) and once again in P(B), so it must be subtracted once to be counted correctly. On the Venn diagram this is the shaded lens in the middle.</p>
+  </div>
+
+  <div class="callout tip">
+    <span class="ct">Use Rule #2 always — it is safe</span>
+    <p>Rule #1 is a special case of Rule #2, because when A and B are mutually exclusive, <span class="v">P(A ∩ B) = 0</span> and the subtraction disappears. If you are ever unsure under exam pressure, write Rule #2 and show that the intersection is zero. You cannot be wrong, and you gain a method mark for justifying it.</p>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-17 · Endangered Species</span><p>In the United States there are 59 species of mammals that are endangered, 75 species of birds, and 68 species of fish. If one animal is selected at random, find the probability that it is either a mammal or a fish.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>Total:</strong> n(S) = 59 + 75 + 68 = 202.</li>
+        <li><strong>Mutually exclusive?</strong> An animal cannot be both a mammal and a fish → <strong>yes</strong>, so use Rule #1.</li>
+        <li class="fx">P(mammal ∪ fish) = <span class="frac"><span class="num">59</span><span class="den">202</span></span> + <span class="frac"><span class="num">68</span><span class="den">202</span></span> = <span class="frac"><span class="num">127</span><span class="den">202</span></span> ≈ <span class="ans">0.629</span></li>
+      </ol>
+      <p>The 75 birds appear <em>only</em> in the denominator. A classic distractor: students who ignore the birds get 127/127 = 1.</p>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-18 · Research and Development Employees</span><p>Corporate research and development centers for three local companies have these numbers of employees: U.S. Steel 110, Alcoa 750, Bayer Material Science 250. If a research employee is selected at random, find the probability that the employee is employed by U.S. Steel or Alcoa.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>Total:</strong> n(S) = 110 + 750 + 250 = 1110.</li>
+        <li><strong>Mutually exclusive?</strong> An employee works for one company → <strong>yes</strong>, Rule #1.</li>
+        <li class="fx">P(Steel ∪ Alcoa) = <span class="frac"><span class="num">110</span><span class="den">1110</span></span> + <span class="frac"><span class="num">750</span><span class="den">1110</span></span> = <span class="frac"><span class="num">860</span><span class="den">1110</span></span> = <span class="frac"><span class="num">86</span><span class="den">111</span></span> ≈ <span class="ans">0.775</span></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-21 · Selecting a Medical Staff Person</span><p>In a hospital unit there are 8 nurses and 5 physicians; 7 nurses and 3 physicians are females. If a staff person is selected, find the probability that the subject is a nurse <strong>or</strong> a male.</p></div>
+    <div class="a">
+      <p><strong>Build the two-way table first — always.</strong></p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Staff</th><th class="num">Female</th><th class="num">Male</th><th class="num">Total</th></tr></thead>
+          <tbody>
+            <tr><td>Nurses</td><td class="num">7</td><td class="num">1</td><td class="num">8</td></tr>
+            <tr><td>Physicians</td><td class="num">3</td><td class="num">2</td><td class="num">5</td></tr>
+            <tr><td><strong>Total</strong></td><td class="num"><strong>10</strong></td><td class="num"><strong>3</strong></td><td class="num"><strong>13</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ol class="steps">
+        <li>Male nurses = 8 − 7 = 1. Male physicians = 5 − 3 = 2. Total males = 3. n(S) = 13.</li>
+        <li><strong>Mutually exclusive?</strong> No — a male nurse is both. So use Rule #2.</li>
+        <li class="fx">P(N ∪ M) = <span class="frac"><span class="num">8</span><span class="den">13</span></span> + <span class="frac"><span class="num">3</span><span class="den">13</span></span> − <span class="frac"><span class="num">1</span><span class="den">13</span></span> = <span class="frac"><span class="num">10</span><span class="den">13</span></span> ≈ <span class="ans">0.769</span></li>
+      </ol>
+      <p><strong>Sanity check by direct count:</strong> nurses-or-males = 7 female nurses + 1 male nurse + 2 male physicians = 10 people out of 13. ✔ Identical. Run this check whenever the numbers are small.</p>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-22 · Driving While Depressed</span><p>On New Year's night, the probability of a person driving while depressed is 0.32, the probability of a person having a driving accident is 0.09, and the probability of a person having a driving accident while depressed is 0.06. What is the probability of a person driving while depressed <strong>or</strong> having a driving accident?</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>Extract:</strong> P(D) = 0.32, P(A) = 0.09, P(D ∩ A) = 0.06.</li>
+        <li><strong>Mutually exclusive?</strong> No — P(D ∩ A) = 0.06 ≠ 0, so they overlap. Rule #2.</li>
+        <li class="fx">P(D ∪ A) = 0.32 + 0.09 − 0.06 = <span class="ans">0.35</span></li>
+      </ol>
+      <div class="callout trap" style="margin-top:14px">
+        <span class="ct">Trap — "accident <em>while</em> depressed" is an intersection, not a conditional</span>
+        <p>The phrase "having a driving accident <strong>while</strong> depressed" means both things happen to the same person: <span class="v">P(D ∩ A) = 0.06</span>. It does <em>not</em> mean <span class="v">P(A | D)</span>. If it had been conditional, the problem would say "<em>given that</em> the person is depressed" or "<em>of those who are depressed</em>". Misreading this turns 0.35 into a wrong answer, so slow down on the word that joins the two events.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>3 · Extended addition rules (three or more events)</h3>
+  <div class="formula">
+    <div class="label">Three mutually exclusive events A, B, C</div>
+    <p class="fx">P(A ∪ B ∪ C) = P(A) + P(B) + P(C)</p>
+  </div>
+  <div class="formula">
+    <div class="label">Three events that are NOT mutually exclusive</div>
+    <p class="fx">P(A ∪ B ∪ C) = P(A) + P(B) + P(C) − P(A ∩ B) − P(A ∩ C) − P(B ∩ C) + P(A ∩ B ∩ C)</p>
+    <p class="note">Pattern: add the singles, subtract the pairs, add back the triple. The lecture notes point you to Exercises 19–21 for the mutually exclusive version and Exercise 24 for the general version.</p>
+  </div>
+
+  <div class="ar-note">
+    <span class="lbl">متى أستخدم أي قاعدة؟</span>
+    اسأل نفسك سؤالًا واحدًا: <b>هل يمكن للحدثين أن يقعا معًا؟</b><br>
+    • <b>لا</b> ← متنافيان (mutually exclusive) ← <b>P(A) + P(B)</b><br>
+    • <b>نعم</b> ← غير متنافيين ← <b>P(A) + P(B) − P(A∩B)</b><br>
+    وإذا ترددت، استخدم القاعدة الثانية دائمًا — فهي تعطي النتيجة الصحيحة في الحالتين لأن التقاطع يساوي صفرًا عند التنافي.
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 4-3 -->
+<!-- ============================================================ -->
+<section id="s43" style="--sec:var(--ink-3);--wash:var(--ink-3-wash)">
+  <div class="sec-head">
+    <span class="sec-num">4-3</span>
+    <h2>The Multiplication Rules and Conditional Probability
+      <span class="ar">قواعد الضرب والاحتمال الشرطي</span>
+    </h2>
+  </div>
+
+  <p>§4-2 handled "<strong>or</strong>". §4-3 handles "<strong>and</strong>" — and then inverts it to handle "<strong>given that</strong>". This is the densest section in the chapter and the one that separates a B from an A.</p>
+
+  <h3>1 · Independent vs dependent events</h3>
+  <div class="grid2">
+    <div class="card">
+      <h5>Independent events</h5>
+      <p>Two events <span class="v">A</span> and <span class="v">B</span> are <strong>independent</strong> if the fact that A occurs <strong>does not affect</strong> the probability of B occurring.</p>
+    </div>
+    <div class="card">
+      <h5>Dependent events</h5>
+      <p>Two events <span class="v">A</span> and <span class="v">B</span> are <strong>dependent</strong> if the fact that A occurs <strong>does affect</strong> the probability of B occurring.</p>
+    </div>
+  </div>
+
+  <div class="callout trap">
+    <span class="ct">Important note — independent ≠ mutually exclusive</span>
+    <p>These two ideas are constantly confused and the lecturer calls it out explicitly. When tossing a <strong>single</strong> coin, the result can be either heads or tails but <strong>cannot be both</strong> — those are <em>mutually exclusive</em> events. When tossing <strong>two</strong> coins, the result of one flip <strong>does not affect</strong> the result of the other — those are <em>independent</em> events.</p>
+    <p style="margin-top:8px"><strong>The deeper point:</strong> mutually exclusive events (with non-zero probabilities) are in fact <em>dependent</em>. If A happens, you know for certain B did not — knowing about A changed everything about B. Mutually exclusive is about <em>overlap</em>; independent is about <em>influence</em>.</p>
+  </div>
+
+  <h4>Spotting dependence in a word problem</h4>
+  <ul>
+    <li><strong>"…and then it is replaced"</strong> → independent. The pool resets, so probabilities repeat.</li>
+    <li><strong>"…without replacement"</strong> → dependent. Both the numerator and the denominator shrink on the second draw.</li>
+    <li><strong>Separate devices</strong> (a coin <em>and</em> a die, three different people chosen from a large population) → independent.</li>
+    <li><strong>"Of these clients…", "of those who…"</strong> → dependent; you are being given a conditional probability.</li>
+  </ul>
+
+  <h3>2 · The multiplication rules</h3>
+  <div class="formula">
+    <div class="label">Multiplication Rule #1 — independent events</div>
+    <p class="fx">P(A ∩ B) = P(A) · P(B)</p>
+  </div>
+  <div class="formula">
+    <div class="label">Multiplication Rule #2 — dependent events</div>
+    <p class="fx">P(A ∩ B) = P(A | B) · P(B)</p>
+    <p class="fx">P(A ∩ B) = P(B | A) · P(A)</p>
+    <p class="note">Both forms are correct — use whichever conditional probability the question hands you. In practice the question gives one unconditional probability and one conditional one; multiply them.</p>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-23 · Tossing a Coin</span><p>A coin is flipped and a die is rolled. Find the probability of getting a head on the coin <em>and</em> a 4 on the die.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li>The coin and the die do not influence each other → <strong>independent</strong> → Rule #1.</li>
+        <li>P(head) = 1/2 &nbsp; and &nbsp; P(4) = 1/6.</li>
+        <li class="fx">P(head ∩ 4) = <span class="frac"><span class="num">1</span><span class="den">2</span></span> · <span class="frac"><span class="num">1</span><span class="den">6</span></span> = <span class="frac"><span class="num">1</span><span class="den">12</span></span> ≈ <span class="ans">0.0833</span></li>
+      </ol>
+      <p><strong>Verify by sample space:</strong> n(S) = 2 × 6 = 12 outcomes, and only (H, 4) qualifies → 1/12. ✔</p>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-25 · Selecting a Colored Ball</span><p>An urn contains 3 red balls, 2 blue balls, and 5 white balls. A ball is selected and its color noted. <strong>Then it is replaced.</strong> A second ball is selected and its color noted. Find the probability of: (a) selecting 2 blue balls; (b) selecting 1 blue ball and then 1 white ball; (c) selecting 1 red ball and then 1 blue ball.</p></div>
+    <div class="a">
+      <p><strong>Total balls = 3 + 2 + 5 = 10.</strong> The ball is <em>replaced</em>, so every draw sees the same 10 balls → <strong>independent</strong> → Rule #1.</p>
+      <ol class="steps">
+        <li><strong>(a)</strong> P(B ∩ B) = <span class="frac"><span class="num">2</span><span class="den">10</span></span> · <span class="frac"><span class="num">2</span><span class="den">10</span></span> = <span class="frac"><span class="num">4</span><span class="den">100</span></span> = <span class="frac"><span class="num">1</span><span class="den">25</span></span> = <span class="ans">0.04</span></li>
+        <li><strong>(b)</strong> P(B ∩ W) = <span class="frac"><span class="num">2</span><span class="den">10</span></span> · <span class="frac"><span class="num">5</span><span class="den">10</span></span> = <span class="frac"><span class="num">10</span><span class="den">100</span></span> = <span class="ans">0.10</span></li>
+        <li><strong>(c)</strong> P(R ∩ B) = <span class="frac"><span class="num">3</span><span class="den">10</span></span> · <span class="frac"><span class="num">2</span><span class="den">10</span></span> = <span class="frac"><span class="num">6</span><span class="den">100</span></span> = <span class="ans">0.06</span></li>
+      </ol>
+      <div class="callout tip" style="margin-top:14px">
+        <span class="ct">The variant you must be ready for</span>
+        <p>If the same question said "<strong>without replacement</strong>", every second denominator becomes 9 and the matching numerator drops by one where the colors agree:<br>
+        (a) (2/10)(1/9) = 2/90 ≈ 0.0222 &nbsp;·&nbsp; (b) (2/10)(5/9) = 10/90 ≈ 0.1111 &nbsp;·&nbsp; (c) (3/10)(2/9) = 6/90 ≈ 0.0667.<br>
+        Examiners pair these two versions constantly. Circle the words "replaced" or "without replacement" the moment you see them.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-26 · Survey on Stress</span><p>It was found that 3 out of every 4 American workers say they suffer great stress at least once a week. If three people are selected at random, find the probability that all three will say that they suffer great stress at least once a week.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li>P(stress) = 3/4 = 0.75 for each person; three people drawn from a large population → <strong>independent</strong>.</li>
+        <li class="fx">P(all three) = <span class="frac"><span class="num">3</span><span class="den">4</span></span> · <span class="frac"><span class="num">3</span><span class="den">4</span></span> · <span class="frac"><span class="num">3</span><span class="den">4</span></span> = <span class="frac"><span class="num">27</span><span class="den">64</span></span> ≈ <span class="ans">0.4219</span></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-27 · Male Color Blindness</span><p>Approximately 9% of men have a type of color blindness that prevents them from distinguishing between red and green. If 3 men are selected at random, find the probability that all of them will have this type of red-green color blindness.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li>P(color blind) = 0.09; three independent selections.</li>
+        <li class="fx">P(all three) = (0.09)<sup>3</sup> = 0.09 × 0.09 × 0.09 = <span class="ans">0.000729</span></li>
+      </ol>
+      <p><strong>Interpretation marks:</strong> a result this small should be read aloud in your answer — "about 7 in 10,000 groups of three men". Interpretation is explicitly in CLO8 and costs you nothing to add.</p>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-29 · Homeowner's and Automobile Insurance</span><p>World Wide Insurance Company found that 53% of the residents of a city had homeowner's insurance (<span class="v">H</span>) with the company. <strong>Of these clients</strong>, 27% also had automobile insurance (<span class="v">A</span>). If a resident is selected at random, find the probability that the resident has both homeowner's and automobile insurance with World Wide.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>Extract carefully.</strong> P(H) = 0.53. The phrase "<em>of these clients</em>" makes the 27% conditional: P(A | H) = 0.27.</li>
+        <li>Dependent → Rule #2.</li>
+        <li class="fx">P(H ∩ A) = P(H) · P(A | H) = 0.53 × 0.27 = <span class="ans">0.1431</span></li>
+      </ol>
+      <div class="callout trap" style="margin-top:14px">
+        <span class="ct">Trap — "of these" is the conditional signal</span>
+        <p>If you read the 27% as unconditional P(A) and multiply 0.53 × 0.27 anyway, you get the right number for the wrong reason and will lose the method mark. Worse, on a question where the two routes differ you will get the wrong number. Train yourself to annotate the given values as <span class="v">P(H) = 0.53</span> and <span class="v">P(A|H) = 0.27</span> <em>before</em> calculating.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-28 · Unemployed Workers</span><p>For a specific year, 5.2% of U.S. workers were unemployed. During that time, 33% of those who were unemployed received unemployment benefits. If a person is selected at random, find the probability that she or he received unemployment benefits if the person is unemployed.</p></div>
+    <div class="a">
+      <p><strong>Extract:</strong> P(U) = 0.052, and "33% <em>of those who were unemployed</em>" gives P(B | U) = 0.33.</p>
+      <p><strong>As worded on the slide</strong> ("…<em>if the person is unemployed</em>"), the question asks for the conditional probability, which is handed to you directly:</p>
+      <p class="fx">P(B | U) = <span class="ans">0.33</span></p>
+      <p><strong>The textbook version of this example</strong> asks for the probability that a randomly selected person "was unemployed <strong>and</strong> received benefits", which is the multiplication rule:</p>
+      <p class="fx">P(U ∩ B) = P(U) · P(B | U) = 0.052 × 0.33 = <span class="ans">0.01716 ≈ 0.0172</span></p>
+      <div class="callout tip" style="margin-top:14px">
+        <span class="ct">Be ready for both</span>
+        <p>This pair is the clearest illustration in the chapter of how one word changes the whole calculation. "<strong>And</strong>" → multiply the two values (0.0172). "<strong>Given / if / of those who</strong>" → the conditional is already there (0.33). In an exam, write which one you are computing in words before you compute it.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>3 · Tree diagrams with branch probabilities</h3>
+  <p>When an experiment happens in stages and the second stage depends on the first, a tree diagram is not optional decoration — it is the method. Multiply <em>along</em> branches, add <em>across</em> the branches that satisfy the event.</p>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-31 · Selecting Colored Balls</span><p>Box 1 contains 2 red balls and 1 blue ball. Box 2 contains 3 blue balls and 1 red ball. A coin is tossed: heads → box 1 is selected and a ball is drawn; tails → box 2 is selected and a ball is drawn. Find the probability of selecting a red ball.</p></div>
+    <div class="a">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Path</th><th class="num">P(box)</th><th class="num">P(ball | box)</th><th class="num">Product</th></tr></thead>
+          <tbody>
+            <tr><td>Box 1 → Red</td><td class="num">1/2</td><td class="num">2/3</td><td class="num">2/6 = 1/3</td></tr>
+            <tr><td>Box 1 → Blue</td><td class="num">1/2</td><td class="num">1/3</td><td class="num">1/6</td></tr>
+            <tr><td>Box 2 → Red</td><td class="num">1/2</td><td class="num">1/4</td><td class="num">1/8</td></tr>
+            <tr><td>Box 2 → Blue</td><td class="num">1/2</td><td class="num">3/4</td><td class="num">3/8</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Red can be reached by two different paths, so add them:</strong></p>
+      <p class="fx">P(Red) = <span class="frac"><span class="num">1</span><span class="den">2</span></span>·<span class="frac"><span class="num">2</span><span class="den">3</span></span> + <span class="frac"><span class="num">1</span><span class="den">2</span></span>·<span class="frac"><span class="num">1</span><span class="den">4</span></span> = <span class="frac"><span class="num">2</span><span class="den">6</span></span> + <span class="frac"><span class="num">1</span><span class="den">8</span></span> = <span class="frac"><span class="num">8</span><span class="den">24</span></span> + <span class="frac"><span class="num">3</span><span class="den">24</span></span> = <span class="frac"><span class="num">11</span><span class="den">24</span></span> ≈ <span class="ans">0.4583</span></p>
+      <p class="note" style="font-size:.9rem;color:var(--fg-soft)"><strong>Check:</strong> all four products sum to 1/3 + 1/6 + 1/8 + 3/8 = 8/24 + 4/24 + 3/24 + 9/24 = 24/24 = 1. ✔ A tree whose branches don't sum to 1 has an error in it.</p>
+    </div>
+  </div>
+
+  <h3>4 · Conditional probability</h3>
+  <p>The <span class="term">conditional probability</span> of an event <span class="v">B</span> in relationship to an event <span class="v">A</span> is the probability that event B occurs <em>after</em> event A has already occurred.</p>
+  <div class="formula">
+    <div class="label">Conditional probability</div>
+    <p class="fx">P(B | A) = <span class="frac"><span class="num">P(A ∩ B)</span><span class="den">P(A)</span></span> &nbsp;&nbsp;&nbsp; P(A) ≠ 0</p>
+    <p class="note">Read it as: <em>the condition goes in the denominator.</em> Conditioning on A means you throw away everything outside A and treat A as the new sample space.</p>
+  </div>
+  <div class="formula">
+    <div class="label">Conditional probability and independence</div>
+    <p class="fx">If A and B are independent: &nbsp; P(B | A) = <span class="frac"><span class="num">P(A ∩ B)</span><span class="den">P(A)</span></span> = P(B)</p>
+    <p class="note">Knowing A happened tells you nothing new about B — which is exactly what "independent" means. This doubles as the <strong>test for independence</strong>.</p>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-32 · Selecting Colored Chips</span><p>A box contains black chips and white chips. A person selects two chips <strong>without replacement</strong>. If the probability of selecting a black chip and a white chip is 15/56, and the probability of selecting a black chip on the first draw is 3/8, find the probability of selecting the white chip on the second draw, <em>given</em> that the first chip selected was a black chip.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>Extract:</strong> P(B ∩ W) = 15/56, P(B) = 3/8. Required: P(W | B).</li>
+        <li class="fx">P(W | B) = <span class="frac"><span class="num">P(B ∩ W)</span><span class="den">P(B)</span></span> = <span class="frac"><span class="num">15/56</span><span class="den">3/8</span></span> = <span class="frac"><span class="num">15</span><span class="den">56</span></span> × <span class="frac"><span class="num">8</span><span class="den">3</span></span> = <span class="frac"><span class="num">120</span><span class="den">168</span></span> = <span class="frac"><span class="num">5</span><span class="den">7</span></span> ≈ <span class="ans">0.714</span></li>
+      </ol>
+      <p><strong>Dividing by a fraction:</strong> flip the bottom fraction and multiply. 15/56 ÷ 3/8 = 15/56 × 8/3. Cancel: 15/3 = 5 and 8/56 = 1/7 → 5/7.</p>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-33 · Parking Tickets</span><p>The probability that Sam parks in a no-parking zone <em>and</em> gets a parking ticket is 0.06, and the probability that Sam cannot find a legal parking space and has to park in the no-parking zone is 0.20. On Tuesday, Sam arrives at school and has to park in a no-parking zone. Find the probability that he will get a parking ticket.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>Extract:</strong> Let N = parks in a no-parking zone, T = gets a ticket. P(N ∩ T) = 0.06, P(N) = 0.20.</li>
+        <li>"He <em>has to</em> park in a no-parking zone" = N has already happened → the question wants P(T | N).</li>
+        <li class="fx">P(T | N) = <span class="frac"><span class="num">P(N ∩ T)</span><span class="den">P(N)</span></span> = <span class="frac"><span class="num">0.06</span><span class="den">0.20</span></span> = <span class="ans">0.30</span></li>
+      </ol>
+      <p><strong>Why this is the exam's favourite shape:</strong> the condition is hidden inside a story ("he has to park there") rather than announced with the word "given". Learn to spot a condition stated as an accomplished fact.</p>
+    </div>
+  </div>
+
+  <h3>5 · Two-way (contingency) tables — the complete toolkit</h3>
+  <p>A two-way table lets you answer every question type in §4-1 to §4-3 by reading counts. Master the four readings and this becomes free marks.</p>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-34 · Survey on Women in the Military</span><p>A recent survey asked 100 people if they thought women in the armed forces should be permitted to participate in combat:</p>
+      <div class="tbl-wrap" style="margin-top:10px">
+        <table>
+          <thead><tr><th>Gender</th><th class="num">Yes</th><th class="num">No</th><th class="num">Total</th></tr></thead>
+          <tbody>
+            <tr><td>Male</td><td class="num">32</td><td class="num">18</td><td class="num">50</td></tr>
+            <tr><td>Female</td><td class="num">8</td><td class="num">42</td><td class="num">50</td></tr>
+            <tr><td><strong>Total</strong></td><td class="num"><strong>40</strong></td><td class="num"><strong>60</strong></td><td class="num"><strong>100</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:10px">Find: (a) the respondent answered yes, given that the respondent was female; (b) the respondent was male, given that the respondent answered no; (c) are the events "Male" and "Yes" independent? (d) are "Male" and "Yes" mutually exclusive?</p>
+    </div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>(a) P(Yes | Female).</strong> The condition "Female" restricts you to the Female row, total 50. Of those, 8 said yes.<br>
+          <span class="fx">P(Yes | Female) = <span class="frac"><span class="num">8</span><span class="den">50</span></span> = <span class="ans">0.16</span></span></li>
+        <li><strong>(b) P(Male | No).</strong> The condition "No" restricts you to the No column, total 60. Of those, 18 are male.<br>
+          <span class="fx">P(Male | No) = <span class="frac"><span class="num">18</span><span class="den">60</span></span> = <span class="ans">0.30</span></span></li>
+        <li><strong>(c) Independent?</strong> Test whether P(M ∩ Y) = P(M) · P(Y).<br>
+          <span class="fx">P(M ∩ Y) = 32/100 = 0.32</span><br>
+          <span class="fx">P(M) · P(Y) = (50/100)(40/100) = 0.5 × 0.4 = 0.20</span><br>
+          0.32 ≠ 0.20 → <span class="ans">Not independent — the events are dependent.</span><br>
+          <em>Equivalent test:</em> P(Y | M) = 32/50 = 0.64 but P(Y) = 40/100 = 0.40. Knowing the respondent is male changes the probability of "yes", so they are dependent.</li>
+        <li><strong>(d) Mutually exclusive?</strong> P(M ∩ Y) = 32/100 = 0.32 ≠ 0. There are 32 people who are <em>both</em> male and said yes.<br>
+          → <span class="ans">Not mutually exclusive.</span></li>
+      </ol>
+      <div class="callout tip" style="margin-top:14px">
+        <span class="ct">Parts (c) and (d) together are the whole point of the example</span>
+        <p>One table, two different questions that students merge into one. <strong>Mutually exclusive</strong> asks "<em>is the overlap empty?</em>" — look at the cell. <strong>Independent</strong> asks "<em>does one change the other?</em>" — compare a conditional with its unconditional version, or compare P(A∩B) with P(A)P(B). Answering (d) with the independence test, or (c) with the overlap test, scores zero.</p>
+      </div>
+    </div>
+  </div>
+
+  <h4>The four readings of a two-way table</h4>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th style="width:26%">Question type</th><th>What goes in the denominator</th><th style="width:28%">Example from 4-34</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Simple</strong> P(A)</td><td>The grand total.</td><td>P(Male) = 50/100</td></tr>
+        <tr><td><strong>Joint "and"</strong> P(A ∩ B)</td><td>The grand total; numerator is the single cell.</td><td>P(Male ∩ Yes) = 32/100</td></tr>
+        <tr><td><strong>Union "or"</strong> P(A ∪ B)</td><td>The grand total; add the row and column, subtract the shared cell once.</td><td>P(Male ∪ Yes) = (50 + 40 − 32)/100 = 0.58</td></tr>
+        <tr><td><strong>Conditional "given"</strong> P(A | B)</td><td>The <em>row or column total</em> of the condition.</td><td>P(Yes | Female) = 8/50</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ar-note">
+    <span class="lbl">القاعدة الذهبية في جداول التقاطع</span>
+    <b>الشرط يحدد المقام.</b> إذا قيل "given that it is a female" فالمقام هو مجموع صف الإناث (50) وليس المجموع الكلي (100). أما "and" فالمقام يبقى المجموع الكلي والبسط هو الخلية المشتركة.<br>
+    و<b>فرّق دائمًا</b> بين: <b>mutually exclusive</b> (هل التقاطع فارغ؟ انظر إلى الخلية) و<b>independent</b> (هل يؤثر أحدهما في الآخر؟ قارن P(A∩B) مع P(A)·P(B)).
+  </div>
+
+  <h3>6 · Probabilities for "at least" — the complement shortcut</h3>
+  <p>This is the technique the lecture notes flag under "Other Examples: Probabilities for <em>At Least</em>" (textbook Examples 4-36 <em>Rolling a Die</em> and 4-37 <em>Ties</em>, set for self-study). It is the single most reusable trick in the chapter.</p>
+
+  <div class="formula">
+    <div class="label">The "at least one" rule</div>
+    <p class="fx">P(at least one) = 1 − P(none)</p>
+    <p class="note">"At least one" has many ways to happen (exactly one, exactly two, exactly three, …) but its complement — "none" — has exactly one. Compute the easy side and subtract.</p>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Illustration · the standard shape</span><p>A single die is rolled 3 times. Find the probability of getting <strong>at least one</strong> 5.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>The long way (don't):</strong> P(exactly one 5) + P(exactly two 5s) + P(three 5s). Three separate calculations.</li>
+        <li><strong>The complement way:</strong> "at least one 5" has complement "no 5s at all". P(not a 5 on one roll) = 5/6.</li>
+        <li class="fx">P(no 5s in 3 rolls) = (5/6)<sup>3</sup> = <span class="frac"><span class="num">125</span><span class="den">216</span></span></li>
+        <li class="fx">P(at least one 5) = 1 − <span class="frac"><span class="num">125</span><span class="den">216</span></span> = <span class="frac"><span class="num">91</span><span class="den">216</span></span> ≈ <span class="ans">0.4213</span></li>
+      </ol>
+      <p>The same pattern solves "at least one defective", "at least one female", "at least one match" — see Example 4-51(d) in §4-5, where it appears in its examined form.</p>
+    </div>
+  </div>
+
+  <div class="callout tip">
+    <span class="ct">The three complement triggers</span>
+    <p>Reach for <span class="v">1 − P(…)</span> the moment you read: <strong>"at least one"</strong> (complement = none) · <strong>"not"</strong> (complement = the event itself) · <strong>"neither / none"</strong> (complement = at least one). Scanning for these three phrases before you start writing will save you minutes on every paper.</p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 4-4 & 4-5 -->
+<!-- ============================================================ -->
+<section id="s44" style="--sec:var(--ink-4);--wash:var(--ink-4-wash)">
+  <div class="sec-head">
+    <span class="sec-num">4-4<br>4-5</span>
+    <h2>Counting Rules, and Probability with Counting Rules
+      <span class="ar">قواعد العدّ والاحتمال باستخدام قواعد العدّ</span>
+    </h2>
+  </div>
+
+  <p>Everything so far needed <span class="v">n(E)</span> and <span class="v">n(S)</span>. When the sample space is too large to list, you <em>count</em> it instead. The four main counting rules are: the <strong>Fundamental Counting Rule</strong>, <strong>Factorial Notation</strong>, <strong>Permutations</strong>, and <strong>Combinations</strong>. These two sections carry In-Class Quiz II.</p>
+
+  <h3>1 · The Fundamental Counting Rule</h3>
+  <div class="formula">
+    <div class="label">Fundamental counting rule</div>
+    <p class="fx">In a sequence of <em>n</em> events in which the first has <em>k</em><sub>1</sub> possibilities, the second has <em>k</em><sub>2</sub>, the third has <em>k</em><sub>3</sub>, and so on, the total number of possibilities of the sequence is</p>
+    <p class="fx">k<sub>1</sub> × k<sub>2</sub> × ⋯ × k<sub>n</sub></p>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-38 · Tossing a Coin and Rolling a Die</span><p>A coin is tossed and a die is rolled. Find the number of outcomes for the sequence of events.</p></div>
+    <div class="a"><p class="fx">2 × 6 = <span class="ans">12 outcomes</span></p>
+    <p>Namely H1, H2, H3, H4, H5, H6, T1, T2, T3, T4, T5, T6.</p></div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-39 · Types of Paint</span><p>A paint manufacturer wishes to manufacture several different paints. The categories include — Color: red, blue, white, black, green, brown, yellow. Type: latex, oil. Texture: flat, semigloss, high gloss. Use: outdoor, indoor. How many different kinds of paint can be made if you select one color, one type, one texture, and one use?</p></div>
+    <div class="a">
+      <p>Count the options in each category: 7 colors, 2 types, 3 textures, 2 uses.</p>
+      <p class="fx">7 × 2 × 3 × 2 = <span class="ans">84 different kinds of paint</span></p>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-40 · Distribution of Blood Types</span><p>There are four blood types: A, B, AB, O. Blood can also be Rh+ or Rh−. A blood donor can be classified as either male or female. How many different ways can a donor have his or her blood labeled?</p></div>
+    <div class="a"><p class="fx">4 × 2 × 2 = <span class="ans">16 ways</span></p></div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-41 · Railroad Memorial License Plates</span><p>A license plate has a four-digit identification number. How many different plates can be made if: (a) digits are from 0 to 9 and repetitions are permitted? (b) digits are from 0 to 9 and repetitions are <strong>not</strong> permitted?</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>(a) With repetition.</strong> Every slot still has all 10 digits available:<br>
+          <span class="fx">10 × 10 × 10 × 10 = 10<sup>4</sup> = <span class="ans">10,000 plates</span></span></li>
+        <li><strong>(b) Without repetition.</strong> Each digit used is removed from the pool:<br>
+          <span class="fx">10 × 9 × 8 × 7 = <span class="ans">5,040 plates</span></span></li>
+      </ol>
+      <div class="callout tip" style="margin-top:14px">
+        <span class="ct">The lecturer's own rule of thumb</span>
+        <p>"If repetitions are permitted, then the numbers <strong>stay the same</strong> going from left to right. If repetitions are not permitted, then the numbers <strong>decrease by 1</strong> for each place left to right." Write this on your formula sheet exactly as stated — it answers half of all counting-rule questions on sight.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>2 · Factorial notation</h3>
+  <div class="formula">
+    <div class="label">Factorial</div>
+    <p class="fx">n! = n × (n − 1) × (n − 2) × ⋯ × (2 × 1)</p>
+    <p class="fx">0! = 1</p>
+    <p class="note">Examples: 5! = 5 · 4 · 3 · 2 · 1 = 120 &nbsp;·&nbsp; 9! = 9 · 8 · 7 · 6 · 5 · 4 · 3 · 2 · 1 = 362,880</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <caption>Factorials worth knowing cold</caption>
+      <thead><tr><th class="num">n</th><th class="num">0</th><th class="num">1</th><th class="num">2</th><th class="num">3</th><th class="num">4</th><th class="num">5</th><th class="num">6</th><th class="num">7</th><th class="num">8</th><th class="num">9</th><th class="num">10</th></tr></thead>
+      <tbody>
+        <tr><td class="num"><strong>n!</strong></td><td class="num">1</td><td class="num">1</td><td class="num">2</td><td class="num">6</td><td class="num">24</td><td class="num">120</td><td class="num">720</td><td class="num">5,040</td><td class="num">40,320</td><td class="num">362,880</td><td class="num">3,628,800</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>Casio keystrokes.</strong> To compute <span class="v">(5 + 3)! = 40,320</span>: <span class="keypad">( 5 + 3 ) &nbsp;SHIFT&nbsp; x<sup>−1</sup> (x!) &nbsp;=</span></p>
+
+  <div class="callout trap">
+    <span class="ct">Trap — 0! = 1, not 0</span>
+    <p>This matters because <span class="v"><sub>n</sub>P<sub>n</sub> = n!/(n−n)! = n!/0! = n!</span> and <span class="v"><sub>n</sub>C<sub>n</sub> = n!/(0! · n!) = 1</span>. If you set 0! = 0 you get a division by zero and lose the whole question. Memorise it as a definition, not as a calculation.</p>
+  </div>
+
+  <h3>3 · Permutations — order matters</h3>
+  <p>A <span class="term">permutation</span> is an arrangement of <em>n</em> objects in a <strong>specific order</strong>.</p>
+
+  <div class="formula">
+    <div class="label">Permutation Rule 1 — n objects taken r at a time</div>
+    <p class="fx"><sub>n</sub>P<sub>r</sub> = <span class="frac"><span class="num">n!</span><span class="den">(n − r)!</span></span></p>
+    <p class="note">Casio: to compute <span class="v"><sub>7</sub>P<sub>4</sub></span> → <span class="keypad">7 &nbsp;SHIFT&nbsp; × (nPr) &nbsp;4 &nbsp;=</span></p>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-43 · Business Location</span><p>(a) A business owner has a choice of 5 locations in which to establish her business. She decides to rank each location according to certain criteria, such as price of the store and parking facilities. How many different ways can she rank the 5 locations?<br>(b) Suppose she wishes to rank only the <strong>top 3 locations</strong> selected from 5 locations. How many different ways can she rank them?</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>(a)</strong> All 5 ranked, order matters: <span class="fx">5! = 5 · 4 · 3 · 2 · 1 = <span class="ans">120 ways</span></span><br>
+          <em>Equivalently:</em> <span class="v"><sub>5</sub>P<sub>5</sub> = 5!/0! = 120/1 = 120</span></li>
+        <li><strong>(b)</strong> 3 chosen from 5, order matters: <span class="fx"><sub>5</sub>P<sub>3</sub> = <span class="frac"><span class="num">5!</span><span class="den">(5 − 3)!</span></span> = <span class="frac"><span class="num">120</span><span class="den">2</span></span> = <span class="ans">60 ways</span></span></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-44 · Radio Show Guests</span><p>A radio talk show host can select 3 of 6 special guests for her program. The <strong>order of appearance</strong> of the guests is important. How many different ways can this be done?</p></div>
+    <div class="a">
+      <p>"Order of appearance is important" → permutation.</p>
+      <p class="fx"><sub>6</sub>P<sub>3</sub> = <span class="frac"><span class="num">6!</span><span class="den">(6 − 3)!</span></span> = <span class="frac"><span class="num">720</span><span class="den">6</span></span> = <span class="ans">120 ways</span></p>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-45 · School Musical Plays</span><p>A school musical director can select 2 musical plays to present next year. One will be presented in the fall, and one will be presented in the spring. If she has 9 to pick from, how many different possibilities are there?</p></div>
+    <div class="a">
+      <p>The two slots are <em>distinguishable</em> (fall vs spring), so order matters → permutation.</p>
+      <p class="fx"><sub>9</sub>P<sub>2</sub> = <span class="frac"><span class="num">9!</span><span class="den">(9 − 2)!</span></span> = <span class="frac"><span class="num">362,880</span><span class="den">5,040</span></span> = <span class="ans">72 possibilities</span></p>
+      <p><strong>Why not a combination?</strong> Play X in fall + play Y in spring is a different programme from Y in fall + X in spring. Labelled slots always mean permutation.</p>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-42 · Lock Codes</span><p>A person needs to make up a four-digit combination to open the lock on the garage door. The person decides to use four <strong>different</strong> digits from the first four digits, 0 through 3. How many different combinations can be made?</p></div>
+    <div class="a">
+      <p>Four distinct digits arranged in all four positions — a full permutation:</p>
+      <p class="fx">4! = 4 · 3 · 2 · 1 = <span class="ans">24 combinations</span></p>
+      <p><strong>Note the vocabulary trap:</strong> everyday English calls this a "combination lock", but mathematically it is a <em>permutation</em> — 0123 and 3210 open different locks. The word "combination" in a question is never evidence; only the question "does order matter?" decides.</p>
+    </div>
+  </div>
+
+  <div class="formula">
+    <div class="label">Permutation Rule 2 — when some objects are identical</div>
+    <p class="fx"><sub>n</sub>P<sub>r₁ r₂ r₃ … r<sub>p</sub></sub> = <span class="frac"><span class="num">n!</span><span class="den">r<sub>1</sub>! · r<sub>2</sub>! · r<sub>3</sub>! ⋯ r<sub>p</sub>!</span></span></p>
+    <p class="note">where <span class="v">r<sub>1</sub> + r<sub>2</sub> + ⋯ + r<sub>p</sub> = n</span>. Divide out the arrangements you cannot tell apart.</p>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-46 · Letter Permutations</span><p>How many permutations of the letters can be made from the word <em>STATISTICS</em>?</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>Count the letters:</strong> S-T-A-T-I-S-T-I-C-S → n = 10.</li>
+        <li><strong>Tally repeats:</strong> S appears 3 times, T appears 3 times, I appears 2 times, A once, C once. Check: 3 + 3 + 2 + 1 + 1 = 10 ✔</li>
+        <li class="fx">Permutations = <span class="frac"><span class="num">10!</span><span class="den">3! · 3! · 2! · 1! · 1!</span></span> = <span class="frac"><span class="num">3,628,800</span><span class="den">6 · 6 · 2</span></span> = <span class="frac"><span class="num">3,628,800</span><span class="den">72</span></span> = <span class="ans">50,400</span></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">HW 30 · Toothpaste Display</span><p>How many different ways can 5 identical tubes of tartar control toothpaste, 3 identical tubes of bright white toothpaste, and 4 identical tubes of mint toothpaste be arranged in a grocery store counter display?</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li>n = 5 + 3 + 4 = 12 tubes; three identical groups of sizes 5, 3, 4.</li>
+        <li class="fx">= <span class="frac"><span class="num">12!</span><span class="den">5! · 3! · 4!</span></span> = <span class="frac"><span class="num">479,001,600</span><span class="den">120 · 6 · 24</span></span> = <span class="frac"><span class="num">479,001,600</span><span class="den">17,280</span></span> = <span class="ans">27,720 ways</span></li>
+      </ol>
+    </div>
+  </div>
+
+  <h3>4 · Combinations — order does not matter</h3>
+  <p>A selection of distinct objects <strong>without regard to order</strong> is called a <span class="term">combination</span>.</p>
+  <div class="formula">
+    <div class="label">Combination rule</div>
+    <p class="fx"><sub>n</sub>C<sub>r</sub> = <span class="frac"><span class="num">n!</span><span class="den">(n − r)! · r!</span></span></p>
+    <p class="note"><strong>Important:</strong> in a combination, the order or arrangement of the objects is <em>not</em> important; order <em>is</em> important in a permutation. Casio: to compute <span class="v"><sub>10</sub>C<sub>4</sub></span> → <span class="keypad">10 &nbsp;SHIFT&nbsp; ÷ (nCr) &nbsp;4 &nbsp;=</span></p>
+  </div>
+
+  <div class="callout tip">
+    <span class="ct">The relationship worth seeing once</span>
+    <p><span class="v"><sub>n</sub>C<sub>r</sub> = <sub>n</sub>P<sub>r</sub> ÷ r!</span> — a combination is a permutation with the <span class="v">r!</span> internal orderings divided out. That is why <span class="v"><sub>n</sub>C<sub>r</sub></span> is always ≤ <span class="v"><sub>n</sub>P<sub>r</sub></span>. If your combination answer comes out <em>larger</em> than the matching permutation, you have used the wrong formula.</p>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-48 · Movies at the Park</span><p>The director of Movies at the Park must select 4 movies from a total of 10 movies to show on Movie Night at the Park. How many different ways can the selections be made?</p></div>
+    <div class="a">
+      <p>Just a selection — nothing says the four are shown in a particular order → combination.</p>
+      <p class="fx"><sub>10</sub>C<sub>4</sub> = <span class="frac"><span class="num">10!</span><span class="den">(10 − 4)! · 4!</span></span> = <span class="frac"><span class="num">10 · 9 · 8 · 7</span><span class="den">4 · 3 · 2 · 1</span></span> = <span class="frac"><span class="num">5,040</span><span class="den">24</span></span> = <span class="ans">210 ways</span></p>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-49 · Committee Selection</span><p>In a club there are 7 women and 5 men. A committee of 3 women and 2 men is to be chosen. How many different possibilities are there?</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>Choose the women:</strong> <span class="v"><sub>7</sub>C<sub>3</sub></span> = 7!/(4!·3!) = (7·6·5)/(3·2·1) = 210/6 = <strong>35</strong></li>
+        <li><strong>Choose the men:</strong> <span class="v"><sub>5</sub>C<sub>2</sub></span> = 5!/(3!·2!) = (5·4)/2 = <strong>10</strong></li>
+        <li><strong>Combine with the Fundamental Counting Rule</strong> (a choice of women <em>and</em> a choice of men):<br>
+          <span class="fx">35 × 10 = <span class="ans">350 possibilities</span></span></li>
+      </ol>
+      <div class="callout trap" style="margin-top:14px">
+        <span class="ct">Trap — "and" means multiply, not add</span>
+        <p>Choosing 3 women <strong>and</strong> 2 men = <span class="v">35 × 10 = 350</span>. Students who write 35 + 10 = 45 are answering a different question ("choose 3 women <em>or</em> 2 men"). Within counting rules, <strong>and → ×</strong>, <strong>or → +</strong>.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>5 · Summary of the counting rules (Table 4-1)</h3>
+  <div class="tbl-wrap">
+    <table>
+      <caption>Table 4-1 — Summary of counting rules</caption>
+      <thead><tr><th style="width:22%">Rule</th><th>Definition</th><th style="width:24%">Formula</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Fundamental counting rule</strong></td><td>The number of ways a sequence of <em>n</em> events can occur if the first event can occur in <em>k</em><sub>1</sub> ways, the second in <em>k</em><sub>2</sub> ways, etc.</td><td class="num">k<sub>1</sub> · k<sub>2</sub> · k<sub>3</sub> ⋯ k<sub>n</sub></td></tr>
+        <tr><td><strong>Permutation rule 1</strong></td><td>The number of permutations of <em>n</em> objects taking <em>r</em> objects at a time (<strong>order is important</strong>).</td><td class="num"><sub>n</sub>P<sub>r</sub> = n! / (n − r)!</td></tr>
+        <tr><td><strong>Permutation rule 2</strong></td><td>The number of permutations of <em>n</em> objects when <em>r</em><sub>1</sub> objects are identical, <em>r</em><sub>2</sub> objects are identical, …, <em>r</em><sub>p</sub> objects are identical.</td><td class="num">n! / (r<sub>1</sub>! r<sub>2</sub>! ⋯ r<sub>p</sub>!)</td></tr>
+        <tr><td><strong>Combination rule</strong></td><td>The number of combinations of <em>r</em> objects taken from <em>n</em> objects (<strong>order is not important</strong>).</td><td class="num"><sub>n</sub>C<sub>r</sub> = n! / [(n − r)! r!]</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>6 · §4-5 — Probability and Counting Rules</h3>
+  <p>This is the destination. The counting rules supply <span class="v">n(E)</span> and <span class="v">n(S)</span>; classical probability divides them. The structure of every §4-5 question is identical:</p>
+  <ol class="flow">
+    <li><span class="k">STEP 1</span><span class="t"><b>Count the sample space.</b> How many total ways can the selection be made? Usually a single <span class="v"><sub>n</sub>C<sub>r</sub></span> or a product.</span></li>
+    <li><span class="k">STEP 2</span><span class="t"><b>Count the event.</b> How many of those ways satisfy the condition? Usually a product of smaller <span class="v">C</span>'s — one per category.</span></li>
+    <li><span class="k">STEP 3</span><span class="t"><b>Divide.</b> <span class="v">P(E) = n(E) / n(S)</span>, then round sensibly and interpret in words.</span></li>
+  </ol>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-51 · Defective Integrated Circuits</span><p>A box contains 24 integrated circuits, 4 of which are defective. If 4 are sold at random, find: (a) exactly 2 are defective; (b) none is defective; (c) all are defective; (d) at least 1 is defective.</p></div>
+    <div class="a">
+      <p><strong>Set-up.</strong> 4 defective, 20 good, 24 total. Choosing 4 with no order → combinations.</p>
+      <p class="fx">n(S) = <sub>24</sub>C<sub>4</sub> = <span class="frac"><span class="num">24 · 23 · 22 · 21</span><span class="den">4 · 3 · 2 · 1</span></span> = <span class="frac"><span class="num">255,024</span><span class="den">24</span></span> = <strong>10,626</strong></p>
+      <ol class="steps">
+        <li><strong>(a) Exactly 2 defective</strong> — so 2 from the 4 defective <em>and</em> 2 from the 20 good:<br>
+          <span class="fx">n(E) = <sub>4</sub>C<sub>2</sub> × <sub>20</sub>C<sub>2</sub> = 6 × 190 = 1,140</span><br>
+          <span class="fx">P = <span class="frac"><span class="num">1,140</span><span class="den">10,626</span></span> ≈ <span class="ans">0.1073</span></span></li>
+        <li><strong>(b) None defective</strong> — all 4 from the 20 good:<br>
+          <span class="fx">n(E) = <sub>20</sub>C<sub>4</sub> = <span class="frac"><span class="num">20 · 19 · 18 · 17</span><span class="den">24</span></span> = 4,845</span><br>
+          <span class="fx">P = <span class="frac"><span class="num">4,845</span><span class="den">10,626</span></span> ≈ <span class="ans">0.4560</span></span></li>
+        <li><strong>(c) All defective</strong> — all 4 from the 4 defective:<br>
+          <span class="fx">n(E) = <sub>4</sub>C<sub>4</sub> = 1</span><br>
+          <span class="fx">P = <span class="frac"><span class="num">1</span><span class="den">10,626</span></span> ≈ <span class="ans">0.000094</span></span></li>
+        <li><strong>(d) At least 1 defective</strong> — the complement of "none defective", which is part (b):<br>
+          <span class="fx">P = 1 − 0.4560 = <span class="ans">0.5440</span></span></li>
+      </ol>
+      <div class="callout tip" style="margin-top:14px">
+        <span class="ct">Part (d) is the exam's reward for recognising the complement</span>
+        <p>Done the long way, (d) = P(1 defective) + P(2) + P(3) + P(4) — four calculations. Done as <span class="v">1 − P(none)</span>, it is one subtraction you have already computed. This is precisely why parts (b) and (d) appear in the same question: the examiner is testing whether you noticed.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-52 · Term Paper Selection</span><p>A student needs to select two topics to write two term papers for a course. There are 8 topics in economics and 11 topics in science. Find the probability that she selects one topic in economics and one topic in science.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>n(S):</strong> any 2 of the 19 available topics → <span class="fx"><sub>19</sub>C<sub>2</sub> = <span class="frac"><span class="num">19 · 18</span><span class="den">2</span></span> = 171</span></li>
+        <li><strong>n(E):</strong> one economics <em>and</em> one science → <span class="fx"><sub>8</sub>C<sub>1</sub> × <sub>11</sub>C<sub>1</sub> = 8 × 11 = 88</span></li>
+        <li class="fx">P = <span class="frac"><span class="num">88</span><span class="den">171</span></span> ≈ <span class="ans">0.5146</span></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-53 · State Lottery Number</span><p>In the Pennsylvania State Lottery, a person selects a three-digit number and repetitions are permitted. If a winning number is selected, find the probability that it will have all three digits the same.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>n(S):</strong> three digits, repetition permitted → <span class="fx">10 × 10 × 10 = 1,000</span></li>
+        <li><strong>n(E):</strong> all three digits the same → 000, 111, 222, …, 999 → <span class="fx">10</span></li>
+        <li class="fx">P = <span class="frac"><span class="num">10</span><span class="den">1,000</span></span> = <span class="ans">0.01</span> &nbsp;(1%)</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-54 · Tennis Tournament</span><p>There are 8 married couples in a tennis club. If 1 man and 1 woman are selected at random to plan the summer tournament, find the probability that they are married to each other.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>n(S):</strong> 8 men to choose from <em>and</em> 8 women → <span class="fx">8 × 8 = 64 pairs</span></li>
+        <li><strong>n(E):</strong> only 8 of those pairs are actually married to each other (one per couple) → <span class="fx">8</span></li>
+        <li class="fx">P = <span class="frac"><span class="num">8</span><span class="den">64</span></span> = <span class="frac"><span class="num">1</span><span class="den">8</span></span> = <span class="ans">0.125</span></li>
+      </ol>
+      <p><strong>Alternative reasoning that proves the answer:</strong> pick any man first; his wife is 1 of the 8 women, so P = 1/8 directly. ✔</p>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">HW 11 · Socks in a Drawer</span><p>A drawer contains 11 identical red socks and 8 identical black socks. Suppose you choose 2 socks at random in the dark. (a) What is the probability that you get a pair of red socks? (b) A pair of black socks? (c) 2 unmatched socks?</p></div>
+    <div class="a">
+      <p><strong>n(S):</strong> any 2 of 19 socks → <span class="fx"><sub>19</sub>C<sub>2</sub> = <span class="frac"><span class="num">19 · 18</span><span class="den">2</span></span> = 171</span></p>
+      <ol class="steps">
+        <li><strong>(a) Pair of red:</strong> <span class="fx"><sub>11</sub>C<sub>2</sub> = <span class="frac"><span class="num">11 · 10</span><span class="den">2</span></span> = 55 &nbsp;→&nbsp; P = <span class="frac"><span class="num">55</span><span class="den">171</span></span> ≈ <span class="ans">0.3216</span></span></li>
+        <li><strong>(b) Pair of black:</strong> <span class="fx"><sub>8</sub>C<sub>2</sub> = <span class="frac"><span class="num">8 · 7</span><span class="den">2</span></span> = 28 &nbsp;→&nbsp; P = <span class="frac"><span class="num">28</span><span class="den">171</span></span> ≈ <span class="ans">0.1637</span></span></li>
+        <li><strong>(c) 2 unmatched:</strong> one red <em>and</em> one black: <span class="fx"><sub>11</sub>C<sub>1</sub> × <sub>8</sub>C<sub>1</sub> = 88 &nbsp;→&nbsp; P = <span class="frac"><span class="num">88</span><span class="den">171</span></span> ≈ <span class="ans">0.5146</span></span><br>
+          <em>Or by complement:</em> 1 − 0.3216 − 0.1637 = 0.5146 ✔</li>
+      </ol>
+      <p class="note" style="font-size:.9rem;color:var(--fg-soft)"><strong>Check:</strong> 55 + 28 + 88 = 171 = n(S). The three cases are exhaustive and mutually exclusive, so their counts must total the sample space. ✔</p>
+    </div>
+  </div>
+
+  <div class="ar-note">
+    <span class="lbl">القاعدة الحاسمة: Permutation أم Combination؟</span>
+    اسأل: <b>هل يتغير الناتج إذا غيّرت الترتيب؟</b><br>
+    • <b>نعم</b> (ترتيب، تصنيف، مراكز أول/ثاني، مناصب مختلفة، أرقام لوحة) ← <b>Permutation</b> <span class="v">nPr</span><br>
+    • <b>لا</b> (لجنة، مجموعة، اختيار عدد من أشياء بدون أدوار) ← <b>Combination</b> <span class="v">nCr</span><br>
+    وتذكّر: كلمة "<b>combination lock</b>" في اللغة الدارجة هي في الحقيقة <b>permutation</b> رياضيًا، فلا تعتمد على الكلمة — اعتمد على السؤال.
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- FORMULA SHEET -->
+<!-- ============================================================ -->
+<section id="sheet" style="--sec:var(--fg);--wash:var(--surface-2)">
+  <div class="sec-head">
+    <span class="sec-num">FS</span>
+    <h2>Master formula sheet
+      <span class="ar">ورقة القوانين الشاملة — احفظها كاملة</span>
+    </h2>
+  </div>
+  <p>Everything in Chapter 4 on one page. If you can reproduce this from memory in four minutes, you are ready.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th style="width:24%">Name</th><th style="width:38%">Formula</th><th>When</th></tr></thead>
+      <tbody>
+        <tr><td colspan="3" style="background:var(--ink-1-wash);font-weight:600;color:var(--ink-1)">§4-1 · Sample spaces and probability</td></tr>
+        <tr><td>Classical probability</td><td class="num">P(E) = n(E) / n(S)</td><td>Equally likely outcomes; you can count the sample space.</td></tr>
+        <tr><td>Empirical probability</td><td class="num">P(E) = f / n</td><td>A frequency distribution or survey data is given.</td></tr>
+        <tr><td>Probability range</td><td class="num">0 ≤ P(E) ≤ 1</td><td>Always. Use it to sanity-check every answer.</td></tr>
+        <tr><td>Total probability</td><td class="num">Σ P(all outcomes in S) = 1</td><td>Check on any frequency or tree table.</td></tr>
+        <tr><td>Complement rule</td><td class="num">P(Ē) = 1 − P(E)</td><td>"not", "neither", "none", "at least one".</td></tr>
+
+        <tr><td colspan="3" style="background:var(--ink-2-wash);font-weight:600;color:var(--ink-2)">§4-2 · Addition rules — "OR"</td></tr>
+        <tr><td>Mutually exclusive test</td><td class="num">A ∩ B = ∅</td><td>Can the two events happen together? No → mutually exclusive.</td></tr>
+        <tr><td>Addition rule 1</td><td class="num">P(A ∪ B) = P(A) + P(B)</td><td>A and B <strong>are</strong> mutually exclusive.</td></tr>
+        <tr><td>Addition rule 2</td><td class="num">P(A ∪ B) = P(A) + P(B) − P(A ∩ B)</td><td>A and B are <strong>not</strong> mutually exclusive. Safe in both cases.</td></tr>
+        <tr><td>Three mutually exclusive</td><td class="num">P(A∪B∪C) = P(A) + P(B) + P(C)</td><td>Three disjoint events.</td></tr>
+        <tr><td>Three general</td><td class="num">P(A∪B∪C) = ΣP(single) − ΣP(pairs) + P(A∩B∩C)</td><td>Three overlapping events.</td></tr>
+
+        <tr><td colspan="3" style="background:var(--ink-3-wash);font-weight:600;color:var(--ink-3)">§4-3 · Multiplication rules — "AND" and "GIVEN"</td></tr>
+        <tr><td>Multiplication rule 1</td><td class="num">P(A ∩ B) = P(A) · P(B)</td><td>A and B independent (with replacement, separate devices).</td></tr>
+        <tr><td>Multiplication rule 2</td><td class="num">P(A ∩ B) = P(A|B)·P(B) = P(B|A)·P(A)</td><td>A and B dependent (without replacement, "of those who…").</td></tr>
+        <tr><td>Conditional probability</td><td class="num">P(B | A) = P(A ∩ B) / P(A)</td><td>"given that", "if", "of those who", a stated accomplished fact.</td></tr>
+        <tr><td>Independence test</td><td class="num">P(B|A) = P(B) &nbsp;or&nbsp; P(A∩B) = P(A)·P(B)</td><td>Asked directly, especially from a two-way table.</td></tr>
+        <tr><td>At least one</td><td class="num">P(at least one) = 1 − P(none)</td><td>Any question containing "at least".</td></tr>
+
+        <tr><td colspan="3" style="background:var(--ink-4-wash);font-weight:600;color:var(--ink-4)">§4-4 &amp; §4-5 · Counting rules</td></tr>
+        <tr><td>Fundamental counting rule</td><td class="num">k<sub>1</sub> × k<sub>2</sub> × ⋯ × k<sub>n</sub></td><td>A sequence of independent choices; repetition allowed or not.</td></tr>
+        <tr><td>Factorial</td><td class="num">n! = n(n−1)(n−2)⋯(2)(1), &nbsp;0! = 1</td><td>Arranging all n objects.</td></tr>
+        <tr><td>Permutation rule 1</td><td class="num"><sub>n</sub>P<sub>r</sub> = n! / (n − r)!</td><td>Choose r from n, <strong>order matters</strong>.</td></tr>
+        <tr><td>Permutation rule 2</td><td class="num">n! / (r<sub>1</sub>! r<sub>2</sub>! ⋯ r<sub>p</sub>!)</td><td>Arrange n objects, some identical (letters, identical items).</td></tr>
+        <tr><td>Combination rule</td><td class="num"><sub>n</sub>C<sub>r</sub> = n! / [(n − r)! r!]</td><td>Choose r from n, <strong>order does not matter</strong>.</td></tr>
+        <tr><td>Link between them</td><td class="num"><sub>n</sub>C<sub>r</sub> = <sub>n</sub>P<sub>r</sub> / r!</td><td>Sanity check: C is always ≤ P.</td></tr>
+        <tr><td>Probability by counting</td><td class="num">P(E) = n(E) / n(S), both counted with the rules above</td><td><strong>The signature §4-5 question.</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Casio calculator keystrokes</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>To compute</th><th>Press</th><th class="num">Result</th></tr></thead>
+      <tbody>
+        <tr><td>(5 + 3)!</td><td><span class="keypad">( 5 + 3 ) &nbsp;SHIFT&nbsp; x<sup>−1</sup> (x!) &nbsp;=</span></td><td class="num">40,320</td></tr>
+        <tr><td><sub>7</sub>P<sub>4</sub></td><td><span class="keypad">7 &nbsp;SHIFT&nbsp; × (nPr) &nbsp;4 &nbsp;=</span></td><td class="num">840</td></tr>
+        <tr><td><sub>10</sub>C<sub>4</sub></td><td><span class="keypad">10 &nbsp;SHIFT&nbsp; ÷ (nCr) &nbsp;4 &nbsp;=</span></td><td class="num">210</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- DECISION TREE -->
+<!-- ============================================================ -->
+<section id="decide" style="--sec:var(--ink-1);--wash:var(--ink-1-wash)">
+  <div class="sec-head">
+    <span class="sec-num">DT</span>
+    <h2>Which rule do I use?
+      <span class="ar">كيف أختار القانون الصحيح خلال عشر ثوانٍ</span>
+    </h2>
+  </div>
+  <p>Run this in order on every question. It takes ten seconds and it is the difference between a confident answer and a guess.</p>
+
+  <ol class="flow">
+    <li><span class="k">Q1</span><span class="t"><b>Does the question contain "not", "neither", "none", or "at least"?</b><br>→ Yes: use the complement, <span class="v">1 − P(opposite)</span>. Compute the easy side. This check comes first because it can collapse the whole problem.</span></li>
+    <li><span class="k">Q2</span><span class="t"><b>Does it say "given that", "if", "of those who", or state a fact as already settled?</b><br>→ Yes: conditional probability, <span class="v">P(B|A) = P(A∩B)/P(A)</span>. From a table, the condition's row or column total is the denominator.</span></li>
+    <li><span class="k">Q3</span><span class="t"><b>Does it say "or"?</b><br>→ Addition rule. Then ask: can both happen together? No → <span class="v">P(A)+P(B)</span>. Yes → <span class="v">P(A)+P(B)−P(A∩B)</span>.</span></li>
+    <li><span class="k">Q4</span><span class="t"><b>Does it say "and", or describe a sequence of stages?</b><br>→ Multiplication rule. Then ask: with replacement / separate devices? → independent, <span class="v">P(A)·P(B)</span>. Without replacement / "of those"? → dependent, <span class="v">P(A)·P(B|A)</span>.</span></li>
+    <li><span class="k">Q5</span><span class="t"><b>Is the sample space too big to list?</b><br>→ Counting rules. Then ask: does order matter? Yes → <span class="v"><sub>n</sub>P<sub>r</sub></span>. No → <span class="v"><sub>n</sub>C<sub>r</sub></span>. Several categories combined → multiply them (Fundamental Counting Rule).</span></li>
+    <li><span class="k">Q6</span><span class="t"><b>Is it asking for a probability after all that counting?</b><br>→ <span class="v">P(E) = n(E)/n(S)</span>. Count the event and the sample space with the same kind of rule — never mix a permutation numerator with a combination denominator.</span></li>
+  </ol>
+
+  <div class="callout trap">
+    <span class="ct">The one consistency rule that catches most §4-5 errors</span>
+    <p>Whatever you use for <span class="v">n(S)</span>, use for <span class="v">n(E)</span>. If the sample space counts <em>unordered</em> selections (combinations), the event must count unordered selections too. A numerator built from permutations over a denominator built from combinations is the most common wrong answer in the whole chapter, and it is always too large by a factor of <span class="v">r!</span>.</p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- TRAPS -->
+<!-- ============================================================ -->
+<section id="traps" style="--sec:var(--accent);--wash:var(--accent-wash)">
+  <div class="sec-head">
+    <span class="sec-num">TR</span>
+    <h2>The 14 traps that cost marks
+      <span class="ar">الأخطاء الأربعة عشر التي تضيّع الدرجات</span>
+    </h2>
+  </div>
+  <p>Each of these has a specific home in this chapter. Read the list the night before the exam.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th style="width:36px">#</th><th style="width:30%">The trap</th><th>What to do instead</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1</td><td>Confusing <strong>mutually exclusive</strong> with <strong>independent</strong>.</td><td>Mutually exclusive = no overlap (<span class="v">A∩B=∅</span>). Independent = no influence (<span class="v">P(A∩B)=P(A)P(B)</span>). Two different questions, two different tests.</td></tr>
+        <tr><td class="num">2</td><td>Using Addition Rule 1 when the events overlap.</td><td>Always test the intersection first. When in doubt use Rule 2; it reduces to Rule 1 automatically.</td></tr>
+        <tr><td class="num">3</td><td>Reading "or" as exclusive.</td><td>In probability, "A or B" always means A, or B, <em>or both</em>.</td></tr>
+        <tr><td class="num">4</td><td>Missing "<strong>without replacement</strong>".</td><td>Circle it. It changes every denominator after the first draw and switches you from Rule 1 to Rule 2.</td></tr>
+        <tr><td class="num">5</td><td>Putting the wrong thing in the conditional denominator.</td><td>The <em>condition</em> is the denominator. <span class="v">P(B|A)</span> divides by <span class="v">P(A)</span>, never by <span class="v">P(B)</span>.</td></tr>
+        <tr><td class="num">6</td><td>Treating "of these clients…" / "of those who…" as unconditional.</td><td>That phrasing always hands you a conditional probability. Annotate it as <span class="v">P(A|H)</span> before you calculate.</td></tr>
+        <tr><td class="num">7</td><td>Mixing up "at most" and "less than" (and "at least" / "more than").</td><td><strong>at</strong> → the boundary value is <em>included</em>. <strong>than</strong> → the boundary value is <em>excluded</em>.</td></tr>
+        <tr><td class="num">8</td><td>Doing "at least one" the long way.</td><td><span class="v">1 − P(none)</span>. Always.</td></tr>
+        <tr><td class="num">9</td><td>Using a permutation for a committee.</td><td>A committee has no internal order → combination. Labelled roles (chair, secretary) → permutation.</td></tr>
+        <tr><td class="num">10</td><td>Adding instead of multiplying across categories.</td><td>"3 women <strong>and</strong> 2 men" → <span class="v"><sub>7</sub>C<sub>3</sub> × <sub>5</sub>C<sub>2</sub></span>. "And" is multiplication.</td></tr>
+        <tr><td class="num">11</td><td>Writing 0! = 0.</td><td><span class="v">0! = 1</span>, by definition. It appears in <span class="v"><sub>n</sub>P<sub>n</sub></span> and <span class="v"><sub>n</sub>C<sub>n</sub></span>.</td></tr>
+        <tr><td class="num">12</td><td>Mixing permutations and combinations between <span class="v">n(E)</span> and <span class="v">n(S)</span>.</td><td>Count both with the same rule. Consistency, not cleverness.</td></tr>
+        <tr><td class="num">13</td><td>Giving only the final number.</td><td>Write the sample space in set notation, name the rule you are using, show the substitution. The lecturer states explicitly that set notation is required.</td></tr>
+        <tr><td class="num">14</td><td>Reporting a probability greater than 1 or negative.</td><td><span class="v">0 ≤ P ≤ 1</span>. If your answer falls outside, you have added when you should have multiplied, or forgotten to divide by <span class="v">n(S)</span>. Catch it before you move on.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- REVIEW -->
+<!-- ============================================================ -->
+<section id="review" style="--sec:var(--ink-2);--wash:var(--ink-2-wash)">
+  <div class="sec-head">
+    <span class="sec-num">RV</span>
+    <h2>The review self-study exercises, fully solved
+      <span class="ar">تمارين المراجعة محلولة بالكامل</span>
+    </h2>
+  </div>
+  <p>These are the three exercises Dr. Al-Hadhrami closes the chapter with, set for self-study. They are solved here step by step.</p>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Ex 1 · Burgers and pizza</span><p>A study shows that about 37 percent of school children eat burger, 17 percent eat pizza, and 10 percent eat both burger and pizza. What is the probability that a randomly selected school child eats <strong>neither</strong> burger nor pizza?</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>Extract:</strong> P(B) = 0.37, P(Z) = 0.17, P(B ∩ Z) = 0.10.</li>
+        <li><strong>"Neither…nor" is the complement of the union.</strong> First get the union — they overlap, so Rule 2:<br>
+          <span class="fx">P(B ∪ Z) = 0.37 + 0.17 − 0.10 = 0.44</span></li>
+        <li class="fx">P(neither) = 1 − P(B ∪ Z) = 1 − 0.44 = <span class="ans">0.56</span></li>
+      </ol>
+      <p><strong>Cross-check with a Venn diagram:</strong> burger only = 0.37 − 0.10 = 0.27; pizza only = 0.17 − 0.10 = 0.07; both = 0.10; outside = 1 − (0.27 + 0.07 + 0.10) = 0.56. ✔</p>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Ex 2 · Smart phone colors</span><p>If the probabilities are, respectively, 0.23, 0.15, 0.21, and 0.09 that a person purchasing a new smart phone will choose the color gold, silver, black, or white, what is the probability that a given buyer will purchase a new phone that comes in one of those colors?</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li>A phone has exactly one color, so the four events are <strong>mutually exclusive</strong> → extended Addition Rule 1.</li>
+        <li class="fx">P(gold ∪ silver ∪ black ∪ white) = 0.23 + 0.15 + 0.21 + 0.09 = <span class="ans">0.68</span></li>
+      </ol>
+      <p><strong>Read what this tells you:</strong> the total is 0.68, not 1 — so 32% of buyers choose some other color entirely. A question that follows up with "find the probability the buyer chooses a different color" is answered by 1 − 0.68 = 0.32.</p>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Ex 3 · Set algebra with probabilities</span><p>If P(A) = 0.3, P(B) = 0.2, and P(A ∩ B) = 0.1, determine: (a) P(A<sup>c</sup>) &nbsp;(b) P(A ∪ B) &nbsp;(c) P(A<sup>c</sup> ∩ B) &nbsp;(d) P(A ∩ B<sup>c</sup>) &nbsp;(e) P((A ∪ B)<sup>c</sup>) &nbsp;(f) P(A<sup>c</sup> ∪ B)</p></div>
+    <div class="a">
+      <p><strong>Build the four-region picture first.</strong> A Venn diagram with two overlapping circles has exactly four regions, and every part of this question reads straight off it:</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Region</th><th>Meaning</th><th class="num">Probability</th></tr></thead>
+          <tbody>
+            <tr><td>A only</td><td>A ∩ B<sup>c</sup></td><td class="num">0.3 − 0.1 = 0.2</td></tr>
+            <tr><td>Both</td><td>A ∩ B</td><td class="num">0.1</td></tr>
+            <tr><td>B only</td><td>A<sup>c</sup> ∩ B</td><td class="num">0.2 − 0.1 = 0.1</td></tr>
+            <tr><td>Neither</td><td>(A ∪ B)<sup>c</sup></td><td class="num">1 − 0.4 = 0.6</td></tr>
+            <tr><td><strong>Total</strong></td><td>S</td><td class="num"><strong>1.0</strong> ✔</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ol class="steps">
+        <li><strong>(a)</strong> P(A<sup>c</sup>) = 1 − P(A) = 1 − 0.3 = <span class="ans">0.7</span></li>
+        <li><strong>(b)</strong> P(A ∪ B) = P(A) + P(B) − P(A ∩ B) = 0.3 + 0.2 − 0.1 = <span class="ans">0.4</span></li>
+        <li><strong>(c)</strong> P(A<sup>c</sup> ∩ B) = "B but not A" = P(B) − P(A ∩ B) = 0.2 − 0.1 = <span class="ans">0.1</span></li>
+        <li><strong>(d)</strong> P(A ∩ B<sup>c</sup>) = "A but not B" = P(A) − P(A ∩ B) = 0.3 − 0.1 = <span class="ans">0.2</span></li>
+        <li><strong>(e)</strong> P((A ∪ B)<sup>c</sup>) = 1 − P(A ∪ B) = 1 − 0.4 = <span class="ans">0.6</span></li>
+        <li><strong>(f)</strong> P(A<sup>c</sup> ∪ B) = P(A<sup>c</sup>) + P(B) − P(A<sup>c</sup> ∩ B) = 0.7 + 0.2 − 0.1 = <span class="ans">0.8</span><br>
+          <em>Or from the diagram:</em> everything except "A only" = 1 − 0.2 = 0.8 ✔</li>
+      </ol>
+      <div class="callout tip" style="margin-top:14px">
+        <span class="ct">The technique that makes this question trivial</span>
+        <p>Never attack set-algebra questions with formulas alone. Draw the two circles, fill in the four regions as numbers, and every sub-part becomes an addition of regions you can see. Parts (c), (d) and (f) take longer to write than to solve once the diagram exists.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- STRATEGY -->
+<!-- ============================================================ -->
+<section id="strategy" style="--sec:var(--ink-4);--wash:var(--ink-4-wash)">
+  <div class="sec-head">
+    <span class="sec-num">A+</span>
+    <h2>The A+ study protocol
+      <span class="ar">بروتوكول الطالب الأول — استراتيجيات الوصول إلى A+</span>
+    </h2>
+  </div>
+
+  <p>Chapter 4 rewards a specific kind of preparation: not more hours, but the right sequence. This is what the top student in a STAT 2101 section actually does, in order.</p>
+
+  <h3>Phase 1 — Build the skeleton (90 minutes, once)</h3>
+  <ol class="flow">
+    <li><span class="k">1.1</span><span class="t"><b>Write the formula sheet by hand, from memory, with the page closed.</b> Then open it and mark every gap in red. Repeat two days later. Recall is what the exam measures; re-reading is not recall and feels far more productive than it is.</span></li>
+    <li><span class="k">1.2</span><span class="t"><b>Make a one-page decision tree in your own words.</b> Copy the "Which rule do I use?" section above, but phrase every branch yourself. The act of rewording is what moves it into memory.</span></li>
+    <li><span class="k">1.3</span><span class="t"><b>Learn the definitions as sentences, not as feelings.</b> Sample space, outcome, event, simple, compound, mutually exclusive, independent, dependent, complement. These are CLO1 marks; they appear on quizzes verbatim and take one minute each to secure.</span></li>
+  </ol>
+
+  <h3>Phase 2 — Drill by question type, not by page order</h3>
+  <ol class="flow">
+    <li><span class="k">2.1</span><span class="t"><b>Group every exercise by which rule solves it</b> before solving any of them. Fifteen minutes of sorting teaches you more about rule selection than two hours of grinding, because rule selection — not arithmetic — is where marks are lost.</span></li>
+    <li><span class="k">2.2</span><span class="t"><b>Do the assigned exercises properly: p. 247, numbers 6, 8, 16 and 40.</b> These are named in the course outline, which means the tutor has them, which means variants of them are the most likely quiz questions in the course. Then do the Moodle exercises — they are listed for both Week 5 and Week 6.</span></li>
+    <li><span class="k">2.3</span><span class="t"><b>Solve every "Self-study" example in the slide deck.</b> Examples 4-13, 4-21, 4-22, 4-26, 4-28, 4-40, 4-45, 4-54 and the three review exercises are marked self-study, which means they are <em>not</em> done in class and are therefore exactly where an examiner finds unfamiliar-looking material. All of them are solved in this document — close it and redo them from the question alone.</span></li>
+    <li><span class="k">2.4</span><span class="t"><b>Build the "twin" of each problem you solve.</b> Did it say <em>with</em> replacement? Redo it <em>without</em>. Did it ask for "exactly 2"? Also do "at least 1". Twin-building is the single highest-yield habit in this chapter because the examiner builds twins for exactly the same reason.</span></li>
+  </ol>
+
+  <h3>Phase 3 — Write like a marker reads</h3>
+  <ol class="flow">
+    <li><span class="k">3.1</span><span class="t"><b>Open every answer by defining your events in symbols.</b> "Let N = the staff person is a nurse, M = the staff person is male." Two lines, and the rest of the solution writes itself — and the marker can follow you even if the arithmetic slips.</span></li>
+    <li><span class="k">3.2</span><span class="t"><b>Write the sample space in set notation whenever it is small enough.</b> The lecturer flags this explicitly on the Example 4-6 slide: "Sample spaces and events need to be expressed using set notations." That is a marking instruction in disguise.</span></li>
+    <li><span class="k">3.3</span><span class="t"><b>Name the rule before you use it.</b> "Since the events are not mutually exclusive, Addition Rule 2 applies." One sentence, often one mark, and it forces you to check your own choice.</span></li>
+    <li><span class="k">3.4</span><span class="t"><b>Finish with a sentence in words.</b> "So there is about a 54% chance that at least one circuit is defective." Interpretation is a stated outcome of this course (CLO8) and costs five seconds.</span></li>
+  </ol>
+
+  <h3>Phase 4 — The exam hour itself</h3>
+  <ol class="flow">
+    <li><span class="k">4.1</span><span class="t"><b>Brain-dump the formula sheet onto the back page in the first 90 seconds</b>, before reading any question. You are then calculating from a written reference instead of from a memory under pressure.</span></li>
+    <li><span class="k">4.2</span><span class="t"><b>Underline the decisive words as you read:</b> <em>and, or, not, at least, at most, given, without replacement, order is important</em>. Every one of them selects a formula. The question is telling you which rule to use; most lost marks come from not listening.</span></li>
+    <li><span class="k">4.3</span><span class="t"><b>Run the three checks on every numerical answer:</b> is it between 0 and 1? do the complementary parts sum to 1? does the magnitude feel right (a rare event should come out small)? These catch nearly every slip.</span></li>
+    <li><span class="k">4.4</span><span class="t"><b>Budget by marks, not by difficulty.</b> The midterm is 60 minutes across Chapters 1–4. Chapter 4 questions look longest but have the most structured method — do them with a timer at home so you know your real pace before exam night.</span></li>
+  </ol>
+
+  <div class="ar-note">
+    <span class="lbl">استراتيجية الطالب الأول — باختصار</span>
+    <ul>
+      <li><b>اكتب ورقة القوانين من ذاكرتك</b> ثم صحّحها. الاسترجاع هو ما يُختبر، وليس القراءة.</li>
+      <li><b>صنّف التمارين حسب القانون المستخدم</b> قبل حلّها — ضياع الدرجات يكون في اختيار القانون لا في الحساب.</li>
+      <li><b>حلّ كل الأمثلة المكتوب عليها Self-study</b> فهي غير محلولة في المحاضرة، ومنها تأتي الأسئلة غير المألوفة.</li>
+      <li><b>اصنع "التوأم" لكل مسألة:</b> إذا كانت with replacement فأعدها without، وإذا كانت "exactly 2" فأعدها "at least 1".</li>
+      <li><b>في الامتحان:</b> اكتب القوانين في أول 90 ثانية، ضع خطًا تحت الكلمات المفتاحية (and / or / not / at least / given / without replacement)، وتأكد أن كل إجابة بين 0 و 1.</li>
+      <li><b>اكتب جملة تفسيرية في النهاية</b> — "أي أن احتمال وجود قطعة معيبة واحدة على الأقل يقارب 54%". هذه درجات شبه مجانية.</li>
+    </ul>
+  </div>
+
+  <h3>The fastest wins, ranked</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th style="width:40px">Rank</th><th>Action</th><th style="width:26%">Time cost</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1</td><td>Memorise the five phrase translations (exactly / less than / at most / more than / at least).</td><td>10 minutes</td></tr>
+        <tr><td class="num">2</td><td>Memorise <span class="v">P(at least one) = 1 − P(none)</span> and scan every question for "at least".</td><td>5 minutes</td></tr>
+        <tr><td class="num">3</td><td>Drill the permutation-vs-combination decision on 20 one-line prompts.</td><td>25 minutes</td></tr>
+        <tr><td class="num">4</td><td>Practise building a two-way table from a word problem (Example 4-21 is the template).</td><td>20 minutes</td></tr>
+        <tr><td class="num">5</td><td>Learn the definitions verbatim for CLO1 marks.</td><td>20 minutes</td></tr>
+        <tr><td class="num">6</td><td>Rehearse the Casio keystrokes for <span class="v">x!</span>, <span class="v">nPr</span>, <span class="v">nCr</span> until they are automatic.</td><td>10 minutes</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>That is ninety minutes of work that covers the majority of the marks available in Chapter 4. Everything else is practice volume.</p>
+</section>
+
+<footer>
+  <p><strong>STAT 2101 — Introduction to Statistics · Chapter 4: Probability and Counting Rules.</strong> Rebuilt from Dr. Ahmed Al-Hadhrami's lecture slides (Spring 24) and aligned to the SQU College of Science course outline, OQF Level 5, Fall 2026. Textbook: Allan G. Bluman, <em>Elementary Statistics: A Step by Step Approach</em>, brief version, 10th edition, McGraw Hill (2017).</p>
+  <p>Every example, definition, formula and note from the source deck is reproduced here, with full worked solutions supplied for the examples the slides leave open. A companion question bank with full solutions accompanies this document.</p>
+</footer>
+
+</div>
