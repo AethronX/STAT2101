@@ -438,6 +438,27 @@ sub,sup{font-size:.72em}
 .arn{display:block;font-family:var(--arabic);direction:rtl;unicode-bidi:isolate;text-align:left;font-size:.84rem;color:var(--fg-soft);font-weight:500;margin-top:2px;line-height:1.5}
 .subtitle-ar{font-family:var(--arabic);direction:rtl;text-align:right;color:var(--fg-soft);font-size:1.02rem;margin:0 0 8px;max-width:none;line-height:1.9}
 
+/* ---------- diagrams ---------- */
+figure.dg{margin:22px 0 26px;padding:16px 14px 12px;background:var(--surface);border:1px solid var(--rule);border-radius:4px;break-inside:avoid;page-break-inside:avoid}
+figure.dg svg{display:block;width:100%;height:auto;margin:0 auto;color:var(--fg);overflow:visible}
+figure.dg figcaption{font-size:.86rem;color:var(--fg-soft);margin:10px auto 0;max-width:64ch;text-align:center;line-height:1.5}
+figure.dg figcaption .ar{display:block;font-family:var(--arabic);direction:rtl;margin-top:4px;font-size:.9rem}
+.dg .ln{stroke:currentColor;fill:none;stroke-width:1.4}
+.dg .ln-soft{stroke:var(--fg-faint);fill:none;stroke-width:1.2}
+.dg .dash{stroke-dasharray:4 4}
+.dg .thick{stroke-width:2.6}
+.dg text{fill:currentColor;font-family:var(--body);font-size:13px}
+.dg text.m{font-family:var(--mono);font-size:12.5px}
+.dg text.sm{font-size:11.5px}
+.dg text.big{font-family:var(--mono);font-size:19px;font-weight:600}
+.dg text.soft{fill:var(--fg-soft)}
+.dg text.b{font-weight:600}
+.dg .bg{fill:var(--surface)}
+.dg .wash1{fill:var(--ink-1-wash)} .dg .wash2{fill:var(--ink-2-wash)} .dg .wash3{fill:var(--ink-3-wash)} .dg .wash4{fill:var(--ink-4-wash)} .dg .washA{fill:var(--accent-wash)}
+.dg .f1{fill:var(--ink-1)} .dg .f2{fill:var(--ink-2)} .dg .f3{fill:var(--ink-3)} .dg .f4{fill:var(--ink-4)} .dg .fA{fill:var(--accent)}
+.dg .s1{stroke:var(--ink-1)} .dg .s2{stroke:var(--ink-2)} .dg .s3{stroke:var(--ink-3)} .dg .s4{stroke:var(--ink-4)} .dg .sA{stroke:var(--accent)}
+.dg text.t1{fill:var(--ink-1)} .dg text.t2{fill:var(--ink-2)} .dg text.t3{fill:var(--ink-3)} .dg text.t4{fill:var(--ink-4)} .dg text.tA{fill:var(--accent)}
+
 /* ---------- tables ---------- */
 .tbl-wrap{overflow-x:auto;margin:18px 0 22px;-webkit-overflow-scrolling:touch}
 table{
@@ -628,6 +649,33 @@ footer p{max-width:none}
     <div class="a">
       <p><strong>Set-up.</strong> 4 defective, 20 good, 24 total. Choosing 4 with no order → combinations.</p>
       <p class="fx">n(S) = <sub>24</sub>C<sub>4</sub> = <span class="frac"><span class="num">24 · 23 · 22 · 21</span><span class="den">4 · 3 · 2 · 1</span></span> = <span class="frac"><span class="num">255,024</span><span class="den">24</span></span> = <strong>10,626</strong></p>
+  <figure class="dg">
+    <svg viewBox="0 0 640 192" style="max-width:640px" role="img" aria-label="The box of 24 split into 4 defective and 20 good; choosing 2 from each gives 6 times 190 ways" xmlns="http://www.w3.org/2000/svg"><defs><marker id="dc-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+<text x="95" y="20" text-anchor="middle" class="sm b">Box of 24</text>
+<rect x="20" y="30" width="150" height="44" rx="0" class="washA ln sA"/>
+<rect x="20" y="74" width="150" height="110" rx="0" class="wash2 ln s2"/>
+<rect x="20" y="30" width="150" height="154" rx="6" class="ln"/>
+<text x="95" y="57" text-anchor="middle" class="sm b">4 defective</text>
+<text x="95" y="134" text-anchor="middle" class="sm b">20 good</text>
+<line x1="172" y1="52" x2="276" y2="52" class="ln" marker-end="url(#dc-arr)"/>
+<text x="224" y="44" text-anchor="middle" class="sm soft">choose 2</text>
+<line x1="172" y1="128" x2="276" y2="128" class="ln" marker-end="url(#dc-arr)"/>
+<text x="224" y="120" text-anchor="middle" class="sm soft">choose 2</text>
+<rect x="280" y="34" width="118" height="36" rx="4" class="bg ln sA"/>
+<text x="339" y="57" text-anchor="middle" class="m b">4C2 = 6</text>
+<rect x="280" y="110" width="118" height="36" rx="4" class="bg ln s2"/>
+<text x="339" y="133" text-anchor="middle" class="m b">20C2 = 190</text>
+<line x1="400" y1="52" x2="444" y2="80" class="ln" marker-end="url(#dc-arr)"/>
+<line x1="400" y1="128" x2="444" y2="100" class="ln" marker-end="url(#dc-arr)"/>
+<text x="424" y="94" text-anchor="middle" class="sm b t4">and → ×</text>
+<rect x="448" y="72" width="176" height="36" rx="4" class="wash4 ln s4"/>
+<text x="536" y="95" text-anchor="middle" class="m b">6 × 190 = 1,140</text>
+<text x="536" y="136" text-anchor="middle" class="m">÷ 24C4 = 10,626</text>
+<text x="536" y="160" text-anchor="middle" class="m b t4">P ≈ 0.1073</text>
+    </svg>
+    <figcaption>Part (a) as a picture: split the box into its two kinds, choose from each kind separately, multiply the counts (“2 defective and 2 good”), then divide by all ways to choose 4 from 24.<span class="ar">الفرع <span dir="ltr" style="white-space:nowrap">(a)</span> كصورة: نقسم الصندوق إلى نوعين، نختار من كل نوع على حدة، نضرب العددين («2 معيبة و 2 سليمة»)، ثم نقسم على كل طرق اختيار 4 من <span dir="ltr" style="white-space:nowrap">24</span>.</span></figcaption>
+  </figure>
+
       <ol class="steps">
         <li><strong>(a) Exactly 2 defective</strong> — so 2 from the 4 defective <em>and</em> 2 from the 20 good:<br>
           <span class="fx">n(E) = <sub>4</sub>C<sub>2</sub> × <sub>20</sub>C<sub>2</sub> = 6 × 190 = 1,140</span><br>

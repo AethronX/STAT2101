@@ -438,6 +438,27 @@ sub,sup{font-size:.72em}
 .arn{display:block;font-family:var(--arabic);direction:rtl;unicode-bidi:isolate;text-align:left;font-size:.84rem;color:var(--fg-soft);font-weight:500;margin-top:2px;line-height:1.5}
 .subtitle-ar{font-family:var(--arabic);direction:rtl;text-align:right;color:var(--fg-soft);font-size:1.02rem;margin:0 0 8px;max-width:none;line-height:1.9}
 
+/* ---------- diagrams ---------- */
+figure.dg{margin:22px 0 26px;padding:16px 14px 12px;background:var(--surface);border:1px solid var(--rule);border-radius:4px;break-inside:avoid;page-break-inside:avoid}
+figure.dg svg{display:block;width:100%;height:auto;margin:0 auto;color:var(--fg);overflow:visible}
+figure.dg figcaption{font-size:.86rem;color:var(--fg-soft);margin:10px auto 0;max-width:64ch;text-align:center;line-height:1.5}
+figure.dg figcaption .ar{display:block;font-family:var(--arabic);direction:rtl;margin-top:4px;font-size:.9rem}
+.dg .ln{stroke:currentColor;fill:none;stroke-width:1.4}
+.dg .ln-soft{stroke:var(--fg-faint);fill:none;stroke-width:1.2}
+.dg .dash{stroke-dasharray:4 4}
+.dg .thick{stroke-width:2.6}
+.dg text{fill:currentColor;font-family:var(--body);font-size:13px}
+.dg text.m{font-family:var(--mono);font-size:12.5px}
+.dg text.sm{font-size:11.5px}
+.dg text.big{font-family:var(--mono);font-size:19px;font-weight:600}
+.dg text.soft{fill:var(--fg-soft)}
+.dg text.b{font-weight:600}
+.dg .bg{fill:var(--surface)}
+.dg .wash1{fill:var(--ink-1-wash)} .dg .wash2{fill:var(--ink-2-wash)} .dg .wash3{fill:var(--ink-3-wash)} .dg .wash4{fill:var(--ink-4-wash)} .dg .washA{fill:var(--accent-wash)}
+.dg .f1{fill:var(--ink-1)} .dg .f2{fill:var(--ink-2)} .dg .f3{fill:var(--ink-3)} .dg .f4{fill:var(--ink-4)} .dg .fA{fill:var(--accent)}
+.dg .s1{stroke:var(--ink-1)} .dg .s2{stroke:var(--ink-2)} .dg .s3{stroke:var(--ink-3)} .dg .s4{stroke:var(--ink-4)} .dg .sA{stroke:var(--accent)}
+.dg text.t1{fill:var(--ink-1)} .dg text.t2{fill:var(--ink-2)} .dg text.t3{fill:var(--ink-3)} .dg text.t4{fill:var(--ink-4)} .dg text.tA{fill:var(--accent)}
+
 /* ---------- tables ---------- */
 .tbl-wrap{overflow-x:auto;margin:18px 0 22px;-webkit-overflow-scrolling:touch}
 table{
@@ -616,7 +637,60 @@ footer p{max-width:none}
   <div class="ex">
     <div class="q"><span class="tag">Example 4-38 · Tossing a Coin and Rolling a Die</span><p>A coin is tossed and a die is rolled. Find the number of outcomes for the sequence of events.</p></div>
     <div class="a"><p class="fx">2 × 6 = <span class="ans">12 outcomes</span></p>
-    <p>Namely H1, H2, H3, H4, H5, H6, T1, T2, T3, T4, T5, T6.</p></div>
+    <p>Namely H1, H2, H3, H4, H5, H6, T1, T2, T3, T4, T5, T6.</p>
+  <figure class="dg">
+    <svg viewBox="0 0 520 282" style="max-width:520px" role="img" aria-label="Tree with two coin branches, each splitting into six die outcomes, for twelve outcomes in total" xmlns="http://www.w3.org/2000/svg">
+<text x="140" y="14" text-anchor="middle" class="sm b soft">Coin: 2 ways</text>
+<text x="300" y="14" text-anchor="middle" class="sm b soft">Die: 6 ways each</text>
+<line x1="30" y1="153" x2="140" y2="90" class="ln-soft"/>
+<line x1="140" y1="90" x2="300" y2="40" class="ln-soft"/>
+<line x1="140" y1="90" x2="300" y2="60" class="ln-soft"/>
+<line x1="140" y1="90" x2="300" y2="80" class="ln-soft"/>
+<line x1="140" y1="90" x2="300" y2="100" class="ln-soft"/>
+<line x1="140" y1="90" x2="300" y2="120" class="ln-soft"/>
+<line x1="140" y1="90" x2="300" y2="140" class="ln-soft"/>
+<line x1="30" y1="153" x2="140" y2="216" class="ln-soft"/>
+<line x1="140" y1="216" x2="300" y2="166" class="ln-soft"/>
+<line x1="140" y1="216" x2="300" y2="186" class="ln-soft"/>
+<line x1="140" y1="216" x2="300" y2="206" class="ln-soft"/>
+<line x1="140" y1="216" x2="300" y2="226" class="ln-soft"/>
+<line x1="140" y1="216" x2="300" y2="246" class="ln-soft"/>
+<line x1="140" y1="216" x2="300" y2="266" class="ln-soft"/>
+<circle cx="300" cy="40" r="3" class="f4"/>
+<text x="310" y="44" text-anchor="start" class="m">H1</text>
+<circle cx="300" cy="60" r="3" class="f4"/>
+<text x="310" y="64" text-anchor="start" class="m">H2</text>
+<circle cx="300" cy="80" r="3" class="f4"/>
+<text x="310" y="84" text-anchor="start" class="m">H3</text>
+<circle cx="300" cy="100" r="3" class="f4"/>
+<text x="310" y="104" text-anchor="start" class="m">H4</text>
+<circle cx="300" cy="120" r="3" class="f4"/>
+<text x="310" y="124" text-anchor="start" class="m">H5</text>
+<circle cx="300" cy="140" r="3" class="f4"/>
+<text x="310" y="144" text-anchor="start" class="m">H6</text>
+<circle cx="140" cy="90" r="13" class="bg ln s4"/>
+<text x="140" y="94.5" text-anchor="middle" class="b t4">H</text>
+<circle cx="300" cy="166" r="3" class="f4"/>
+<text x="310" y="170" text-anchor="start" class="m">T1</text>
+<circle cx="300" cy="186" r="3" class="f4"/>
+<text x="310" y="190" text-anchor="start" class="m">T2</text>
+<circle cx="300" cy="206" r="3" class="f4"/>
+<text x="310" y="210" text-anchor="start" class="m">T3</text>
+<circle cx="300" cy="226" r="3" class="f4"/>
+<text x="310" y="230" text-anchor="start" class="m">T4</text>
+<circle cx="300" cy="246" r="3" class="f4"/>
+<text x="310" y="250" text-anchor="start" class="m">T5</text>
+<circle cx="300" cy="266" r="3" class="f4"/>
+<text x="310" y="270" text-anchor="start" class="m">T6</text>
+<circle cx="140" cy="216" r="13" class="bg ln s4"/>
+<text x="140" y="220.5" text-anchor="middle" class="b t4">T</text>
+<circle cx="30" cy="153" r="4" class="f4"/>
+<text x="440" y="150" text-anchor="middle" class="big t4">2 × 6</text>
+<text x="440" y="174" text-anchor="middle" class="m b">= 12 outcomes</text>
+    </svg>
+    <figcaption>The Fundamental Counting Rule as a tree: each of the 2 coin results branches into the same 6 die results, so the total is 2 × 6 = 12 — multiply, don’t add.<span class="ar">قاعدة العدّ الأساسية كشجرة: كل نتيجة من نتيجتي العملة تتفرع إلى 6 نتائج للنرد، فالمجموع <span dir="ltr" style="white-space:nowrap">2 × 6 = 12</span> — نضرب ولا نجمع.</span></figcaption>
+  </figure>
+</div>
   </div>
 
   <div class="ex">
@@ -641,6 +715,47 @@ footer p{max-width:none}
         <li><strong>(b) Without repetition.</strong> Each digit used is removed from the pool:<br>
           <span class="fx">10 × 9 × 8 × 7 = <span class="ans">5,040 plates</span></span></li>
       </ol>
+  <figure class="dg">
+    <svg viewBox="0 0 580 172" style="max-width:580px" role="img" aria-label="Four digit slots: with repetition each slot has 10 choices; without repetition the choices drop 10, 9, 8, 7" xmlns="http://www.w3.org/2000/svg">
+<text x="178" y="22" text-anchor="middle" class="sm soft">1st digit</text>
+<text x="254" y="22" text-anchor="middle" class="sm soft">2nd digit</text>
+<text x="330" y="22" text-anchor="middle" class="sm soft">3rd digit</text>
+<text x="406" y="22" text-anchor="middle" class="sm soft">4th digit</text>
+<text x="20" y="54" text-anchor="start" class="sm b">With</text>
+<text x="20" y="70" text-anchor="start" class="sm b">repetition</text>
+<rect x="150" y="34" width="56" height="46" rx="4" class="wash4 ln s4"/>
+<text x="178" y="64" text-anchor="middle" class="big">10</text>
+<text x="216" y="62" text-anchor="middle" class="m b">×</text>
+<rect x="226" y="34" width="56" height="46" rx="4" class="wash4 ln s4"/>
+<text x="254" y="64" text-anchor="middle" class="big">10</text>
+<text x="292" y="62" text-anchor="middle" class="m b">×</text>
+<rect x="302" y="34" width="56" height="46" rx="4" class="wash4 ln s4"/>
+<text x="330" y="64" text-anchor="middle" class="big">10</text>
+<text x="368" y="62" text-anchor="middle" class="m b">×</text>
+<rect x="378" y="34" width="56" height="46" rx="4" class="wash4 ln s4"/>
+<text x="406" y="64" text-anchor="middle" class="big">10</text>
+<text x="462" y="63" text-anchor="start" class="m b t4">= 10,000</text>
+<text x="20" y="136" text-anchor="start" class="sm b">Without</text>
+<text x="20" y="152" text-anchor="start" class="sm b">repetition</text>
+<rect x="150" y="116" width="56" height="46" rx="4" class="wash4 ln s4"/>
+<text x="178" y="146" text-anchor="middle" class="big">10</text>
+<text x="216" y="144" text-anchor="middle" class="m b">×</text>
+<text x="216" y="110" text-anchor="middle" class="sm b t4">−1</text>
+<rect x="226" y="116" width="56" height="46" rx="4" class="wash4 ln s4"/>
+<text x="254" y="146" text-anchor="middle" class="big">9</text>
+<text x="292" y="144" text-anchor="middle" class="m b">×</text>
+<text x="292" y="110" text-anchor="middle" class="sm b t4">−1</text>
+<rect x="302" y="116" width="56" height="46" rx="4" class="wash4 ln s4"/>
+<text x="330" y="146" text-anchor="middle" class="big">8</text>
+<text x="368" y="144" text-anchor="middle" class="m b">×</text>
+<text x="368" y="110" text-anchor="middle" class="sm b t4">−1</text>
+<rect x="378" y="116" width="56" height="46" rx="4" class="wash4 ln s4"/>
+<text x="406" y="146" text-anchor="middle" class="big">7</text>
+<text x="462" y="145" text-anchor="start" class="m b t4">= 5,040</text>
+    </svg>
+    <figcaption>One box per digit, with the number of choices written inside. With repetition every slot keeps all 10 digits. Without repetition each slot has one fewer choice than the slot before.<span class="ar">خانة لكل رقم وبداخلها عدد الخيارات. مع التكرار: كل خانة <span dir="ltr" style="white-space:nowrap">10</span> خيارات. بدون تكرار: كل خانة أقل بواحد من التي قبلها <span dir="ltr" style="white-space:nowrap">(10</span>، 9، 8، <span dir="ltr" style="white-space:nowrap">7)</span>.</span></figcaption>
+  </figure>
+
       <div class="callout tip" style="margin-top:14px">
         <span class="ct">The lecturer's own rule of thumb</span>
         <p>"If repetitions are permitted, then the numbers <strong>stay the same</strong> going from left to right. If repetitions are not permitted, then the numbers <strong>decrease by 1</strong> for each place left to right." Write this on your formula sheet exactly as stated — it answers half of all counting-rule questions on sight.</p>
@@ -778,6 +893,62 @@ footer p{max-width:none}
     <span class="ct">The relationship worth seeing once</span>
     <p><span class="v"><sub>n</sub>C<sub>r</sub> = <sub>n</sub>P<sub>r</sub> ÷ r!</span> — a combination is a permutation with the <span class="v">r!</span> internal orderings divided out. That is why <span class="v"><sub>n</sub>C<sub>r</sub></span> is always ≤ <span class="v"><sub>n</sub>P<sub>r</sub></span>. If your combination answer comes out <em>larger</em> than the matching permutation, you have used the wrong formula.</p>
   </div>
+  <figure class="dg">
+    <svg viewBox="0 0 560 236" style="max-width:560px" role="img" aria-label="Six orderings of A, B and C all collapsing into a single unordered selection" xmlns="http://www.w3.org/2000/svg">
+<text x="78" y="18" text-anchor="middle" class="sm b">6 ordered lists</text>
+<text x="78" y="34" text-anchor="middle" class="sm soft">(permutations)</text>
+<text x="455" y="70" text-anchor="middle" class="sm b">1 selection</text>
+<text x="455" y="86" text-anchor="middle" class="sm soft">(combination)</text>
+<text x="282" y="84" text-anchor="middle" class="m b t4">÷ 3! = 6</text>
+<line x1="118" y1="56" x2="380" y2="136" class="ln-soft"/>
+<rect x="36" y="45" width="22" height="22" rx="3" class="bg ln s4"/>
+<text x="47" y="60.5" text-anchor="middle" class="m b">A</text>
+<rect x="62" y="45" width="22" height="22" rx="3" class="bg ln s4"/>
+<text x="73" y="60.5" text-anchor="middle" class="m b">B</text>
+<rect x="88" y="45" width="22" height="22" rx="3" class="bg ln s4"/>
+<text x="99" y="60.5" text-anchor="middle" class="m b">C</text>
+<line x1="118" y1="88" x2="380" y2="136" class="ln-soft"/>
+<rect x="36" y="77" width="22" height="22" rx="3" class="bg ln s4"/>
+<text x="47" y="92.5" text-anchor="middle" class="m b">A</text>
+<rect x="62" y="77" width="22" height="22" rx="3" class="bg ln s4"/>
+<text x="73" y="92.5" text-anchor="middle" class="m b">C</text>
+<rect x="88" y="77" width="22" height="22" rx="3" class="bg ln s4"/>
+<text x="99" y="92.5" text-anchor="middle" class="m b">B</text>
+<line x1="118" y1="120" x2="380" y2="136" class="ln-soft"/>
+<rect x="36" y="109" width="22" height="22" rx="3" class="bg ln s4"/>
+<text x="47" y="124.5" text-anchor="middle" class="m b">B</text>
+<rect x="62" y="109" width="22" height="22" rx="3" class="bg ln s4"/>
+<text x="73" y="124.5" text-anchor="middle" class="m b">A</text>
+<rect x="88" y="109" width="22" height="22" rx="3" class="bg ln s4"/>
+<text x="99" y="124.5" text-anchor="middle" class="m b">C</text>
+<line x1="118" y1="152" x2="380" y2="136" class="ln-soft"/>
+<rect x="36" y="141" width="22" height="22" rx="3" class="bg ln s4"/>
+<text x="47" y="156.5" text-anchor="middle" class="m b">B</text>
+<rect x="62" y="141" width="22" height="22" rx="3" class="bg ln s4"/>
+<text x="73" y="156.5" text-anchor="middle" class="m b">C</text>
+<rect x="88" y="141" width="22" height="22" rx="3" class="bg ln s4"/>
+<text x="99" y="156.5" text-anchor="middle" class="m b">A</text>
+<line x1="118" y1="184" x2="380" y2="136" class="ln-soft"/>
+<rect x="36" y="173" width="22" height="22" rx="3" class="bg ln s4"/>
+<text x="47" y="188.5" text-anchor="middle" class="m b">C</text>
+<rect x="62" y="173" width="22" height="22" rx="3" class="bg ln s4"/>
+<text x="73" y="188.5" text-anchor="middle" class="m b">A</text>
+<rect x="88" y="173" width="22" height="22" rx="3" class="bg ln s4"/>
+<text x="99" y="188.5" text-anchor="middle" class="m b">B</text>
+<line x1="118" y1="216" x2="380" y2="136" class="ln-soft"/>
+<rect x="36" y="205" width="22" height="22" rx="3" class="bg ln s4"/>
+<text x="47" y="220.5" text-anchor="middle" class="m b">C</text>
+<rect x="62" y="205" width="22" height="22" rx="3" class="bg ln s4"/>
+<text x="73" y="220.5" text-anchor="middle" class="m b">B</text>
+<rect x="88" y="205" width="22" height="22" rx="3" class="bg ln s4"/>
+<text x="99" y="220.5" text-anchor="middle" class="m b">A</text>
+<rect x="380" y="104" width="150" height="64" rx="6" class="wash4 ln s4"/>
+<text x="455" y="134" text-anchor="middle" class="m b">{A, B, C}</text>
+<text x="455" y="154" text-anchor="middle" class="sm soft">same committee</text>
+    </svg>
+    <figcaption>The same three people in all 3! = 6 orders. As a ranked list they are 6 different results (permutations); as a committee they are one result (combination). That is why nCr = nPr ÷ r!.<span class="ar">نفس الأشخاص الثلاثة بـ 6 ترتيبات مختلفة. كقائمة مرتّبة هي 6 نتائج (تباديل)، وكلجنة هي نتيجة واحدة (توافيق). لذلك <span dir="ltr" style="white-space:nowrap">nCr = nPr ÷ r!</span>.</span></figcaption>
+  </figure>
+
 
   <div class="ex">
     <div class="q"><span class="tag">Example 4-48 · Movies at the Park</span><p>The director of Movies at the Park must select 4 movies from a total of 10 movies to show on Movie Night at the Park. How many different ways can the selections be made?</p></div>

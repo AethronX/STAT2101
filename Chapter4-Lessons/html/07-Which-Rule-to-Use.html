@@ -438,6 +438,27 @@ sub,sup{font-size:.72em}
 .arn{display:block;font-family:var(--arabic);direction:rtl;unicode-bidi:isolate;text-align:left;font-size:.84rem;color:var(--fg-soft);font-weight:500;margin-top:2px;line-height:1.5}
 .subtitle-ar{font-family:var(--arabic);direction:rtl;text-align:right;color:var(--fg-soft);font-size:1.02rem;margin:0 0 8px;max-width:none;line-height:1.9}
 
+/* ---------- diagrams ---------- */
+figure.dg{margin:22px 0 26px;padding:16px 14px 12px;background:var(--surface);border:1px solid var(--rule);border-radius:4px;break-inside:avoid;page-break-inside:avoid}
+figure.dg svg{display:block;width:100%;height:auto;margin:0 auto;color:var(--fg);overflow:visible}
+figure.dg figcaption{font-size:.86rem;color:var(--fg-soft);margin:10px auto 0;max-width:64ch;text-align:center;line-height:1.5}
+figure.dg figcaption .ar{display:block;font-family:var(--arabic);direction:rtl;margin-top:4px;font-size:.9rem}
+.dg .ln{stroke:currentColor;fill:none;stroke-width:1.4}
+.dg .ln-soft{stroke:var(--fg-faint);fill:none;stroke-width:1.2}
+.dg .dash{stroke-dasharray:4 4}
+.dg .thick{stroke-width:2.6}
+.dg text{fill:currentColor;font-family:var(--body);font-size:13px}
+.dg text.m{font-family:var(--mono);font-size:12.5px}
+.dg text.sm{font-size:11.5px}
+.dg text.big{font-family:var(--mono);font-size:19px;font-weight:600}
+.dg text.soft{fill:var(--fg-soft)}
+.dg text.b{font-weight:600}
+.dg .bg{fill:var(--surface)}
+.dg .wash1{fill:var(--ink-1-wash)} .dg .wash2{fill:var(--ink-2-wash)} .dg .wash3{fill:var(--ink-3-wash)} .dg .wash4{fill:var(--ink-4-wash)} .dg .washA{fill:var(--accent-wash)}
+.dg .f1{fill:var(--ink-1)} .dg .f2{fill:var(--ink-2)} .dg .f3{fill:var(--ink-3)} .dg .f4{fill:var(--ink-4)} .dg .fA{fill:var(--accent)}
+.dg .s1{stroke:var(--ink-1)} .dg .s2{stroke:var(--ink-2)} .dg .s3{stroke:var(--ink-3)} .dg .s4{stroke:var(--ink-4)} .dg .sA{stroke:var(--accent)}
+.dg text.t1{fill:var(--ink-1)} .dg text.t2{fill:var(--ink-2)} .dg text.t3{fill:var(--ink-3)} .dg text.t4{fill:var(--ink-4)} .dg text.tA{fill:var(--accent)}
+
 /* ---------- tables ---------- */
 .tbl-wrap{overflow-x:auto;margin:18px 0 22px;-webkit-overflow-scrolling:touch}
 table{

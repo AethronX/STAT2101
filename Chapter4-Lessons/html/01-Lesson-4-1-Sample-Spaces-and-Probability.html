@@ -438,6 +438,27 @@ sub,sup{font-size:.72em}
 .arn{display:block;font-family:var(--arabic);direction:rtl;unicode-bidi:isolate;text-align:left;font-size:.84rem;color:var(--fg-soft);font-weight:500;margin-top:2px;line-height:1.5}
 .subtitle-ar{font-family:var(--arabic);direction:rtl;text-align:right;color:var(--fg-soft);font-size:1.02rem;margin:0 0 8px;max-width:none;line-height:1.9}
 
+/* ---------- diagrams ---------- */
+figure.dg{margin:22px 0 26px;padding:16px 14px 12px;background:var(--surface);border:1px solid var(--rule);border-radius:4px;break-inside:avoid;page-break-inside:avoid}
+figure.dg svg{display:block;width:100%;height:auto;margin:0 auto;color:var(--fg);overflow:visible}
+figure.dg figcaption{font-size:.86rem;color:var(--fg-soft);margin:10px auto 0;max-width:64ch;text-align:center;line-height:1.5}
+figure.dg figcaption .ar{display:block;font-family:var(--arabic);direction:rtl;margin-top:4px;font-size:.9rem}
+.dg .ln{stroke:currentColor;fill:none;stroke-width:1.4}
+.dg .ln-soft{stroke:var(--fg-faint);fill:none;stroke-width:1.2}
+.dg .dash{stroke-dasharray:4 4}
+.dg .thick{stroke-width:2.6}
+.dg text{fill:currentColor;font-family:var(--body);font-size:13px}
+.dg text.m{font-family:var(--mono);font-size:12.5px}
+.dg text.sm{font-size:11.5px}
+.dg text.big{font-family:var(--mono);font-size:19px;font-weight:600}
+.dg text.soft{fill:var(--fg-soft)}
+.dg text.b{font-weight:600}
+.dg .bg{fill:var(--surface)}
+.dg .wash1{fill:var(--ink-1-wash)} .dg .wash2{fill:var(--ink-2-wash)} .dg .wash3{fill:var(--ink-3-wash)} .dg .wash4{fill:var(--ink-4-wash)} .dg .washA{fill:var(--accent-wash)}
+.dg .f1{fill:var(--ink-1)} .dg .f2{fill:var(--ink-2)} .dg .f3{fill:var(--ink-3)} .dg .f4{fill:var(--ink-4)} .dg .fA{fill:var(--accent)}
+.dg .s1{stroke:var(--ink-1)} .dg .s2{stroke:var(--ink-2)} .dg .s3{stroke:var(--ink-3)} .dg .s4{stroke:var(--ink-4)} .dg .sA{stroke:var(--accent)}
+.dg text.t1{fill:var(--ink-1)} .dg text.t2{fill:var(--ink-2)} .dg text.t3{fill:var(--ink-3)} .dg text.t4{fill:var(--ink-4)} .dg text.tA{fill:var(--accent)}
+
 /* ---------- tables ---------- */
 .tbl-wrap{overflow-x:auto;margin:18px 0 22px;-webkit-overflow-scrolling:touch}
 table{
@@ -638,6 +659,98 @@ footer p{max-width:none}
       <p class="fx">S = {(1,1), (1,2), …, (1,6), (2,1), …, (6,6)}</p>
       <p>So <span class="ans">n(S) = 36</span></p>
       <p><strong>Why it matters:</strong> every dice question in the chapter divides by 36. Memorise the sum distribution now — sum 7 occurs 6 times, sums 6 and 8 occur 5 times each, 5 and 9 four times, 4 and 10 three times, 3 and 11 twice, 2 and 12 once. Total 36. ✔</p>
+  <figure class="dg">
+    <svg viewBox="0 0 362 346" style="max-width:362px" role="img" aria-label="Six by six grid of the 36 outcomes of rolling two dice, with the six outcomes summing to 7 highlighted" xmlns="http://www.w3.org/2000/svg">
+<text x="208" y="22" text-anchor="middle" class="sm b soft">Second die</text>
+<text x="22" y="194" text-anchor="middle" class="sm b soft" transform="rotate(-90 22 194)">First die</text>
+<text x="93" y="46" text-anchor="middle" class="m b">1</text>
+<text x="56" y="83" text-anchor="middle" class="m b">1</text>
+<text x="139" y="46" text-anchor="middle" class="m b">2</text>
+<text x="56" y="129" text-anchor="middle" class="m b">2</text>
+<text x="185" y="46" text-anchor="middle" class="m b">3</text>
+<text x="56" y="175" text-anchor="middle" class="m b">3</text>
+<text x="231" y="46" text-anchor="middle" class="m b">4</text>
+<text x="56" y="221" text-anchor="middle" class="m b">4</text>
+<text x="277" y="46" text-anchor="middle" class="m b">5</text>
+<text x="56" y="267" text-anchor="middle" class="m b">5</text>
+<text x="323" y="46" text-anchor="middle" class="m b">6</text>
+<text x="56" y="313" text-anchor="middle" class="m b">6</text>
+<rect x="70" y="56" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="93" y="83" text-anchor="middle" class="m">1,1</text>
+<rect x="116" y="56" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="139" y="83" text-anchor="middle" class="m">1,2</text>
+<rect x="162" y="56" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="185" y="83" text-anchor="middle" class="m">1,3</text>
+<rect x="208" y="56" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="231" y="83" text-anchor="middle" class="m">1,4</text>
+<rect x="254" y="56" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="277" y="83" text-anchor="middle" class="m">1,5</text>
+<rect x="300" y="56" width="46" height="46" rx="0" class="wash1 ln s1 thick"/>
+<text x="323" y="83" text-anchor="middle" class="m b t1">1,6</text>
+<rect x="70" y="102" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="93" y="129" text-anchor="middle" class="m">2,1</text>
+<rect x="116" y="102" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="139" y="129" text-anchor="middle" class="m">2,2</text>
+<rect x="162" y="102" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="185" y="129" text-anchor="middle" class="m">2,3</text>
+<rect x="208" y="102" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="231" y="129" text-anchor="middle" class="m">2,4</text>
+<rect x="254" y="102" width="46" height="46" rx="0" class="wash1 ln s1 thick"/>
+<text x="277" y="129" text-anchor="middle" class="m b t1">2,5</text>
+<rect x="300" y="102" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="323" y="129" text-anchor="middle" class="m">2,6</text>
+<rect x="70" y="148" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="93" y="175" text-anchor="middle" class="m">3,1</text>
+<rect x="116" y="148" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="139" y="175" text-anchor="middle" class="m">3,2</text>
+<rect x="162" y="148" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="185" y="175" text-anchor="middle" class="m">3,3</text>
+<rect x="208" y="148" width="46" height="46" rx="0" class="wash1 ln s1 thick"/>
+<text x="231" y="175" text-anchor="middle" class="m b t1">3,4</text>
+<rect x="254" y="148" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="277" y="175" text-anchor="middle" class="m">3,5</text>
+<rect x="300" y="148" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="323" y="175" text-anchor="middle" class="m">3,6</text>
+<rect x="70" y="194" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="93" y="221" text-anchor="middle" class="m">4,1</text>
+<rect x="116" y="194" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="139" y="221" text-anchor="middle" class="m">4,2</text>
+<rect x="162" y="194" width="46" height="46" rx="0" class="wash1 ln s1 thick"/>
+<text x="185" y="221" text-anchor="middle" class="m b t1">4,3</text>
+<rect x="208" y="194" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="231" y="221" text-anchor="middle" class="m">4,4</text>
+<rect x="254" y="194" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="277" y="221" text-anchor="middle" class="m">4,5</text>
+<rect x="300" y="194" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="323" y="221" text-anchor="middle" class="m">4,6</text>
+<rect x="70" y="240" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="93" y="267" text-anchor="middle" class="m">5,1</text>
+<rect x="116" y="240" width="46" height="46" rx="0" class="wash1 ln s1 thick"/>
+<text x="139" y="267" text-anchor="middle" class="m b t1">5,2</text>
+<rect x="162" y="240" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="185" y="267" text-anchor="middle" class="m">5,3</text>
+<rect x="208" y="240" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="231" y="267" text-anchor="middle" class="m">5,4</text>
+<rect x="254" y="240" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="277" y="267" text-anchor="middle" class="m">5,5</text>
+<rect x="300" y="240" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="323" y="267" text-anchor="middle" class="m">5,6</text>
+<rect x="70" y="286" width="46" height="46" rx="0" class="wash1 ln s1 thick"/>
+<text x="93" y="313" text-anchor="middle" class="m b t1">6,1</text>
+<rect x="116" y="286" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="139" y="313" text-anchor="middle" class="m">6,2</text>
+<rect x="162" y="286" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="185" y="313" text-anchor="middle" class="m">6,3</text>
+<rect x="208" y="286" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="231" y="313" text-anchor="middle" class="m">6,4</text>
+<rect x="254" y="286" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="277" y="313" text-anchor="middle" class="m">6,5</text>
+<rect x="300" y="286" width="46" height="46" rx="0" class="bg ln-soft"/>
+<text x="323" y="313" text-anchor="middle" class="m">6,6</text>
+    </svg>
+    <figcaption>All 36 outcomes of rolling two dice. The six shaded cells, from (1,6) to (6,1), are the outcomes whose sum is 7, so P(sum = 7) = 6/36 = 1/6.<span class="ar">فضاء العينة لرمي حجري نرد: <span dir="ltr" style="white-space:nowrap">36</span> نتيجة. الخلايا الست الملوّنة مجموعها 7، لذلك <span dir="ltr" style="white-space:nowrap">P(sum = 7) = 6/36</span>.</span></figcaption>
+  </figure>
+
     </div>
   </div>
 
@@ -657,27 +770,94 @@ footer p{max-width:none}
     <div class="q"><span class="tag">Example 4-4 · Gender of Children</span><p>Use a tree diagram to find the sample space for the gender of three children in a family.</p></div>
     <div class="a">
       <p>Branch on the first child (B / G); from each of those, branch on the second child; from each of those, branch on the third. You get 2 × 2 × 2 = 8 terminal branches, read left to right:</p>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th>First child</th><th>Second child</th><th>Third child</th><th>Outcome</th></tr></thead>
-          <tbody>
-            <tr><td>B</td><td>B</td><td>B</td><td class="num">BBB</td></tr>
-            <tr><td>B</td><td>B</td><td>G</td><td class="num">BBG</td></tr>
-            <tr><td>B</td><td>G</td><td>B</td><td class="num">BGB</td></tr>
-            <tr><td>B</td><td>G</td><td>G</td><td class="num">BGG</td></tr>
-            <tr><td>G</td><td>B</td><td>B</td><td class="num">GBB</td></tr>
-            <tr><td>G</td><td>B</td><td>G</td><td class="num">GBG</td></tr>
-            <tr><td>G</td><td>G</td><td>B</td><td class="num">GGB</td></tr>
-            <tr><td>G</td><td>G</td><td>G</td><td class="num">GGG</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <figure class="dg">
+    <svg viewBox="0 0 560 300" style="max-width:560px" role="img" aria-label="Tree diagram for the gender of three children, branching boy or girl three times into eight outcomes" xmlns="http://www.w3.org/2000/svg">
+<text x="150" y="20" text-anchor="middle" class="sm b soft">1st child</text>
+<text x="270" y="20" text-anchor="middle" class="sm b soft">2nd child</text>
+<text x="390" y="20" text-anchor="middle" class="sm b soft">3rd child</text>
+<text x="446" y="20" text-anchor="start" class="sm b soft">Outcome</text>
+<line x1="30" y1="167" x2="150" y2="99" class="ln-soft"/>
+<line x1="30" y1="167" x2="150" y2="235" class="ln-soft"/>
+<line x1="150" y1="99" x2="270" y2="65" class="ln-soft"/>
+<line x1="150" y1="99" x2="270" y2="133" class="ln-soft"/>
+<line x1="150" y1="235" x2="270" y2="201" class="ln-soft"/>
+<line x1="150" y1="235" x2="270" y2="269" class="ln-soft"/>
+<line x1="270" y1="65" x2="390" y2="48" class="ln-soft"/>
+<line x1="270" y1="65" x2="390" y2="82" class="ln-soft"/>
+<line x1="270" y1="133" x2="390" y2="116" class="ln-soft"/>
+<line x1="270" y1="133" x2="390" y2="150" class="ln-soft"/>
+<line x1="270" y1="201" x2="390" y2="184" class="ln-soft"/>
+<line x1="270" y1="201" x2="390" y2="218" class="ln-soft"/>
+<line x1="270" y1="269" x2="390" y2="252" class="ln-soft"/>
+<line x1="270" y1="269" x2="390" y2="286" class="ln-soft"/>
+<circle cx="150" cy="99" r="12" class="bg ln s1"/><text x="150" y="103.5" text-anchor="middle" class="b t1">B</text>
+<circle cx="150" cy="235" r="12" class="bg ln s4"/><text x="150" y="239.5" text-anchor="middle" class="b t4">G</text>
+<circle cx="270" cy="65" r="12" class="bg ln s1"/><text x="270" y="69.5" text-anchor="middle" class="b t1">B</text>
+<circle cx="270" cy="133" r="12" class="bg ln s4"/><text x="270" y="137.5" text-anchor="middle" class="b t4">G</text>
+<circle cx="270" cy="201" r="12" class="bg ln s1"/><text x="270" y="205.5" text-anchor="middle" class="b t1">B</text>
+<circle cx="270" cy="269" r="12" class="bg ln s4"/><text x="270" y="273.5" text-anchor="middle" class="b t4">G</text>
+<circle cx="390" cy="48" r="12" class="bg ln s1"/><text x="390" y="52.5" text-anchor="middle" class="b t1">B</text>
+<text x="446" y="52.5" text-anchor="start" class="m">BBB</text>
+<circle cx="390" cy="82" r="12" class="bg ln s4"/><text x="390" y="86.5" text-anchor="middle" class="b t4">G</text>
+<text x="446" y="86.5" text-anchor="start" class="m">BBG</text>
+<circle cx="390" cy="116" r="12" class="bg ln s1"/><text x="390" y="120.5" text-anchor="middle" class="b t1">B</text>
+<text x="446" y="120.5" text-anchor="start" class="m">BGB</text>
+<circle cx="390" cy="150" r="12" class="bg ln s4"/><text x="390" y="154.5" text-anchor="middle" class="b t4">G</text>
+<text x="446" y="154.5" text-anchor="start" class="m b t4">BGG</text>
+<text x="492" y="154.5" text-anchor="start" class="sm t4">← 2 girls</text>
+<circle cx="390" cy="184" r="12" class="bg ln s1"/><text x="390" y="188.5" text-anchor="middle" class="b t1">B</text>
+<text x="446" y="188.5" text-anchor="start" class="m">GBB</text>
+<circle cx="390" cy="218" r="12" class="bg ln s4"/><text x="390" y="222.5" text-anchor="middle" class="b t4">G</text>
+<text x="446" y="222.5" text-anchor="start" class="m b t4">GBG</text>
+<text x="492" y="222.5" text-anchor="start" class="sm t4">← 2 girls</text>
+<circle cx="390" cy="252" r="12" class="bg ln s1"/><text x="390" y="256.5" text-anchor="middle" class="b t1">B</text>
+<text x="446" y="256.5" text-anchor="start" class="m b t4">GGB</text>
+<text x="492" y="256.5" text-anchor="start" class="sm t4">← 2 girls</text>
+<circle cx="390" cy="286" r="12" class="bg ln s4"/><text x="390" y="290.5" text-anchor="middle" class="b t4">G</text>
+<text x="446" y="290.5" text-anchor="start" class="m">GGG</text>
+<circle cx="30" cy="167" r="4" class="f1"/>
+    </svg>
+    <figcaption>Tree diagram for three children: each child branches into B or G, giving 2 × 2 × 2 = 8 outcomes. The three marked outcomes (BGG, GBG, GGB) form the event “exactly two girls” used in Example 4-6.<span class="ar">شجرة الاحتمالات لثلاثة أطفال: كل طفل يتفرع إلى ولد أو بنت، فنحصل على 8 نتائج. النتائج الثلاث المعلّمة هي حدث «بنتان بالضبط» المستخدم في مثال <span dir="ltr" style="white-space:nowrap">4-6</span>.</span></figcaption>
+  </figure>
       <p>Same eight outcomes as Example 4-3 — the tree is the <em>proof</em> that nothing was missed.</p>
     </div>
   </div>
 
   <h3>3 · Venn diagrams and set operations</h3>
   <p>A <span class="term">Venn diagram</span> is a graphical way of representing the relationships between sets. The rectangle is <span class="v">S</span>; circles inside it are events. Three standard configurations: overlapping (<span class="v">A ∩ B ≠ ∅</span>), disjoint (<span class="v">A ∩ B = ∅</span>), and nested (<span class="v">B ⊂ A</span>).</p>
+  <figure class="dg">
+    <svg viewBox="0 0 660 202" style="max-width:660px" role="img" aria-label="Three Venn diagrams: two overlapping events, two disjoint events, and one event nested inside another" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="vc-a"><circle cx="88" cy="80" r="46"/></clipPath></defs>
+<rect x="10" y="10" width="200" height="140" rx="0" class="ln-soft"/>
+<text x="198" y="28" text-anchor="end" class="b soft">S</text>
+<text x="110" y="174" text-anchor="middle" class="sm b">Overlapping</text>
+<text x="110" y="193" text-anchor="middle" class="m t1">A ∩ B ≠ ∅</text>
+<circle cx="88" cy="80" r="46" class="wash1"/>
+<circle cx="132" cy="80" r="46" class="wash1"/>
+<circle cx="132" cy="80" r="46" class="f1" fill-opacity="0.3" clip-path="url(#vc-a)"/>
+<circle cx="88" cy="80" r="46" class="ln s1"/>
+<circle cx="132" cy="80" r="46" class="ln s1"/>
+<text x="68" y="85" text-anchor="middle" class="b t1">A</text>
+<text x="152" y="85" text-anchor="middle" class="b t1">B</text>
+<rect x="232" y="10" width="200" height="140" rx="0" class="ln-soft"/>
+<text x="420" y="28" text-anchor="end" class="b soft">S</text>
+<text x="332" y="174" text-anchor="middle" class="sm b">Disjoint (mutually exclusive)</text>
+<text x="332" y="193" text-anchor="middle" class="m t1">A ∩ B = ∅</text>
+<circle cx="290" cy="88" r="38" class="wash1 ln s1"/>
+<circle cx="372" cy="72" r="38" class="wash1 ln s1"/>
+<text x="290" y="93" text-anchor="middle" class="b t1">A</text>
+<text x="372" y="77" text-anchor="middle" class="b t1">B</text>
+<rect x="454" y="10" width="200" height="140" rx="0" class="ln-soft"/>
+<text x="642" y="28" text-anchor="end" class="b soft">S</text>
+<text x="554" y="174" text-anchor="middle" class="sm b">Nested</text>
+<text x="554" y="193" text-anchor="middle" class="m t1">B ⊂ A</text>
+<circle cx="550" cy="80" r="58" class="wash1 ln s1"/>
+<circle cx="562" cy="92" r="26" class="f1 ln s1" fill-opacity="0.3"/>
+<text x="518" y="60" text-anchor="middle" class="b t1">A</text>
+<text x="562" y="97" text-anchor="middle" class="b t1">B</text>
+    </svg>
+    <figcaption>The three ways two events can sit inside a sample space S: they overlap, they are disjoint (mutually exclusive), or one is nested inside the other.<span class="ar">الأشكال الثلاثة لحدثين داخل فضاء العينة: متداخلان، أو منفصلان تمامًا (متنافيان)، أو أحدهما داخل الآخر.</span></figcaption>
+  </figure>
+
 
   <div class="formula">
     <div class="label">The three set operations</div>
@@ -686,6 +866,52 @@ footer p{max-width:none}
     <p class="fx"><strong>Complement</strong> &nbsp; Ā &nbsp;or&nbsp; A<sup>c</sup> &nbsp;—&nbsp; read "<strong>not A</strong>" — all outcomes in S that are <em>not</em> in A.</p>
     <p class="note">In probability, "or" is always <em>inclusive</em>: A or B or both. This is not the everyday English "or". It is the single most common source of lost marks in §4-2.</p>
   </div>
+  <figure class="dg">
+    <svg viewBox="0 0 640 158" style="max-width:640px" role="img" aria-label="Four Venn diagrams shading the union, the intersection, the complement of A, and the complement of the union" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="so-a0"><circle cx="64" cy="60" r="34"/></clipPath><clipPath id="so-a1"><circle cx="224" cy="60" r="34"/></clipPath><clipPath id="so-a2"><circle cx="384" cy="60" r="34"/></clipPath><clipPath id="so-a3"><circle cx="544" cy="60" r="34"/></clipPath></defs>
+<rect x="10" y="10" width="140" height="100" rx="0" class="bg ln-soft"/>
+<circle cx="64" cy="60" r="34" class="f1" fill-opacity="0.45"/>
+<circle cx="96" cy="60" r="34" class="f1" fill-opacity="0.45"/>
+<circle cx="64" cy="60" r="34" class="ln s1"/>
+<circle cx="96" cy="60" r="34" class="ln s1"/>
+<rect x="10" y="10" width="140" height="100" rx="0" class="ln-soft"/>
+<text x="50" y="64" text-anchor="middle" class="sm b">A</text>
+<text x="110" y="64" text-anchor="middle" class="sm b">B</text>
+<text x="80" y="132" text-anchor="middle" class="m b">A ∪ B</text>
+<text x="80" y="150" text-anchor="middle" class="sm soft">A or B</text>
+<rect x="170" y="10" width="140" height="100" rx="0" class="bg ln-soft"/>
+<circle cx="256" cy="60" r="34" class="f1" fill-opacity="0.55" clip-path="url(#so-a1)"/>
+<circle cx="224" cy="60" r="34" class="ln s1"/>
+<circle cx="256" cy="60" r="34" class="ln s1"/>
+<rect x="170" y="10" width="140" height="100" rx="0" class="ln-soft"/>
+<text x="210" y="64" text-anchor="middle" class="sm b">A</text>
+<text x="270" y="64" text-anchor="middle" class="sm b">B</text>
+<text x="240" y="132" text-anchor="middle" class="m b">A ∩ B</text>
+<text x="240" y="150" text-anchor="middle" class="sm soft">A and B</text>
+<rect x="330" y="10" width="140" height="100" rx="0" class="bg ln-soft"/>
+<rect x="330" y="10" width="140" height="100" rx="0" class="f1" fill-opacity="0.45"/>
+<circle cx="384" cy="60" r="34" class="bg"/>
+<circle cx="384" cy="60" r="34" class="ln s1"/>
+<circle cx="416" cy="60" r="34" class="ln s1"/>
+<rect x="330" y="10" width="140" height="100" rx="0" class="ln-soft"/>
+<text x="370" y="64" text-anchor="middle" class="sm b">A</text>
+<text x="430" y="64" text-anchor="middle" class="sm b">B</text>
+<text x="400" y="132" text-anchor="middle" class="m b">Ā</text>
+<text x="400" y="150" text-anchor="middle" class="sm soft">not A</text>
+<rect x="490" y="10" width="140" height="100" rx="0" class="bg ln-soft"/>
+<rect x="490" y="10" width="140" height="100" rx="0" class="f1" fill-opacity="0.45"/>
+<circle cx="544" cy="60" r="34" class="bg"/>
+<circle cx="576" cy="60" r="34" class="bg"/>
+<circle cx="544" cy="60" r="34" class="ln s1"/>
+<circle cx="576" cy="60" r="34" class="ln s1"/>
+<rect x="490" y="10" width="140" height="100" rx="0" class="ln-soft"/>
+<text x="530" y="64" text-anchor="middle" class="sm b">A</text>
+<text x="590" y="64" text-anchor="middle" class="sm b">B</text>
+<text x="560" y="132" text-anchor="middle" class="m b">(A ∪ B)ᶜ</text>
+<text x="560" y="150" text-anchor="middle" class="sm soft">neither</text>
+    </svg>
+    <figcaption>The shaded region is the event. Union: everything in A or B or both. Intersection: only the overlap. Complement of A: everything in S outside A. Complement of the union: outside both circles.<span class="ar">المنطقة الملوّنة هي الحدث: الاتحاد <span dir="ltr" style="white-space:nowrap">(A</span> أو B أو كلاهما)، التقاطع (المشترك فقط)، متمّمة <span dir="ltr" style="white-space:nowrap">A (</span>كل ما هو خارج <span dir="ltr" style="white-space:nowrap">A)</span>، ومتمّمة الاتحاد (خارج الدائرتين معًا).</span></figcaption>
+  </figure>
+
   <div class="ar-note">
     <span class="lbl">الشرح بالعربي — مخطط فن والعمليات على الأحداث</span>
     <p><b>مخطط فن (<b dir="ltr">Venn diagram</b>):</b> مستطيل يمثل فضاء العينة <span class="v" dir="ltr">S</span>، وبداخله دوائر تمثل الأحداث.</p><ul><li><b>الاتحاد</b> <span class="v" dir="ltr">A ∪ B</span> ويُقرأ <b dir="ltr">A or B</b>: كل العناصر الموجودة في <span class="v" dir="ltr">A</span> أو في <span class="v" dir="ltr">B</span> <b>أو في الاثنين معًا</b>.</li><li><b>التقاطع</b> <span class="v" dir="ltr">A ∩ B</span> ويُقرأ <b dir="ltr">A and B</b>: العناصر <b>المشتركة فقط</b> بين الحدثين.</li><li><b>المتمّمة</b> <span class="v" dir="ltr">Ā</span> أو <span class="v" dir="ltr">Aᶜ</span> وتُقرأ <b dir="ltr">not A</b>: كل عناصر <span class="v" dir="ltr">S</span> التي <b>ليست</b> في <span class="v" dir="ltr">A</span>.</li></ul><p><b>تنبيه:</b> كلمة <b dir="ltr">or</b> في الاحتمال تعني «أحدهما أو كلاهما» دائمًا، وليست «أحدهما فقط» كما في الكلام اليومي. والمتمّمة تُحسب من داخل <span class="v" dir="ltr">S</span> فقط — في المثال أعلاه الرقم <span class="v" dir="ltr">8</span> يدخل في <span class="v" dir="ltr">Ā</span> لأنه ليس من عوامل 12.</p>
@@ -697,6 +923,33 @@ footer p{max-width:none}
     <div class="a">
       <p><strong>First, build the sets.</strong> Factors of 12: 1, 2, 3, 4, 6, 12 → <span class="v">A = {1, 2, 3, 4, 6, 12}</span>. Factors of 8: 1, 2, 4, 8 → <span class="v">B = {1, 2, 4, 8}</span>.</p>
       <p><strong>Venn layout.</strong> Inside A only: 3, 6, 12. Inside both: 1, 2, 4. Inside B only: 8. Outside both, still in S: 5, 7, 9, 10, 11.</p>
+  <figure class="dg">
+    <svg viewBox="0 0 460 250" style="max-width:460px" role="img" aria-label="Venn diagram of a 12-sided die with factors of 12 and factors of 8, sharing 1, 2 and 4" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="d12-ca"><circle cx="170" cy="128" r="82"/></clipPath></defs>
+<rect x="10" y="10" width="440" height="230" rx="0" class="ln-soft"/>
+<text x="24" y="30" text-anchor="start" class="b soft">S</text>
+<circle cx="170" cy="128" r="82" class="wash1" fill-opacity="0.9"/>
+<circle cx="290" cy="128" r="82" class="wash1" fill-opacity="0.9"/>
+<circle cx="290" cy="128" r="82" class="f1" fill-opacity="0.28" clip-path="url(#d12-ca)"/>
+<circle cx="170" cy="128" r="82" class="ln s1"/>
+<circle cx="290" cy="128" r="82" class="ln s1"/>
+<text x="136" y="38" text-anchor="middle" class="b t1">A: factors of 12</text>
+<text x="324" y="38" text-anchor="middle" class="b t1">B: factors of 8</text>
+<text x="132" y="113" text-anchor="middle" class="m b">3</text>
+<text x="132" y="133" text-anchor="middle" class="m b">6</text>
+<text x="132" y="153" text-anchor="middle" class="m b">12</text>
+<text x="230" y="113" text-anchor="middle" class="m b">1</text>
+<text x="230" y="133" text-anchor="middle" class="m b">2</text>
+<text x="230" y="153" text-anchor="middle" class="m b">4</text>
+<text x="328" y="133" text-anchor="middle" class="m b">8</text>
+<text x="49" y="123" text-anchor="middle" class="m b">5</text>
+<text x="49" y="143" text-anchor="middle" class="m b">7</text>
+<text x="411" y="113" text-anchor="middle" class="m b">9</text>
+<text x="411" y="133" text-anchor="middle" class="m b">10</text>
+<text x="411" y="153" text-anchor="middle" class="m b">11</text>
+    </svg>
+    <figcaption>Every number from 1 to 12 placed in its region. The overlap {1, 2, 4} is A ∩ B; everything inside either circle is A ∪ B; the numbers outside both circles are (A ∪ B)ᶜ.<span class="ar">كل رقم من 1 إلى <span dir="ltr" style="white-space:nowrap">12</span> في منطقته. المنطقة المشتركة <span dir="ltr" style="white-space:nowrap">{1, 2, 4}</span> هي التقاطع، وكل ما داخل الدائرتين هو الاتحاد، والأرقام خارجهما هي متمّمة الاتحاد.</span></figcaption>
+  </figure>
+
       <ol class="steps">
         <li>(a) <span class="v">A ∪ B</span> = {1, 2, 3, 4, 6, 8, 12} &nbsp;→&nbsp; <span class="ans">n = 7</span></li>
         <li>(b) <span class="v">A ∩ B</span> = {1, 2, 4} &nbsp;→&nbsp; <span class="ans">n = 3</span></li>
@@ -764,6 +1017,36 @@ footer p{max-width:none}
     <p class="fx">(4) &nbsp; The sum of the probabilities of all outcomes in S equals 1.</p>
     <p class="note">The probability line: 0 = Impossible · ~0.25 = Unlikely · 0.5 = 50–50 · ~0.75 = Likely · 1 = Certain.</p>
   </div>
+  <figure class="dg">
+    <svg viewBox="0 0 640 124" style="max-width:640px" role="img" aria-label="Probability scale from 0 impossible to 1 certain, with example events marked" xmlns="http://www.w3.org/2000/svg">
+<line x1="40" y1="62" x2="600" y2="62" class="ln thick"/>
+<line x1="40" y1="55" x2="40" y2="69" class="ln"/>
+<text x="40" y="44" text-anchor="middle" class="sm b">Impossible</text>
+<text x="40" y="88" text-anchor="middle" class="m soft">0</text>
+<line x1="180" y1="55" x2="180" y2="69" class="ln"/>
+<text x="180" y="44" text-anchor="middle" class="sm b">Unlikely</text>
+<text x="180" y="88" text-anchor="middle" class="m soft">0.25</text>
+<line x1="320" y1="55" x2="320" y2="69" class="ln"/>
+<text x="320" y="44" text-anchor="middle" class="sm b">50–50</text>
+<text x="320" y="88" text-anchor="middle" class="m soft">0.5</text>
+<line x1="460" y1="55" x2="460" y2="69" class="ln"/>
+<text x="460" y="44" text-anchor="middle" class="sm b">Likely</text>
+<text x="460" y="88" text-anchor="middle" class="m soft">0.75</text>
+<line x1="600" y1="55" x2="600" y2="69" class="ln"/>
+<text x="600" y="44" text-anchor="middle" class="sm b">Certain</text>
+<text x="600" y="88" text-anchor="middle" class="m soft">1</text>
+<circle cx="40" cy="62" r="5.5" class="f1"/>
+<text x="40" y="114" text-anchor="middle" class="sm t1">roll a 9</text>
+<circle cx="133.333" cy="62" r="5.5" class="f1"/>
+<text x="133.333" y="114" text-anchor="middle" class="sm t1">sum of 7</text>
+<circle cx="320" cy="62" r="5.5" class="f1"/>
+<text x="320" y="114" text-anchor="middle" class="sm t1">a head</text>
+<circle cx="600" cy="62" r="5.5" class="f1"/>
+<text x="600" y="114" text-anchor="middle" class="sm t1">less than 7</text>
+    </svg>
+    <figcaption>Every probability sits on this line between 0 and 1. Marked examples: rolling a 9 on a die (0, impossible), a sum of 7 with two dice (1/6), a head on a coin (0.5), and a number less than 7 on a die (1, certain).<span class="ar">كل احتمال يقع على هذا الخط بين 0 و 1: ظهور 9 على النرد مستحيل <span dir="ltr" style="white-space:nowrap">(0)</span>، مجموع 7 بحجري نرد <span dir="ltr" style="white-space:nowrap">(1/6)</span>، صورة في العملة <span dir="ltr" style="white-space:nowrap">(0.5)</span>، عدد أقل من 7 مؤكد <span dir="ltr" style="white-space:nowrap">(1)</span>.</span></figcaption>
+  </figure>
+
   <div class="ar-note">
     <span class="lbl">الشرح بالعربي — القانون الكلاسيكي وقواعد الاحتمال</span>
     <p><b>الاحتمال الكلاسيكي</b> = عدد النتائج التي تحقق الحدث ÷ عدد كل النتائج الممكنة: <span class="v" dir="ltr">P(E) = n(E) / n(S)</span>.</p><p><b>قواعد الاحتمال الأربع:</b></p><ol><li>الاحتمال دائمًا بين الصفر والواحد: <span class="v" dir="ltr">0 ≤ P(E) ≤ 1</span>.</li><li>إذا كان <span class="v" dir="ltr">P(E) = 0</span> فالحدث <b>مستحيل</b> (مثل ظهور 9 على نرد عادي).</li><li>إذا كان <span class="v" dir="ltr">P(E) = 1</span> فالحدث <b>مؤكد</b> (مثل ظهور عدد أقل من 7).</li><li>مجموع احتمالات كل النتائج في فضاء العينة = <span class="v" dir="ltr">1</span>.</li></ol><p>استخدم القاعدة الأولى لفحص كل إجابة: أي احتمال <b>سالب</b> أو <b>أكبر من 1</b> يعني أن في الحل خطأ. وتذكّر أن الدكتور يطلب كتابة فضاء العينة والحدث <b>بصيغة المجموعات</b> {…} — عليها درجات.</p>
@@ -789,6 +1072,20 @@ footer p{max-width:none}
     <p class="fx">P(Ē) = 1 − P(E) &nbsp;&nbsp;or&nbsp;&nbsp; P(E) = 1 − P(Ē) &nbsp;&nbsp;or&nbsp;&nbsp; P(E) + P(Ē) = 1</p>
     <p class="note">This is the highest-leverage formula in the chapter. Whenever a question contains "<strong>not</strong>", "<strong>at least one</strong>", "<strong>neither</strong>", or "<strong>none</strong>", reach for it before you do anything else.</p>
   </div>
+  <figure class="dg">
+    <svg viewBox="0 0 420 190" style="max-width:420px" role="img" aria-label="Venn diagram showing event E as a circle and its complement as the rest of the sample space" xmlns="http://www.w3.org/2000/svg">
+<rect x="10" y="10" width="400" height="170" rx="0" class="wash1 ln s1"/>
+<circle cx="210" cy="95" r="62" class="f1" fill-opacity="0.5"/>
+<circle cx="210" cy="95" r="62" class="ln s1"/>
+<text x="210" y="92" text-anchor="middle" class="b">E</text>
+<text x="210" y="112" text-anchor="middle" class="m">P(E)</text>
+<text x="26" y="34" text-anchor="start" class="sm b">Ē  (everything outside E)</text>
+<text x="26" y="52" text-anchor="start" class="m t1">P(Ē) = 1 − P(E)</text>
+<text x="398" y="170" text-anchor="end" class="sm soft">whole box: P(S) = 1</text>
+    </svg>
+    <figcaption>E and its complement Ē split the sample space with nothing left over, so their probabilities add to 1.<span class="ar">الحدث E ومتمّمته Ē يقسمان فضاء العينة كاملًا دون أي تداخل، لذلك مجموع احتماليهما = 1.</span></figcaption>
+  </figure>
+
   <div class="ar-note">
     <span class="lbl">الشرح بالعربي — المتمّمة</span>
     <p>متمّمة الحدث <span class="v" dir="ltr">E</span> هي كل النتائج التي <b>لا تحقق</b> <span class="v" dir="ltr">E</span>. وبما أن الحدث إما أن يقع أو لا يقع، فمجموع الاحتمالين = 1، ومنه:</p><p style="text-align:center"><span class="v" dir="ltr">P(Ē) = 1 − P(E)</span></p><p><b>متى تستخدمها؟</b> عندما ترى في السؤال: <b dir="ltr">not</b> (ليس)، <b dir="ltr">neither … nor</b> (لا هذا ولا ذاك)، <b dir="ltr">none</b> (ولا واحد)، <b dir="ltr">at least one</b> (واحد على الأقل). هذه القاعدة كثيرًا ما تحوّل سؤالًا طويلًا إلى عملية طرح واحدة. مثال: 23% يفضّلون الفانيلا، إذن احتمال <b>ليس</b> الفانيلا = <span class="v" dir="ltr">1 − 0.23 = 0.77</span>.</p>

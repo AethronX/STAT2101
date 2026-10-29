@@ -438,6 +438,27 @@ sub,sup{font-size:.72em}
 .arn{display:block;font-family:var(--arabic);direction:rtl;unicode-bidi:isolate;text-align:left;font-size:.84rem;color:var(--fg-soft);font-weight:500;margin-top:2px;line-height:1.5}
 .subtitle-ar{font-family:var(--arabic);direction:rtl;text-align:right;color:var(--fg-soft);font-size:1.02rem;margin:0 0 8px;max-width:none;line-height:1.9}
 
+/* ---------- diagrams ---------- */
+figure.dg{margin:22px 0 26px;padding:16px 14px 12px;background:var(--surface);border:1px solid var(--rule);border-radius:4px;break-inside:avoid;page-break-inside:avoid}
+figure.dg svg{display:block;width:100%;height:auto;margin:0 auto;color:var(--fg);overflow:visible}
+figure.dg figcaption{font-size:.86rem;color:var(--fg-soft);margin:10px auto 0;max-width:64ch;text-align:center;line-height:1.5}
+figure.dg figcaption .ar{display:block;font-family:var(--arabic);direction:rtl;margin-top:4px;font-size:.9rem}
+.dg .ln{stroke:currentColor;fill:none;stroke-width:1.4}
+.dg .ln-soft{stroke:var(--fg-faint);fill:none;stroke-width:1.2}
+.dg .dash{stroke-dasharray:4 4}
+.dg .thick{stroke-width:2.6}
+.dg text{fill:currentColor;font-family:var(--body);font-size:13px}
+.dg text.m{font-family:var(--mono);font-size:12.5px}
+.dg text.sm{font-size:11.5px}
+.dg text.big{font-family:var(--mono);font-size:19px;font-weight:600}
+.dg text.soft{fill:var(--fg-soft)}
+.dg text.b{font-weight:600}
+.dg .bg{fill:var(--surface)}
+.dg .wash1{fill:var(--ink-1-wash)} .dg .wash2{fill:var(--ink-2-wash)} .dg .wash3{fill:var(--ink-3-wash)} .dg .wash4{fill:var(--ink-4-wash)} .dg .washA{fill:var(--accent-wash)}
+.dg .f1{fill:var(--ink-1)} .dg .f2{fill:var(--ink-2)} .dg .f3{fill:var(--ink-3)} .dg .f4{fill:var(--ink-4)} .dg .fA{fill:var(--accent)}
+.dg .s1{stroke:var(--ink-1)} .dg .s2{stroke:var(--ink-2)} .dg .s3{stroke:var(--ink-3)} .dg .s4{stroke:var(--ink-4)} .dg .sA{stroke:var(--accent)}
+.dg text.t1{fill:var(--ink-1)} .dg text.t2{fill:var(--ink-2)} .dg text.t3{fill:var(--ink-3)} .dg text.t4{fill:var(--ink-4)} .dg text.tA{fill:var(--accent)}
+
 /* ---------- tables ---------- */
 .tbl-wrap{overflow-x:auto;margin:18px 0 22px;-webkit-overflow-scrolling:touch}
 table{
@@ -614,6 +635,25 @@ footer p{max-width:none}
         <li class="fx">P(neither) = 1 − P(B ∪ Z) = 1 − 0.44 = <span class="ans">0.56</span></li>
       </ol>
       <p><strong>Cross-check with a Venn diagram:</strong> burger only = 0.37 − 0.10 = 0.27; pizza only = 0.17 − 0.10 = 0.07; both = 0.10; outside = 1 − (0.27 + 0.07 + 0.10) = 0.56. ✔</p>
+  <figure class="dg">
+    <svg viewBox="0 0 460 250" style="max-width:460px" role="img" aria-label="Venn diagram for burger and pizza with region probabilities 0.27, 0.10, 0.07 and 0.56 outside" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="ex1-ca"><circle cx="170" cy="128" r="82"/></clipPath></defs>
+<rect x="10" y="10" width="440" height="230" rx="0" class="ln-soft"/>
+<text x="24" y="30" text-anchor="start" class="b soft">S</text>
+<circle cx="170" cy="128" r="82" class="wash2" fill-opacity="0.9"/>
+<circle cx="290" cy="128" r="82" class="wash2" fill-opacity="0.9"/>
+<circle cx="290" cy="128" r="82" class="f2" fill-opacity="0.28" clip-path="url(#ex1-ca)"/>
+<circle cx="170" cy="128" r="82" class="ln s2"/>
+<circle cx="290" cy="128" r="82" class="ln s2"/>
+<text x="136" y="38" text-anchor="middle" class="b t2">Burger 0.37</text>
+<text x="324" y="38" text-anchor="middle" class="b t2">Pizza 0.17</text>
+<text x="132" y="133" text-anchor="middle" class="m b">0.27</text>
+<text x="230" y="133" text-anchor="middle" class="m b">0.10</text>
+<text x="328" y="133" text-anchor="middle" class="m b">0.07</text>
+<text x="438" y="232" text-anchor="end" class="sm soft">neither: 0.56</text>
+    </svg>
+    <figcaption>Fill the overlap first (0.10), then subtract it from each total to get the “only” regions. The four regions add to 1, and “neither” is the region outside both circles.<span class="ar">املأ المنطقة المشتركة أولًا <span dir="ltr" style="white-space:nowrap">(0.10)</span>، ثم اطرحها من كل مجموع لتحصل على «فقط». مجموع المناطق الأربع = 1، و«لا هذا ولا ذاك» هي المنطقة خارج الدائرتين.</span></figcaption>
+  </figure>
+
     </div>
   </div>
 
@@ -644,6 +684,25 @@ footer p{max-width:none}
           </tbody>
         </table>
       </div>
+  <figure class="dg">
+    <svg viewBox="0 0 460 250" style="max-width:460px" role="img" aria-label="Venn diagram with A only 0.2, both 0.1, B only 0.1 and neither 0.6" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="ex3-ca"><circle cx="170" cy="128" r="82"/></clipPath></defs>
+<rect x="10" y="10" width="440" height="230" rx="0" class="ln-soft"/>
+<text x="24" y="30" text-anchor="start" class="b soft">S</text>
+<circle cx="170" cy="128" r="82" class="wash2" fill-opacity="0.9"/>
+<circle cx="290" cy="128" r="82" class="wash2" fill-opacity="0.9"/>
+<circle cx="290" cy="128" r="82" class="f2" fill-opacity="0.28" clip-path="url(#ex3-ca)"/>
+<circle cx="170" cy="128" r="82" class="ln s2"/>
+<circle cx="290" cy="128" r="82" class="ln s2"/>
+<text x="136" y="38" text-anchor="middle" class="b t2">A: 0.3</text>
+<text x="324" y="38" text-anchor="middle" class="b t2">B: 0.2</text>
+<text x="132" y="133" text-anchor="middle" class="m b">0.2</text>
+<text x="230" y="133" text-anchor="middle" class="m b">0.1</text>
+<text x="328" y="133" text-anchor="middle" class="m b">0.1</text>
+<text x="438" y="232" text-anchor="end" class="sm soft">neither: 0.6</text>
+    </svg>
+    <figcaption>The four regions of Ex 3. Every part of the question is a sum of regions: A ∩ Bᶜ is the left region (0.2), Aᶜ ∩ B is the right region (0.1), and Aᶜ ∪ B is everything except the left region (0.8).<span class="ar">مناطق التمرين 3. كل فرع هو مجموع مناطق: A فقط = <span dir="ltr" style="white-space:nowrap">0.2</span>، B فقط = <span dir="ltr" style="white-space:nowrap">0.1</span>، و <span dir="ltr" style="white-space:nowrap">Aᶜ ∪ B</span> = كل شيء ما عدا منطقة A فقط = <span dir="ltr" style="white-space:nowrap">0.8</span>.</span></figcaption>
+  </figure>
+
       <ol class="steps">
         <li><strong>(a)</strong> P(A<sup>c</sup>) = 1 − P(A) = 1 − 0.3 = <span class="ans">0.7</span></li>
         <li><strong>(b)</strong> P(A ∪ B) = P(A) + P(B) − P(A ∩ B) = 0.3 + 0.2 − 0.1 = <span class="ans">0.4</span></li>
