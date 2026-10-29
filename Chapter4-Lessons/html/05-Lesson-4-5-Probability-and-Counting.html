@@ -1,0 +1,718 @@
+<title>Lesson 4-5 Probability and Counting</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+
+<style>
+/* Layout: single reading column with a sticky rail nav; four section inks mirror the
+   overprint of a Venn diagram — the chapter's own governing picture. */
+:root{
+  --bg:#fbfaf7;
+  --surface:#ffffff;
+  --surface-2:#f2f1ec;
+  --fg:#1b2027;
+  --fg-soft:#4c5663;
+  --fg-faint:#78828f;
+  --rule:#dddcd4;
+  --rule-soft:#eceae3;
+
+  --ink-1:#1f4e79;   /* 4-1  sample spaces      */
+  --ink-2:#0f6f5c;   /* 4-2  addition rules     */
+  --ink-3:#9a5b12;   /* 4-3  multiplication     */
+  --ink-4:#7b2d6b;   /* 4-4 / 4-5 counting      */
+  --accent:#b23b2e;  /* alarms, traps, must-know */
+
+  --ink-1-wash:#eaf0f7;
+  --ink-2-wash:#e5f1ee;
+  --ink-3-wash:#f8efe1;
+  --ink-4-wash:#f4e9f2;
+  --accent-wash:#f9eae7;
+
+  --display:"Spectral",Georgia,"Times New Roman",serif;
+  --body:"IBM Plex Sans","IBM Plex Sans Arabic",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --arabic:"IBM Plex Sans Arabic","IBM Plex Sans",-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  --measure:70ch;
+  --shadow:0 1px 2px rgba(27,32,39,.05),0 8px 24px -16px rgba(27,32,39,.25);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#13171c;
+    --surface:#1a1f26;
+    --surface-2:#222932;
+    --fg:#e8e6e0;
+    --fg-soft:#b3bac4;
+    --fg-faint:#8a929e;
+    --rule:#333b45;
+    --rule-soft:#272e37;
+
+    --ink-1:#7bb0e8;
+    --ink-2:#4fc4a8;
+    --ink-3:#e2a74e;
+    --ink-4:#d089c2;
+    --accent:#ef7f70;
+
+    --ink-1-wash:#182633;
+    --ink-2-wash:#132a26;
+    --ink-3-wash:#2b2314;
+    --ink-4-wash:#2a1b28;
+    --accent-wash:#2f1c19;
+
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#13171c;
+  --surface:#1a1f26;
+  --surface-2:#222932;
+  --fg:#e8e6e0;
+  --fg-soft:#b3bac4;
+  --fg-faint:#8a929e;
+  --rule:#333b45;
+  --rule-soft:#272e37;
+
+  --ink-1:#7bb0e8;
+  --ink-2:#4fc4a8;
+  --ink-3:#e2a74e;
+  --ink-4:#d089c2;
+  --accent:#ef7f70;
+
+  --ink-1-wash:#182633;
+  --ink-2-wash:#132a26;
+  --ink-3-wash:#2b2314;
+  --ink-4-wash:#2a1b28;
+  --accent-wash:#2f1c19;
+
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{
+  max-width:980px;
+  margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 72px;
+}
+
+/* ---------- masthead ---------- */
+.masthead{
+  padding-block:56px 36px;
+  border-bottom:3px double var(--rule);
+  margin-bottom:36px;
+}
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+}
+h1{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(2.1rem,6vw,3.4rem);
+  line-height:1.08;
+  margin:0 0 10px;
+  letter-spacing:-.015em;
+  text-wrap:balance;
+}
+.subtitle{
+  font-family:var(--display);
+  font-style:italic;
+  font-size:clamp(1.05rem,2.6vw,1.3rem);
+  color:var(--fg-soft);
+  margin:0 0 22px;
+  max-width:var(--measure);
+}
+.meta-strip{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 10px;
+  margin-top:20px;
+}
+.chip{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.04em;
+  padding:5px 10px;
+  border:1px solid var(--rule);
+  border-radius:3px;
+  color:var(--fg-soft);
+  background:var(--surface);
+}
+.chip strong{color:var(--fg);font-weight:600}
+
+/* ---------- nav ---------- */
+nav.toc{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:20px 22px;
+  margin-bottom:44px;
+  box-shadow:var(--shadow);
+}
+nav.toc h2{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+  font-weight:500;
+}
+nav.toc ol{
+  margin:0;padding:0;list-style:none;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:4px 26px;
+}
+nav.toc li{min-width:0}
+nav.toc a{
+  display:flex;
+  gap:10px;
+  align-items:baseline;
+  text-decoration:none;
+  color:var(--fg);
+  padding:5px 0;
+  border-bottom:1px solid var(--rule-soft);
+  font-size:.92rem;
+}
+nav.toc a:hover{color:var(--accent)}
+nav.toc a .num{
+  font-family:var(--mono);
+  font-size:.74rem;
+  color:var(--fg-faint);
+  flex:none;
+  min-width:2.4em;
+}
+
+/* ---------- sections ---------- */
+section{margin-bottom:64px;scroll-margin-top:24px}
+.sec-head{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+  padding-bottom:14px;
+  border-bottom:2px solid var(--sec,var(--fg));
+  margin-bottom:28px;
+}
+.sec-num{
+  font-family:var(--mono);
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.06em;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:5px 9px;
+  border-radius:3px;
+  flex:none;
+  margin-top:6px;
+}
+.sec-head h2{
+  font-family:var(--display);
+  font-size:clamp(1.5rem,4vw,2.05rem);
+  line-height:1.18;
+  margin:0;
+  font-weight:600;
+  text-wrap:balance;
+  min-width:0;
+}
+.sec-head .ar{
+  display:block;
+  font-family:var(--arabic);
+  font-size:.92rem;
+  font-style:normal;
+  color:var(--fg-soft);
+  direction:rtl;
+  margin-top:4px;
+  font-weight:400;
+}
+h3{
+  font-family:var(--body);
+  font-size:1.08rem;
+  font-weight:600;
+  letter-spacing:-.005em;
+  margin:36px 0 12px;
+  color:var(--fg);
+  display:flex;
+  align-items:baseline;
+  gap:9px;
+  flex-wrap:wrap;
+}
+h3::before{
+  content:"";
+  width:18px;height:3px;
+  background:var(--sec,var(--fg));
+  flex:none;
+  border-radius:2px;
+}
+h4{
+  font-family:var(--mono);
+  font-size:.74rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:26px 0 10px;
+  font-weight:500;
+}
+p{margin:0 0 14px;max-width:var(--measure)}
+ul,ol{max-width:var(--measure);padding-left:1.25em;margin:0 0 14px}
+li{margin-bottom:7px}
+li::marker{color:var(--sec,var(--fg-faint))}
+strong{font-weight:600}
+em{font-style:italic}
+code,.v{
+  font-family:var(--mono);
+  font-size:.9em;
+  background:var(--surface-2);
+  padding:1px 5px;
+  border-radius:3px;
+  white-space:nowrap;
+}
+.term{
+  font-weight:600;
+  color:var(--sec,var(--fg));
+}
+a{color:var(--accent)}
+
+/* ---------- maths ---------- */
+.fx{
+  font-family:var(--mono);
+  font-size:1.02rem;
+  line-height:2.1;
+  white-space:nowrap;
+}
+.frac{
+  display:inline-flex;
+  flex-direction:column;
+  vertical-align:middle;
+  text-align:center;
+  font-family:var(--mono);
+  line-height:1.25;
+  margin:0 .22em;
+  position:relative;
+  top:-.08em;
+}
+.frac .num{border-bottom:1.5px solid currentColor;padding:0 .4em .08em}
+.frac .den{padding:.08em .4em 0}
+sub,sup{font-size:.72em}
+
+.formula{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-left:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:18px 20px;
+  margin:18px 0 22px;
+  box-shadow:var(--shadow);
+  overflow-x:auto;
+}
+.formula .label{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg-faint));
+  margin-bottom:10px;
+  font-weight:600;
+}
+.formula .fx{margin:4px 0}
+.formula .note{
+  font-size:.88rem;
+  color:var(--fg-soft);
+  margin:10px 0 0;
+  white-space:normal;
+  max-width:none;
+}
+
+/* ---------- example cards ---------- */
+.ex{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:5px;
+  margin:20px 0;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.ex > .q{
+  padding:16px 20px;
+  border-bottom:1px dashed var(--rule);
+  background:var(--wash,var(--surface-2));
+}
+.ex .tag{
+  font-family:var(--mono);
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg));
+  display:block;
+  margin-bottom:6px;
+}
+.ex .q p{margin:0;max-width:none}
+.ex > .a{padding:16px 20px}
+.ex > .a p{max-width:none}
+.ex > .a p:last-child{margin-bottom:0}
+.ex .steps{margin:0;padding-left:1.2em;max-width:none}
+.ex .steps li{margin-bottom:9px}
+.ans{
+  display:inline-block;
+  font-family:var(--mono);
+  font-weight:600;
+  background:var(--sec,var(--fg));
+  color:#fff;
+  padding:3px 9px;
+  border-radius:3px;
+  font-size:.92em;
+  white-space:nowrap;
+}
+
+/* ---------- callouts ---------- */
+.callout{
+  border-radius:4px;
+  padding:16px 18px;
+  margin:20px 0;
+  border:1px solid;
+  font-size:.95rem;
+}
+.callout p{max-width:none}
+.callout p:last-child{margin-bottom:0}
+.callout .ct{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-weight:600;
+  display:block;
+  margin-bottom:8px;
+}
+.trap{background:var(--accent-wash);border-color:var(--accent)}
+.trap .ct{color:var(--accent)}
+.tip{background:var(--ink-2-wash);border-color:var(--ink-2)}
+.tip .ct{color:var(--ink-2)}
+.note{background:var(--surface-2);border-color:var(--rule)}
+.note .ct{color:var(--fg-faint)}
+
+.ar-note{
+  font-family:var(--arabic);
+  direction:rtl;
+  text-align:right;
+  background:var(--surface-2);
+  border-right:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:13px 16px;
+  margin:16px 0;
+  font-size:.96rem;
+  line-height:1.95;
+  color:var(--fg-soft);
+}
+.ar-note b{color:var(--fg);font-weight:600}
+.ar-note .lbl{
+  display:block;
+  font-size:.72rem;
+  letter-spacing:.04em;
+  color:var(--sec,var(--fg-faint));
+  font-weight:600;
+  margin-bottom:4px;
+}
+.ar-note ul{padding-right:1.2em;padding-left:0;margin:6px 0 0;max-width:none}
+
+.ar-note p{margin:0 0 7px;max-width:none}
+.ar-note p:last-child{margin-bottom:0}
+.ar-note ol{padding-right:1.3em;padding-left:0;margin:6px 0 0;max-width:none}
+.ar-note li{margin-bottom:5px}
+.ar-note .v{font-size:.84em}
+.arn{display:block;font-family:var(--arabic);direction:rtl;unicode-bidi:isolate;text-align:left;font-size:.84rem;color:var(--fg-soft);font-weight:500;margin-top:2px;line-height:1.5}
+.subtitle-ar{font-family:var(--arabic);direction:rtl;text-align:right;color:var(--fg-soft);font-size:1.02rem;margin:0 0 8px;max-width:none;line-height:1.9}
+
+/* ---------- tables ---------- */
+.tbl-wrap{overflow-x:auto;margin:18px 0 22px;-webkit-overflow-scrolling:touch}
+table{
+  border-collapse:collapse;
+  width:100%;
+  min-width:420px;
+  font-size:.93rem;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+}
+caption{
+  caption-side:top;
+  text-align:left;
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  padding-bottom:9px;
+  font-weight:500;
+}
+th,td{
+  padding:9px 13px;
+  border-bottom:1px solid var(--rule-soft);
+  text-align:left;
+  vertical-align:top;
+}
+thead th{
+  background:var(--sec,var(--surface-2));
+  color:#fff;
+  font-weight:600;
+  font-size:.78rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  border-bottom:none;
+}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even){background:var(--surface-2)}
+td.num,th.num{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+
+/* ---------- misc blocks ---------- */
+.grid2{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:16px;
+  margin:18px 0 22px;
+}
+.card{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-top:3px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:16px 18px;
+  min-width:0;
+}
+.card h5{
+  font-family:var(--body);
+  font-size:.97rem;
+  font-weight:600;
+  margin:0 0 8px;
+}
+.card p{font-size:.92rem;margin-bottom:0;max-width:none;color:var(--fg-soft)}
+
+.flow{
+  list-style:none;
+  padding:0;
+  margin:18px 0 22px;
+  max-width:none;
+  display:grid;
+  gap:10px;
+}
+.flow li{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:13px 16px;
+  margin:0;
+}
+.flow .k{
+  font-family:var(--mono);
+  font-size:.73rem;
+  font-weight:600;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:3px 8px;
+  border-radius:3px;
+  flex:none;
+  margin-top:3px;
+  white-space:nowrap;
+}
+.flow .t{min-width:0;font-size:.95rem}
+.flow .t b{display:block;margin-bottom:2px}
+
+.keypad{
+  font-family:var(--mono);
+  font-size:.86rem;
+  background:var(--surface-2);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:4px 9px;
+  display:inline-block;
+  white-space:nowrap;
+}
+
+hr.soft{border:none;border-top:1px solid var(--rule-soft);margin:34px 0}
+
+footer{
+  border-top:3px double var(--rule);
+  padding-top:24px;
+  margin-top:20px;
+  font-size:.86rem;
+  color:var(--fg-faint);
+}
+footer p{max-width:none}
+
+@media (max-width:520px){
+  .sec-head{gap:11px}
+  .fx{font-size:.94rem}
+  .ex > .q,.ex > .a{padding:14px 15px}
+}
+@media print{
+  body{background:#fff}
+  nav.toc{break-inside:avoid}
+  .ex,.formula,.callout,.card{break-inside:avoid}
+  section{break-before:auto}
+}
+</style>
+
+<style>
+.series{list-style:none;padding:0;margin:10px 0 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2px 24px;max-width:none}
+.series li{margin:0;padding:3px 0;border-bottom:1px solid var(--rule-soft);font-size:.84rem;color:var(--fg-faint)}
+.series li.here{color:var(--fg);font-weight:600}
+.series li.here::after{content:"  ← this file";color:var(--accent);font-weight:500}
+.lesson-mast{padding-block:40px 22px}
+.lesson-mast .meta-strip{margin-top:0}
+</style>
+
+<div class="wrap">
+
+<header class="masthead lesson-mast">
+  <p class="eyebrow">Sultan Qaboos University · STAT 2101 · Chapter 4: Probability and Counting Rules</p>
+  <div class="meta-strip">
+    <span class="chip"><strong>Week</strong> 6</span>
+    <span class="chip"><strong>Assessed</strong> In-Class Quiz II</span>
+    <span class="chip"><strong>Also</strong> Midterm + Final</span>
+    <span class="chip"><strong>File</strong> 6 / 11</span>
+  </div>
+</header>
+
+<section id="s45" style="--sec:var(--ink-4);--wash:var(--ink-4-wash)">
+  <div class="sec-head">
+    <span class="sec-num">4-5</span>
+    <h2>Probability and Counting Rules
+      <span class="ar">الاحتمال باستخدام قواعد العدّ</span>
+    </h2>
+  </div>
+
+  <p>This lesson is where Chapter 4 comes together: the counting rules of §4-4 produce <span class="v">n(E)</span> and <span class="v">n(S)</span>, and the classical probability formula of §4-1 divides them. Course-outline criterion CLO4-A — <em>calculate probabilities using counting rules and basic probability principles</em> — describes exactly this kind of question.</p>
+
+  <div class="formula">
+    <div class="label">Tools carried over from §4-1 and §4-4</div>
+    <p class="fx">Classical probability: &nbsp;P(E) = n(E) / n(S)</p>
+    <p class="fx">Combination: &nbsp;<sub>n</sub>C<sub>r</sub> = n! / [(n − r)! · r!]</p>
+    <p class="fx">Fundamental counting rule: &nbsp;k<sub>1</sub> × k<sub>2</sub> × ⋯ × k<sub>n</sub></p>
+    <p class="fx">At least one: &nbsp;P(at least one) = 1 − P(none)</p>
+    <p class="note">Choosing from several categories ("2 defective <strong>and</strong> 2 good") → one combination per category, multiplied together.</p>
+  </div>
+
+  <h3>1 · The three-step method</h3>
+  <p>This is the destination. The counting rules supply <span class="v">n(E)</span> and <span class="v">n(S)</span>; classical probability divides them. The structure of every §4-5 question is identical:</p>
+  <ol class="flow">
+    <li><span class="k">STEP 1</span><span class="t"><b>Count the sample space.</b> How many total ways can the selection be made? Usually a single <span class="v"><sub>n</sub>C<sub>r</sub></span> or a product.</span></li>
+    <li><span class="k">STEP 2</span><span class="t"><b>Count the event.</b> How many of those ways satisfy the condition? Usually a product of smaller <span class="v">C</span>'s — one per category.</span></li>
+    <li><span class="k">STEP 3</span><span class="t"><b>Divide.</b> <span class="v">P(E) = n(E) / n(S)</span>, then round sensibly and interpret in words.</span></li>
+  </ol>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — الاحتمال باستخدام قواعد العدّ (أهم نوع أسئلة)</span>
+    <p>كل سؤال من هذا النوع له نفس الخطوات الثلاث:</p><ol><li><b>احسب <span class="v" dir="ltr">n(S)</span>:</b> عدد كل طرق الاختيار الممكنة — غالبًا <span class="v" dir="ltr">nCr</span> واحدة.</li><li><b>احسب <span class="v" dir="ltr">n(E)</span>:</b> عدد الطرق التي تحقق الشرط — غالبًا حاصل ضرب توافيق، واحدة لكل فئة.</li><li><b>اقسم:</b> <span class="v" dir="ltr">P(E) = n(E) ÷ n(S)</span>، ثم اكتب جملة تفسيرية.</li></ol><p><b>مثال:</b> 24 قطعة منها 4 معيبة، نختار 4. احتمال قطعتين معيبتين بالضبط = <span class="v" dir="ltr">(4C2 × 20C2) ÷ 24C4 = 1140 ÷ 10626 ≈ 0.1073</span>. وإذا طُلب «واحدة معيبة على الأقل» ← <span class="v" dir="ltr">1 − P(none) = 1 − 0.4560 = 0.5440</span>.</p><p><b>قاعدة الاتساق:</b> استخدم نفس نوع العدّ في البسط والمقام — لا تضع تباديل فوق توافيق.</p>
+  </div>
+
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-51 · Defective Integrated Circuits</span><p>A box contains 24 integrated circuits, 4 of which are defective. If 4 are sold at random, find: (a) exactly 2 are defective; (b) none is defective; (c) all are defective; (d) at least 1 is defective.</p></div>
+    <div class="a">
+      <p><strong>Set-up.</strong> 4 defective, 20 good, 24 total. Choosing 4 with no order → combinations.</p>
+      <p class="fx">n(S) = <sub>24</sub>C<sub>4</sub> = <span class="frac"><span class="num">24 · 23 · 22 · 21</span><span class="den">4 · 3 · 2 · 1</span></span> = <span class="frac"><span class="num">255,024</span><span class="den">24</span></span> = <strong>10,626</strong></p>
+      <ol class="steps">
+        <li><strong>(a) Exactly 2 defective</strong> — so 2 from the 4 defective <em>and</em> 2 from the 20 good:<br>
+          <span class="fx">n(E) = <sub>4</sub>C<sub>2</sub> × <sub>20</sub>C<sub>2</sub> = 6 × 190 = 1,140</span><br>
+          <span class="fx">P = <span class="frac"><span class="num">1,140</span><span class="den">10,626</span></span> ≈ <span class="ans">0.1073</span></span></li>
+        <li><strong>(b) None defective</strong> — all 4 from the 20 good:<br>
+          <span class="fx">n(E) = <sub>20</sub>C<sub>4</sub> = <span class="frac"><span class="num">20 · 19 · 18 · 17</span><span class="den">24</span></span> = 4,845</span><br>
+          <span class="fx">P = <span class="frac"><span class="num">4,845</span><span class="den">10,626</span></span> ≈ <span class="ans">0.4560</span></span></li>
+        <li><strong>(c) All defective</strong> — all 4 from the 4 defective:<br>
+          <span class="fx">n(E) = <sub>4</sub>C<sub>4</sub> = 1</span><br>
+          <span class="fx">P = <span class="frac"><span class="num">1</span><span class="den">10,626</span></span> ≈ <span class="ans">0.000094</span></span></li>
+        <li><strong>(d) At least 1 defective</strong> — the complement of "none defective", which is part (b):<br>
+          <span class="fx">P = 1 − 0.4560 = <span class="ans">0.5440</span></span></li>
+      </ol>
+      <div class="callout tip" style="margin-top:14px">
+        <span class="ct">Part (d) is the exam's reward for recognising the complement</span>
+        <p>Done the long way, (d) = P(1 defective) + P(2) + P(3) + P(4) — four calculations. Done as <span class="v">1 − P(none)</span>, it is one subtraction you have already computed. This is precisely why parts (b) and (d) appear in the same question: the examiner is testing whether you noticed.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-52 · Term Paper Selection</span><p>A student needs to select two topics to write two term papers for a course. There are 8 topics in economics and 11 topics in science. Find the probability that she selects one topic in economics and one topic in science.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>n(S):</strong> any 2 of the 19 available topics → <span class="fx"><sub>19</sub>C<sub>2</sub> = <span class="frac"><span class="num">19 · 18</span><span class="den">2</span></span> = 171</span></li>
+        <li><strong>n(E):</strong> one economics <em>and</em> one science → <span class="fx"><sub>8</sub>C<sub>1</sub> × <sub>11</sub>C<sub>1</sub> = 8 × 11 = 88</span></li>
+        <li class="fx">P = <span class="frac"><span class="num">88</span><span class="den">171</span></span> ≈ <span class="ans">0.5146</span></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-53 · State Lottery Number</span><p>In the Pennsylvania State Lottery, a person selects a three-digit number and repetitions are permitted. If a winning number is selected, find the probability that it will have all three digits the same.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>n(S):</strong> three digits, repetition permitted → <span class="fx">10 × 10 × 10 = 1,000</span></li>
+        <li><strong>n(E):</strong> all three digits the same → 000, 111, 222, …, 999 → <span class="fx">10</span></li>
+        <li class="fx">P = <span class="frac"><span class="num">10</span><span class="den">1,000</span></span> = <span class="ans">0.01</span> &nbsp;(1%)</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-54 · Tennis Tournament</span><p>There are 8 married couples in a tennis club. If 1 man and 1 woman are selected at random to plan the summer tournament, find the probability that they are married to each other.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>n(S):</strong> 8 men to choose from <em>and</em> 8 women → <span class="fx">8 × 8 = 64 pairs</span></li>
+        <li><strong>n(E):</strong> only 8 of those pairs are actually married to each other (one per couple) → <span class="fx">8</span></li>
+        <li class="fx">P = <span class="frac"><span class="num">8</span><span class="den">64</span></span> = <span class="frac"><span class="num">1</span><span class="den">8</span></span> = <span class="ans">0.125</span></li>
+      </ol>
+      <p><strong>Alternative reasoning that proves the answer:</strong> pick any man first; his wife is 1 of the 8 women, so P = 1/8 directly. ✔</p>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">HW 11 · Socks in a Drawer</span><p>A drawer contains 11 identical red socks and 8 identical black socks. Suppose you choose 2 socks at random in the dark. (a) What is the probability that you get a pair of red socks? (b) A pair of black socks? (c) 2 unmatched socks?</p></div>
+    <div class="a">
+      <p><strong>n(S):</strong> any 2 of 19 socks → <span class="fx"><sub>19</sub>C<sub>2</sub> = <span class="frac"><span class="num">19 · 18</span><span class="den">2</span></span> = 171</span></p>
+      <ol class="steps">
+        <li><strong>(a) Pair of red:</strong> <span class="fx"><sub>11</sub>C<sub>2</sub> = <span class="frac"><span class="num">11 · 10</span><span class="den">2</span></span> = 55 &nbsp;→&nbsp; P = <span class="frac"><span class="num">55</span><span class="den">171</span></span> ≈ <span class="ans">0.3216</span></span></li>
+        <li><strong>(b) Pair of black:</strong> <span class="fx"><sub>8</sub>C<sub>2</sub> = <span class="frac"><span class="num">8 · 7</span><span class="den">2</span></span> = 28 &nbsp;→&nbsp; P = <span class="frac"><span class="num">28</span><span class="den">171</span></span> ≈ <span class="ans">0.1637</span></span></li>
+        <li><strong>(c) 2 unmatched:</strong> one red <em>and</em> one black: <span class="fx"><sub>11</sub>C<sub>1</sub> × <sub>8</sub>C<sub>1</sub> = 88 &nbsp;→&nbsp; P = <span class="frac"><span class="num">88</span><span class="den">171</span></span> ≈ <span class="ans">0.5146</span></span><br>
+          <em>Or by complement:</em> 1 − 0.3216 − 0.1637 = 0.5146 ✔</li>
+      </ol>
+      <p class="note" style="font-size:.9rem;color:var(--fg-soft)"><strong>Check:</strong> 55 + 28 + 88 = 171 = n(S). The three cases are exhaustive and mutually exclusive, so their counts must total the sample space. ✔</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><strong>Chapter 4 study series — 11 files.</strong> Read the lessons in order; the revision files at the end draw on all of them.</p>
+  <ol class="series">
+    <li>00 · Exam brief — what the outline tests</li>
+    <li>01 · Lesson 4-1 — Sample Spaces and Probability</li>
+    <li>02 · Lesson 4-2 — The Addition Rules</li>
+    <li>03 · Lesson 4-3 — Multiplication Rules and Conditional Probability</li>
+    <li>04 · Lesson 4-4 — Counting Rules</li>
+    <li class="here">05 · Lesson 4-5 — Probability and Counting Rules</li>
+    <li>06 · Master formula sheet</li>
+    <li>07 · Which rule do I use?</li>
+    <li>08 · The 14 traps that cost marks</li>
+    <li>09 · Review exercises, solved</li>
+    <li>10 · The A+ study protocol</li>
+  </ol>
+  <p>Rebuilt from Dr. Ahmed Al-Hadhrami's lecture slides (Spring 24) and aligned to the SQU College of Science STAT 2101 course outline, Fall 2026. Textbook: Allan G. Bluman, <em>Elementary Statistics: A Step by Step Approach</em>, brief version, 10th edition, McGraw Hill (2017). A companion 100-question bank with full solutions accompanies this series.</p>
+</footer>
+
+</div>

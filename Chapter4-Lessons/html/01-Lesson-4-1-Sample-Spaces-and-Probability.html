@@ -1,0 +1,954 @@
+<title>Lesson 4-1 Sample Spaces</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+
+<style>
+/* Layout: single reading column with a sticky rail nav; four section inks mirror the
+   overprint of a Venn diagram — the chapter's own governing picture. */
+:root{
+  --bg:#fbfaf7;
+  --surface:#ffffff;
+  --surface-2:#f2f1ec;
+  --fg:#1b2027;
+  --fg-soft:#4c5663;
+  --fg-faint:#78828f;
+  --rule:#dddcd4;
+  --rule-soft:#eceae3;
+
+  --ink-1:#1f4e79;   /* 4-1  sample spaces      */
+  --ink-2:#0f6f5c;   /* 4-2  addition rules     */
+  --ink-3:#9a5b12;   /* 4-3  multiplication     */
+  --ink-4:#7b2d6b;   /* 4-4 / 4-5 counting      */
+  --accent:#b23b2e;  /* alarms, traps, must-know */
+
+  --ink-1-wash:#eaf0f7;
+  --ink-2-wash:#e5f1ee;
+  --ink-3-wash:#f8efe1;
+  --ink-4-wash:#f4e9f2;
+  --accent-wash:#f9eae7;
+
+  --display:"Spectral",Georgia,"Times New Roman",serif;
+  --body:"IBM Plex Sans","IBM Plex Sans Arabic",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --arabic:"IBM Plex Sans Arabic","IBM Plex Sans",-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  --measure:70ch;
+  --shadow:0 1px 2px rgba(27,32,39,.05),0 8px 24px -16px rgba(27,32,39,.25);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#13171c;
+    --surface:#1a1f26;
+    --surface-2:#222932;
+    --fg:#e8e6e0;
+    --fg-soft:#b3bac4;
+    --fg-faint:#8a929e;
+    --rule:#333b45;
+    --rule-soft:#272e37;
+
+    --ink-1:#7bb0e8;
+    --ink-2:#4fc4a8;
+    --ink-3:#e2a74e;
+    --ink-4:#d089c2;
+    --accent:#ef7f70;
+
+    --ink-1-wash:#182633;
+    --ink-2-wash:#132a26;
+    --ink-3-wash:#2b2314;
+    --ink-4-wash:#2a1b28;
+    --accent-wash:#2f1c19;
+
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#13171c;
+  --surface:#1a1f26;
+  --surface-2:#222932;
+  --fg:#e8e6e0;
+  --fg-soft:#b3bac4;
+  --fg-faint:#8a929e;
+  --rule:#333b45;
+  --rule-soft:#272e37;
+
+  --ink-1:#7bb0e8;
+  --ink-2:#4fc4a8;
+  --ink-3:#e2a74e;
+  --ink-4:#d089c2;
+  --accent:#ef7f70;
+
+  --ink-1-wash:#182633;
+  --ink-2-wash:#132a26;
+  --ink-3-wash:#2b2314;
+  --ink-4-wash:#2a1b28;
+  --accent-wash:#2f1c19;
+
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{
+  max-width:980px;
+  margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 72px;
+}
+
+/* ---------- masthead ---------- */
+.masthead{
+  padding-block:56px 36px;
+  border-bottom:3px double var(--rule);
+  margin-bottom:36px;
+}
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+}
+h1{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(2.1rem,6vw,3.4rem);
+  line-height:1.08;
+  margin:0 0 10px;
+  letter-spacing:-.015em;
+  text-wrap:balance;
+}
+.subtitle{
+  font-family:var(--display);
+  font-style:italic;
+  font-size:clamp(1.05rem,2.6vw,1.3rem);
+  color:var(--fg-soft);
+  margin:0 0 22px;
+  max-width:var(--measure);
+}
+.meta-strip{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 10px;
+  margin-top:20px;
+}
+.chip{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.04em;
+  padding:5px 10px;
+  border:1px solid var(--rule);
+  border-radius:3px;
+  color:var(--fg-soft);
+  background:var(--surface);
+}
+.chip strong{color:var(--fg);font-weight:600}
+
+/* ---------- nav ---------- */
+nav.toc{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:20px 22px;
+  margin-bottom:44px;
+  box-shadow:var(--shadow);
+}
+nav.toc h2{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+  font-weight:500;
+}
+nav.toc ol{
+  margin:0;padding:0;list-style:none;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:4px 26px;
+}
+nav.toc li{min-width:0}
+nav.toc a{
+  display:flex;
+  gap:10px;
+  align-items:baseline;
+  text-decoration:none;
+  color:var(--fg);
+  padding:5px 0;
+  border-bottom:1px solid var(--rule-soft);
+  font-size:.92rem;
+}
+nav.toc a:hover{color:var(--accent)}
+nav.toc a .num{
+  font-family:var(--mono);
+  font-size:.74rem;
+  color:var(--fg-faint);
+  flex:none;
+  min-width:2.4em;
+}
+
+/* ---------- sections ---------- */
+section{margin-bottom:64px;scroll-margin-top:24px}
+.sec-head{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+  padding-bottom:14px;
+  border-bottom:2px solid var(--sec,var(--fg));
+  margin-bottom:28px;
+}
+.sec-num{
+  font-family:var(--mono);
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.06em;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:5px 9px;
+  border-radius:3px;
+  flex:none;
+  margin-top:6px;
+}
+.sec-head h2{
+  font-family:var(--display);
+  font-size:clamp(1.5rem,4vw,2.05rem);
+  line-height:1.18;
+  margin:0;
+  font-weight:600;
+  text-wrap:balance;
+  min-width:0;
+}
+.sec-head .ar{
+  display:block;
+  font-family:var(--arabic);
+  font-size:.92rem;
+  font-style:normal;
+  color:var(--fg-soft);
+  direction:rtl;
+  margin-top:4px;
+  font-weight:400;
+}
+h3{
+  font-family:var(--body);
+  font-size:1.08rem;
+  font-weight:600;
+  letter-spacing:-.005em;
+  margin:36px 0 12px;
+  color:var(--fg);
+  display:flex;
+  align-items:baseline;
+  gap:9px;
+  flex-wrap:wrap;
+}
+h3::before{
+  content:"";
+  width:18px;height:3px;
+  background:var(--sec,var(--fg));
+  flex:none;
+  border-radius:2px;
+}
+h4{
+  font-family:var(--mono);
+  font-size:.74rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:26px 0 10px;
+  font-weight:500;
+}
+p{margin:0 0 14px;max-width:var(--measure)}
+ul,ol{max-width:var(--measure);padding-left:1.25em;margin:0 0 14px}
+li{margin-bottom:7px}
+li::marker{color:var(--sec,var(--fg-faint))}
+strong{font-weight:600}
+em{font-style:italic}
+code,.v{
+  font-family:var(--mono);
+  font-size:.9em;
+  background:var(--surface-2);
+  padding:1px 5px;
+  border-radius:3px;
+  white-space:nowrap;
+}
+.term{
+  font-weight:600;
+  color:var(--sec,var(--fg));
+}
+a{color:var(--accent)}
+
+/* ---------- maths ---------- */
+.fx{
+  font-family:var(--mono);
+  font-size:1.02rem;
+  line-height:2.1;
+  white-space:nowrap;
+}
+.frac{
+  display:inline-flex;
+  flex-direction:column;
+  vertical-align:middle;
+  text-align:center;
+  font-family:var(--mono);
+  line-height:1.25;
+  margin:0 .22em;
+  position:relative;
+  top:-.08em;
+}
+.frac .num{border-bottom:1.5px solid currentColor;padding:0 .4em .08em}
+.frac .den{padding:.08em .4em 0}
+sub,sup{font-size:.72em}
+
+.formula{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-left:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:18px 20px;
+  margin:18px 0 22px;
+  box-shadow:var(--shadow);
+  overflow-x:auto;
+}
+.formula .label{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg-faint));
+  margin-bottom:10px;
+  font-weight:600;
+}
+.formula .fx{margin:4px 0}
+.formula .note{
+  font-size:.88rem;
+  color:var(--fg-soft);
+  margin:10px 0 0;
+  white-space:normal;
+  max-width:none;
+}
+
+/* ---------- example cards ---------- */
+.ex{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:5px;
+  margin:20px 0;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.ex > .q{
+  padding:16px 20px;
+  border-bottom:1px dashed var(--rule);
+  background:var(--wash,var(--surface-2));
+}
+.ex .tag{
+  font-family:var(--mono);
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg));
+  display:block;
+  margin-bottom:6px;
+}
+.ex .q p{margin:0;max-width:none}
+.ex > .a{padding:16px 20px}
+.ex > .a p{max-width:none}
+.ex > .a p:last-child{margin-bottom:0}
+.ex .steps{margin:0;padding-left:1.2em;max-width:none}
+.ex .steps li{margin-bottom:9px}
+.ans{
+  display:inline-block;
+  font-family:var(--mono);
+  font-weight:600;
+  background:var(--sec,var(--fg));
+  color:#fff;
+  padding:3px 9px;
+  border-radius:3px;
+  font-size:.92em;
+  white-space:nowrap;
+}
+
+/* ---------- callouts ---------- */
+.callout{
+  border-radius:4px;
+  padding:16px 18px;
+  margin:20px 0;
+  border:1px solid;
+  font-size:.95rem;
+}
+.callout p{max-width:none}
+.callout p:last-child{margin-bottom:0}
+.callout .ct{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-weight:600;
+  display:block;
+  margin-bottom:8px;
+}
+.trap{background:var(--accent-wash);border-color:var(--accent)}
+.trap .ct{color:var(--accent)}
+.tip{background:var(--ink-2-wash);border-color:var(--ink-2)}
+.tip .ct{color:var(--ink-2)}
+.note{background:var(--surface-2);border-color:var(--rule)}
+.note .ct{color:var(--fg-faint)}
+
+.ar-note{
+  font-family:var(--arabic);
+  direction:rtl;
+  text-align:right;
+  background:var(--surface-2);
+  border-right:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:13px 16px;
+  margin:16px 0;
+  font-size:.96rem;
+  line-height:1.95;
+  color:var(--fg-soft);
+}
+.ar-note b{color:var(--fg);font-weight:600}
+.ar-note .lbl{
+  display:block;
+  font-size:.72rem;
+  letter-spacing:.04em;
+  color:var(--sec,var(--fg-faint));
+  font-weight:600;
+  margin-bottom:4px;
+}
+.ar-note ul{padding-right:1.2em;padding-left:0;margin:6px 0 0;max-width:none}
+
+.ar-note p{margin:0 0 7px;max-width:none}
+.ar-note p:last-child{margin-bottom:0}
+.ar-note ol{padding-right:1.3em;padding-left:0;margin:6px 0 0;max-width:none}
+.ar-note li{margin-bottom:5px}
+.ar-note .v{font-size:.84em}
+.arn{display:block;font-family:var(--arabic);direction:rtl;unicode-bidi:isolate;text-align:left;font-size:.84rem;color:var(--fg-soft);font-weight:500;margin-top:2px;line-height:1.5}
+.subtitle-ar{font-family:var(--arabic);direction:rtl;text-align:right;color:var(--fg-soft);font-size:1.02rem;margin:0 0 8px;max-width:none;line-height:1.9}
+
+/* ---------- tables ---------- */
+.tbl-wrap{overflow-x:auto;margin:18px 0 22px;-webkit-overflow-scrolling:touch}
+table{
+  border-collapse:collapse;
+  width:100%;
+  min-width:420px;
+  font-size:.93rem;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+}
+caption{
+  caption-side:top;
+  text-align:left;
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  padding-bottom:9px;
+  font-weight:500;
+}
+th,td{
+  padding:9px 13px;
+  border-bottom:1px solid var(--rule-soft);
+  text-align:left;
+  vertical-align:top;
+}
+thead th{
+  background:var(--sec,var(--surface-2));
+  color:#fff;
+  font-weight:600;
+  font-size:.78rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  border-bottom:none;
+}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even){background:var(--surface-2)}
+td.num,th.num{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+
+/* ---------- misc blocks ---------- */
+.grid2{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:16px;
+  margin:18px 0 22px;
+}
+.card{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-top:3px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:16px 18px;
+  min-width:0;
+}
+.card h5{
+  font-family:var(--body);
+  font-size:.97rem;
+  font-weight:600;
+  margin:0 0 8px;
+}
+.card p{font-size:.92rem;margin-bottom:0;max-width:none;color:var(--fg-soft)}
+
+.flow{
+  list-style:none;
+  padding:0;
+  margin:18px 0 22px;
+  max-width:none;
+  display:grid;
+  gap:10px;
+}
+.flow li{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:13px 16px;
+  margin:0;
+}
+.flow .k{
+  font-family:var(--mono);
+  font-size:.73rem;
+  font-weight:600;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:3px 8px;
+  border-radius:3px;
+  flex:none;
+  margin-top:3px;
+  white-space:nowrap;
+}
+.flow .t{min-width:0;font-size:.95rem}
+.flow .t b{display:block;margin-bottom:2px}
+
+.keypad{
+  font-family:var(--mono);
+  font-size:.86rem;
+  background:var(--surface-2);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:4px 9px;
+  display:inline-block;
+  white-space:nowrap;
+}
+
+hr.soft{border:none;border-top:1px solid var(--rule-soft);margin:34px 0}
+
+footer{
+  border-top:3px double var(--rule);
+  padding-top:24px;
+  margin-top:20px;
+  font-size:.86rem;
+  color:var(--fg-faint);
+}
+footer p{max-width:none}
+
+@media (max-width:520px){
+  .sec-head{gap:11px}
+  .fx{font-size:.94rem}
+  .ex > .q,.ex > .a{padding:14px 15px}
+}
+@media print{
+  body{background:#fff}
+  nav.toc{break-inside:avoid}
+  .ex,.formula,.callout,.card{break-inside:avoid}
+  section{break-before:auto}
+}
+</style>
+
+<style>
+.series{list-style:none;padding:0;margin:10px 0 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2px 24px;max-width:none}
+.series li{margin:0;padding:3px 0;border-bottom:1px solid var(--rule-soft);font-size:.84rem;color:var(--fg-faint)}
+.series li.here{color:var(--fg);font-weight:600}
+.series li.here::after{content:"  ← this file";color:var(--accent);font-weight:500}
+.lesson-mast{padding-block:40px 22px}
+.lesson-mast .meta-strip{margin-top:0}
+</style>
+
+<div class="wrap">
+
+<header class="masthead lesson-mast">
+  <p class="eyebrow">Sultan Qaboos University · STAT 2101 · Chapter 4: Probability and Counting Rules</p>
+  <div class="meta-strip">
+    <span class="chip"><strong>Week</strong> 5</span>
+    <span class="chip"><strong>Exercises</strong> p. 247 {6, 8, 16, 40}</span>
+    <span class="chip"><strong>Assessed</strong> Midterm + Final</span>
+    <span class="chip"><strong>File</strong> 2 / 11</span>
+  </div>
+</header>
+
+<section id="s41" style="--sec:var(--ink-1);--wash:var(--ink-1-wash)">
+  <div class="sec-head">
+    <span class="sec-num">4-1</span>
+    <h2>Sample Spaces and Probability
+      <span class="ar">فضاءات العينة والاحتمال</span>
+    </h2>
+  </div>
+
+  <p>The whole of probability is one idea executed carefully: <strong>name every outcome that could happen, name the ones you care about, compare the two counts.</strong> Everything in §4-1 is machinery for doing that without losing an outcome.</p>
+
+  <h3>1 · The five words you must define on command</h3>
+  <p>These are CLO1 marks. They are asked as short definition questions and they are asked as the first part of long questions. Learn them as sentences, not as feelings.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th style="width:30%">Term</th><th>Definition (exam wording)</th><th style="width:26%">Example</th></tr></thead>
+      <tbody>
+        <tr><td><span class="term">Probability experiment</span><span class="arn">التجربة الاحتمالية</span></td><td>A chance process that leads to well-defined results called outcomes.</td><td>Rolling two dice.</td></tr>
+        <tr><td><span class="term">Outcome</span><span class="arn">النتيجة</span></td><td>The result of a <em>single trial</em> of a probability experiment.</td><td>Getting (5, 4).</td></tr>
+        <tr><td><span class="term">Sample space <span class="v">S</span></span><span class="arn">فضاء العينة</span></td><td>The set of <em>all possible</em> outcomes of a probability experiment. The number of elements in <span class="v">S</span> is <span class="v">n(S)</span>.</td><td><span class="v">S</span> = all 36 dice pairs.</td></tr>
+        <tr><td><span class="term">Event</span><span class="arn">الحدث</span></td><td>A set of outcomes of a probability experiment. Denoted <span class="v">A, B, C…</span> or <span class="v">E₁, E₂, E₃…</span></td><td><span class="v">E</span> = "sum is 7".</td></tr>
+        <tr><td><span class="term">Simple event</span><span class="arn">الحدث البسيط</span></td><td>An event with <strong>one</strong> outcome.</td><td>"All three children are boys" = {BBB}.</td></tr>
+        <tr><td><span class="term">Compound event</span><span class="arn">الحدث المركّب</span></td><td>An event consisting of <strong>two or more</strong> outcomes.</td><td>"Exactly two girls" = {BGG, GBG, GGB}.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ar-note">
+    <span class="lbl">تمييز سريع</span>
+    <b>Outcome</b> = نتيجة تجربة واحدة. <b>Sample space</b> = كل النتائج الممكنة. <b>Event</b> = مجموعة جزئية من فضاء العينة. إذا كانت تحتوي عنصرًا واحدًا فهي <b>simple</b>، وإذا احتوت عنصرين فأكثر فهي <b>compound</b>.
+  </div>
+
+  <h3>2 · Writing sample spaces — the three standard devices</h3>
+
+  
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — كيف أكتب فضاء العينة؟</span>
+    <p>قبل حساب أي احتمال يجب أن تكتب <b>فضاء العينة كاملًا</b> دون أن تنسى أي نتيجة، لأن المقام في كل قانون هو <span class="v" dir="ltr">n(S)</span>. توجد ثلاث طرق:</p><ol><li><b>الجدول:</b> مناسب لرمي حجري نرد — <span class="v" dir="ltr">6 × 6 = 36</span> نتيجة على شكل أزواج مرتبة.</li><li><b>السرد المنظّم:</b> تكتب النتائج بترتيب ثابت (كل الأولاد أولًا، ثم بنت واحدة في كل موقع، ثم بنتان...) حتى لا تسقط نتيجة.</li><li><b>شجرة الاحتمالات:</b> كل مرحلة تتفرع إلى احتمالاتها، وعدد الأطراف النهائية = عدد النتائج. الشجرة هي <b>الدليل</b> على أنك لم تنسَ شيئًا.</li></ol>
+  </div>
+<h4>Device 1 — The grid (two dice)</h4>
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-1 · Rolling Dice</span><p>Find the sample space for rolling two dice.</p></div>
+    <div class="a">
+      <p>Each die has 6 faces, and the dice are distinguishable (one red, one white). Lay them out as a 6 × 6 grid of ordered pairs:</p>
+      <p class="fx">S = {(1,1), (1,2), …, (1,6), (2,1), …, (6,6)}</p>
+      <p>So <span class="ans">n(S) = 36</span></p>
+      <p><strong>Why it matters:</strong> every dice question in the chapter divides by 36. Memorise the sum distribution now — sum 7 occurs 6 times, sums 6 and 8 occur 5 times each, 5 and 9 four times, 4 and 10 three times, 3 and 11 twice, 2 and 12 once. Total 36. ✔</p>
+    </div>
+  </div>
+
+  <h4>Device 2 — Systematic listing (gender of children)</h4>
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-3 · Gender of Children</span><p>Find the sample space for the gender of the children if a family has three children. Use B for boy and G for girl.</p></div>
+    <div class="a">
+      <p class="fx">S = {BBB, BBG, BGB, GBB, BGG, GBG, GGB, GGG}</p>
+      <p><span class="ans">n(S) = 8</span> &nbsp; (= 2 × 2 × 2, by the Fundamental Counting Rule of §4-4)</p>
+      <p>Note the ordering discipline: all-boys first, then one girl in each of three positions, then two girls in each of three positions, then all girls. Listing in a fixed order is how you avoid dropping an outcome under exam pressure.</p>
+    </div>
+  </div>
+
+  <h4>Device 3 — The tree diagram</h4>
+  <p>A <span class="term">tree diagram</span> is a device consisting of line segments emanating from a starting point and also from the outcome point. It is used to determine all possible outcomes of a probability experiment.</p>
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-4 · Gender of Children</span><p>Use a tree diagram to find the sample space for the gender of three children in a family.</p></div>
+    <div class="a">
+      <p>Branch on the first child (B / G); from each of those, branch on the second child; from each of those, branch on the third. You get 2 × 2 × 2 = 8 terminal branches, read left to right:</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>First child</th><th>Second child</th><th>Third child</th><th>Outcome</th></tr></thead>
+          <tbody>
+            <tr><td>B</td><td>B</td><td>B</td><td class="num">BBB</td></tr>
+            <tr><td>B</td><td>B</td><td>G</td><td class="num">BBG</td></tr>
+            <tr><td>B</td><td>G</td><td>B</td><td class="num">BGB</td></tr>
+            <tr><td>B</td><td>G</td><td>G</td><td class="num">BGG</td></tr>
+            <tr><td>G</td><td>B</td><td>B</td><td class="num">GBB</td></tr>
+            <tr><td>G</td><td>B</td><td>G</td><td class="num">GBG</td></tr>
+            <tr><td>G</td><td>G</td><td>B</td><td class="num">GGB</td></tr>
+            <tr><td>G</td><td>G</td><td>G</td><td class="num">GGG</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Same eight outcomes as Example 4-3 — the tree is the <em>proof</em> that nothing was missed.</p>
+    </div>
+  </div>
+
+  <h3>3 · Venn diagrams and set operations</h3>
+  <p>A <span class="term">Venn diagram</span> is a graphical way of representing the relationships between sets. The rectangle is <span class="v">S</span>; circles inside it are events. Three standard configurations: overlapping (<span class="v">A ∩ B ≠ ∅</span>), disjoint (<span class="v">A ∩ B = ∅</span>), and nested (<span class="v">B ⊂ A</span>).</p>
+
+  <div class="formula">
+    <div class="label">The three set operations</div>
+    <p class="fx"><strong>Union</strong> &nbsp; A ∪ B &nbsp;—&nbsp; read "<strong>A or B</strong>" — all outcomes in either event <em>or both</em>.</p>
+    <p class="fx"><strong>Intersection</strong> &nbsp; A ∩ B &nbsp;—&nbsp; read "<strong>A and B</strong>" — all outcomes in <em>both</em> events.</p>
+    <p class="fx"><strong>Complement</strong> &nbsp; Ā &nbsp;or&nbsp; A<sup>c</sup> &nbsp;—&nbsp; read "<strong>not A</strong>" — all outcomes in S that are <em>not</em> in A.</p>
+    <p class="note">In probability, "or" is always <em>inclusive</em>: A or B or both. This is not the everyday English "or". It is the single most common source of lost marks in §4-2.</p>
+  </div>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — مخطط فن والعمليات على الأحداث</span>
+    <p><b>مخطط فن (<b dir="ltr">Venn diagram</b>):</b> مستطيل يمثل فضاء العينة <span class="v" dir="ltr">S</span>، وبداخله دوائر تمثل الأحداث.</p><ul><li><b>الاتحاد</b> <span class="v" dir="ltr">A ∪ B</span> ويُقرأ <b dir="ltr">A or B</b>: كل العناصر الموجودة في <span class="v" dir="ltr">A</span> أو في <span class="v" dir="ltr">B</span> <b>أو في الاثنين معًا</b>.</li><li><b>التقاطع</b> <span class="v" dir="ltr">A ∩ B</span> ويُقرأ <b dir="ltr">A and B</b>: العناصر <b>المشتركة فقط</b> بين الحدثين.</li><li><b>المتمّمة</b> <span class="v" dir="ltr">Ā</span> أو <span class="v" dir="ltr">Aᶜ</span> وتُقرأ <b dir="ltr">not A</b>: كل عناصر <span class="v" dir="ltr">S</span> التي <b>ليست</b> في <span class="v" dir="ltr">A</span>.</li></ul><p><b>تنبيه:</b> كلمة <b dir="ltr">or</b> في الاحتمال تعني «أحدهما أو كلاهما» دائمًا، وليست «أحدهما فقط» كما في الكلام اليومي. والمتمّمة تُحسب من داخل <span class="v" dir="ltr">S</span> فقط — في المثال أعلاه الرقم <span class="v" dir="ltr">8</span> يدخل في <span class="v" dir="ltr">Ā</span> لأنه ليس من عوامل 12.</p>
+  </div>
+
+
+  <div class="ex">
+    <div class="q"><span class="tag">Worked example · 12-sided die</span><p>Roll a 12-sided die once. <span class="v">S</span> = {1,…,12}. Let <span class="v">A</span> = factors of 12 and <span class="v">B</span> = factors of 8. Represent S, A, B on a Venn diagram, then find (a) <span class="v">A ∪ B</span>, (b) <span class="v">A ∩ B</span>, (c) <span class="v">Ā</span>, (d) <span class="v">(A ∪ B)<sup>c</sup></span>.</p></div>
+    <div class="a">
+      <p><strong>First, build the sets.</strong> Factors of 12: 1, 2, 3, 4, 6, 12 → <span class="v">A = {1, 2, 3, 4, 6, 12}</span>. Factors of 8: 1, 2, 4, 8 → <span class="v">B = {1, 2, 4, 8}</span>.</p>
+      <p><strong>Venn layout.</strong> Inside A only: 3, 6, 12. Inside both: 1, 2, 4. Inside B only: 8. Outside both, still in S: 5, 7, 9, 10, 11.</p>
+      <ol class="steps">
+        <li>(a) <span class="v">A ∪ B</span> = {1, 2, 3, 4, 6, 8, 12} &nbsp;→&nbsp; <span class="ans">n = 7</span></li>
+        <li>(b) <span class="v">A ∩ B</span> = {1, 2, 4} &nbsp;→&nbsp; <span class="ans">n = 3</span></li>
+        <li>(c) <span class="v">Ā</span> = {5, 7, 8, 9, 10, 11} &nbsp;→&nbsp; <span class="ans">n = 6</span> &nbsp;(everything in S not in A — note 8 <em>is</em> included)</li>
+        <li>(d) <span class="v">(A ∪ B)<sup>c</sup></span> = {5, 7, 9, 10, 11} &nbsp;→&nbsp; <span class="ans">n = 5</span></li>
+      </ol>
+      <p class="note" style="font-size:.9rem;color:var(--fg-soft)"><strong>Check:</strong> n(A ∪ B) + n((A ∪ B)<sup>c</sup>) = 7 + 5 = 12 = n(S). ✔ Always run this check — it catches a dropped element in two seconds.</p>
+    </div>
+  </div>
+
+  <div class="callout trap">
+    <span class="ct">Trap — the complement must stay inside S</span>
+    <p><span class="v">Ā</span> is <em>not</em> "everything else in the universe". It is everything in <strong>this sample space</strong> that is not in A. In the example above, students routinely forget 8 belongs in <span class="v">Ā</span> because it "feels like it belongs to B". B is irrelevant to <span class="v">Ā</span>.</p>
+  </div>
+
+  <h3>4 · The three interpretations of probability</h3>
+  <p><span class="term">Probability</span> is used to quantify the likelihood, or chance, that an outcome of a random experiment will occur. The probability that event <span class="v">A</span> occurs is written <span class="v">P(A)</span>. There are three basic interpretations:</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h5>1 · Classical</h5>
+      <p>Uses sample spaces. Assumes <strong>all outcomes are equally likely</strong>. Computed before any data is collected — pure counting.</p>
+    </div>
+    <div class="card">
+      <h5>2 · Empirical (relative frequency)</h5>
+      <p>Based on <strong>observation</strong>. Computed from a frequency distribution of data already collected.</p>
+    </div>
+    <div class="card">
+      <h5>3 · Subjective</h5>
+      <p>A value based on an <strong>educated guess or estimate</strong>, employing opinions and inexact information.</p>
+    </div>
+  </div>
+
+  
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — أنواع الاحتمال الثلاثة</span>
+    <ul><li><b>الكلاسيكي (<b dir="ltr">Classical</b>):</b> يُحسب من فضاء العينة <b>قبل</b> إجراء أي تجربة، بشرط أن تكون كل النتائج متساوية الفرص. مثال: احتمال ظهور <span class="v" dir="ltr">3</span> عند رمي نرد = <span class="v" dir="ltr">1/6</span>.</li><li><b>التجريبي (<b dir="ltr">Empirical</b>):</b> يُحسب من <b>بيانات جُمعت فعلًا</b> — جدول تكراري أو استبيان — ويساوي التكرار ÷ المجموع.</li><li><b>الشخصي (<b dir="ltr">Subjective</b>):</b> تقدير مبني على <b>رأي أو خبرة</b> شخص، بلا عدّ وبلا بيانات.</li></ul><p><b>طريقة التمييز في الامتحان:</b> فضاء عينة يُعدّ ← كلاسيكي. جدول أو «في استبيان شمل n شخصًا» ← تجريبي. رأي خبير ← شخصي.</p>
+  </div>
+<h4>Classical probability</h4>
+  <p><span class="term">Equally likely events</span> are events that have the same probability of occurring. The classical probability of any event <span class="v">E</span> of a sample space <span class="v">S</span> is:</p>
+  <div class="formula">
+    <div class="label">Classical probability</div>
+    <p class="fx">P(E) = <span class="frac"><span class="num">n(E)</span><span class="den">n(S)</span></span></p>
+    <p class="note"><span class="v">n(E)</span> = the number of outcomes in E. &nbsp;<span class="v">n(S)</span> = the number of outcomes in S.</p>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-6 · Gender of Children</span><p>If a family has three children, find the probability that exactly two of the three children are girls.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>Sample space:</strong> S = {BBB, BBG, BGB, GBB, BGG, GBG, GGB, GGG}, so n(S) = 8.</li>
+        <li><strong>Event:</strong> E = "exactly two of the three children are girls" = {BGG, GBG, GGB}, so n(E) = 3.</li>
+        <li><strong>Divide:</strong> P(E) = n(E)/n(S) = 3/8 = <span class="ans">0.375</span></li>
+      </ol>
+      <p><strong>Important (the lecturer flags this explicitly):</strong> sample spaces and events must be <em>written out using set notation</em> as shown above. Marks are allocated to the set, not only to the final number. Writing just "3/8" loses method marks.</p>
+    </div>
+  </div>
+
+  <h4>The four probability rules</h4>
+  <div class="formula">
+    <div class="label">Probability rules — let event E be in sample space S</div>
+    <p class="fx">(1) &nbsp; 0 ≤ P(E) ≤ 1</p>
+    <p class="fx">(2) &nbsp; If P(E) = 0, then E <strong>cannot happen</strong> (impossible).</p>
+    <p class="fx">(3) &nbsp; If P(E) = 1, then E is <strong>certain</strong>.</p>
+    <p class="fx">(4) &nbsp; The sum of the probabilities of all outcomes in S equals 1.</p>
+    <p class="note">The probability line: 0 = Impossible · ~0.25 = Unlikely · 0.5 = 50–50 · ~0.75 = Likely · 1 = Certain.</p>
+  </div>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — القانون الكلاسيكي وقواعد الاحتمال</span>
+    <p><b>الاحتمال الكلاسيكي</b> = عدد النتائج التي تحقق الحدث ÷ عدد كل النتائج الممكنة: <span class="v" dir="ltr">P(E) = n(E) / n(S)</span>.</p><p><b>قواعد الاحتمال الأربع:</b></p><ol><li>الاحتمال دائمًا بين الصفر والواحد: <span class="v" dir="ltr">0 ≤ P(E) ≤ 1</span>.</li><li>إذا كان <span class="v" dir="ltr">P(E) = 0</span> فالحدث <b>مستحيل</b> (مثل ظهور 9 على نرد عادي).</li><li>إذا كان <span class="v" dir="ltr">P(E) = 1</span> فالحدث <b>مؤكد</b> (مثل ظهور عدد أقل من 7).</li><li>مجموع احتمالات كل النتائج في فضاء العينة = <span class="v" dir="ltr">1</span>.</li></ol><p>استخدم القاعدة الأولى لفحص كل إجابة: أي احتمال <b>سالب</b> أو <b>أكبر من 1</b> يعني أن في الحل خطأ. وتذكّر أن الدكتور يطلب كتابة فضاء العينة والحدث <b>بصيغة المجموعات</b> {…} — عليها درجات.</p>
+  </div>
+
+
+  <div class="ex">
+    <div class="q"><span class="tag">Examples 4-8 &amp; 4-9 · Rolling a Die</span><p>(a) When a single die is rolled, find the probability of getting a 9. &nbsp;(b) When a single die is rolled, what is the probability of getting a number less than 7?</p></div>
+    <div class="a">
+      <p><strong>(a)</strong> S = {1, 2, 3, 4, 5, 6}; E: getting a 9. It is impossible to get a 9, so E = { } and n(E) = 0.</p>
+      <p class="fx">P(E) = 0/6 = <span class="ans">0</span></p>
+      <p><strong>(b)</strong> S = {1, 2, 3, 4, 5, 6}; E: getting a number less than 7. Every face qualifies, so E = {1, 2, 3, 4, 5, 6} and n(E) = 6.</p>
+      <p class="fx">P(E) = 6/6 = <span class="ans">1</span> — the event is <strong>certain</strong>.</p>
+      <p>These two examples exist to demonstrate rules (2) and (3). An exam question that produces <span class="v">P = 0</span> or <span class="v">P = 1</span> is testing whether you <em>recognise</em> impossibility and certainty — say the words in your answer.</p>
+    </div>
+  </div>
+
+  <h3>5 · Complementary events</h3>
+  <p>The <span class="term">complement of an event E</span> is the set of outcomes in the sample space that are not included in the outcomes of event E. It is denoted <span class="v">Ē</span> (read "E bar").</p>
+
+  <div class="formula">
+    <div class="label">Rule for complementary events</div>
+    <p class="fx">P(Ē) = 1 − P(E) &nbsp;&nbsp;or&nbsp;&nbsp; P(E) = 1 − P(Ē) &nbsp;&nbsp;or&nbsp;&nbsp; P(E) + P(Ē) = 1</p>
+    <p class="note">This is the highest-leverage formula in the chapter. Whenever a question contains "<strong>not</strong>", "<strong>at least one</strong>", "<strong>neither</strong>", or "<strong>none</strong>", reach for it before you do anything else.</p>
+  </div>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — المتمّمة</span>
+    <p>متمّمة الحدث <span class="v" dir="ltr">E</span> هي كل النتائج التي <b>لا تحقق</b> <span class="v" dir="ltr">E</span>. وبما أن الحدث إما أن يقع أو لا يقع، فمجموع الاحتمالين = 1، ومنه:</p><p style="text-align:center"><span class="v" dir="ltr">P(Ē) = 1 − P(E)</span></p><p><b>متى تستخدمها؟</b> عندما ترى في السؤال: <b dir="ltr">not</b> (ليس)، <b dir="ltr">neither … nor</b> (لا هذا ولا ذاك)، <b dir="ltr">none</b> (ولا واحد)، <b dir="ltr">at least one</b> (واحد على الأقل). هذه القاعدة كثيرًا ما تحوّل سؤالًا طويلًا إلى عملية طرح واحدة. مثال: 23% يفضّلون الفانيلا، إذن احتمال <b>ليس</b> الفانيلا = <span class="v" dir="ltr">1 − 0.23 = 0.77</span>.</p>
+  </div>
+
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-10 · Finding Complements</span><p>Find the complement of each event: (a) selecting a month that has 30 days; (b) selecting a day of the week that begins with the letter S; (c) rolling two dice and getting a number whose sum is 7.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>(a)</strong> Months have 28, 30 or 31 days. Complement = <span class="ans">selecting a month that has 28 or 31 days.</span></li>
+        <li><strong>(b)</strong> Days starting with S are Saturday and Sunday. Complement = <span class="ans">selecting a day that does not begin with the letter S</span> — that is, Monday, Tuesday, Wednesday, Thursday or Friday.</li>
+        <li><strong>(c)</strong> The possible sums of two dice are 2 through 12. Complement = <span class="ans">getting a sum of 2, 3, 4, 5, 6, 8, 9, 10, 11, or 12.</span></li>
+      </ol>
+      <div class="callout note" style="margin-top:14px">
+        <span class="ct">Note on the slide</span>
+        <p>The lecture slide for part (b) prints "does not begin with the letter <strong>T</strong>", which is a typo carried from an earlier version of the example. The event is "begins with S", so its complement is "does <em>not</em> begin with S". Write S in your answer and you are correct against the textbook.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-11 · Favorite Ice Cream Flavors</span><p>In a study, 23% of the people surveyed said that vanilla was their favorite flavor of ice cream. If a person is selected at random, find the probability that the person's favorite flavor is <em>not</em> vanilla.</p></div>
+    <div class="a">
+      <p>Let E be "favorite flavor is vanilla", with P(E) = 0.23.</p>
+      <p class="fx">P(not vanilla) = 1 − P(E) = 1 − 0.23 = <span class="ans">0.77</span> &nbsp;(or 77%)</p>
+    </div>
+  </div>
+
+  <h3>6 · Empirical probability</h3>
+  <p>Given a frequency distribution, the probability of an event being in a given class is the relative frequency of that class:</p>
+  <div class="formula">
+    <div class="label">Empirical (relative frequency) probability</div>
+    <p class="fx">P(E) = <span class="frac"><span class="num">frequency for the class</span><span class="den">total frequencies in the distribution</span></span> = <span class="frac"><span class="num">f</span><span class="den">n</span></span></p>
+    <p class="note"><span class="v">f</span> = frequency of the class (event); <span class="v">n</span> = the sample size. Based on <strong>observation</strong>, not on assuming equally likely outcomes.</p>
+  </div>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — الاحتمال التجريبي</span>
+    <p>يُحسب من البيانات المجموعة: <span class="v" dir="ltr">P(E) = f / n</span>، حيث <span class="v" dir="ltr">f</span> تكرار الفئة و <span class="v" dir="ltr">n</span> حجم العينة الكلي. مثال: سألت 50 شخصًا وأجاب 3 منهم «قطار أو حافلة»، فالاحتمال <span class="v" dir="ltr">3/50 = 0.06</span>.</p><p><b>نصيحة:</b> اجمع عمود التكرارات وتأكد أنه يساوي <span class="v" dir="ltr">n</span>، واجمع عمود الاحتمالات وتأكد أنه يساوي <span class="v" dir="ltr">1</span>. وإذا طُلب احتمال فئتين معًا (A أو B) فاجمع تكراريهما ثم اقسم.</p>
+  </div>
+
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-12 · Travel Survey</span><p>A researcher asked 50 people who plan to travel over the Thanksgiving holiday how they will get to their destination: Drive 41, Fly 6, Train or bus 3. Find the probability that a person will travel by train or bus.</p></div>
+    <div class="a">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Method</th><th class="num">Frequency f</th><th class="num">Empirical probability f/n</th></tr></thead>
+          <tbody>
+            <tr><td>Drive</td><td class="num">41</td><td class="num">41/50 = 0.82</td></tr>
+            <tr><td>Fly</td><td class="num">6</td><td class="num">6/50 = 0.12</td></tr>
+            <tr><td>Train or bus</td><td class="num">3</td><td class="num">3/50 = 0.06</td></tr>
+            <tr><td><strong>Total</strong></td><td class="num"><strong>50</strong></td><td class="num"><strong>50/50 = 1.00</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="fx">P(train or bus) = f/n = 3/50 = <span class="ans">0.06</span></p>
+      <p>The total column summing to exactly 1.00 is probability rule (4) in action — use it as a check on every frequency table you build.</p>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-13 · Distribution of Blood Types</span><p>In a sample of 50 people, 21 had type O blood, 22 had type A, 5 had type B, and 2 had type AB. Set up a frequency distribution and find: (a) P(type O); (b) P(type A or type B); (c) P(neither type A nor type O); (d) P(not type AB).</p></div>
+    <div class="a">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Type</th><th class="num">Frequency</th></tr></thead>
+          <tbody>
+            <tr><td>A</td><td class="num">22</td></tr>
+            <tr><td>B</td><td class="num">5</td></tr>
+            <tr><td>AB</td><td class="num">2</td></tr>
+            <tr><td>O</td><td class="num">21</td></tr>
+            <tr><td><strong>Total</strong></td><td class="num"><strong>50</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ol class="steps">
+        <li><strong>(a)</strong> P(O) = f/n = 21/50 = <span class="ans">0.42</span></li>
+        <li><strong>(b)</strong> P(A or B) = 22/50 + 5/50 = 27/50 = <span class="ans">0.54</span> &nbsp;(add the frequencies of the two classes — the types are mutually exclusive)</li>
+        <li><strong>(c)</strong> "Neither A nor O" means the person has type B or type AB: P = 5/50 + 2/50 = 7/50 = <span class="ans">0.14</span></li>
+        <li><strong>(d)</strong> P(not AB) = 1 − P(AB) = 1 − 2/50 = 48/50 = <span class="ans">0.96</span></li>
+      </ol>
+      <p><strong>Read the structure:</strong> (b) is the addition rule, (c) is a translated complement ("neither…nor" = complement of a union), (d) is the complement rule. One table, three different tools. This is exactly how a long exam question is built.</p>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-14 · Sleep Hours</span><p>A survey found the following distribution for hours of sleep per night: Less than 6 h → 12; 6 h → 26; 7 h → 30; 8 h → 28; More than 8 h → 4. Total 100. Find, for a person selected at random: (a) sleeps 8 hours; (b) sleeps fewer than 7 hours; (c) sleeps <strong>at most</strong> 8 hours; (d) sleeps <strong>at least</strong> 7 hours.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>(a) Exactly 8 hours</strong> — one class only: P = 28/100 = <span class="ans">0.28</span></li>
+        <li><strong>(b) Fewer than 7 hours</strong> — strictly below 7, so "less than 6" and "6": P = (12 + 26)/100 = 38/100 = <span class="ans">0.38</span></li>
+        <li><strong>(c) At most 8 hours</strong> — 8 and everything below it: P = (12 + 26 + 30 + 28)/100 = 96/100 = <span class="ans">0.96</span><br><em>Faster:</em> 1 − P(more than 8) = 1 − 4/100 = 0.96 ✔</li>
+        <li><strong>(d) At least 7 hours</strong> — 7 and everything above it: P = (30 + 28 + 4)/100 = 62/100 = <span class="ans">0.62</span></li>
+      </ol>
+    </div>
+  </div>
+
+  <h3>7 · The five phrases — translate before you calculate</h3>
+  <p>The lecturer gives this as a standalone "Important Note" slide, which is a strong signal that it is examined. Consider the values <strong>3, 4, 5, 6, 7</strong>:</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th style="width:28%">Phrase</th><th style="width:30%">Values used</th><th>Symbol</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Exactly 5</strong></td><td class="num">5</td><td><span class="v">X = 5</span></td></tr>
+        <tr><td><strong>Less (fewer) than 5</strong></td><td class="num">3, 4</td><td><span class="v">X &lt; 5</span> — 5 is <em>excluded</em></td></tr>
+        <tr><td><strong>At most 5</strong> (5 or less)</td><td class="num">3, 4, 5</td><td><span class="v">X ≤ 5</span> — 5 is <em>included</em></td></tr>
+        <tr><td><strong>More (greater) than 5</strong></td><td class="num">6, 7</td><td><span class="v">X &gt; 5</span> — 5 is <em>excluded</em></td></tr>
+        <tr><td><strong>At least 5</strong></td><td class="num">5, 6, 7</td><td><span class="v">X ≥ 5</span> — 5 is <em>included</em></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ar-note">
+    <span class="lbl">الترجمة الحرفية — احفظها</span>
+    <ul>
+      <li><b>Exactly 5</b> = بالضبط 5 فقط.</li>
+      <li><b>Less / fewer than 5</b> = أقل من 5، <b>بدون</b> الـ 5.</li>
+      <li><b>At most 5</b> = 5 فأقل، <b>مع</b> الـ 5.</li>
+      <li><b>More / greater than 5</b> = أكثر من 5، <b>بدون</b> الـ 5.</li>
+      <li><b>At least 5</b> = 5 فأكثر، <b>مع</b> الـ 5.</li>
+    </ul>
+    القاعدة الذهبية: كلمة <b>at</b> (at most / at least) تعني أن الرقم نفسه <b>داخل</b> الحساب. وكلمة <b>than</b> (less than / more than) تعني أن الرقم نفسه <b>خارج</b> الحساب.
+  </div>
+
+  <h3>8 · Subjective probability</h3>
+  <p><span class="term">Subjective probability</span> uses a probability value based on an educated guess or estimate, employing opinions and inexact information. No sample space is counted and no data is tabulated — a qualified person simply assigns a number.</p>
+  <ul>
+    <li>A sportswriter may say there is a <strong>70% probability</strong> that the Oman football team will win the Gulf Cup next year.</li>
+    <li>A physician might say that, on the basis of her diagnosis, there is a <strong>30% chance</strong> the patient will need an operation.</li>
+    <li>A seismologist might say there is an <strong>80% probability</strong> that an earthquake will occur in a certain area.</li>
+  </ul>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — الاحتمال الشخصي</span>
+    <p>رقم يعطيه شخص بناءً على <b>خبرته أو رأيه</b>، مثل قول محلل رياضي إن احتمال فوز منتخب عُمان بكأس الخليج <span class="v" dir="ltr">70%</span>، أو قول طبيب إن احتمال حاجة المريض لعملية <span class="v" dir="ltr">30%</span>. لا يوجد فضاء عينة يُعدّ ولا جدول بيانات — مجرد تقدير مدروس. غالبًا يأتي في الامتحان كسؤال: «ما نوع هذا الاحتمال؟»</p>
+  </div>
+
+  <div class="callout tip">
+    <span class="ct">How this is examined</span>
+    <p>You will be shown a statement and asked <em>which type of probability is this?</em> The tell: counting a sample space → <strong>classical</strong>. A frequency table or "in a survey of n people" → <strong>empirical</strong>. An expert's opinion with no data behind it → <strong>subjective</strong>. One mark, two seconds, never miss it.</p>
+  </div>
+</section>
+
+<footer>
+  <p><strong>Chapter 4 study series — 11 files.</strong> Read the lessons in order; the revision files at the end draw on all of them.</p>
+  <ol class="series">
+    <li>00 · Exam brief — what the outline tests</li>
+    <li class="here">01 · Lesson 4-1 — Sample Spaces and Probability</li>
+    <li>02 · Lesson 4-2 — The Addition Rules</li>
+    <li>03 · Lesson 4-3 — Multiplication Rules and Conditional Probability</li>
+    <li>04 · Lesson 4-4 — Counting Rules</li>
+    <li>05 · Lesson 4-5 — Probability and Counting Rules</li>
+    <li>06 · Master formula sheet</li>
+    <li>07 · Which rule do I use?</li>
+    <li>08 · The 14 traps that cost marks</li>
+    <li>09 · Review exercises, solved</li>
+    <li>10 · The A+ study protocol</li>
+  </ol>
+  <p>Rebuilt from Dr. Ahmed Al-Hadhrami's lecture slides (Spring 24) and aligned to the SQU College of Science STAT 2101 course outline, Fall 2026. Textbook: Allan G. Bluman, <em>Elementary Statistics: A Step by Step Approach</em>, brief version, 10th edition, McGraw Hill (2017). A companion 100-question bank with full solutions accompanies this series.</p>
+</footer>
+
+</div>

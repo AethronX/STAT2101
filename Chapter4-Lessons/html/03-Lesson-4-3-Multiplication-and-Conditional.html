@@ -1,0 +1,915 @@
+<title>Lesson 4-3 Multiplication Rules</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+
+<style>
+/* Layout: single reading column with a sticky rail nav; four section inks mirror the
+   overprint of a Venn diagram — the chapter's own governing picture. */
+:root{
+  --bg:#fbfaf7;
+  --surface:#ffffff;
+  --surface-2:#f2f1ec;
+  --fg:#1b2027;
+  --fg-soft:#4c5663;
+  --fg-faint:#78828f;
+  --rule:#dddcd4;
+  --rule-soft:#eceae3;
+
+  --ink-1:#1f4e79;   /* 4-1  sample spaces      */
+  --ink-2:#0f6f5c;   /* 4-2  addition rules     */
+  --ink-3:#9a5b12;   /* 4-3  multiplication     */
+  --ink-4:#7b2d6b;   /* 4-4 / 4-5 counting      */
+  --accent:#b23b2e;  /* alarms, traps, must-know */
+
+  --ink-1-wash:#eaf0f7;
+  --ink-2-wash:#e5f1ee;
+  --ink-3-wash:#f8efe1;
+  --ink-4-wash:#f4e9f2;
+  --accent-wash:#f9eae7;
+
+  --display:"Spectral",Georgia,"Times New Roman",serif;
+  --body:"IBM Plex Sans","IBM Plex Sans Arabic",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --arabic:"IBM Plex Sans Arabic","IBM Plex Sans",-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  --measure:70ch;
+  --shadow:0 1px 2px rgba(27,32,39,.05),0 8px 24px -16px rgba(27,32,39,.25);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#13171c;
+    --surface:#1a1f26;
+    --surface-2:#222932;
+    --fg:#e8e6e0;
+    --fg-soft:#b3bac4;
+    --fg-faint:#8a929e;
+    --rule:#333b45;
+    --rule-soft:#272e37;
+
+    --ink-1:#7bb0e8;
+    --ink-2:#4fc4a8;
+    --ink-3:#e2a74e;
+    --ink-4:#d089c2;
+    --accent:#ef7f70;
+
+    --ink-1-wash:#182633;
+    --ink-2-wash:#132a26;
+    --ink-3-wash:#2b2314;
+    --ink-4-wash:#2a1b28;
+    --accent-wash:#2f1c19;
+
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#13171c;
+  --surface:#1a1f26;
+  --surface-2:#222932;
+  --fg:#e8e6e0;
+  --fg-soft:#b3bac4;
+  --fg-faint:#8a929e;
+  --rule:#333b45;
+  --rule-soft:#272e37;
+
+  --ink-1:#7bb0e8;
+  --ink-2:#4fc4a8;
+  --ink-3:#e2a74e;
+  --ink-4:#d089c2;
+  --accent:#ef7f70;
+
+  --ink-1-wash:#182633;
+  --ink-2-wash:#132a26;
+  --ink-3-wash:#2b2314;
+  --ink-4-wash:#2a1b28;
+  --accent-wash:#2f1c19;
+
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{
+  max-width:980px;
+  margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 72px;
+}
+
+/* ---------- masthead ---------- */
+.masthead{
+  padding-block:56px 36px;
+  border-bottom:3px double var(--rule);
+  margin-bottom:36px;
+}
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+}
+h1{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(2.1rem,6vw,3.4rem);
+  line-height:1.08;
+  margin:0 0 10px;
+  letter-spacing:-.015em;
+  text-wrap:balance;
+}
+.subtitle{
+  font-family:var(--display);
+  font-style:italic;
+  font-size:clamp(1.05rem,2.6vw,1.3rem);
+  color:var(--fg-soft);
+  margin:0 0 22px;
+  max-width:var(--measure);
+}
+.meta-strip{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 10px;
+  margin-top:20px;
+}
+.chip{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.04em;
+  padding:5px 10px;
+  border:1px solid var(--rule);
+  border-radius:3px;
+  color:var(--fg-soft);
+  background:var(--surface);
+}
+.chip strong{color:var(--fg);font-weight:600}
+
+/* ---------- nav ---------- */
+nav.toc{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:20px 22px;
+  margin-bottom:44px;
+  box-shadow:var(--shadow);
+}
+nav.toc h2{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+  font-weight:500;
+}
+nav.toc ol{
+  margin:0;padding:0;list-style:none;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:4px 26px;
+}
+nav.toc li{min-width:0}
+nav.toc a{
+  display:flex;
+  gap:10px;
+  align-items:baseline;
+  text-decoration:none;
+  color:var(--fg);
+  padding:5px 0;
+  border-bottom:1px solid var(--rule-soft);
+  font-size:.92rem;
+}
+nav.toc a:hover{color:var(--accent)}
+nav.toc a .num{
+  font-family:var(--mono);
+  font-size:.74rem;
+  color:var(--fg-faint);
+  flex:none;
+  min-width:2.4em;
+}
+
+/* ---------- sections ---------- */
+section{margin-bottom:64px;scroll-margin-top:24px}
+.sec-head{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+  padding-bottom:14px;
+  border-bottom:2px solid var(--sec,var(--fg));
+  margin-bottom:28px;
+}
+.sec-num{
+  font-family:var(--mono);
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.06em;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:5px 9px;
+  border-radius:3px;
+  flex:none;
+  margin-top:6px;
+}
+.sec-head h2{
+  font-family:var(--display);
+  font-size:clamp(1.5rem,4vw,2.05rem);
+  line-height:1.18;
+  margin:0;
+  font-weight:600;
+  text-wrap:balance;
+  min-width:0;
+}
+.sec-head .ar{
+  display:block;
+  font-family:var(--arabic);
+  font-size:.92rem;
+  font-style:normal;
+  color:var(--fg-soft);
+  direction:rtl;
+  margin-top:4px;
+  font-weight:400;
+}
+h3{
+  font-family:var(--body);
+  font-size:1.08rem;
+  font-weight:600;
+  letter-spacing:-.005em;
+  margin:36px 0 12px;
+  color:var(--fg);
+  display:flex;
+  align-items:baseline;
+  gap:9px;
+  flex-wrap:wrap;
+}
+h3::before{
+  content:"";
+  width:18px;height:3px;
+  background:var(--sec,var(--fg));
+  flex:none;
+  border-radius:2px;
+}
+h4{
+  font-family:var(--mono);
+  font-size:.74rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:26px 0 10px;
+  font-weight:500;
+}
+p{margin:0 0 14px;max-width:var(--measure)}
+ul,ol{max-width:var(--measure);padding-left:1.25em;margin:0 0 14px}
+li{margin-bottom:7px}
+li::marker{color:var(--sec,var(--fg-faint))}
+strong{font-weight:600}
+em{font-style:italic}
+code,.v{
+  font-family:var(--mono);
+  font-size:.9em;
+  background:var(--surface-2);
+  padding:1px 5px;
+  border-radius:3px;
+  white-space:nowrap;
+}
+.term{
+  font-weight:600;
+  color:var(--sec,var(--fg));
+}
+a{color:var(--accent)}
+
+/* ---------- maths ---------- */
+.fx{
+  font-family:var(--mono);
+  font-size:1.02rem;
+  line-height:2.1;
+  white-space:nowrap;
+}
+.frac{
+  display:inline-flex;
+  flex-direction:column;
+  vertical-align:middle;
+  text-align:center;
+  font-family:var(--mono);
+  line-height:1.25;
+  margin:0 .22em;
+  position:relative;
+  top:-.08em;
+}
+.frac .num{border-bottom:1.5px solid currentColor;padding:0 .4em .08em}
+.frac .den{padding:.08em .4em 0}
+sub,sup{font-size:.72em}
+
+.formula{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-left:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:18px 20px;
+  margin:18px 0 22px;
+  box-shadow:var(--shadow);
+  overflow-x:auto;
+}
+.formula .label{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg-faint));
+  margin-bottom:10px;
+  font-weight:600;
+}
+.formula .fx{margin:4px 0}
+.formula .note{
+  font-size:.88rem;
+  color:var(--fg-soft);
+  margin:10px 0 0;
+  white-space:normal;
+  max-width:none;
+}
+
+/* ---------- example cards ---------- */
+.ex{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:5px;
+  margin:20px 0;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.ex > .q{
+  padding:16px 20px;
+  border-bottom:1px dashed var(--rule);
+  background:var(--wash,var(--surface-2));
+}
+.ex .tag{
+  font-family:var(--mono);
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg));
+  display:block;
+  margin-bottom:6px;
+}
+.ex .q p{margin:0;max-width:none}
+.ex > .a{padding:16px 20px}
+.ex > .a p{max-width:none}
+.ex > .a p:last-child{margin-bottom:0}
+.ex .steps{margin:0;padding-left:1.2em;max-width:none}
+.ex .steps li{margin-bottom:9px}
+.ans{
+  display:inline-block;
+  font-family:var(--mono);
+  font-weight:600;
+  background:var(--sec,var(--fg));
+  color:#fff;
+  padding:3px 9px;
+  border-radius:3px;
+  font-size:.92em;
+  white-space:nowrap;
+}
+
+/* ---------- callouts ---------- */
+.callout{
+  border-radius:4px;
+  padding:16px 18px;
+  margin:20px 0;
+  border:1px solid;
+  font-size:.95rem;
+}
+.callout p{max-width:none}
+.callout p:last-child{margin-bottom:0}
+.callout .ct{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-weight:600;
+  display:block;
+  margin-bottom:8px;
+}
+.trap{background:var(--accent-wash);border-color:var(--accent)}
+.trap .ct{color:var(--accent)}
+.tip{background:var(--ink-2-wash);border-color:var(--ink-2)}
+.tip .ct{color:var(--ink-2)}
+.note{background:var(--surface-2);border-color:var(--rule)}
+.note .ct{color:var(--fg-faint)}
+
+.ar-note{
+  font-family:var(--arabic);
+  direction:rtl;
+  text-align:right;
+  background:var(--surface-2);
+  border-right:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:13px 16px;
+  margin:16px 0;
+  font-size:.96rem;
+  line-height:1.95;
+  color:var(--fg-soft);
+}
+.ar-note b{color:var(--fg);font-weight:600}
+.ar-note .lbl{
+  display:block;
+  font-size:.72rem;
+  letter-spacing:.04em;
+  color:var(--sec,var(--fg-faint));
+  font-weight:600;
+  margin-bottom:4px;
+}
+.ar-note ul{padding-right:1.2em;padding-left:0;margin:6px 0 0;max-width:none}
+
+.ar-note p{margin:0 0 7px;max-width:none}
+.ar-note p:last-child{margin-bottom:0}
+.ar-note ol{padding-right:1.3em;padding-left:0;margin:6px 0 0;max-width:none}
+.ar-note li{margin-bottom:5px}
+.ar-note .v{font-size:.84em}
+.arn{display:block;font-family:var(--arabic);direction:rtl;unicode-bidi:isolate;text-align:left;font-size:.84rem;color:var(--fg-soft);font-weight:500;margin-top:2px;line-height:1.5}
+.subtitle-ar{font-family:var(--arabic);direction:rtl;text-align:right;color:var(--fg-soft);font-size:1.02rem;margin:0 0 8px;max-width:none;line-height:1.9}
+
+/* ---------- tables ---------- */
+.tbl-wrap{overflow-x:auto;margin:18px 0 22px;-webkit-overflow-scrolling:touch}
+table{
+  border-collapse:collapse;
+  width:100%;
+  min-width:420px;
+  font-size:.93rem;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+}
+caption{
+  caption-side:top;
+  text-align:left;
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  padding-bottom:9px;
+  font-weight:500;
+}
+th,td{
+  padding:9px 13px;
+  border-bottom:1px solid var(--rule-soft);
+  text-align:left;
+  vertical-align:top;
+}
+thead th{
+  background:var(--sec,var(--surface-2));
+  color:#fff;
+  font-weight:600;
+  font-size:.78rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  border-bottom:none;
+}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even){background:var(--surface-2)}
+td.num,th.num{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+
+/* ---------- misc blocks ---------- */
+.grid2{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:16px;
+  margin:18px 0 22px;
+}
+.card{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-top:3px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:16px 18px;
+  min-width:0;
+}
+.card h5{
+  font-family:var(--body);
+  font-size:.97rem;
+  font-weight:600;
+  margin:0 0 8px;
+}
+.card p{font-size:.92rem;margin-bottom:0;max-width:none;color:var(--fg-soft)}
+
+.flow{
+  list-style:none;
+  padding:0;
+  margin:18px 0 22px;
+  max-width:none;
+  display:grid;
+  gap:10px;
+}
+.flow li{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:13px 16px;
+  margin:0;
+}
+.flow .k{
+  font-family:var(--mono);
+  font-size:.73rem;
+  font-weight:600;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:3px 8px;
+  border-radius:3px;
+  flex:none;
+  margin-top:3px;
+  white-space:nowrap;
+}
+.flow .t{min-width:0;font-size:.95rem}
+.flow .t b{display:block;margin-bottom:2px}
+
+.keypad{
+  font-family:var(--mono);
+  font-size:.86rem;
+  background:var(--surface-2);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:4px 9px;
+  display:inline-block;
+  white-space:nowrap;
+}
+
+hr.soft{border:none;border-top:1px solid var(--rule-soft);margin:34px 0}
+
+footer{
+  border-top:3px double var(--rule);
+  padding-top:24px;
+  margin-top:20px;
+  font-size:.86rem;
+  color:var(--fg-faint);
+}
+footer p{max-width:none}
+
+@media (max-width:520px){
+  .sec-head{gap:11px}
+  .fx{font-size:.94rem}
+  .ex > .q,.ex > .a{padding:14px 15px}
+}
+@media print{
+  body{background:#fff}
+  nav.toc{break-inside:avoid}
+  .ex,.formula,.callout,.card{break-inside:avoid}
+  section{break-before:auto}
+}
+</style>
+
+<style>
+.series{list-style:none;padding:0;margin:10px 0 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2px 24px;max-width:none}
+.series li{margin:0;padding:3px 0;border-bottom:1px solid var(--rule-soft);font-size:.84rem;color:var(--fg-faint)}
+.series li.here{color:var(--fg);font-weight:600}
+.series li.here::after{content:"  ← this file";color:var(--accent);font-weight:500}
+.lesson-mast{padding-block:40px 22px}
+.lesson-mast .meta-strip{margin-top:0}
+</style>
+
+<div class="wrap">
+
+<header class="masthead lesson-mast">
+  <p class="eyebrow">Sultan Qaboos University · STAT 2101 · Chapter 4: Probability and Counting Rules</p>
+  <div class="meta-strip">
+    <span class="chip"><strong>Week</strong> 5</span>
+    <span class="chip"><strong>Exercises</strong> p. 247 {6, 8, 16, 40}</span>
+    <span class="chip"><strong>Assessed</strong> Midterm + Final</span>
+    <span class="chip"><strong>File</strong> 4 / 11</span>
+  </div>
+</header>
+
+<section id="s43" style="--sec:var(--ink-3);--wash:var(--ink-3-wash)">
+  <div class="sec-head">
+    <span class="sec-num">4-3</span>
+    <h2>The Multiplication Rules and Conditional Probability
+      <span class="ar">قواعد الضرب والاحتمال الشرطي</span>
+    </h2>
+  </div>
+
+  <p>§4-2 handled "<strong>or</strong>". §4-3 handles "<strong>and</strong>" — and then inverts it to handle "<strong>given that</strong>". This is the densest section in the chapter and the one that separates a B from an A.</p>
+
+  <h3>1 · Independent vs dependent events</h3>
+  <div class="grid2">
+    <div class="card">
+      <h5>Independent events</h5>
+      <p>Two events <span class="v">A</span> and <span class="v">B</span> are <strong>independent</strong> if the fact that A occurs <strong>does not affect</strong> the probability of B occurring.</p>
+    </div>
+    <div class="card">
+      <h5>Dependent events</h5>
+      <p>Two events <span class="v">A</span> and <span class="v">B</span> are <strong>dependent</strong> if the fact that A occurs <strong>does affect</strong> the probability of B occurring.</p>
+    </div>
+  </div>
+
+  <div class="callout trap">
+    <span class="ct">Important note — independent ≠ mutually exclusive</span>
+    <p>These two ideas are constantly confused and the lecturer calls it out explicitly. When tossing a <strong>single</strong> coin, the result can be either heads or tails but <strong>cannot be both</strong> — those are <em>mutually exclusive</em> events. When tossing <strong>two</strong> coins, the result of one flip <strong>does not affect</strong> the result of the other — those are <em>independent</em> events.</p>
+    <p style="margin-top:8px"><strong>The deeper point:</strong> mutually exclusive events (with non-zero probabilities) are in fact <em>dependent</em>. If A happens, you know for certain B did not — knowing about A changed everything about B. Mutually exclusive is about <em>overlap</em>; independent is about <em>influence</em>.</p>
+  </div>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — أهم فكرة في القسم: الاستقلال والتبعية</span>
+    <ul><li><b>المستقلان (<b dir="ltr">independent</b>):</b> وقوع أحدهما <b>لا يغيّر</b> احتمال الآخر. مثال: رمي عملتين — نتيجة الأولى لا تؤثر في الثانية.</li><li><b>التابعان (<b dir="ltr">dependent</b>):</b> وقوع أحدهما <b>يغيّر</b> احتمال الآخر. مثال: سحب كرتين بدون إرجاع — السحبة الأولى تغيّر ما تبقى في الصندوق.</li></ul><p><b>لا تخلط بين المفهومين:</b> «متنافيان» سؤاله «هل يوجد تداخل؟»، و«مستقلان» سؤاله «هل يؤثر أحدهما في الآخر؟». بل إن الحدثين المتنافيين (باحتمالات غير صفرية) يكونان <b>تابعين</b>، لأن وقوع A يجعل وقوع B مستحيلًا — أي أنه أثّر فيه بالكامل.</p>
+  </div>
+
+
+  <h4>Spotting dependence in a word problem</h4>
+  <ul>
+    <li><strong>"…and then it is replaced"</strong> → independent. The pool resets, so probabilities repeat.</li>
+    <li><strong>"…without replacement"</strong> → dependent. Both the numerator and the denominator shrink on the second draw.</li>
+    <li><strong>Separate devices</strong> (a coin <em>and</em> a die, three different people chosen from a large population) → independent.</li>
+    <li><strong>"Of these clients…", "of those who…"</strong> → dependent; you are being given a conditional probability.</li>
+  </ul>
+  <div class="ar-note">
+    <span class="lbl">كيف أعرف من صياغة السؤال؟</span>
+    <ul><li><b dir="ltr">with replacement</b> / <b dir="ltr">then it is replaced</b> (مع الإرجاع) ← <b>مستقلان</b>، الاحتمال يتكرر كما هو.</li><li><b dir="ltr">without replacement</b> (بدون إرجاع) ← <b>تابعان</b>، البسط والمقام يتغيران في السحبة الثانية.</li><li>أدوات منفصلة (عملة ونرد، أشخاص من مجتمع كبير) ← <b>مستقلان</b>.</li><li><b dir="ltr">of these</b> / <b dir="ltr">of those who</b> (من بين هؤلاء) ← هذا <b>احتمال شرطي</b>، والحدثان تابعان.</li></ul>
+  </div>
+
+
+  <h3>2 · The multiplication rules</h3>
+  <div class="formula">
+    <div class="label">Multiplication Rule #1 — independent events</div>
+    <p class="fx">P(A ∩ B) = P(A) · P(B)</p>
+  </div>
+  <div class="formula">
+    <div class="label">Multiplication Rule #2 — dependent events</div>
+    <p class="fx">P(A ∩ B) = P(A | B) · P(B)</p>
+    <p class="fx">P(A ∩ B) = P(B | A) · P(A)</p>
+    <p class="note">Both forms are correct — use whichever conditional probability the question hands you. In practice the question gives one unconditional probability and one conditional one; multiply them.</p>
+  </div>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — قاعدتا الضرب</span>
+    <p>قاعدة الضرب تجيب عن سؤال: <b>ما احتمال A و B معًا؟</b></p><ul><li><b>إذا كانا مستقلين:</b> <span class="v" dir="ltr">P(A ∩ B) = P(A) × P(B)</span>. مثال: صورة في العملة و 4 في النرد = <span class="v" dir="ltr">1/2 × 1/6 = 1/12</span>.</li><li><b>إذا كانا تابعين:</b> <span class="v" dir="ltr">P(A ∩ B) = P(A) × P(B | A)</span>، أي احتمال الأول × احتمال الثاني <b>بشرط</b> وقوع الأول. مثال: 53% لديهم تأمين منزل، و<b>من بين هؤلاء</b> 27% لديهم تأمين سيارة ← <span class="v" dir="ltr">0.53 × 0.27 = 0.1431</span>.</li></ul><p><b>القاعدة الذهبية:</b> <b dir="ltr">and</b> تعني <b>ضرب</b>، و <b dir="ltr">or</b> تعني <b>جمع</b>.</p>
+  </div>
+
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-23 · Tossing a Coin</span><p>A coin is flipped and a die is rolled. Find the probability of getting a head on the coin <em>and</em> a 4 on the die.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li>The coin and the die do not influence each other → <strong>independent</strong> → Rule #1.</li>
+        <li>P(head) = 1/2 &nbsp; and &nbsp; P(4) = 1/6.</li>
+        <li class="fx">P(head ∩ 4) = <span class="frac"><span class="num">1</span><span class="den">2</span></span> · <span class="frac"><span class="num">1</span><span class="den">6</span></span> = <span class="frac"><span class="num">1</span><span class="den">12</span></span> ≈ <span class="ans">0.0833</span></li>
+      </ol>
+      <p><strong>Verify by sample space:</strong> n(S) = 2 × 6 = 12 outcomes, and only (H, 4) qualifies → 1/12. ✔</p>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-25 · Selecting a Colored Ball</span><p>An urn contains 3 red balls, 2 blue balls, and 5 white balls. A ball is selected and its color noted. <strong>Then it is replaced.</strong> A second ball is selected and its color noted. Find the probability of: (a) selecting 2 blue balls; (b) selecting 1 blue ball and then 1 white ball; (c) selecting 1 red ball and then 1 blue ball.</p></div>
+    <div class="a">
+      <p><strong>Total balls = 3 + 2 + 5 = 10.</strong> The ball is <em>replaced</em>, so every draw sees the same 10 balls → <strong>independent</strong> → Rule #1.</p>
+      <ol class="steps">
+        <li><strong>(a)</strong> P(B ∩ B) = <span class="frac"><span class="num">2</span><span class="den">10</span></span> · <span class="frac"><span class="num">2</span><span class="den">10</span></span> = <span class="frac"><span class="num">4</span><span class="den">100</span></span> = <span class="frac"><span class="num">1</span><span class="den">25</span></span> = <span class="ans">0.04</span></li>
+        <li><strong>(b)</strong> P(B ∩ W) = <span class="frac"><span class="num">2</span><span class="den">10</span></span> · <span class="frac"><span class="num">5</span><span class="den">10</span></span> = <span class="frac"><span class="num">10</span><span class="den">100</span></span> = <span class="ans">0.10</span></li>
+        <li><strong>(c)</strong> P(R ∩ B) = <span class="frac"><span class="num">3</span><span class="den">10</span></span> · <span class="frac"><span class="num">2</span><span class="den">10</span></span> = <span class="frac"><span class="num">6</span><span class="den">100</span></span> = <span class="ans">0.06</span></li>
+      </ol>
+      <div class="callout tip" style="margin-top:14px">
+        <span class="ct">The variant you must be ready for</span>
+        <p>If the same question said "<strong>without replacement</strong>", every second denominator becomes 9 and the matching numerator drops by one where the colors agree:<br>
+        (a) (2/10)(1/9) = 2/90 ≈ 0.0222 &nbsp;·&nbsp; (b) (2/10)(5/9) = 10/90 ≈ 0.1111 &nbsp;·&nbsp; (c) (3/10)(2/9) = 6/90 ≈ 0.0667.<br>
+        Examiners pair these two versions constantly. Circle the words "replaced" or "without replacement" the moment you see them.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-26 · Survey on Stress</span><p>It was found that 3 out of every 4 American workers say they suffer great stress at least once a week. If three people are selected at random, find the probability that all three will say that they suffer great stress at least once a week.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li>P(stress) = 3/4 = 0.75 for each person; three people drawn from a large population → <strong>independent</strong>.</li>
+        <li class="fx">P(all three) = <span class="frac"><span class="num">3</span><span class="den">4</span></span> · <span class="frac"><span class="num">3</span><span class="den">4</span></span> · <span class="frac"><span class="num">3</span><span class="den">4</span></span> = <span class="frac"><span class="num">27</span><span class="den">64</span></span> ≈ <span class="ans">0.4219</span></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-27 · Male Color Blindness</span><p>Approximately 9% of men have a type of color blindness that prevents them from distinguishing between red and green. If 3 men are selected at random, find the probability that all of them will have this type of red-green color blindness.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li>P(color blind) = 0.09; three independent selections.</li>
+        <li class="fx">P(all three) = (0.09)<sup>3</sup> = 0.09 × 0.09 × 0.09 = <span class="ans">0.000729</span></li>
+      </ol>
+      <p><strong>Interpretation marks:</strong> a result this small should be read aloud in your answer — "about 7 in 10,000 groups of three men". Interpretation is explicitly in CLO8 and costs you nothing to add.</p>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-29 · Homeowner's and Automobile Insurance</span><p>World Wide Insurance Company found that 53% of the residents of a city had homeowner's insurance (<span class="v">H</span>) with the company. <strong>Of these clients</strong>, 27% also had automobile insurance (<span class="v">A</span>). If a resident is selected at random, find the probability that the resident has both homeowner's and automobile insurance with World Wide.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>Extract carefully.</strong> P(H) = 0.53. The phrase "<em>of these clients</em>" makes the 27% conditional: P(A | H) = 0.27.</li>
+        <li>Dependent → Rule #2.</li>
+        <li class="fx">P(H ∩ A) = P(H) · P(A | H) = 0.53 × 0.27 = <span class="ans">0.1431</span></li>
+      </ol>
+      <div class="callout trap" style="margin-top:14px">
+        <span class="ct">Trap — "of these" is the conditional signal</span>
+        <p>If you read the 27% as unconditional P(A) and multiply 0.53 × 0.27 anyway, you get the right number for the wrong reason and will lose the method mark. Worse, on a question where the two routes differ you will get the wrong number. Train yourself to annotate the given values as <span class="v">P(H) = 0.53</span> and <span class="v">P(A|H) = 0.27</span> <em>before</em> calculating.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-28 · Unemployed Workers</span><p>For a specific year, 5.2% of U.S. workers were unemployed. During that time, 33% of those who were unemployed received unemployment benefits. If a person is selected at random, find the probability that she or he received unemployment benefits if the person is unemployed.</p></div>
+    <div class="a">
+      <p><strong>Extract:</strong> P(U) = 0.052, and "33% <em>of those who were unemployed</em>" gives P(B | U) = 0.33.</p>
+      <p><strong>As worded on the slide</strong> ("…<em>if the person is unemployed</em>"), the question asks for the conditional probability, which is handed to you directly:</p>
+      <p class="fx">P(B | U) = <span class="ans">0.33</span></p>
+      <p><strong>The textbook version of this example</strong> asks for the probability that a randomly selected person "was unemployed <strong>and</strong> received benefits", which is the multiplication rule:</p>
+      <p class="fx">P(U ∩ B) = P(U) · P(B | U) = 0.052 × 0.33 = <span class="ans">0.01716 ≈ 0.0172</span></p>
+      <div class="callout tip" style="margin-top:14px">
+        <span class="ct">Be ready for both</span>
+        <p>This pair is the clearest illustration in the chapter of how one word changes the whole calculation. "<strong>And</strong>" → multiply the two values (0.0172). "<strong>Given / if / of those who</strong>" → the conditional is already there (0.33). In an exam, write which one you are computing in words before you compute it.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>3 · Tree diagrams with branch probabilities</h3>
+  <p>When an experiment happens in stages and the second stage depends on the first, a tree diagram is not optional decoration — it is the method. Multiply <em>along</em> branches, add <em>across</em> the branches that satisfy the event.</p>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — شجرة الاحتمالات</span>
+    <p>عندما تتم التجربة على <b>مراحل</b> (مثلًا: رمي عملة لاختيار صندوق، ثم سحب كرة منه)، ارسم شجرة:</p><ul><li><b>على طول الفرع:</b> اضرب الاحتمالات — هذا احتمال مسار واحد.</li><li><b>بين الفروع:</b> اجمع احتمالات كل المسارات التي تحقق الحدث المطلوب.</li><li><b>للتأكد:</b> مجموع احتمالات كل المسارات النهائية يجب أن يساوي <span class="v" dir="ltr">1</span>.</li></ul>
+  </div>
+
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-31 · Selecting Colored Balls</span><p>Box 1 contains 2 red balls and 1 blue ball. Box 2 contains 3 blue balls and 1 red ball. A coin is tossed: heads → box 1 is selected and a ball is drawn; tails → box 2 is selected and a ball is drawn. Find the probability of selecting a red ball.</p></div>
+    <div class="a">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Path</th><th class="num">P(box)</th><th class="num">P(ball | box)</th><th class="num">Product</th></tr></thead>
+          <tbody>
+            <tr><td>Box 1 → Red</td><td class="num">1/2</td><td class="num">2/3</td><td class="num">2/6 = 1/3</td></tr>
+            <tr><td>Box 1 → Blue</td><td class="num">1/2</td><td class="num">1/3</td><td class="num">1/6</td></tr>
+            <tr><td>Box 2 → Red</td><td class="num">1/2</td><td class="num">1/4</td><td class="num">1/8</td></tr>
+            <tr><td>Box 2 → Blue</td><td class="num">1/2</td><td class="num">3/4</td><td class="num">3/8</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Red can be reached by two different paths, so add them:</strong></p>
+      <p class="fx">P(Red) = <span class="frac"><span class="num">1</span><span class="den">2</span></span>·<span class="frac"><span class="num">2</span><span class="den">3</span></span> + <span class="frac"><span class="num">1</span><span class="den">2</span></span>·<span class="frac"><span class="num">1</span><span class="den">4</span></span> = <span class="frac"><span class="num">2</span><span class="den">6</span></span> + <span class="frac"><span class="num">1</span><span class="den">8</span></span> = <span class="frac"><span class="num">8</span><span class="den">24</span></span> + <span class="frac"><span class="num">3</span><span class="den">24</span></span> = <span class="frac"><span class="num">11</span><span class="den">24</span></span> ≈ <span class="ans">0.4583</span></p>
+      <p class="note" style="font-size:.9rem;color:var(--fg-soft)"><strong>Check:</strong> all four products sum to 1/3 + 1/6 + 1/8 + 3/8 = 8/24 + 4/24 + 3/24 + 9/24 = 24/24 = 1. ✔ A tree whose branches don't sum to 1 has an error in it.</p>
+    </div>
+  </div>
+
+  <h3>4 · Conditional probability</h3>
+  <p>The <span class="term">conditional probability</span> of an event <span class="v">B</span> in relationship to an event <span class="v">A</span> is the probability that event B occurs <em>after</em> event A has already occurred.</p>
+  <div class="formula">
+    <div class="label">Conditional probability</div>
+    <p class="fx">P(B | A) = <span class="frac"><span class="num">P(A ∩ B)</span><span class="den">P(A)</span></span> &nbsp;&nbsp;&nbsp; P(A) ≠ 0</p>
+    <p class="note">Read it as: <em>the condition goes in the denominator.</em> Conditioning on A means you throw away everything outside A and treat A as the new sample space.</p>
+  </div>
+  <div class="formula">
+    <div class="label">Conditional probability and independence</div>
+    <p class="fx">If A and B are independent: &nbsp; P(B | A) = <span class="frac"><span class="num">P(A ∩ B)</span><span class="den">P(A)</span></span> = P(B)</p>
+    <p class="note">Knowing A happened tells you nothing new about B — which is exactly what "independent" means. This doubles as the <strong>test for independence</strong>.</p>
+  </div>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — الاحتمال الشرطي</span>
+    <p><span class="v" dir="ltr">P(B | A)</span> يُقرأ «احتمال B <b>بشرط</b> أن A قد وقع». معناه أننا نعرف مسبقًا أن A حدث، فنحصر أنفسنا داخل A فقط ونعتبره فضاء العينة الجديد.</p><p style="text-align:center"><span class="v" dir="ltr">P(B | A) = P(A ∩ B) ÷ P(A)</span> — <b>الشرط دائمًا في المقام</b></p><p><b>مثال:</b> احتمال أن يوقف سام سيارته في مكان ممنوع <b>و</b> يحصل على مخالفة <span class="v" dir="ltr">0.06</span>، واحتمال أن يوقفها في مكان ممنوع <span class="v" dir="ltr">0.20</span>. إذا أوقفها فعلًا في مكان ممنوع، فاحتمال المخالفة = <span class="v" dir="ltr">0.06 ÷ 0.20 = 0.30</span>.</p><p><b>اختبار الاستقلال:</b> إذا كان <span class="v" dir="ltr">P(B | A) = P(B)</span> — أو <span class="v" dir="ltr">P(A ∩ B) = P(A) × P(B)</span> — فالحدثان مستقلان، أي أن معرفة A لم تغيّر شيئًا.</p><p><b>كلمات الشرط في السؤال:</b> <b dir="ltr">given that</b>، <b dir="ltr">if</b>، <b dir="ltr">of those who</b>، أو حقيقة مذكورة على أنها وقعت («وصل سام واضطر للوقوف في مكان ممنوع»).</p>
+  </div>
+
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-32 · Selecting Colored Chips</span><p>A box contains black chips and white chips. A person selects two chips <strong>without replacement</strong>. If the probability of selecting a black chip and a white chip is 15/56, and the probability of selecting a black chip on the first draw is 3/8, find the probability of selecting the white chip on the second draw, <em>given</em> that the first chip selected was a black chip.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>Extract:</strong> P(B ∩ W) = 15/56, P(B) = 3/8. Required: P(W | B).</li>
+        <li class="fx">P(W | B) = <span class="frac"><span class="num">P(B ∩ W)</span><span class="den">P(B)</span></span> = <span class="frac"><span class="num">15/56</span><span class="den">3/8</span></span> = <span class="frac"><span class="num">15</span><span class="den">56</span></span> × <span class="frac"><span class="num">8</span><span class="den">3</span></span> = <span class="frac"><span class="num">120</span><span class="den">168</span></span> = <span class="frac"><span class="num">5</span><span class="den">7</span></span> ≈ <span class="ans">0.714</span></li>
+      </ol>
+      <p><strong>Dividing by a fraction:</strong> flip the bottom fraction and multiply. 15/56 ÷ 3/8 = 15/56 × 8/3. Cancel: 15/3 = 5 and 8/56 = 1/7 → 5/7.</p>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-33 · Parking Tickets</span><p>The probability that Sam parks in a no-parking zone <em>and</em> gets a parking ticket is 0.06, and the probability that Sam cannot find a legal parking space and has to park in the no-parking zone is 0.20. On Tuesday, Sam arrives at school and has to park in a no-parking zone. Find the probability that he will get a parking ticket.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>Extract:</strong> Let N = parks in a no-parking zone, T = gets a ticket. P(N ∩ T) = 0.06, P(N) = 0.20.</li>
+        <li>"He <em>has to</em> park in a no-parking zone" = N has already happened → the question wants P(T | N).</li>
+        <li class="fx">P(T | N) = <span class="frac"><span class="num">P(N ∩ T)</span><span class="den">P(N)</span></span> = <span class="frac"><span class="num">0.06</span><span class="den">0.20</span></span> = <span class="ans">0.30</span></li>
+      </ol>
+      <p><strong>Why this is the exam's favourite shape:</strong> the condition is hidden inside a story ("he has to park there") rather than announced with the word "given". Learn to spot a condition stated as an accomplished fact.</p>
+    </div>
+  </div>
+
+  <h3>5 · Two-way (contingency) tables — the complete toolkit</h3>
+  <p>A two-way table lets you answer every question type in §4-1 to §4-3 by reading counts. Master the four readings and this becomes free marks.</p>
+
+  <div class="ex">
+    <div class="q"><span class="tag">Example 4-34 · Survey on Women in the Military</span><p>A recent survey asked 100 people if they thought women in the armed forces should be permitted to participate in combat:</p>
+      <div class="tbl-wrap" style="margin-top:10px">
+        <table>
+          <thead><tr><th>Gender</th><th class="num">Yes</th><th class="num">No</th><th class="num">Total</th></tr></thead>
+          <tbody>
+            <tr><td>Male</td><td class="num">32</td><td class="num">18</td><td class="num">50</td></tr>
+            <tr><td>Female</td><td class="num">8</td><td class="num">42</td><td class="num">50</td></tr>
+            <tr><td><strong>Total</strong></td><td class="num"><strong>40</strong></td><td class="num"><strong>60</strong></td><td class="num"><strong>100</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:10px">Find: (a) the respondent answered yes, given that the respondent was female; (b) the respondent was male, given that the respondent answered no; (c) are the events "Male" and "Yes" independent? (d) are "Male" and "Yes" mutually exclusive?</p>
+    </div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>(a) P(Yes | Female).</strong> The condition "Female" restricts you to the Female row, total 50. Of those, 8 said yes.<br>
+          <span class="fx">P(Yes | Female) = <span class="frac"><span class="num">8</span><span class="den">50</span></span> = <span class="ans">0.16</span></span></li>
+        <li><strong>(b) P(Male | No).</strong> The condition "No" restricts you to the No column, total 60. Of those, 18 are male.<br>
+          <span class="fx">P(Male | No) = <span class="frac"><span class="num">18</span><span class="den">60</span></span> = <span class="ans">0.30</span></span></li>
+        <li><strong>(c) Independent?</strong> Test whether P(M ∩ Y) = P(M) · P(Y).<br>
+          <span class="fx">P(M ∩ Y) = 32/100 = 0.32</span><br>
+          <span class="fx">P(M) · P(Y) = (50/100)(40/100) = 0.5 × 0.4 = 0.20</span><br>
+          0.32 ≠ 0.20 → <span class="ans">Not independent — the events are dependent.</span><br>
+          <em>Equivalent test:</em> P(Y | M) = 32/50 = 0.64 but P(Y) = 40/100 = 0.40. Knowing the respondent is male changes the probability of "yes", so they are dependent.</li>
+        <li><strong>(d) Mutually exclusive?</strong> P(M ∩ Y) = 32/100 = 0.32 ≠ 0. There are 32 people who are <em>both</em> male and said yes.<br>
+          → <span class="ans">Not mutually exclusive.</span></li>
+      </ol>
+      <div class="callout tip" style="margin-top:14px">
+        <span class="ct">Parts (c) and (d) together are the whole point of the example</span>
+        <p>One table, two different questions that students merge into one. <strong>Mutually exclusive</strong> asks "<em>is the overlap empty?</em>" — look at the cell. <strong>Independent</strong> asks "<em>does one change the other?</em>" — compare a conditional with its unconditional version, or compare P(A∩B) with P(A)P(B). Answering (d) with the independence test, or (c) with the overlap test, scores zero.</p>
+      </div>
+    </div>
+  </div>
+
+  <h4>The four readings of a two-way table</h4>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th style="width:26%">Question type</th><th>What goes in the denominator</th><th style="width:28%">Example from 4-34</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Simple</strong> P(A)</td><td>The grand total.</td><td>P(Male) = 50/100</td></tr>
+        <tr><td><strong>Joint "and"</strong> P(A ∩ B)</td><td>The grand total; numerator is the single cell.</td><td>P(Male ∩ Yes) = 32/100</td></tr>
+        <tr><td><strong>Union "or"</strong> P(A ∪ B)</td><td>The grand total; add the row and column, subtract the shared cell once.</td><td>P(Male ∪ Yes) = (50 + 40 − 32)/100 = 0.58</td></tr>
+        <tr><td><strong>Conditional "given"</strong> P(A | B)</td><td>The <em>row or column total</em> of the condition.</td><td>P(Yes | Female) = 8/50</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ar-note">
+    <span class="lbl">القاعدة الذهبية في جداول التقاطع</span>
+    <b>الشرط يحدد المقام.</b> إذا قيل "given that it is a female" فالمقام هو مجموع صف الإناث (50) وليس المجموع الكلي (100). أما "and" فالمقام يبقى المجموع الكلي والبسط هو الخلية المشتركة.<br>
+    و<b>فرّق دائمًا</b> بين: <b>mutually exclusive</b> (هل التقاطع فارغ؟ انظر إلى الخلية) و<b>independent</b> (هل يؤثر أحدهما في الآخر؟ قارن P(A∩B) مع P(A)·P(B)).
+  </div>
+
+  <h3>6 · Probabilities for "at least" — the complement shortcut</h3>
+  <p>This is the technique the lecture notes flag under "Other Examples: Probabilities for <em>At Least</em>" (textbook Examples 4-36 <em>Rolling a Die</em> and 4-37 <em>Ties</em>, set for self-study). It is the single most reusable trick in the chapter.</p>
+
+  <div class="formula">
+    <div class="label">The "at least one" rule</div>
+    <p class="fx">P(at least one) = 1 − P(none)</p>
+    <p class="note">"At least one" has many ways to happen (exactly one, exactly two, exactly three, …) but its complement — "none" — has exactly one. Compute the easy side and subtract.</p>
+  </div>
+  <div class="ar-note">
+    <span class="lbl">الشرح بالعربي — «واحد على الأقل»</span>
+    <p>«واحد على الأقل» له طرق كثيرة للحدوث (واحد، اثنان، ثلاثة...)، لكن عكسه «ولا واحد» له طريقة <b>واحدة فقط</b>. لذلك:</p><p style="text-align:center"><span class="v" dir="ltr">P(at least one) = 1 − P(none)</span></p><p><b>مثال:</b> رمي نرد 3 مرات، احتمال ظهور 5 مرة واحدة على الأقل = <span class="v" dir="ltr">1 − (5/6)³ = 1 − 125/216 ≈ 0.4213</span>.</p><p>كلما رأيت <b dir="ltr">at least</b> في السؤال، فكّر في المتمّمة قبل أي شيء آخر.</p>
+  </div>
+
+
+  <div class="ex">
+    <div class="q"><span class="tag">Illustration · the standard shape</span><p>A single die is rolled 3 times. Find the probability of getting <strong>at least one</strong> 5.</p></div>
+    <div class="a">
+      <ol class="steps">
+        <li><strong>The long way (don't):</strong> P(exactly one 5) + P(exactly two 5s) + P(three 5s). Three separate calculations.</li>
+        <li><strong>The complement way:</strong> "at least one 5" has complement "no 5s at all". P(not a 5 on one roll) = 5/6.</li>
+        <li class="fx">P(no 5s in 3 rolls) = (5/6)<sup>3</sup> = <span class="frac"><span class="num">125</span><span class="den">216</span></span></li>
+        <li class="fx">P(at least one 5) = 1 − <span class="frac"><span class="num">125</span><span class="den">216</span></span> = <span class="frac"><span class="num">91</span><span class="den">216</span></span> ≈ <span class="ans">0.4213</span></li>
+      </ol>
+      <p>The same pattern solves "at least one defective", "at least one female", "at least one match" — see Example 4-51(d) in §4-5, where it appears in its examined form.</p>
+    </div>
+  </div>
+
+  <div class="callout tip">
+    <span class="ct">The three complement triggers</span>
+    <p>Reach for <span class="v">1 − P(…)</span> the moment you read: <strong>"at least one"</strong> (complement = none) · <strong>"not"</strong> (complement = the event itself) · <strong>"neither / none"</strong> (complement = at least one). Scanning for these three phrases before you start writing will save you minutes on every paper.</p>
+  </div>
+</section>
+
+<footer>
+  <p><strong>Chapter 4 study series — 11 files.</strong> Read the lessons in order; the revision files at the end draw on all of them.</p>
+  <ol class="series">
+    <li>00 · Exam brief — what the outline tests</li>
+    <li>01 · Lesson 4-1 — Sample Spaces and Probability</li>
+    <li>02 · Lesson 4-2 — The Addition Rules</li>
+    <li class="here">03 · Lesson 4-3 — Multiplication Rules and Conditional Probability</li>
+    <li>04 · Lesson 4-4 — Counting Rules</li>
+    <li>05 · Lesson 4-5 — Probability and Counting Rules</li>
+    <li>06 · Master formula sheet</li>
+    <li>07 · Which rule do I use?</li>
+    <li>08 · The 14 traps that cost marks</li>
+    <li>09 · Review exercises, solved</li>
+    <li>10 · The A+ study protocol</li>
+  </ol>
+  <p>Rebuilt from Dr. Ahmed Al-Hadhrami's lecture slides (Spring 24) and aligned to the SQU College of Science STAT 2101 course outline, Fall 2026. Textbook: Allan G. Bluman, <em>Elementary Statistics: A Step by Step Approach</em>, brief version, 10th edition, McGraw Hill (2017). A companion 100-question bank with full solutions accompanies this series.</p>
+</footer>
+
+</div>
