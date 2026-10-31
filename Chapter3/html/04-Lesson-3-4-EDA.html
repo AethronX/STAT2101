@@ -1,0 +1,882 @@
+<title>Lesson 3-4 Exploratory Data Analysis</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+
+<style>
+/* Layout: single reading column with a sticky rail nav; four section inks mirror the
+   overprint of a Venn diagram — the chapter's own governing picture. */
+:root{
+  --bg:#fbfaf7;
+  --surface:#ffffff;
+  --surface-2:#f2f1ec;
+  --fg:#1b2027;
+  --fg-soft:#4c5663;
+  --fg-faint:#78828f;
+  --rule:#dddcd4;
+  --rule-soft:#eceae3;
+
+  --ink-1:#1f4e79;   /* 4-1  sample spaces      */
+  --ink-2:#0f6f5c;   /* 4-2  addition rules     */
+  --ink-3:#9a5b12;   /* 4-3  multiplication     */
+  --ink-4:#7b2d6b;   /* 4-4 / 4-5 counting      */
+  --accent:#b23b2e;  /* alarms, traps, must-know */
+
+  --ink-1-wash:#eaf0f7;
+  --ink-2-wash:#e5f1ee;
+  --ink-3-wash:#f8efe1;
+  --ink-4-wash:#f4e9f2;
+  --accent-wash:#f9eae7;
+
+  --display:"Spectral",Georgia,"Times New Roman",serif;
+  --body:"IBM Plex Sans","IBM Plex Sans Arabic",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --arabic:"IBM Plex Sans Arabic","IBM Plex Sans",-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  --measure:70ch;
+  --shadow:0 1px 2px rgba(27,32,39,.05),0 8px 24px -16px rgba(27,32,39,.25);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#13171c;
+    --surface:#1a1f26;
+    --surface-2:#222932;
+    --fg:#e8e6e0;
+    --fg-soft:#b3bac4;
+    --fg-faint:#8a929e;
+    --rule:#333b45;
+    --rule-soft:#272e37;
+
+    --ink-1:#7bb0e8;
+    --ink-2:#4fc4a8;
+    --ink-3:#e2a74e;
+    --ink-4:#d089c2;
+    --accent:#ef7f70;
+
+    --ink-1-wash:#182633;
+    --ink-2-wash:#132a26;
+    --ink-3-wash:#2b2314;
+    --ink-4-wash:#2a1b28;
+    --accent-wash:#2f1c19;
+
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#13171c;
+  --surface:#1a1f26;
+  --surface-2:#222932;
+  --fg:#e8e6e0;
+  --fg-soft:#b3bac4;
+  --fg-faint:#8a929e;
+  --rule:#333b45;
+  --rule-soft:#272e37;
+
+  --ink-1:#7bb0e8;
+  --ink-2:#4fc4a8;
+  --ink-3:#e2a74e;
+  --ink-4:#d089c2;
+  --accent:#ef7f70;
+
+  --ink-1-wash:#182633;
+  --ink-2-wash:#132a26;
+  --ink-3-wash:#2b2314;
+  --ink-4-wash:#2a1b28;
+  --accent-wash:#2f1c19;
+
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{
+  max-width:980px;
+  margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 72px;
+}
+
+/* ---------- masthead ---------- */
+.masthead{
+  padding-block:56px 36px;
+  border-bottom:3px double var(--rule);
+  margin-bottom:36px;
+}
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+}
+h1{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(2.1rem,6vw,3.4rem);
+  line-height:1.08;
+  margin:0 0 10px;
+  letter-spacing:-.015em;
+  text-wrap:balance;
+}
+.subtitle{
+  font-family:var(--display);
+  font-style:italic;
+  font-size:clamp(1.05rem,2.6vw,1.3rem);
+  color:var(--fg-soft);
+  margin:0 0 22px;
+  max-width:var(--measure);
+}
+.meta-strip{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 10px;
+  margin-top:20px;
+}
+.chip{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.04em;
+  padding:5px 10px;
+  border:1px solid var(--rule);
+  border-radius:3px;
+  color:var(--fg-soft);
+  background:var(--surface);
+}
+.chip strong{color:var(--fg);font-weight:600}
+
+/* ---------- nav ---------- */
+nav.toc{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:20px 22px;
+  margin-bottom:44px;
+  box-shadow:var(--shadow);
+}
+nav.toc h2{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+  font-weight:500;
+}
+nav.toc ol{
+  margin:0;padding:0;list-style:none;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:4px 26px;
+}
+nav.toc li{min-width:0}
+nav.toc a{
+  display:flex;
+  gap:10px;
+  align-items:baseline;
+  text-decoration:none;
+  color:var(--fg);
+  padding:5px 0;
+  border-bottom:1px solid var(--rule-soft);
+  font-size:.92rem;
+}
+nav.toc a:hover{color:var(--accent)}
+nav.toc a .num{
+  font-family:var(--mono);
+  font-size:.74rem;
+  color:var(--fg-faint);
+  flex:none;
+  min-width:2.4em;
+}
+
+/* ---------- sections ---------- */
+section{margin-bottom:64px;scroll-margin-top:24px}
+.sec-head{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+  padding-bottom:14px;
+  border-bottom:2px solid var(--sec,var(--fg));
+  margin-bottom:28px;
+}
+.sec-num{
+  font-family:var(--mono);
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.06em;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:5px 9px;
+  border-radius:3px;
+  flex:none;
+  margin-top:6px;
+}
+.sec-head h2{
+  font-family:var(--display);
+  font-size:clamp(1.5rem,4vw,2.05rem);
+  line-height:1.18;
+  margin:0;
+  font-weight:600;
+  text-wrap:balance;
+  min-width:0;
+}
+.sec-head .ar{
+  display:block;
+  font-family:var(--arabic);
+  font-size:.92rem;
+  font-style:normal;
+  color:var(--fg-soft);
+  direction:rtl;
+  margin-top:4px;
+  font-weight:400;
+}
+h3{
+  font-family:var(--body);
+  font-size:1.08rem;
+  font-weight:600;
+  letter-spacing:-.005em;
+  margin:36px 0 12px;
+  color:var(--fg);
+  display:flex;
+  align-items:baseline;
+  gap:9px;
+  flex-wrap:wrap;
+}
+h3::before{
+  content:"";
+  width:18px;height:3px;
+  background:var(--sec,var(--fg));
+  flex:none;
+  border-radius:2px;
+}
+h4{
+  font-family:var(--mono);
+  font-size:.74rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:26px 0 10px;
+  font-weight:500;
+}
+p{margin:0 0 14px;max-width:var(--measure)}
+ul,ol{max-width:var(--measure);padding-left:1.25em;margin:0 0 14px}
+li{margin-bottom:7px}
+li::marker{color:var(--sec,var(--fg-faint))}
+strong{font-weight:600}
+em{font-style:italic}
+code,.v{
+  font-family:var(--mono);
+  font-size:.9em;
+  background:var(--surface-2);
+  padding:1px 5px;
+  border-radius:3px;
+  white-space:nowrap;
+}
+.term{
+  font-weight:600;
+  color:var(--sec,var(--fg));
+}
+a{color:var(--accent)}
+
+/* ---------- maths ---------- */
+.fx{
+  font-family:var(--mono);
+  font-size:1.02rem;
+  line-height:2.1;
+  white-space:nowrap;
+}
+.frac{
+  display:inline-flex;
+  flex-direction:column;
+  vertical-align:middle;
+  text-align:center;
+  font-family:var(--mono);
+  line-height:1.25;
+  margin:0 .22em;
+  position:relative;
+  top:-.08em;
+}
+.frac .num{border-bottom:1.5px solid currentColor;padding:0 .4em .08em}
+.frac .den{padding:.08em .4em 0}
+sub,sup{font-size:.72em}
+
+.formula{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-left:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:18px 20px;
+  margin:18px 0 22px;
+  box-shadow:var(--shadow);
+  overflow-x:auto;
+}
+.formula .label{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg-faint));
+  margin-bottom:10px;
+  font-weight:600;
+}
+.formula .fx{margin:4px 0}
+.formula .note{
+  font-size:.88rem;
+  color:var(--fg-soft);
+  margin:10px 0 0;
+  white-space:normal;
+  max-width:none;
+}
+
+/* ---------- example cards ---------- */
+.ex{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:5px;
+  margin:20px 0;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.ex > .q{
+  padding:16px 20px;
+  border-bottom:1px dashed var(--rule);
+  background:var(--wash,var(--surface-2));
+}
+.ex .tag{
+  font-family:var(--mono);
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg));
+  display:block;
+  margin-bottom:6px;
+}
+.ex .q p{margin:0;max-width:none}
+.ex > .a{padding:16px 20px}
+.ex > .a p{max-width:none}
+.ex > .a p:last-child{margin-bottom:0}
+.ex .steps{margin:0;padding-left:1.2em;max-width:none}
+.ex .steps li{margin-bottom:9px}
+.ans{
+  display:inline-block;
+  font-family:var(--mono);
+  font-weight:600;
+  background:var(--sec,var(--fg));
+  color:#fff;
+  padding:3px 9px;
+  border-radius:3px;
+  font-size:.92em;
+  white-space:nowrap;
+}
+
+/* ---------- callouts ---------- */
+.callout{
+  border-radius:4px;
+  padding:16px 18px;
+  margin:20px 0;
+  border:1px solid;
+  font-size:.95rem;
+}
+.callout p{max-width:none}
+.callout p:last-child{margin-bottom:0}
+.callout .ct{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-weight:600;
+  display:block;
+  margin-bottom:8px;
+}
+.trap{background:var(--accent-wash);border-color:var(--accent)}
+.trap .ct{color:var(--accent)}
+.tip{background:var(--ink-2-wash);border-color:var(--ink-2)}
+.tip .ct{color:var(--ink-2)}
+.note{background:var(--surface-2);border-color:var(--rule)}
+.note .ct{color:var(--fg-faint)}
+
+.ar-note{
+  font-family:var(--arabic);
+  direction:rtl;
+  text-align:right;
+  background:var(--surface-2);
+  border-right:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:13px 16px;
+  margin:16px 0;
+  font-size:.96rem;
+  line-height:1.95;
+  color:var(--fg-soft);
+}
+.ar-note b{color:var(--fg);font-weight:600}
+.ar-note .lbl{
+  display:block;
+  font-size:.72rem;
+  letter-spacing:.04em;
+  color:var(--sec,var(--fg-faint));
+  font-weight:600;
+  margin-bottom:4px;
+}
+.ar-note ul{padding-right:1.2em;padding-left:0;margin:6px 0 0;max-width:none}
+
+.ar-note p{margin:0 0 7px;max-width:none}
+.ar-note p:last-child{margin-bottom:0}
+.ar-note ol{padding-right:1.3em;padding-left:0;margin:6px 0 0;max-width:none}
+.ar-note li{margin-bottom:5px}
+.ar-note .v{font-size:.84em}
+.arn{display:block;font-family:var(--arabic);direction:rtl;unicode-bidi:isolate;text-align:left;font-size:.84rem;color:var(--fg-soft);font-weight:500;margin-top:2px;line-height:1.5}
+.subtitle-ar{font-family:var(--arabic);direction:rtl;text-align:right;color:var(--fg-soft);font-size:1.02rem;margin:0 0 8px;max-width:none;line-height:1.9}
+
+/* ---------- diagrams ---------- */
+figure.dg{margin:22px 0 26px;padding:16px 14px 12px;background:var(--surface);border:1px solid var(--rule);border-radius:4px;break-inside:avoid;page-break-inside:avoid}
+figure.dg svg{display:block;width:100%;height:auto;margin:0 auto;color:var(--fg);overflow:visible}
+figure.dg figcaption{font-size:.86rem;color:var(--fg-soft);margin:10px auto 0;max-width:64ch;text-align:center;line-height:1.5}
+figure.dg figcaption .ar{display:block;font-family:var(--arabic);direction:rtl;margin-top:4px;font-size:.9rem}
+.dg .ln{stroke:currentColor;fill:none;stroke-width:1.4}
+.dg .ln-soft{stroke:var(--fg-faint);fill:none;stroke-width:1.2}
+.dg .dash{stroke-dasharray:4 4}
+.dg .thick{stroke-width:2.6}
+.dg text{fill:currentColor;font-family:var(--body);font-size:13px}
+.dg text.m{font-family:var(--mono);font-size:12.5px}
+.dg text.sm{font-size:11.5px}
+.dg text.big{font-family:var(--mono);font-size:19px;font-weight:600}
+.dg text.soft{fill:var(--fg-soft)}
+.dg text.b{font-weight:600}
+.dg .bg{fill:var(--surface)}
+.dg .wash1{fill:var(--ink-1-wash)} .dg .wash2{fill:var(--ink-2-wash)} .dg .wash3{fill:var(--ink-3-wash)} .dg .wash4{fill:var(--ink-4-wash)} .dg .washA{fill:var(--accent-wash)}
+.dg .f1{fill:var(--ink-1)} .dg .f2{fill:var(--ink-2)} .dg .f3{fill:var(--ink-3)} .dg .f4{fill:var(--ink-4)} .dg .fA{fill:var(--accent)}
+.dg .s1{stroke:var(--ink-1)} .dg .s2{stroke:var(--ink-2)} .dg .s3{stroke:var(--ink-3)} .dg .s4{stroke:var(--ink-4)} .dg .sA{stroke:var(--accent)}
+.dg text.t1{fill:var(--ink-1)} .dg text.t2{fill:var(--ink-2)} .dg text.t3{fill:var(--ink-3)} .dg text.t4{fill:var(--ink-4)} .dg text.tA{fill:var(--accent)}
+
+/* ---------- tables ---------- */
+.tbl-wrap{overflow-x:auto;margin:18px 0 22px;-webkit-overflow-scrolling:touch}
+table{
+  border-collapse:collapse;
+  width:100%;
+  min-width:420px;
+  font-size:.93rem;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+}
+caption{
+  caption-side:top;
+  text-align:left;
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  padding-bottom:9px;
+  font-weight:500;
+}
+th,td{
+  padding:9px 13px;
+  border-bottom:1px solid var(--rule-soft);
+  text-align:left;
+  vertical-align:top;
+}
+thead th{
+  background:var(--sec,var(--surface-2));
+  color:#fff;
+  font-weight:600;
+  font-size:.78rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  border-bottom:none;
+}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even){background:var(--surface-2)}
+td.num,th.num{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+
+/* ---------- misc blocks ---------- */
+.grid2{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:16px;
+  margin:18px 0 22px;
+}
+.card{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-top:3px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:16px 18px;
+  min-width:0;
+}
+.card h5{
+  font-family:var(--body);
+  font-size:.97rem;
+  font-weight:600;
+  margin:0 0 8px;
+}
+.card p{font-size:.92rem;margin-bottom:0;max-width:none;color:var(--fg-soft)}
+
+.flow{
+  list-style:none;
+  padding:0;
+  margin:18px 0 22px;
+  max-width:none;
+  display:grid;
+  gap:10px;
+}
+.flow li{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:13px 16px;
+  margin:0;
+}
+.flow .k{
+  font-family:var(--mono);
+  font-size:.73rem;
+  font-weight:600;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:3px 8px;
+  border-radius:3px;
+  flex:none;
+  margin-top:3px;
+  white-space:nowrap;
+}
+.flow .t{min-width:0;font-size:.95rem}
+.flow .t b{display:block;margin-bottom:2px}
+
+.keypad{
+  font-family:var(--mono);
+  font-size:.86rem;
+  background:var(--surface-2);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:4px 9px;
+  display:inline-block;
+  white-space:nowrap;
+}
+
+hr.soft{border:none;border-top:1px solid var(--rule-soft);margin:34px 0}
+
+footer{
+  border-top:3px double var(--rule);
+  padding-top:24px;
+  margin-top:20px;
+  font-size:.86rem;
+  color:var(--fg-faint);
+}
+footer p{max-width:none}
+
+@media (max-width:520px){
+  .sec-head{gap:11px}
+  .fx{font-size:.94rem}
+  .ex > .q,.ex > .a{padding:14px 15px}
+}
+@media print{
+  body{background:#fff}
+  nav.toc{break-inside:avoid}
+  .ex,.formula,.callout,.card{break-inside:avoid}
+  section{break-before:auto}
+}
+</style>
+
+<style>
+/* Chapter 3: denser setting so pages carry more per sheet */
+body{font-size:14.5px;line-height:1.55}
+p,ul,ol{max-width:none}
+p{margin:0 0 9px}
+li{margin-bottom:4px}
+.masthead{padding-block:34px 18px;margin-bottom:20px}
+section{margin-bottom:30px}
+.sec-head{margin-bottom:16px;padding-bottom:10px}
+h3{margin:22px 0 8px;font-size:1.02rem}
+h4{margin:14px 0 6px}
+.formula{padding:11px 14px;margin:10px 0 12px}
+.formula .fx{margin:1px 0;line-height:1.9}
+.ex{margin:10px 0}
+.ex > .q,.ex > .a{padding:10px 14px}
+.ex .steps li{margin-bottom:5px}
+.callout{padding:10px 13px;margin:10px 0;font-size:.93rem}
+.ar-note{padding:9px 13px;margin:9px 0;line-height:1.8;font-size:.93rem}
+.tbl-wrap{margin:8px 0 12px}
+th,td{padding:6px 10px}
+table{font-size:.9rem;min-width:0}
+figure.dg{margin:12px 0 14px;padding:10px 10px 8px}
+figure.dg figcaption{margin-top:6px;font-size:.84rem}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+.cols2 > *{min-width:0}
+.cols2 .ex{margin:0}
+@media (max-width:640px){.cols2{grid-template-columns:1fr}}
+/* let long formulas wrap inside narrow columns instead of being clipped */
+.fx,.ex .fx,.cols2 .fx,.a .fx{white-space:normal;overflow-x:visible}
+footer{margin-top:10px;padding-top:12px;font-size:.78rem}footer p{margin:0 0 4px}
+/* allow tall example cards to split across pages so no half-empty pages */
+@media print{.ex,.a.long{break-inside:auto!important;page-break-inside:auto!important}.a:not(.long){break-inside:avoid!important}.ex > .q{break-inside:avoid}.cols2{break-inside:auto}}
+.series{list-style:none;padding:0;margin:8px 0 12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2px 22px;max-width:none}
+.series li{margin:0;padding:3px 0;border-bottom:1px solid var(--rule-soft);font-size:.82rem;color:var(--fg-faint)}
+.series li.here{color:var(--fg);font-weight:600}
+.series li.here::after{content:"  ← this file";color:var(--accent);font-weight:500}
+.src{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-faint);border:1px solid var(--rule);border-radius:3px;padding:0 5px;margin-left:6px;white-space:nowrap;font-weight:500}
+</style>
+
+<div class="wrap">
+<header class="masthead">
+  <p class="eyebrow">Sultan Qaboos University · STAT 2101 · Chapter 3: Data Description</p>
+  <div class="meta-strip"><span class="chip"><strong>Week</strong> 4</span><span class="chip"><strong>CLO</strong> 3-B · 3-C · 3-D (R)</span><span class="chip"><strong>Before</strong> In-Class Quiz I</span><span class="chip"><strong>File</strong> 5 / 8</span></div>
+</header>
+<section id="s34" style="--sec:var(--ink-4);--wash:var(--ink-4-wash)">
+  <div class="sec-head">
+    <span class="sec-num">3-4</span>
+    <h2>Exploratory Data Analysis
+      <span class="ar">التحليل الاستكشافي للبيانات — الملخص الخماسي والمخطط الصندوقي وقراءة الشكل والمقارنة</span>
+    </h2>
+  </div>
+
+  <h3>1 · Traditional statistics vs EDA <span class="src">Amani · Hadhrami Table 3-5</span></h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Aspect</th><th>Traditional statistics</th><th>Exploratory data analysis (EDA)</th></tr></thead>
+    <tbody>
+      <tr><td>Data organisation</td><td>frequency distribution</td><td><strong>stem-and-leaf plot</strong></td></tr>
+      <tr><td>Main graphs</td><td>histogram, ogive</td><td><strong>boxplot</strong> (box-and-whisker plot)</td></tr>
+      <tr><td>Measure of centre</td><td>mean</td><td><strong>median</strong></td></tr>
+      <tr><td>Measure of variation</td><td>standard deviation</td><td><strong>IQR = Q₃ − Q₁</strong></td></tr>
+      <tr><td>Purpose</td><td>test specific hypotheses or confirm assumptions from collected data, e.g. has the average income increased compared with last year?</td><td>explore the data and find patterns, trends or outliers <strong>without prior assumptions</strong></td></tr>
+    </tbody>
+  </table></div>
+  <div class="ar-note"><span class="lbl">الشرح بالعربي — لماذا التحليل الاستكشافي؟</span>الإحصاء التقليدي يبدأ بفرضية ويختبرها باستخدام المتوسط والانحراف المعياري. أما التحليل الاستكشافي فيبدأ <b>بلا افتراضات</b>: ننظر إلى البيانات لنكتشف شكلها وقيمها الشاذة. ولذلك يستخدم <b>الوسيط والمدى الربيعي</b> بدل المتوسط والانحراف، لأنهما <b>لا يتأثران بالقيم الشاذة</b> التي نبحث عنها أصلًا. احفظ الجدول بأعمدته الثلاثة، فهو سؤال تعريف مباشر في الكويز.</div>
+
+  <h3>2 · Five-number summary and boxplot <span class="src">Both</span></h3>
+  <div class="cols2">
+    <div><p>A data set is summarised by five values, reported <strong>in this order</strong>: (1) minimum; (2) <span class="v">Q₁ = P₂₅</span>; (3) <span class="v">Q₂ = median = P₅₀</span>; (4) <span class="v">Q₃ = P₇₅</span>; (5) maximum.</p>
+      <p><strong>Constructing a boxplot</strong> <span class="src">Amani</span>: <strong>Step 1</strong> find the five-number summary. <strong>Step 2</strong> draw a horizontal axis with a scale that includes the minimum and maximum. <strong>Step 3</strong> draw a box whose vertical sides pass through Q₁ and Q₃, with a vertical line through the median. <strong>Step 4</strong> draw a line (whisker) from the minimum to the left side of the box and from the maximum to the right side.</p>
+      <p>The appearance of a boxplot changes with skewness, but its structure stays the same.</p></div>
+    <div class="ex" style="margin:0"><div class="q"><span class="tag">Simple example <span class="src">Amani</span></span><p>7, 15, 36, 39, 42, 43, 46, 49, 50, 51, 52, 61, 69, 80, 90. Construct a boxplot.</p></div>
+      <div class="a"><p>n = 15 (odd), so the median is the 8th value, <span class="ans">49</span>. Lower seven: 7 15 36 <strong>39</strong> 42 43 46, so Q₁ = <span class="ans">39</span>. Upper seven: 50 51 52 <strong>61</strong> 69 80 90, so Q₃ = <span class="ans">61</span>.</p><p>Five-number summary: <strong>7, 39, 49, 61, 90</strong>.</p></div></div>
+  </div>
+  <figure class="dg"><svg viewBox="0 0 660 172" style="max-width:660px" role="img" aria-label="Boxplot of Dr. Amani's fifteen values with minimum 7, Q1 39, median 49, Q3 61 and maximum 90, each section holding 25 percent" xmlns="http://www.w3.org/2000/svg">
+<line x1="50.0" y1="118.0" x2="620.0" y2="118.0" class="ln"/>
+<line x1="50.0" y1="118.0" x2="50.0" y2="123.0" class="ln"/>
+<text x="50.0" y="136.0" text-anchor="middle" class="m soft">0</text>
+<line x1="107.0" y1="118.0" x2="107.0" y2="123.0" class="ln"/>
+<text x="107.0" y="136.0" text-anchor="middle" class="m soft">10</text>
+<line x1="164.0" y1="118.0" x2="164.0" y2="123.0" class="ln"/>
+<text x="164.0" y="136.0" text-anchor="middle" class="m soft">20</text>
+<line x1="221.0" y1="118.0" x2="221.0" y2="123.0" class="ln"/>
+<text x="221.0" y="136.0" text-anchor="middle" class="m soft">30</text>
+<line x1="278.0" y1="118.0" x2="278.0" y2="123.0" class="ln"/>
+<text x="278.0" y="136.0" text-anchor="middle" class="m soft">40</text>
+<line x1="335.0" y1="118.0" x2="335.0" y2="123.0" class="ln"/>
+<text x="335.0" y="136.0" text-anchor="middle" class="m soft">50</text>
+<line x1="392.0" y1="118.0" x2="392.0" y2="123.0" class="ln"/>
+<text x="392.0" y="136.0" text-anchor="middle" class="m soft">60</text>
+<line x1="449.0" y1="118.0" x2="449.0" y2="123.0" class="ln"/>
+<text x="449.0" y="136.0" text-anchor="middle" class="m soft">70</text>
+<line x1="506.0" y1="118.0" x2="506.0" y2="123.0" class="ln"/>
+<text x="506.0" y="136.0" text-anchor="middle" class="m soft">80</text>
+<line x1="563.0" y1="118.0" x2="563.0" y2="123.0" class="ln"/>
+<text x="563.0" y="136.0" text-anchor="middle" class="m soft">90</text>
+<line x1="620.0" y1="118.0" x2="620.0" y2="123.0" class="ln"/>
+<text x="620.0" y="136.0" text-anchor="middle" class="m soft">100</text>
+<line x1="89.9" y1="72.0" x2="272.3" y2="72.0" class="ln"/>
+<line x1="397.7" y1="72.0" x2="563.0" y2="72.0" class="ln"/>
+<line x1="89.9" y1="64.0" x2="89.9" y2="80.0" class="ln"/>
+<line x1="563.0" y1="64.0" x2="563.0" y2="80.0" class="ln"/>
+<rect x="272.3" y="55.0" width="125.4" height="34.0" rx="0" class="wash4 ln s4"/>
+<line x1="329.3" y1="55.0" x2="329.3" y2="89.0" class="ln s4 thick"/>
+<text x="89.9" y="48.0" text-anchor="middle" class="m b">7</text>
+<text x="272.3" y="48.0" text-anchor="middle" class="m b">39</text>
+<text x="329.3" y="48.0" text-anchor="middle" class="m b">49</text>
+<text x="397.7" y="48.0" text-anchor="middle" class="m b">61</text>
+<text x="563.0" y="48.0" text-anchor="middle" class="m b">90</text>
+<text x="89.9" y="30.0" text-anchor="middle" class="sm b soft">Minimum</text>
+<text x="272.3" y="30.0" text-anchor="middle" class="sm b soft">Q1</text>
+<text x="329.3" y="30.0" text-anchor="middle" class="sm b soft">Median Q2</text>
+<text x="397.7" y="30.0" text-anchor="middle" class="sm b soft">Q3</text>
+<text x="563.0" y="30.0" text-anchor="middle" class="sm b soft">Maximum</text>
+<text x="181.1" y="100.0" text-anchor="middle" class="sm t4">25%</text>
+<text x="300.8" y="100.0" text-anchor="middle" class="sm t4">25%</text>
+<text x="363.5" y="100.0" text-anchor="middle" class="sm t4">25%</text>
+<text x="480.4" y="100.0" text-anchor="middle" class="sm t4">25%</text>
+<line x1="272.3" y1="148.0" x2="397.7" y2="148.0" class="ln"/>
+<line x1="272.3" y1="148.0" x2="272.3" y2="142.0" class="ln"/>
+<line x1="397.7" y1="148.0" x2="397.7" y2="142.0" class="ln"/>
+<text x="335.0" y="164.0" text-anchor="middle" class="sm b t4">IQR = Q3 − Q1 = 22</text>
+</svg><figcaption>Five-number summary 7, 39, 49, 61, 90. Each of the four pieces (left whisker, two halves of the box, right whisker) holds 25% of the data, however long it looks.<span class="ar">الملخص الخماسي 7، <span dir="ltr" style="white-space:nowrap">39</span>، <span dir="ltr" style="white-space:nowrap">49</span>، <span dir="ltr" style="white-space:nowrap">61</span>، <span dir="ltr" style="white-space:nowrap">90</span>. كل جزء من الأجزاء الأربعة (الخط الأيسر، نصفا الصندوق، الخط الأيمن) يحتوي <span dir="ltr" style="white-space:nowrap">25%</span> من البيانات مهما كان طوله.</span></figcaption></figure>
+  <div class="cols2">
+    <div class="ex"><div class="q"><span class="tag">Activity <span class="src">Amani</span></span><p>Construct a boxplot for 12, 5, 22, 30, 7, 36, 14, 42, 15, 53, 25.</p></div>
+      <div class="a"><p>Ordered: 5 7 12 14 15 <strong>22</strong> 25 30 36 42 53 (n = 11). MD = <span class="ans">22</span>. Q₁ = median of 5 7 12 14 15 = <span class="ans">12</span>. Q₃ = median of 25 30 36 42 53 = <span class="ans">36</span>.</p><p>Five-number summary: <strong>5, 12, 22, 36, 53</strong>. IQR = 24 and the fences are −24 and 72, so there are no outliers.</p></div></div>
+    <div class="ex"><div class="q"><span class="tag">Ex 3-37 · Meteorites in 10 U.S. states <span class="src">Hadhrami</span></span><p>89, 47, 164, 296, 30, 215, 138, 78, 48, 39</p></div>
+      <div class="a"><p>Ordered: 30 39 47 48 78 89 138 164 215 296. MD = (78 + 89)/2 = <span class="ans">83.5</span>. Q₁ = <span class="ans">47</span>, Q₃ = <span class="ans">164</span>; min 30, max 296.</p><p>Five-number summary: <strong>30, 47, 83.5, 164, 296</strong>.</p></div></div>
+  </div>
+  <figure class="dg"><svg viewBox="0 0 660 120" style="max-width:660px" role="img" aria-label="Boxplot with minimum 5, Q1 12, median 22, Q3 36 and maximum 53" xmlns="http://www.w3.org/2000/svg">
+<line x1="50.0" y1="92.0" x2="620.0" y2="92.0" class="ln"/>
+<line x1="50.0" y1="92.0" x2="50.0" y2="97.0" class="ln"/>
+<text x="50.0" y="110.0" text-anchor="middle" class="m soft">0</text>
+<line x1="145.0" y1="92.0" x2="145.0" y2="97.0" class="ln"/>
+<text x="145.0" y="110.0" text-anchor="middle" class="m soft">10</text>
+<line x1="240.0" y1="92.0" x2="240.0" y2="97.0" class="ln"/>
+<text x="240.0" y="110.0" text-anchor="middle" class="m soft">20</text>
+<line x1="335.0" y1="92.0" x2="335.0" y2="97.0" class="ln"/>
+<text x="335.0" y="110.0" text-anchor="middle" class="m soft">30</text>
+<line x1="430.0" y1="92.0" x2="430.0" y2="97.0" class="ln"/>
+<text x="430.0" y="110.0" text-anchor="middle" class="m soft">40</text>
+<line x1="525.0" y1="92.0" x2="525.0" y2="97.0" class="ln"/>
+<text x="525.0" y="110.0" text-anchor="middle" class="m soft">50</text>
+<line x1="620.0" y1="92.0" x2="620.0" y2="97.0" class="ln"/>
+<text x="620.0" y="110.0" text-anchor="middle" class="m soft">60</text>
+<line x1="97.5" y1="52.0" x2="164.0" y2="52.0" class="ln"/>
+<line x1="392.0" y1="52.0" x2="553.5" y2="52.0" class="ln"/>
+<line x1="97.5" y1="44.0" x2="97.5" y2="60.0" class="ln"/>
+<line x1="553.5" y1="44.0" x2="553.5" y2="60.0" class="ln"/>
+<rect x="164.0" y="37.0" width="228.0" height="30.0" rx="0" class="wash4 ln s4"/>
+<line x1="259.0" y1="37.0" x2="259.0" y2="67.0" class="ln s4 thick"/>
+<text x="97.5" y="30.0" text-anchor="middle" class="m b">5</text>
+<text x="164.0" y="30.0" text-anchor="middle" class="m b">12</text>
+<text x="259.0" y="30.0" text-anchor="middle" class="m b">22</text>
+<text x="392.0" y="30.0" text-anchor="middle" class="m b">36</text>
+<text x="553.5" y="30.0" text-anchor="middle" class="m b">53</text>
+<text x="211.5" y="84.0" text-anchor="middle" class="sm soft">10</text>
+<text x="325.5" y="84.0" text-anchor="middle" class="sm soft">14</text>
+</svg><figcaption>Activity solution. The median sits left of the box centre (10 vs 14 on each side) and the right whisker (17) is longer than the left (7): the data are positively (right) skewed.<span class="ar">حل النشاط: الوسيط يقع يسار منتصف الصندوق <span dir="ltr" style="white-space:nowrap">(10</span> مقابل <span dir="ltr" style="white-space:nowrap">14)</span>، والخط الأيمن <span dir="ltr" style="white-space:nowrap">(17)</span> أطول من الأيسر <span dir="ltr" style="white-space:nowrap">(7)</span>، إذن التوزيع ملتوٍ نحو اليمين (موجب).</span></figcaption></figure>
+  <figure class="dg"><svg viewBox="0 0 660 120" style="max-width:660px" role="img" aria-label="Boxplot of meteorites found with minimum 30, Q1 47, median 83.5, Q3 164, maximum 296" xmlns="http://www.w3.org/2000/svg">
+<line x1="50.0" y1="92.0" x2="620.0" y2="92.0" class="ln"/>
+<line x1="50.0" y1="92.0" x2="50.0" y2="97.0" class="ln"/>
+<text x="50.0" y="110.0" text-anchor="middle" class="m soft">0</text>
+<line x1="145.0" y1="92.0" x2="145.0" y2="97.0" class="ln"/>
+<text x="145.0" y="110.0" text-anchor="middle" class="m soft">50</text>
+<line x1="240.0" y1="92.0" x2="240.0" y2="97.0" class="ln"/>
+<text x="240.0" y="110.0" text-anchor="middle" class="m soft">100</text>
+<line x1="335.0" y1="92.0" x2="335.0" y2="97.0" class="ln"/>
+<text x="335.0" y="110.0" text-anchor="middle" class="m soft">150</text>
+<line x1="430.0" y1="92.0" x2="430.0" y2="97.0" class="ln"/>
+<text x="430.0" y="110.0" text-anchor="middle" class="m soft">200</text>
+<line x1="525.0" y1="92.0" x2="525.0" y2="97.0" class="ln"/>
+<text x="525.0" y="110.0" text-anchor="middle" class="m soft">250</text>
+<line x1="620.0" y1="92.0" x2="620.0" y2="97.0" class="ln"/>
+<text x="620.0" y="110.0" text-anchor="middle" class="m soft">300</text>
+<line x1="107.0" y1="52.0" x2="139.3" y2="52.0" class="ln"/>
+<line x1="361.6" y1="52.0" x2="612.4" y2="52.0" class="ln"/>
+<line x1="107.0" y1="44.0" x2="107.0" y2="60.0" class="ln"/>
+<line x1="612.4" y1="44.0" x2="612.4" y2="60.0" class="ln"/>
+<rect x="139.3" y="37.0" width="222.3" height="30.0" rx="0" class="wash4 ln s4"/>
+<line x1="208.7" y1="37.0" x2="208.7" y2="67.0" class="ln s4 thick"/>
+<text x="107.0" y="30.0" text-anchor="middle" class="m b">30</text>
+<text x="139.3" y="30.0" text-anchor="middle" class="m b">47</text>
+<text x="208.7" y="30.0" text-anchor="middle" class="m b">83.5</text>
+<text x="361.6" y="30.0" text-anchor="middle" class="m b">164</text>
+<text x="612.4" y="30.0" text-anchor="middle" class="m b">296</text>
+</svg><figcaption>Example 3-37. The median is close to Q1 and the right whisker is far longer than the left: positively (right) skewed.<span class="ar">مثال <span dir="ltr" style="white-space:nowrap">3-37</span>: الوسيط قريب من <span dir="ltr" style="white-space:nowrap">Q1</span> والخط الأيمن أطول بكثير من الأيسر، إذن التوزيع ملتوٍ نحو اليمين.</span></figcaption></figure>
+
+  <h3>3 · Reading shape from a boxplot <span class="src">Both · CLO3-B</span></h3>
+  <div class="cols2">
+    <div class="tbl-wrap" style="margin:0"><table>
+      <thead><tr><th>Shape</th><th>Median inside the box</th><th>Whiskers (lines)</th></tr></thead><tbody>
+        <tr><td><strong>Symmetric</strong></td><td>near the centre</td><td>about the same length</td></tr>
+        <tr><td><strong>Positively (right) skewed</strong></td><td>left of centre</td><td>right line longer</td></tr>
+        <tr><td><strong>Negatively (left) skewed</strong></td><td>right of centre</td><td>left line longer</td></tr></tbody></table></div>
+    <div class="callout tip" style="margin:0"><span class="ct">How to answer "describe the shape" for full marks</span><p>Quote the evidence with numbers: "The median (83.5) is closer to Q₁ (47) than to Q₃ (164): 36.5 versus 80.5. The right whisker (132) is much longer than the left (17). So the distribution is <strong>positively skewed</strong>." Dr. Amani's notes join the two clues with AND. If they disagree, say so and give more weight to the median position.</p></div>
+  </div>
+  <figure class="dg"><svg viewBox="0 0 680 116" style="max-width:680px" role="img" aria-label="Three boxplots illustrating left-skewed, symmetric and right-skewed data" xmlns="http://www.w3.org/2000/svg">
+<line x1="32.6" y1="44.0" x2="109.4" y2="44.0" class="ln"/>
+<line x1="180.4" y1="44.0" x2="199.6" y2="44.0" class="ln"/>
+<line x1="32.6" y1="36.0" x2="32.6" y2="52.0" class="ln"/>
+<line x1="199.6" y1="36.0" x2="199.6" y2="52.0" class="ln"/>
+<rect x="109.4" y="30.0" width="71.0" height="28.0" rx="0" class="wash4 ln s4"/>
+<line x1="161.2" y1="30.0" x2="161.2" y2="58.0" class="ln s4 thick"/>
+<text x="119.0" y="90.0" text-anchor="middle" class="sm b">Left (negatively) skewed</text>
+<text x="119.0" y="108.0" text-anchor="middle" class="sm soft">median right · left whisker longer</text>
+<line x1="260.4" y1="44.0" x2="312.2" y2="44.0" class="ln"/>
+<line x1="369.8" y1="44.0" x2="421.6" y2="44.0" class="ln"/>
+<line x1="260.4" y1="36.0" x2="260.4" y2="52.0" class="ln"/>
+<line x1="421.6" y1="36.0" x2="421.6" y2="52.0" class="ln"/>
+<rect x="312.2" y="30.0" width="57.6" height="28.0" rx="0" class="wash4 ln s4"/>
+<line x1="341.0" y1="30.0" x2="341.0" y2="58.0" class="ln s4 thick"/>
+<text x="341.0" y="90.0" text-anchor="middle" class="sm b">Symmetric</text>
+<text x="341.0" y="108.0" text-anchor="middle" class="sm soft">median centred · whiskers equal</text>
+<line x1="482.4" y1="44.0" x2="501.6" y2="44.0" class="ln"/>
+<line x1="572.6" y1="44.0" x2="649.4" y2="44.0" class="ln"/>
+<line x1="482.4" y1="36.0" x2="482.4" y2="52.0" class="ln"/>
+<line x1="649.4" y1="36.0" x2="649.4" y2="52.0" class="ln"/>
+<rect x="501.6" y="30.0" width="71.0" height="28.0" rx="0" class="wash4 ln s4"/>
+<line x1="520.8" y1="30.0" x2="520.8" y2="58.0" class="ln s4 thick"/>
+<text x="563.0" y="90.0" text-anchor="middle" class="sm b">Right (positively) skewed</text>
+<text x="563.0" y="108.0" text-anchor="middle" class="sm soft">median left · right whisker longer</text>
+</svg><figcaption>Read skewness from two clues: where the median sits inside the box, and which whisker is longer. Both point toward the long tail.<span class="ar">نقرأ الالتواء من دليلين: موقع الوسيط داخل الصندوق، وأي الخطين أطول. وكلاهما يشير إلى جهة الذيل الطويل.</span></figcaption></figure>
+
+  <h3>4 · Side-by-side boxplots <span class="src">Both · CLO3-C</span></h3>
+  <div class="ex"><div class="q"><span class="tag">Ex 3-38 · Roller coaster speeds (mph) <span class="src">Hadhrami</span></span><p>Wood: 50 56 60 48 35 67 72 68 · Steel: 55 70 48 28 100 106 102 120. Compare the distributions using boxplots.</p></div>
+    <div class="a"><p>Wood ordered: 35 48 50 56 | 60 67 68 72, giving five-number summary <strong>35, 49, 58, 67.5, 72</strong>. Steel ordered: 28 48 55 70 | 100 102 106 120, giving <strong>28, 51.5, 85, 104, 120</strong>.</p>
+      <figure class="dg"><svg viewBox="0 0 660 186" style="max-width:660px" role="img" aria-label="Side-by-side boxplots of wooden and steel roller coaster speeds on a shared scale" xmlns="http://www.w3.org/2000/svg">
+<line x1="110.0" y1="158.0" x2="630.0" y2="158.0" class="ln"/>
+<line x1="110.0" y1="158.0" x2="110.0" y2="163.0" class="ln"/>
+<text x="110.0" y="176.0" text-anchor="middle" class="m soft">20</text>
+<line x1="157.3" y1="158.0" x2="157.3" y2="163.0" class="ln"/>
+<text x="157.3" y="176.0" text-anchor="middle" class="m soft">30</text>
+<line x1="204.5" y1="158.0" x2="204.5" y2="163.0" class="ln"/>
+<text x="204.5" y="176.0" text-anchor="middle" class="m soft">40</text>
+<line x1="251.8" y1="158.0" x2="251.8" y2="163.0" class="ln"/>
+<text x="251.8" y="176.0" text-anchor="middle" class="m soft">50</text>
+<line x1="299.1" y1="158.0" x2="299.1" y2="163.0" class="ln"/>
+<text x="299.1" y="176.0" text-anchor="middle" class="m soft">60</text>
+<line x1="346.4" y1="158.0" x2="346.4" y2="163.0" class="ln"/>
+<text x="346.4" y="176.0" text-anchor="middle" class="m soft">70</text>
+<line x1="393.6" y1="158.0" x2="393.6" y2="163.0" class="ln"/>
+<text x="393.6" y="176.0" text-anchor="middle" class="m soft">80</text>
+<line x1="440.9" y1="158.0" x2="440.9" y2="163.0" class="ln"/>
+<text x="440.9" y="176.0" text-anchor="middle" class="m soft">90</text>
+<line x1="488.2" y1="158.0" x2="488.2" y2="163.0" class="ln"/>
+<text x="488.2" y="176.0" text-anchor="middle" class="m soft">100</text>
+<line x1="535.5" y1="158.0" x2="535.5" y2="163.0" class="ln"/>
+<text x="535.5" y="176.0" text-anchor="middle" class="m soft">110</text>
+<line x1="582.7" y1="158.0" x2="582.7" y2="163.0" class="ln"/>
+<text x="582.7" y="176.0" text-anchor="middle" class="m soft">120</text>
+<line x1="630.0" y1="158.0" x2="630.0" y2="163.0" class="ln"/>
+<text x="630.0" y="176.0" text-anchor="middle" class="m soft">130</text>
+<text x="20.0" y="54.0" text-anchor="start" class="sm b t2">Wooden</text>
+<line x1="180.9" y1="50.0" x2="247.1" y2="50.0" class="ln"/>
+<line x1="334.5" y1="50.0" x2="355.8" y2="50.0" class="ln"/>
+<line x1="180.9" y1="42.0" x2="180.9" y2="58.0" class="ln"/>
+<line x1="355.8" y1="42.0" x2="355.8" y2="58.0" class="ln"/>
+<rect x="247.1" y="36.0" width="87.5" height="28.0" rx="0" class="wash2 ln s2"/>
+<line x1="289.6" y1="36.0" x2="289.6" y2="64.0" class="ln s2 thick"/>
+<text x="180.9" y="29.0" text-anchor="middle" class="m b">35</text>
+<text x="247.1" y="29.0" text-anchor="middle" class="m b">49</text>
+<text x="289.6" y="29.0" text-anchor="middle" class="m b">58</text>
+<text x="334.5" y="29.0" text-anchor="middle" class="m b">67.5</text>
+<text x="355.8" y="16.0" text-anchor="middle" class="m b">72</text>
+<text x="20.0" y="124.0" text-anchor="start" class="sm b t4">Steel</text>
+<line x1="147.8" y1="120.0" x2="258.9" y2="120.0" class="ln"/>
+<line x1="507.1" y1="120.0" x2="582.7" y2="120.0" class="ln"/>
+<line x1="147.8" y1="112.0" x2="147.8" y2="128.0" class="ln"/>
+<line x1="582.7" y1="112.0" x2="582.7" y2="128.0" class="ln"/>
+<rect x="258.9" y="106.0" width="248.2" height="28.0" rx="0" class="wash4 ln s4"/>
+<line x1="417.3" y1="106.0" x2="417.3" y2="134.0" class="ln s4 thick"/>
+<text x="147.8" y="99.0" text-anchor="middle" class="m b">28</text>
+<text x="258.9" y="99.0" text-anchor="middle" class="m b">51.5</text>
+<text x="417.3" y="99.0" text-anchor="middle" class="m b">85</text>
+<text x="507.1" y="99.0" text-anchor="middle" class="m b">104</text>
+<text x="582.7" y="99.0" text-anchor="middle" class="m b">120</text>
+</svg><figcaption>Example 3-38 on one scale. Steel coasters have a much higher median (85 vs 58), a much larger IQR (52.5 vs 18.5) and range, and are negatively skewed; wooden coasters are about symmetric.<span class="ar">مثال <span dir="ltr" style="white-space:nowrap">3-38</span> على مقياس واحد: الوسيط للحديدية أعلى بكثير <span dir="ltr" style="white-space:nowrap">(85</span> مقابل <span dir="ltr" style="white-space:nowrap">58)</span>، ومداها الربيعي ومداها أكبر بكثير، وتوزيعها ملتوٍ لليسار، بينما الخشبية متماثلة تقريبًا.</span></figcaption></figure>
+      <p>(1) The median of the steel coasters is much higher (85 vs 58). (2) The IQR (spread) of the steel coasters is much larger (52.5 vs 18.5). (3) The range of the steel coasters is larger (92 vs 37). (4) The steel coasters are <strong>negatively skewed</strong> (median nearer Q₃); the wooden coasters are about symmetric.</p></div></div>
+  <div class="callout note"><span class="ct">Comparing two classes' grades <span class="src">Amani</span></span><p>The same four-point comparison: Class B's <strong>median</strong> is higher (it performed better overall); Class B's <strong>IQR</strong> is larger (grades more spread out); its <strong>range</strong> is wider (more variation in performance); Class B is <strong>left-skewed</strong> (some students scored much lower than the median) while Class A is <strong>right-skewed</strong>. Use this template, <em>centre → spread (IQR) → range → shape</em>, for every side-by-side question.</p></div>
+  <div class="ar-note"><span class="lbl">الشرح بالعربي — قراءة المخطط الصندوقي والمقارنة</span>المخطط الصندوقي يُرسم من <b>الملخص الخماسي</b>: أصغر قيمة، <span class="v" dir="ltr">Q₁</span>، الوسيط، <span class="v" dir="ltr">Q₃</span>، أكبر قيمة. وكل جزء من أجزائه الأربعة يحتوي <b>25%</b> من البيانات مهما كان طوله، فالجزء الأطول لا يعني بيانات أكثر بل <b>تشتتًا أكبر</b>. لمعرفة الشكل: إذا كان الوسيط <b>يسار</b> منتصف الصندوق والخط <b>الأيمن</b> أطول ← ملتوٍ لليمين (موجب)، والعكس ← ملتوٍ لليسار (سالب). وعند المقارنة بين مجموعتين اكتب أربع نقاط بالترتيب: (1) الوسيط، (2) المدى الربيعي، (3) المدى، (4) الشكل. ودعّم كل نقطة <b>بالأرقام</b>.</div>
+
+  <div class="callout note"><span class="ct">R for Lab Quiz I (outline CLO3-D)</span><p><span class="v">fivenum(x)</span> gives the five-number summary, <span class="v">boxplot(x, horizontal = TRUE)</span> draws the boxplot, and <span class="v">boxplot(wood, steel, names = c("Wood", "Steel"), horizontal = TRUE)</span> draws side-by-side boxplots. R's boxplot whiskers stop at the last value inside the 1.5·IQR fences and draw any outliers as separate points. <span class="v">fivenum()</span> can differ from the hand method when n is odd: for Dr. Amani's 15 values it gives hinges 40.5 and 56.5 instead of Q₁ = 39 and Q₃ = 61.</p></div>
+</section>
+
+<footer>
+  <p><strong>Chapter 3 study set: 8 files.</strong> One merged source built from Dr. Amani Al-Rubkhi's Fall 2026 notes (course coordinator) and Dr. Ahmed Al-Hadhrami's Spring 2024 slides, aligned to the SQU STAT 2101 course outline (Fall 2026). Textbook: Bluman, <em>Elementary Statistics</em>, 10th ed.</p>
+  <p>00 · Exam brief: what the outline tests · 01 · Lesson 3-1: Measures of Central Tendency · 02 · Lesson 3-2: Measures of Variation · 03 · Lesson 3-3: Measures of Position · <strong style="color:var(--accent)">04 · Lesson 3-4: Exploratory Data Analysis</strong> · 05 · Revision pack: formulas, decisions, traps, R · 06 · Exam-style questions (no answers) · 07 · Full worked answers</p>
+</footer>
+</div>

@@ -1,0 +1,1012 @@
+<title>Lesson 3-2 Variation</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+
+<style>
+/* Layout: single reading column with a sticky rail nav; four section inks mirror the
+   overprint of a Venn diagram — the chapter's own governing picture. */
+:root{
+  --bg:#fbfaf7;
+  --surface:#ffffff;
+  --surface-2:#f2f1ec;
+  --fg:#1b2027;
+  --fg-soft:#4c5663;
+  --fg-faint:#78828f;
+  --rule:#dddcd4;
+  --rule-soft:#eceae3;
+
+  --ink-1:#1f4e79;   /* 4-1  sample spaces      */
+  --ink-2:#0f6f5c;   /* 4-2  addition rules     */
+  --ink-3:#9a5b12;   /* 4-3  multiplication     */
+  --ink-4:#7b2d6b;   /* 4-4 / 4-5 counting      */
+  --accent:#b23b2e;  /* alarms, traps, must-know */
+
+  --ink-1-wash:#eaf0f7;
+  --ink-2-wash:#e5f1ee;
+  --ink-3-wash:#f8efe1;
+  --ink-4-wash:#f4e9f2;
+  --accent-wash:#f9eae7;
+
+  --display:"Spectral",Georgia,"Times New Roman",serif;
+  --body:"IBM Plex Sans","IBM Plex Sans Arabic",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --arabic:"IBM Plex Sans Arabic","IBM Plex Sans",-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  --measure:70ch;
+  --shadow:0 1px 2px rgba(27,32,39,.05),0 8px 24px -16px rgba(27,32,39,.25);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#13171c;
+    --surface:#1a1f26;
+    --surface-2:#222932;
+    --fg:#e8e6e0;
+    --fg-soft:#b3bac4;
+    --fg-faint:#8a929e;
+    --rule:#333b45;
+    --rule-soft:#272e37;
+
+    --ink-1:#7bb0e8;
+    --ink-2:#4fc4a8;
+    --ink-3:#e2a74e;
+    --ink-4:#d089c2;
+    --accent:#ef7f70;
+
+    --ink-1-wash:#182633;
+    --ink-2-wash:#132a26;
+    --ink-3-wash:#2b2314;
+    --ink-4-wash:#2a1b28;
+    --accent-wash:#2f1c19;
+
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#13171c;
+  --surface:#1a1f26;
+  --surface-2:#222932;
+  --fg:#e8e6e0;
+  --fg-soft:#b3bac4;
+  --fg-faint:#8a929e;
+  --rule:#333b45;
+  --rule-soft:#272e37;
+
+  --ink-1:#7bb0e8;
+  --ink-2:#4fc4a8;
+  --ink-3:#e2a74e;
+  --ink-4:#d089c2;
+  --accent:#ef7f70;
+
+  --ink-1-wash:#182633;
+  --ink-2-wash:#132a26;
+  --ink-3-wash:#2b2314;
+  --ink-4-wash:#2a1b28;
+  --accent-wash:#2f1c19;
+
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{
+  max-width:980px;
+  margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 72px;
+}
+
+/* ---------- masthead ---------- */
+.masthead{
+  padding-block:56px 36px;
+  border-bottom:3px double var(--rule);
+  margin-bottom:36px;
+}
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+}
+h1{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(2.1rem,6vw,3.4rem);
+  line-height:1.08;
+  margin:0 0 10px;
+  letter-spacing:-.015em;
+  text-wrap:balance;
+}
+.subtitle{
+  font-family:var(--display);
+  font-style:italic;
+  font-size:clamp(1.05rem,2.6vw,1.3rem);
+  color:var(--fg-soft);
+  margin:0 0 22px;
+  max-width:var(--measure);
+}
+.meta-strip{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 10px;
+  margin-top:20px;
+}
+.chip{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.04em;
+  padding:5px 10px;
+  border:1px solid var(--rule);
+  border-radius:3px;
+  color:var(--fg-soft);
+  background:var(--surface);
+}
+.chip strong{color:var(--fg);font-weight:600}
+
+/* ---------- nav ---------- */
+nav.toc{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:20px 22px;
+  margin-bottom:44px;
+  box-shadow:var(--shadow);
+}
+nav.toc h2{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+  font-weight:500;
+}
+nav.toc ol{
+  margin:0;padding:0;list-style:none;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:4px 26px;
+}
+nav.toc li{min-width:0}
+nav.toc a{
+  display:flex;
+  gap:10px;
+  align-items:baseline;
+  text-decoration:none;
+  color:var(--fg);
+  padding:5px 0;
+  border-bottom:1px solid var(--rule-soft);
+  font-size:.92rem;
+}
+nav.toc a:hover{color:var(--accent)}
+nav.toc a .num{
+  font-family:var(--mono);
+  font-size:.74rem;
+  color:var(--fg-faint);
+  flex:none;
+  min-width:2.4em;
+}
+
+/* ---------- sections ---------- */
+section{margin-bottom:64px;scroll-margin-top:24px}
+.sec-head{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+  padding-bottom:14px;
+  border-bottom:2px solid var(--sec,var(--fg));
+  margin-bottom:28px;
+}
+.sec-num{
+  font-family:var(--mono);
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.06em;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:5px 9px;
+  border-radius:3px;
+  flex:none;
+  margin-top:6px;
+}
+.sec-head h2{
+  font-family:var(--display);
+  font-size:clamp(1.5rem,4vw,2.05rem);
+  line-height:1.18;
+  margin:0;
+  font-weight:600;
+  text-wrap:balance;
+  min-width:0;
+}
+.sec-head .ar{
+  display:block;
+  font-family:var(--arabic);
+  font-size:.92rem;
+  font-style:normal;
+  color:var(--fg-soft);
+  direction:rtl;
+  margin-top:4px;
+  font-weight:400;
+}
+h3{
+  font-family:var(--body);
+  font-size:1.08rem;
+  font-weight:600;
+  letter-spacing:-.005em;
+  margin:36px 0 12px;
+  color:var(--fg);
+  display:flex;
+  align-items:baseline;
+  gap:9px;
+  flex-wrap:wrap;
+}
+h3::before{
+  content:"";
+  width:18px;height:3px;
+  background:var(--sec,var(--fg));
+  flex:none;
+  border-radius:2px;
+}
+h4{
+  font-family:var(--mono);
+  font-size:.74rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:26px 0 10px;
+  font-weight:500;
+}
+p{margin:0 0 14px;max-width:var(--measure)}
+ul,ol{max-width:var(--measure);padding-left:1.25em;margin:0 0 14px}
+li{margin-bottom:7px}
+li::marker{color:var(--sec,var(--fg-faint))}
+strong{font-weight:600}
+em{font-style:italic}
+code,.v{
+  font-family:var(--mono);
+  font-size:.9em;
+  background:var(--surface-2);
+  padding:1px 5px;
+  border-radius:3px;
+  white-space:nowrap;
+}
+.term{
+  font-weight:600;
+  color:var(--sec,var(--fg));
+}
+a{color:var(--accent)}
+
+/* ---------- maths ---------- */
+.fx{
+  font-family:var(--mono);
+  font-size:1.02rem;
+  line-height:2.1;
+  white-space:nowrap;
+}
+.frac{
+  display:inline-flex;
+  flex-direction:column;
+  vertical-align:middle;
+  text-align:center;
+  font-family:var(--mono);
+  line-height:1.25;
+  margin:0 .22em;
+  position:relative;
+  top:-.08em;
+}
+.frac .num{border-bottom:1.5px solid currentColor;padding:0 .4em .08em}
+.frac .den{padding:.08em .4em 0}
+sub,sup{font-size:.72em}
+
+.formula{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-left:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:18px 20px;
+  margin:18px 0 22px;
+  box-shadow:var(--shadow);
+  overflow-x:auto;
+}
+.formula .label{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg-faint));
+  margin-bottom:10px;
+  font-weight:600;
+}
+.formula .fx{margin:4px 0}
+.formula .note{
+  font-size:.88rem;
+  color:var(--fg-soft);
+  margin:10px 0 0;
+  white-space:normal;
+  max-width:none;
+}
+
+/* ---------- example cards ---------- */
+.ex{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:5px;
+  margin:20px 0;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.ex > .q{
+  padding:16px 20px;
+  border-bottom:1px dashed var(--rule);
+  background:var(--wash,var(--surface-2));
+}
+.ex .tag{
+  font-family:var(--mono);
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg));
+  display:block;
+  margin-bottom:6px;
+}
+.ex .q p{margin:0;max-width:none}
+.ex > .a{padding:16px 20px}
+.ex > .a p{max-width:none}
+.ex > .a p:last-child{margin-bottom:0}
+.ex .steps{margin:0;padding-left:1.2em;max-width:none}
+.ex .steps li{margin-bottom:9px}
+.ans{
+  display:inline-block;
+  font-family:var(--mono);
+  font-weight:600;
+  background:var(--sec,var(--fg));
+  color:#fff;
+  padding:3px 9px;
+  border-radius:3px;
+  font-size:.92em;
+  white-space:nowrap;
+}
+
+/* ---------- callouts ---------- */
+.callout{
+  border-radius:4px;
+  padding:16px 18px;
+  margin:20px 0;
+  border:1px solid;
+  font-size:.95rem;
+}
+.callout p{max-width:none}
+.callout p:last-child{margin-bottom:0}
+.callout .ct{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-weight:600;
+  display:block;
+  margin-bottom:8px;
+}
+.trap{background:var(--accent-wash);border-color:var(--accent)}
+.trap .ct{color:var(--accent)}
+.tip{background:var(--ink-2-wash);border-color:var(--ink-2)}
+.tip .ct{color:var(--ink-2)}
+.note{background:var(--surface-2);border-color:var(--rule)}
+.note .ct{color:var(--fg-faint)}
+
+.ar-note{
+  font-family:var(--arabic);
+  direction:rtl;
+  text-align:right;
+  background:var(--surface-2);
+  border-right:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:13px 16px;
+  margin:16px 0;
+  font-size:.96rem;
+  line-height:1.95;
+  color:var(--fg-soft);
+}
+.ar-note b{color:var(--fg);font-weight:600}
+.ar-note .lbl{
+  display:block;
+  font-size:.72rem;
+  letter-spacing:.04em;
+  color:var(--sec,var(--fg-faint));
+  font-weight:600;
+  margin-bottom:4px;
+}
+.ar-note ul{padding-right:1.2em;padding-left:0;margin:6px 0 0;max-width:none}
+
+.ar-note p{margin:0 0 7px;max-width:none}
+.ar-note p:last-child{margin-bottom:0}
+.ar-note ol{padding-right:1.3em;padding-left:0;margin:6px 0 0;max-width:none}
+.ar-note li{margin-bottom:5px}
+.ar-note .v{font-size:.84em}
+.arn{display:block;font-family:var(--arabic);direction:rtl;unicode-bidi:isolate;text-align:left;font-size:.84rem;color:var(--fg-soft);font-weight:500;margin-top:2px;line-height:1.5}
+.subtitle-ar{font-family:var(--arabic);direction:rtl;text-align:right;color:var(--fg-soft);font-size:1.02rem;margin:0 0 8px;max-width:none;line-height:1.9}
+
+/* ---------- diagrams ---------- */
+figure.dg{margin:22px 0 26px;padding:16px 14px 12px;background:var(--surface);border:1px solid var(--rule);border-radius:4px;break-inside:avoid;page-break-inside:avoid}
+figure.dg svg{display:block;width:100%;height:auto;margin:0 auto;color:var(--fg);overflow:visible}
+figure.dg figcaption{font-size:.86rem;color:var(--fg-soft);margin:10px auto 0;max-width:64ch;text-align:center;line-height:1.5}
+figure.dg figcaption .ar{display:block;font-family:var(--arabic);direction:rtl;margin-top:4px;font-size:.9rem}
+.dg .ln{stroke:currentColor;fill:none;stroke-width:1.4}
+.dg .ln-soft{stroke:var(--fg-faint);fill:none;stroke-width:1.2}
+.dg .dash{stroke-dasharray:4 4}
+.dg .thick{stroke-width:2.6}
+.dg text{fill:currentColor;font-family:var(--body);font-size:13px}
+.dg text.m{font-family:var(--mono);font-size:12.5px}
+.dg text.sm{font-size:11.5px}
+.dg text.big{font-family:var(--mono);font-size:19px;font-weight:600}
+.dg text.soft{fill:var(--fg-soft)}
+.dg text.b{font-weight:600}
+.dg .bg{fill:var(--surface)}
+.dg .wash1{fill:var(--ink-1-wash)} .dg .wash2{fill:var(--ink-2-wash)} .dg .wash3{fill:var(--ink-3-wash)} .dg .wash4{fill:var(--ink-4-wash)} .dg .washA{fill:var(--accent-wash)}
+.dg .f1{fill:var(--ink-1)} .dg .f2{fill:var(--ink-2)} .dg .f3{fill:var(--ink-3)} .dg .f4{fill:var(--ink-4)} .dg .fA{fill:var(--accent)}
+.dg .s1{stroke:var(--ink-1)} .dg .s2{stroke:var(--ink-2)} .dg .s3{stroke:var(--ink-3)} .dg .s4{stroke:var(--ink-4)} .dg .sA{stroke:var(--accent)}
+.dg text.t1{fill:var(--ink-1)} .dg text.t2{fill:var(--ink-2)} .dg text.t3{fill:var(--ink-3)} .dg text.t4{fill:var(--ink-4)} .dg text.tA{fill:var(--accent)}
+
+/* ---------- tables ---------- */
+.tbl-wrap{overflow-x:auto;margin:18px 0 22px;-webkit-overflow-scrolling:touch}
+table{
+  border-collapse:collapse;
+  width:100%;
+  min-width:420px;
+  font-size:.93rem;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+}
+caption{
+  caption-side:top;
+  text-align:left;
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  padding-bottom:9px;
+  font-weight:500;
+}
+th,td{
+  padding:9px 13px;
+  border-bottom:1px solid var(--rule-soft);
+  text-align:left;
+  vertical-align:top;
+}
+thead th{
+  background:var(--sec,var(--surface-2));
+  color:#fff;
+  font-weight:600;
+  font-size:.78rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  border-bottom:none;
+}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even){background:var(--surface-2)}
+td.num,th.num{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+
+/* ---------- misc blocks ---------- */
+.grid2{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:16px;
+  margin:18px 0 22px;
+}
+.card{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-top:3px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:16px 18px;
+  min-width:0;
+}
+.card h5{
+  font-family:var(--body);
+  font-size:.97rem;
+  font-weight:600;
+  margin:0 0 8px;
+}
+.card p{font-size:.92rem;margin-bottom:0;max-width:none;color:var(--fg-soft)}
+
+.flow{
+  list-style:none;
+  padding:0;
+  margin:18px 0 22px;
+  max-width:none;
+  display:grid;
+  gap:10px;
+}
+.flow li{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:13px 16px;
+  margin:0;
+}
+.flow .k{
+  font-family:var(--mono);
+  font-size:.73rem;
+  font-weight:600;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:3px 8px;
+  border-radius:3px;
+  flex:none;
+  margin-top:3px;
+  white-space:nowrap;
+}
+.flow .t{min-width:0;font-size:.95rem}
+.flow .t b{display:block;margin-bottom:2px}
+
+.keypad{
+  font-family:var(--mono);
+  font-size:.86rem;
+  background:var(--surface-2);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:4px 9px;
+  display:inline-block;
+  white-space:nowrap;
+}
+
+hr.soft{border:none;border-top:1px solid var(--rule-soft);margin:34px 0}
+
+footer{
+  border-top:3px double var(--rule);
+  padding-top:24px;
+  margin-top:20px;
+  font-size:.86rem;
+  color:var(--fg-faint);
+}
+footer p{max-width:none}
+
+@media (max-width:520px){
+  .sec-head{gap:11px}
+  .fx{font-size:.94rem}
+  .ex > .q,.ex > .a{padding:14px 15px}
+}
+@media print{
+  body{background:#fff}
+  nav.toc{break-inside:avoid}
+  .ex,.formula,.callout,.card{break-inside:avoid}
+  section{break-before:auto}
+}
+</style>
+
+<style>
+/* Chapter 3: denser setting so pages carry more per sheet */
+body{font-size:14.5px;line-height:1.55}
+p,ul,ol{max-width:none}
+p{margin:0 0 9px}
+li{margin-bottom:4px}
+.masthead{padding-block:34px 18px;margin-bottom:20px}
+section{margin-bottom:30px}
+.sec-head{margin-bottom:16px;padding-bottom:10px}
+h3{margin:22px 0 8px;font-size:1.02rem}
+h4{margin:14px 0 6px}
+.formula{padding:11px 14px;margin:10px 0 12px}
+.formula .fx{margin:1px 0;line-height:1.9}
+.ex{margin:10px 0}
+.ex > .q,.ex > .a{padding:10px 14px}
+.ex .steps li{margin-bottom:5px}
+.callout{padding:10px 13px;margin:10px 0;font-size:.93rem}
+.ar-note{padding:9px 13px;margin:9px 0;line-height:1.8;font-size:.93rem}
+.tbl-wrap{margin:8px 0 12px}
+th,td{padding:6px 10px}
+table{font-size:.9rem;min-width:0}
+figure.dg{margin:12px 0 14px;padding:10px 10px 8px}
+figure.dg figcaption{margin-top:6px;font-size:.84rem}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+.cols2 > *{min-width:0}
+.cols2 .ex{margin:0}
+@media (max-width:640px){.cols2{grid-template-columns:1fr}}
+/* let long formulas wrap inside narrow columns instead of being clipped */
+.fx,.ex .fx,.cols2 .fx,.a .fx{white-space:normal;overflow-x:visible}
+footer{margin-top:10px;padding-top:12px;font-size:.78rem}footer p{margin:0 0 4px}
+/* allow tall example cards to split across pages so no half-empty pages */
+@media print{.ex,.a.long{break-inside:auto!important;page-break-inside:auto!important}.a:not(.long){break-inside:avoid!important}.ex > .q{break-inside:avoid}.cols2{break-inside:auto}}
+.series{list-style:none;padding:0;margin:8px 0 12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2px 22px;max-width:none}
+.series li{margin:0;padding:3px 0;border-bottom:1px solid var(--rule-soft);font-size:.82rem;color:var(--fg-faint)}
+.series li.here{color:var(--fg);font-weight:600}
+.series li.here::after{content:"  ← this file";color:var(--accent);font-weight:500}
+.src{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-faint);border:1px solid var(--rule);border-radius:3px;padding:0 5px;margin-left:6px;white-space:nowrap;font-weight:500}
+</style>
+
+<div class="wrap">
+<header class="masthead">
+  <p class="eyebrow">Sultan Qaboos University · STAT 2101 · Chapter 3: Data Description</p>
+  <div class="meta-strip"><span class="chip"><strong>Week</strong> 3</span><span class="chip"><strong>CLO</strong> 2-A · 3-C</span><span class="chip"><strong>Textbook</strong> p. 178 {2, 3, 10, 17}</span><span class="chip"><strong>File</strong> 3 / 8</span></div>
+</header>
+<section id="s32" style="--sec:var(--ink-2);--wash:var(--ink-2-wash)">
+  <div class="sec-head">
+    <span class="sec-num">3-2</span>
+    <h2>Measures of Variation
+      <span class="ar">مقاييس التشتت — المدى والتباين والانحراف المعياري ومعامل الاختلاف ونظرية تشيبيشيف</span>
+    </h2>
+  </div>
+
+  <p><span class="term">Variation</span> (spread, dispersion) describes how far the data values are from each other, or how dispersed they are. The main measures are the <strong>range</strong>, <strong>variance</strong>, <strong>standard deviation</strong> and <strong>interquartile range</strong> (covered in 3-3). A measure of variation combined with a measure of centre gives a good picture of a distribution. <span class="src">Both</span></p>
+
+  <h3>0 · Why centre is not enough <span class="src">Amani</span></h3>
+  <p>Waiting times (minutes) at two SQU hospital clinics. A: 6.5 6.6 6.7 6.8 7.1 7.3 7.4 7.7 7.7 7.7 · B: 4.2 5.4 5.8 6.2 6.7 7.7 7.7 8.5 9.3 10.0. Both clinics have mean 7.15, median 7.2, mode 7.7 and midrange 7.1, so the centre cannot separate them. The dot plot shows the difference.</p>
+  <figure class="dg"><svg viewBox="0 0 660 176" style="max-width:660px" role="img" aria-label="Dot plots of waiting times at two clinics with the same mean of 7.15 minutes but very different spreads" xmlns="http://www.w3.org/2000/svg">
+<line x1="70.0" y1="150.0" x2="640.0" y2="150.0" class="ln"/>
+<line x1="70.0" y1="150.0" x2="70.0" y2="155.0" class="ln"/>
+<text x="70.0" y="168.0" text-anchor="middle" class="m soft">4</text>
+<line x1="157.7" y1="150.0" x2="157.7" y2="155.0" class="ln"/>
+<text x="157.7" y="168.0" text-anchor="middle" class="m soft">5</text>
+<line x1="245.4" y1="150.0" x2="245.4" y2="155.0" class="ln"/>
+<text x="245.4" y="168.0" text-anchor="middle" class="m soft">6</text>
+<line x1="333.1" y1="150.0" x2="333.1" y2="155.0" class="ln"/>
+<text x="333.1" y="168.0" text-anchor="middle" class="m soft">7</text>
+<line x1="420.8" y1="150.0" x2="420.8" y2="155.0" class="ln"/>
+<text x="420.8" y="168.0" text-anchor="middle" class="m soft">8</text>
+<line x1="508.5" y1="150.0" x2="508.5" y2="155.0" class="ln"/>
+<text x="508.5" y="168.0" text-anchor="middle" class="m soft">9</text>
+<line x1="596.2" y1="150.0" x2="596.2" y2="155.0" class="ln"/>
+<text x="596.2" y="168.0" text-anchor="middle" class="m soft">10</text>
+<circle cx="289.2" cy="56.0" r="4" class="f2"/>
+<circle cx="298.0" cy="56.0" r="4" class="f2"/>
+<circle cx="306.8" cy="56.0" r="4" class="f2"/>
+<circle cx="315.5" cy="56.0" r="4" class="f2"/>
+<circle cx="341.8" cy="56.0" r="4" class="f2"/>
+<circle cx="359.4" cy="56.0" r="4" class="f2"/>
+<circle cx="368.2" cy="56.0" r="4" class="f2"/>
+<circle cx="394.5" cy="56.0" r="4" class="f2"/>
+<circle cx="394.5" cy="46.0" r="4" class="f2"/>
+<circle cx="394.5" cy="36.0" r="4" class="f2"/>
+<text x="20.0" y="60.0" text-anchor="start" class="sm b t2">Clinic A</text>
+<line x1="289.2" y1="70.0" x2="394.5" y2="70.0" class="ln"/>
+<line x1="289.2" y1="70.0" x2="289.2" y2="64.0" class="ln"/>
+<line x1="394.5" y1="70.0" x2="394.5" y2="64.0" class="ln"/>
+<text x="402.5" y="74.0" text-anchor="start" class="sm b">range = 1.2</text>
+<circle cx="87.5" cy="116.0" r="4" class="f3"/>
+<circle cx="192.8" cy="116.0" r="4" class="f3"/>
+<circle cx="227.8" cy="116.0" r="4" class="f3"/>
+<circle cx="262.9" cy="116.0" r="4" class="f3"/>
+<circle cx="306.8" cy="116.0" r="4" class="f3"/>
+<circle cx="394.5" cy="116.0" r="4" class="f3"/>
+<circle cx="394.5" cy="106.0" r="4" class="f3"/>
+<circle cx="464.6" cy="116.0" r="4" class="f3"/>
+<circle cx="534.8" cy="116.0" r="4" class="f3"/>
+<circle cx="596.2" cy="116.0" r="4" class="f3"/>
+<text x="20.0" y="120.0" text-anchor="start" class="sm b t3">Clinic B</text>
+<line x1="87.5" y1="130.0" x2="596.2" y2="130.0" class="ln"/>
+<line x1="87.5" y1="130.0" x2="87.5" y2="124.0" class="ln"/>
+<line x1="596.2" y1="130.0" x2="596.2" y2="124.0" class="ln"/>
+<text x="604.2" y="134.0" text-anchor="start" class="sm b">range = 5.8</text>
+<line x1="346.2" y1="22.0" x2="346.2" y2="150.0" class="ln sA dash"/>
+<text x="346.2" y="16.0" text-anchor="middle" class="sm b tA">mean = 7.15 for both</text>
+</svg><figcaption>Same mean, median, mode and midrange, but clinic B's waiting times are spread almost five times wider. The centre alone cannot tell the clinics apart; a measure of variation can.<span class="ar">نفس المتوسط والوسيط والمنوال ومنتصف المدى للعيادتين، لكن أوقات الانتظار في العيادة B مشتّتة أكثر بكثير. مقاييس النزعة المركزية وحدها لا تكفي، ونحتاج مقاييس التشتت.</span></figcaption></figure>
+
+  <h3>1 · The range <span class="src">Both</span></h3>
+  <div class="cols2">
+    <div class="formula" style="margin:0"><div class="label">Range</div><p class="fx">R = highest value − lowest value</p><p class="note">The simplest measure, but it depends only on the two extremes, so one extreme value changes it markedly. It is less useful than the variance and SD. Give it as a <strong>single number</strong>.</p></div>
+    <div class="ex" style="margin:0"><div class="q"><span class="tag">Simple example <span class="src">Amani</span> · Ex 3-16 paint <span class="src">Hadhrami</span></span><p>(a) 1, 2, 4 · (b) 1, 2, 1000 · (c) months before fading: brand A 10 60 50 30 40 20, brand B 35 45 30 35 40 25.</p></div>
+      <div class="a"><p>(a) R = <span class="ans">3</span> · (b) R = <span class="ans">999</span>: one extreme value multiplies the range by 333. (c) A: <span class="v">60 − 10 =</span> <span class="ans">50 months</span>; B: <span class="v">45 − 25 =</span> <span class="ans">20 months</span>, less than half of brand A's. Textbook: Ex 3-15, 3-17.</p></div></div>
+  </div>
+
+  <h3>2 · Variance and standard deviation <span class="src">Both</span></h3>
+  <p>Both are built on the <span class="term">deviation</span>, the distance of each value from the mean: <span class="v">(X − μ)</span> or <span class="v">(X − x̄)</span>. Deviations always sum to zero, <span class="v">Σ(X − x̄) = 0</span>, so they are squared before averaging. The <strong>variance</strong> is the average of the squared deviations, and the <strong>standard deviation</strong> is its square root.</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th></th><th>Population (parameter)</th><th>Sample (statistic)</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Variance</strong><span class="arn">التباين</span></td><td class="fx">σ² = <span class="frac"><span class="num">Σ(X − μ)²</span><span class="den">N</span></span></td><td class="fx">s² = <span class="frac"><span class="num">Σ(X − x̄)²</span><span class="den">n − 1</span></span></td></tr>
+      <tr><td><strong>Standard deviation</strong><span class="arn">الانحراف المعياري</span></td><td class="fx">σ = √σ²</td><td class="fx">s = √s²</td></tr>
+      <tr><td><strong>Shortcut (sample)</strong></td><td colspan="2" class="fx">s² = <span class="frac"><span class="num">n(ΣX²) − (ΣX)²</span><span class="den">n(n − 1)</span></span> &nbsp; or &nbsp; s² = <span class="frac"><span class="num">ΣX² − n·x̄²</span><span class="den">n − 1</span></span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="cols2">
+    <div class="callout tip" style="margin:0"><span class="ct">Properties to quote</span><p>Variance and SD can <strong>never be negative</strong>, so take the positive square root. If the values sit close to the mean, the variance is small. The <strong>serious disadvantage of the variance</strong> is that its units are squared (units²). The <strong>SD has the same units as the data</strong>. The larger the SD, the more spread out the data. When two data sets have equal means, the one with the larger variance or SD is more variable. <span class="v">ΣX²</span> (square, then sum) is not <span class="v">(ΣX)²</span> (sum, then square).</p></div>
+    <div class="callout note" style="margin:0"><span class="ct">Research question in both decks: why n − 1?</span><p>The sample mean x̄ is computed from the same data, so the values sit closer to x̄ than to the true μ. Dividing by n would therefore <strong>underestimate</strong> σ². Dividing by <span class="v">n − 1</span> (the <em>degrees of freedom</em>: once x̄ is fixed, only n − 1 deviations are free) gives a slightly larger value, which makes s² an <strong>unbiased</strong> estimator of σ².</p></div>
+  </div>
+  <figure class="dg"><svg viewBox="0 0 660 200" style="max-width:660px" role="img" aria-label="Each paint lifetime drawn as a bar from the mean of 35 to its value, with positive and negative deviations" xmlns="http://www.w3.org/2000/svg">
+<line x1="60.0" y1="176.0" x2="440.0" y2="176.0" class="ln"/>
+<line x1="60.0" y1="176.0" x2="60.0" y2="181.0" class="ln"/>
+<text x="60.0" y="194.0" text-anchor="middle" class="m soft">0</text>
+<line x1="114.3" y1="176.0" x2="114.3" y2="181.0" class="ln"/>
+<text x="114.3" y="194.0" text-anchor="middle" class="m soft">10</text>
+<line x1="168.6" y1="176.0" x2="168.6" y2="181.0" class="ln"/>
+<text x="168.6" y="194.0" text-anchor="middle" class="m soft">20</text>
+<line x1="222.9" y1="176.0" x2="222.9" y2="181.0" class="ln"/>
+<text x="222.9" y="194.0" text-anchor="middle" class="m soft">30</text>
+<line x1="277.1" y1="176.0" x2="277.1" y2="181.0" class="ln"/>
+<text x="277.1" y="194.0" text-anchor="middle" class="m soft">40</text>
+<line x1="331.4" y1="176.0" x2="331.4" y2="181.0" class="ln"/>
+<text x="331.4" y="194.0" text-anchor="middle" class="m soft">50</text>
+<line x1="385.7" y1="176.0" x2="385.7" y2="181.0" class="ln"/>
+<text x="385.7" y="194.0" text-anchor="middle" class="m soft">60</text>
+<line x1="440.0" y1="176.0" x2="440.0" y2="181.0" class="ln"/>
+<text x="440.0" y="194.0" text-anchor="middle" class="m soft">70</text>
+<line x1="250.0" y1="14.0" x2="250.0" y2="176.0" class="ln sA dash"/>
+<text x="250.0" y="10.0" text-anchor="middle" class="sm b tA">μ = 35</text>
+<line x1="250.0" y1="30.0" x2="114.3" y2="30.0" class="ln thick s3"/>
+<circle cx="114.3" cy="30.0" r="4.5" class="f3"/>
+<text x="104.3" y="34.0" text-anchor="end" class="m b">-25</text>
+<text x="30.0" y="34.0" text-anchor="end" class="m">10</text>
+<line x1="250.0" y1="53.0" x2="385.7" y2="53.0" class="ln thick s2"/>
+<circle cx="385.7" cy="53.0" r="4.5" class="f2"/>
+<text x="395.7" y="57.0" text-anchor="start" class="m b">+25</text>
+<text x="30.0" y="57.0" text-anchor="end" class="m">60</text>
+<line x1="250.0" y1="76.0" x2="331.4" y2="76.0" class="ln thick s2"/>
+<circle cx="331.4" cy="76.0" r="4.5" class="f2"/>
+<text x="341.4" y="80.0" text-anchor="start" class="m b">+15</text>
+<text x="30.0" y="80.0" text-anchor="end" class="m">50</text>
+<line x1="250.0" y1="99.0" x2="222.9" y2="99.0" class="ln thick s3"/>
+<circle cx="222.9" cy="99.0" r="4.5" class="f3"/>
+<text x="212.9" y="103.0" text-anchor="end" class="m b">-5</text>
+<text x="30.0" y="103.0" text-anchor="end" class="m">30</text>
+<line x1="250.0" y1="122.0" x2="277.1" y2="122.0" class="ln thick s2"/>
+<circle cx="277.1" cy="122.0" r="4.5" class="f2"/>
+<text x="287.1" y="126.0" text-anchor="start" class="m b">+5</text>
+<text x="30.0" y="126.0" text-anchor="end" class="m">40</text>
+<line x1="250.0" y1="145.0" x2="168.6" y2="145.0" class="ln thick s3"/>
+<circle cx="168.6" cy="145.0" r="4.5" class="f3"/>
+<text x="158.6" y="149.0" text-anchor="end" class="m b">-15</text>
+<text x="30.0" y="149.0" text-anchor="end" class="m">20</text>
+<text x="470.0" y="46.0" text-anchor="start" class="m b">Σ(X − μ) = 0</text>
+<text x="470.0" y="70.0" text-anchor="start" class="sm soft">squares:</text>
+<text x="470.0" y="88.0" text-anchor="start" class="m">625+625+225+25+25+225</text>
+<text x="470.0" y="108.0" text-anchor="start" class="m b">Σ(X − μ)² = 1750</text>
+<text x="470.0" y="136.0" text-anchor="start" class="m b t2">σ² = 1750 / 6 ≈ 291.7</text>
+<text x="470.0" y="158.0" text-anchor="start" class="m b t2">σ = √291.7 ≈ 17.1</text>
+</svg><figcaption>Example 3-18 (brand A paint). Each bar is a deviation X − μ. They cancel to zero, which is why we square them before averaging; the average squared deviation is the variance.<span class="ar">مثال <span dir="ltr" style="white-space:nowrap">3-18</span>: كل خط يمثل انحراف القيمة عن المتوسط. مجموع الانحرافات = صفر دائمًا، لذلك نربّعها قبل أخذ المتوسط، ومتوسط مربعات الانحرافات هو التباين.</span></figcaption></figure>
+  <div class="cols2">
+    <div class="ex"><div class="q"><span class="tag">Ex 3-18 · Paint brand A (a population) <span class="src">Hadhrami</span></span><p>10, 60, 50, 30, 40, 20. Find σ² and σ.</p></div>
+      <div class="a"><p>μ = 210/6 = 35; Σ(X − μ)² = 1750 (see the figure).</p><p class="fx">σ² = 1750/6 = <span class="ans">291.7</span> &nbsp; σ = <span class="ans">17.1 months</span></p><p><strong>Brand B</strong> (textbook Ex 3-19): μ = 35, Σ(X − μ)² = 250, so σ² = 41.7 and σ = 6.5. Same mean, but brand A is far more variable.</p></div></div>
+    <div class="ex"><div class="q"><span class="tag">Simple example: 1, 2, 4 (sample) <span class="src">Amani</span></span><p>Find s² and s.</p></div>
+      <div class="a"><p>x̄ = 7/3. Deviations: −4/3, −1/3, 5/3, which sum to 0. Squares: 16/9 + 1/9 + 25/9 = 42/9 = 4.667.</p><p class="fx">s² = 4.667/2 = <span class="ans">2.333</span> &nbsp; s = <span class="ans">1.53</span></p><p>The notes print 2.335 because the deviations were rounded to −1.33, −0.33, 1.67 first. That is exactly why the rounding rule says <strong>never round mid-calculation</strong>.</p></div></div>
+  </div>
+  <div class="ex"><div class="q"><span class="tag">Ex 3-20 and 3-21 · Teacher strikes <span class="src">Hadhrami</span> = Ejada teacher awards <span class="src">Amani</span></span><p>A random sample of years: 9, 10, 14, 7, 8, 3. Find s² and s by the definition formula and by the shortcut formula.</p></div>
+    <div class="a"><div class="cols2">
+      <div><p><strong>Definition:</strong> x̄ = 51/6 = 8.5. Deviations 0.5, 1.5, 5.5, −1.5, −0.5, −5.5; squares 0.25, 2.25, 30.25, 2.25, 0.25, 30.25.</p><p class="fx">s² = 65.5/5 = 13.1</p></div>
+      <div><p><strong>Shortcut:</strong> ΣX = 51, ΣX² = 499.</p><p class="fx">s² = <span class="frac"><span class="num">6(499) − 51²</span><span class="den">6(5)</span></span> = <span class="frac"><span class="num">2994 − 2601</span><span class="den">30</span></span> = <span class="frac"><span class="num">393</span><span class="den">30</span></span> = 13.1</p><p class="fx">Check: (499 − 6·8.5²)/5 = 65.5/5 = 13.1</p></div></div>
+      <p>All three formulas agree: <span class="ans">s² = 13.1, s = √13.1 ≈ 3.6</span></p></div></div>
+  <div class="cols2">
+    <div class="ex"><div class="q"><span class="tag">Activity · range, variance, SD of both clinics <span class="src">Amani</span></span></div>
+      <div class="a"><div class="tbl-wrap" style="margin:0"><table><thead><tr><th class="num">Clinic A X</th><th class="num">X − 7.15</th><th class="num">(X − 7.15)²</th></tr></thead><tbody>
+        <tr><td class="num">6.5</td><td class="num">−0.65</td><td class="num">0.4225</td></tr><tr><td class="num">6.6</td><td class="num">−0.55</td><td class="num">0.3025</td></tr>
+        <tr><td class="num">6.7</td><td class="num">−0.45</td><td class="num">0.2025</td></tr><tr><td class="num">6.8</td><td class="num">−0.35</td><td class="num">0.1225</td></tr>
+        <tr><td class="num">7.1</td><td class="num">−0.05</td><td class="num">0.0025</td></tr><tr><td class="num">7.3</td><td class="num">0.15</td><td class="num">0.0225</td></tr>
+        <tr><td class="num">7.4</td><td class="num">0.25</td><td class="num">0.0625</td></tr><tr><td class="num">7.7 ×3</td><td class="num">0.55</td><td class="num">0.3025 ×3</td></tr>
+        <tr><td class="num"><strong>Σ</strong></td><td class="num">0</td><td class="num"><strong>2.045</strong></td></tr></tbody></table></div>
+        <p>A: R = <span class="v">1.2</span>, s² = 2.045/9 = <span class="ans">0.227</span>, s = <span class="ans">0.477 min</span>.<br>B: R = <span class="v">5.8</span>, Σ(X − x̄)² = 29.865, s² = <span class="ans">3.318</span>, s = <span class="ans">1.822 min</span>.</p>
+        <p>Clinic B's SD is almost <strong>four times</strong> clinic A's. A is the more <strong>consistent</strong> clinic: patients there know what wait to expect.</p></div></div>
+    <div class="ex"><div class="q"><span class="tag">Activity · car accidents in Muscat <span class="src">Amani</span></span><p>Five months: 22, 30, 36, 24, 5 (note: mean = 28). Find R, s², s.</p></div>
+      <div class="a"><p><strong>Version consistent with the note</strong> (last value 28): x̄ = 140/5 = 28; deviations −6, 2, 8, −4, 0; Σ = 120.</p><p class="fx">R = 36 − 22 = <span class="ans">14</span> &nbsp; s² = 120/4 = <span class="ans">30</span> &nbsp; s = <span class="ans">5.48</span></p><p><strong>As printed</strong> (last value 5): x̄ = 23.4, R = 31, Σ(X − x̄)² = 543.2, s² = 135.8, s = 11.65. One low month nearly doubles the SD.</p></div></div>
+  </div>
+  <div class="ar-note"><span class="lbl">الشرح بالعربي — التباين والانحراف المعياري</span>الانحراف = بُعد القيمة عن المتوسط <span class="v" dir="ltr">X − x̄</span>. مجموع الانحرافات = صفر دائمًا، لذلك <b>نربّعها</b> ثم نأخذ متوسطها، وهذا هو التباين. التباين وحدته <b>مربعة</b> (وهذا عيبه)، فنأخذ الجذر لنحصل على الانحراف المعياري، وهو بنفس وحدة البيانات. للمجتمع نقسم على <span class="v" dir="ltr">N</span>، وللعينة نقسم على <span class="v" dir="ltr">n − 1</span>. انتبه: اقرأ السؤال جيدًا. «عينة» تعني <span class="v" dir="ltr">n − 1</span>، و«مجتمع» أو «كل الموظفين» تعني <span class="v" dir="ltr">N</span>. والقانون المختصر يعطي نفس الناتج تمامًا، لكن احذر الخلط بين <span class="v" dir="ltr">ΣX²</span> و<span class="v" dir="ltr">(ΣX)²</span>.</div>
+
+  <h3>3 · Variance and SD for grouped data <span class="src">Both</span></h3>
+  <div class="formula"><div class="label">Shortcut formula: table A Class · B f · C Xₘ · D f·Xₘ · E f·Xₘ²</div>
+    <p class="fx">s² = <span class="frac"><span class="num">n(Σf·Xₘ²) − (Σf·Xₘ)²</span><span class="den">n(n − 1)</span></span> &nbsp;&nbsp;&nbsp; s = √s²</p><p class="note">Steps: find the midpoints; f·Xₘ → column D; f·Xₘ² → column E; sum columns B (= n), D and E; substitute; take the square root.</p></div>
+  <div class="cols2">
+    <div class="ex"><div class="q"><span class="tag">Ex 3-22 · Miles run per week (20 runners) <span class="src">Hadhrami</span></span>
+      <div class="tbl-wrap" style="margin:6px 0 0"><table><thead><tr><th>Class</th><th class="num">f</th><th class="num">Xₘ</th><th class="num">f·Xₘ</th><th class="num">f·Xₘ²</th></tr></thead><tbody>
+        <tr><td>5.5–10.5</td><td class="num">1</td><td class="num">8</td><td class="num">8</td><td class="num">64</td></tr>
+        <tr><td>10.5–15.5</td><td class="num">2</td><td class="num">13</td><td class="num">26</td><td class="num">338</td></tr>
+        <tr><td>15.5–20.5</td><td class="num">3</td><td class="num">18</td><td class="num">54</td><td class="num">972</td></tr>
+        <tr><td>20.5–25.5</td><td class="num">5</td><td class="num">23</td><td class="num">115</td><td class="num">2,645</td></tr>
+        <tr><td>25.5–30.5</td><td class="num">4</td><td class="num">28</td><td class="num">112</td><td class="num">3,136</td></tr>
+        <tr><td>30.5–35.5</td><td class="num">3</td><td class="num">33</td><td class="num">99</td><td class="num">3,267</td></tr>
+        <tr><td>35.5–40.5</td><td class="num">2</td><td class="num">38</td><td class="num">76</td><td class="num">2,888</td></tr>
+        <tr><td><strong>Σ</strong></td><td class="num"><strong>20</strong></td><td></td><td class="num"><strong>490</strong></td><td class="num"><strong>13,310</strong></td></tr></tbody></table></div></div>
+      <div class="a"><p class="fx">s² = <span class="frac"><span class="num">20(13,310) − 490²</span><span class="den">20(19)</span></span> = <span class="frac"><span class="num">26,100</span><span class="den">380</span></span> ≈ <span class="ans">68.7</span> &nbsp; s ≈ <span class="ans">8.3 miles</span></p></div></div>
+    <div class="ex"><div class="q"><span class="tag">Ages of drivers (table in 3-1) <span class="src">Amani</span></span><p>Find the sample variance and SD.</p></div>
+      <div class="a"><p>Column E (f·Xₘ²): 11,404.75 · 21,125 · 26,244 · 32,931.5 · 0 · 4,160.25 · 5,256.25.</p><p class="fx">n = 71, Σf·Xₘ = 2579.5, Σf·Xₘ² = 101,121.75</p><p class="fx">s² = <span class="frac"><span class="num">71(101,121.75) − 2579.5²</span><span class="den">71(70)</span></span> = <span class="frac"><span class="num">525,824</span><span class="den">4970</span></span> = <span class="ans">105.80</span></p><p class="fx">s = <span class="ans">10.29 years</span></p><p>With x̄ = 36.33 from 3-1, the CV is 10.29/36.33 = 28.3%.</p></div></div>
+  </div>
+
+  <h3>4 · Coefficient of variation (CVar) <span class="src">Both</span></h3>
+  <div class="cols2">
+    <div class="formula" style="margin:0"><div class="label">Coefficient of variation: SD as a percentage of the mean</div><p class="fx">sample: CVar = <span class="frac"><span class="num">s</span><span class="den">x̄</span></span> · 100 &nbsp;&nbsp; population: CVar = <span class="frac"><span class="num">σ</span><span class="den">μ</span></span> · 100</p><p class="note">The SD and the mean share the same units, so CVar has <strong>no units</strong>. That is why it can compare standard deviations measured in different units, or data sets with different means. Lower CV: values closer together, <strong>less variable and more consistent</strong>. Higher CV: more spread out, greater relative variability.</p></div>
+    <div class="ex" style="margin:0"><div class="q"><span class="tag">Ex 3-23 · Car sales vs commissions <span class="src">Both</span></span><p>Sales: mean 87, s = 5. Commissions: mean 5225 OMR, s = 773.</p></div>
+      <div class="a"><p class="fx">sales 5/87 · 100 ≈ <span class="ans">5.7%</span> &nbsp; commissions 773/5225 · 100 ≈ <span class="ans">14.8%</span></p><p>The commissions are more variable than the sales.</p></div></div>
+  </div>
+  <div class="cols2">
+    <div class="ex"><div class="q"><span class="tag">Ex 3-24 · Roller coasters <span class="src">Hadhrami</span></span><p>Speed: mean 69.16 mph, <strong>variance</strong> 2.76. Height: mean 177.80 ft, <strong>variance</strong> 157.70.</p></div>
+      <div class="a"><p>Take the square root first, because the variance is given, not the SD:</p><p class="fx">√2.76/69.16 · 100 ≈ <span class="ans">2.4%</span> &nbsp; √157.70/177.80 · 100 ≈ <span class="ans">7.1%</span></p><p>The speeds are less variable and more consistent.</p></div></div>
+    <div class="ex"><div class="q"><span class="tag">Activity · two departments <span class="src">Amani</span></span><p>Dept 1: 40 employees, mean 450 OMR, SD 7. Dept 2: 65 employees, mean 350 OMR, SD 9. (1) Which has the higher total salary expense? (2) Which has greater variability?</p></div>
+      <div class="a"><p>(1) The total is n·x̄: 40 × 450 = 18,000 and 65 × 350 = 22,750, so <span class="ans">Dept 2</span>.</p><p>(2) CV₁ = 7/450 = 1.56% and CV₂ = 9/350 = 2.57%, so <span class="ans">Dept 2</span> varies more. Comparing raw SDs alone is not valid here because the means differ.</p></div></div>
+  </div>
+  <div class="ex"><div class="q"><span class="tag">Activity · CV to SD <span class="src">Amani</span></span><p>80 candidates: mean height 145.8 cm, coefficient of variation 2.5%. Find the SD.</p></div>
+    <div class="a"><p>Rearrange the formula: <span class="v">s = CV × x̄ / 100 = 0.025 × 145.8 =</span> <span class="ans">3.645 cm</span>. The 80 candidates is a distractor: n is not needed.</p></div></div>
+  <div class="ar-note"><span class="lbl">الشرح بالعربي — معامل الاختلاف</span>معامل الاختلاف = الانحراف المعياري ÷ المتوسط × 100، وهو <b>بدون وحدة</b>. نستخدمه للمقارنة بين مجموعتين <b>تختلف وحداتهما</b> (مثلًا عدد سيارات مقابل ريالات) أو <b>تختلف متوسطاتهما</b>. الأصغر يعني تشتتًا نسبيًا أقل واتساقًا أكبر. فخّان شائعان: (1) إذا أُعطيت <b>التباين</b> فخذ الجذر أولًا قبل القسمة. (2) لا تقارن الانحرافين المعياريين مباشرة إذا اختلف المتوسطان، بل قارن معاملي الاختلاف.</div>
+
+  <h3>5 · Range rule of thumb <span class="src">Both</span></h3>
+  <div class="cols2">
+    <div><div class="formula" style="margin:0 0 8px"><div class="label">Quick estimate of s, only for unimodal and roughly symmetric data</div><p class="fx">s ≈ <span class="frac"><span class="num">range</span><span class="den">4</span></span></p></div>
+      <p><strong>Why 4?</strong> (research question) For bell-shaped data about 95% of values lie within x̄ ± 2s, an interval of width 4s, so the range is roughly 4s. The textbook uses the same idea to approximate the smallest and largest values: about x̄ − 2s and x̄ + 2s.</p></div>
+    <div class="ex" style="margin:0"><div class="q"><span class="tag">Examples <span class="src">Amani</span> · <span class="src">Hadhrami</span></span><p>(a) 12, 12, 14, 15, 16, 18, 18, 20, 20, 25. (b) 5, 8, 8, 9, 10, 12, 13.</p></div>
+      <div class="a"><p>(a) s ≈ 13/4 = 3.25, while the formula gives s = 4.06. (b) s ≈ 8/4 = 2, while the formula gives 2.7.</p><p>The rule is quick but less accurate. In most cases it <strong>underestimates</strong> s, but not always.</p></div></div>
+  </div>
+
+  <h3>6 · Chebyshev's theorem: any shape <span class="src">Both</span></h3>
+  <div class="formula"><div class="label">Chebyshev (1821–1894): for any k &gt; 1, not necessarily an integer</div>
+    <p class="fx">at least &nbsp;1 − <span class="frac"><span class="num">1</span><span class="den">k²</span></span>&nbsp; of the data lie within &nbsp;x̄ ± k·s (sample) &nbsp;or&nbsp; μ ± k·σ (population)</p>
+    <p class="note">k = 1.5: at least 55.56% · k = 2: at least <strong>75%</strong> · k = 2.5: at least 84% · k = 3: at least <strong>88.89%</strong> (8/9). Finding k: <span class="v">k = (upper limit − mean)/SD</span>. The answer is always "<strong>at least</strong>", never "exactly".</p></div>
+  <figure class="dg"><svg viewBox="0 0 660 166" style="max-width:660px" role="img" aria-label="Number line around a mean of 28 with standard deviation 3, showing nested intervals for k equal to 2 and 3" xmlns="http://www.w3.org/2000/svg">
+<line x1="50.0" y1="120.0" x2="620.0" y2="120.0" class="ln"/>
+<line x1="121.2" y1="120.0" x2="121.2" y2="125.0" class="ln"/>
+<text x="121.2" y="138.0" text-anchor="middle" class="m soft">19</text>
+<line x1="192.5" y1="120.0" x2="192.5" y2="125.0" class="ln"/>
+<text x="192.5" y="138.0" text-anchor="middle" class="m soft">22</text>
+<line x1="263.8" y1="120.0" x2="263.8" y2="125.0" class="ln"/>
+<text x="263.8" y="138.0" text-anchor="middle" class="m soft">25</text>
+<line x1="335.0" y1="120.0" x2="335.0" y2="125.0" class="ln"/>
+<text x="335.0" y="138.0" text-anchor="middle" class="m soft">28</text>
+<line x1="406.2" y1="120.0" x2="406.2" y2="125.0" class="ln"/>
+<text x="406.2" y="138.0" text-anchor="middle" class="m soft">31</text>
+<line x1="477.5" y1="120.0" x2="477.5" y2="125.0" class="ln"/>
+<text x="477.5" y="138.0" text-anchor="middle" class="m soft">34</text>
+<line x1="548.8" y1="120.0" x2="548.8" y2="125.0" class="ln"/>
+<text x="548.8" y="138.0" text-anchor="middle" class="m soft">37</text>
+<text x="121.2" y="156.0" text-anchor="middle" class="sm soft">x̄−3s</text>
+<text x="192.5" y="156.0" text-anchor="middle" class="sm soft">x̄−2s</text>
+<text x="263.8" y="156.0" text-anchor="middle" class="sm soft">x̄−s</text>
+<text x="335.0" y="156.0" text-anchor="middle" class="sm soft">x̄</text>
+<text x="406.2" y="156.0" text-anchor="middle" class="sm soft">x̄+s</text>
+<text x="477.5" y="156.0" text-anchor="middle" class="sm soft">x̄+2s</text>
+<text x="548.8" y="156.0" text-anchor="middle" class="sm soft">x̄+3s</text>
+<rect x="192.5" y="82.0" width="285.0" height="30.0" rx="0" class="wash2"/>
+<rect x="121.2" y="92.0" width="71.2" height="20.0" rx="0" class="wash3"/>
+<rect x="477.5" y="92.0" width="71.2" height="20.0" rx="0" class="wash3"/>
+<line x1="192.5" y1="70.0" x2="477.5" y2="70.0" class="ln"/>
+<line x1="192.5" y1="70.0" x2="192.5" y2="76.0" class="ln"/>
+<line x1="477.5" y1="70.0" x2="477.5" y2="76.0" class="ln"/>
+<text x="335.0" y="64.0" text-anchor="middle" class="sm b t2">k = 2: at least 1 − 1/4 = 75%  (≥ 38 of 50)</text>
+<line x1="121.2" y1="36.0" x2="548.8" y2="36.0" class="ln"/>
+<line x1="121.2" y1="36.0" x2="121.2" y2="42.0" class="ln"/>
+<line x1="548.8" y1="36.0" x2="548.8" y2="42.0" class="ln"/>
+<text x="335.0" y="30.0" text-anchor="middle" class="sm b t3">k = 3: at least 1 − 1/9 ≈ 88.89%</text>
+</svg><figcaption>Dr. Amani's activity: n = 50, x̄ = 28, s = 3. The interval (22, 34) is x̄ ± 2s, so at least 75% (37.5, so at least 38 observations) lie inside, whatever the shape of the data.<span class="ar">نشاط د. أماني: <span dir="ltr" style="white-space:nowrap">n = 50</span> و <span dir="ltr" style="white-space:nowrap">x̄ = 28</span> و <span dir="ltr" style="white-space:nowrap">s = 3</span>. الفترة <span dir="ltr" style="white-space:nowrap">(22, 34)</span> هي <span dir="ltr" style="white-space:nowrap">x̄ ± 2s</span>، إذن <span dir="ltr" style="white-space:nowrap">75%</span> على الأقل من البيانات داخلها (أي <span dir="ltr" style="white-space:nowrap">38</span> مشاهدة على الأقل) مهما كان شكل التوزيع.</span></figcaption></figure>
+  <div class="cols2">
+    <div class="ex"><div class="q"><span class="tag">Activity · n = 50, x̄ = 28, s = 3 <span class="src">Amani</span></span><p>What can be said about the number of observations (1) inside (22, 34) and (2) outside it?</p></div>
+      <div class="a"><p>28 − 3k = 22, so k = (28 − 22)/3 = 2, and 1 − 1/4 = 75%.</p><p>(1) 0.75 × 50 = 37.5: <span class="ans">at least 38</span> observations inside. Round <strong>up</strong> for "at least".</p><p>(2) <span class="ans">at most 12</span> outside (50 − 38).</p></div></div>
+    <div>
+      <div class="ex"><div class="q"><span class="tag">Ex 3-26 · Travel allowance <span class="src">Both</span></span><p>Mean $0.25/mile, s = $0.02. Find the minimum percentage between $0.20 and $0.30.</p></div>
+        <div class="a"><p class="fx">k = (0.30 − 0.25)/0.02 = 2.5 → 1 − 1/6.25 = <span class="ans">84%</span></p></div></div>
+      <div class="ex"><div class="q"><span class="tag">Ex 3-25 · House prices <span class="src">Hadhrami</span></span><p>Mean $50,000, s = $10,000. Find the range containing at least 75% of prices.</p></div>
+        <div class="a"><p class="fx">k = 2: 50,000 ± 20,000 → <span class="ans">$30,000 to $70,000</span></p></div></div>
+    </div>
+  </div>
+
+  <h3>7 · The empirical (normal) rule: bell-shaped only <span class="src">Hadhrami</span></h3>
+  <div class="cols2">
+    <div><p>When the distribution is <strong>bell-shaped (normal)</strong>, approximately <strong>68%</strong> of values lie within 1 SD of the mean, <strong>95%</strong> within 2 SD, and <strong>99.7%</strong> within 3 SD. Chapter 6 develops this further.</p>
+      <div class="tbl-wrap" style="margin:6px 0 0"><table><thead><tr><th></th><th>Chebyshev</th><th>Empirical</th></tr></thead><tbody>
+        <tr><td>Applies to</td><td><strong>any</strong> shape</td><td><strong>bell-shaped</strong> only</td></tr>
+        <tr><td>Within 2 SD</td><td>at least 75%</td><td>about 95%</td></tr>
+        <tr><td>Within 3 SD</td><td>at least 88.89%</td><td>about 99.7%</td></tr>
+        <tr><td>Wording</td><td>"at least"</td><td>"approximately"</td></tr></tbody></table></div></div>
+    <p style="align-self:center">Example: national exam scores with mean 480 and SD 90, normally distributed. About 68% lie between 390 and 570 (480 ± 90), 95% between 300 and 660 (480 ± 180), and 99.7% between 210 and 750 (480 ± 270).</p>
+  </div>
+  <figure class="dg"><svg viewBox="0 0 680 198" style="max-width:680px" role="img" aria-label="Bell curve of exam scores with mean 480 and standard deviation 90, shaded within one, two and three standard deviations" xmlns="http://www.w3.org/2000/svg">
+<polygon points="82.9,170.0 82.9,168.8 89.3,168.5 95.7,168.1 102.1,167.7 108.6,167.1 115.0,166.5 121.4,165.7 127.9,164.9 134.3,163.8 140.7,162.6 147.1,161.2 153.6,159.7 160.0,157.9 166.4,155.8 172.9,153.6 179.3,151.0 185.7,148.2 192.1,145.2 198.6,141.8 205.0,138.2 211.4,134.3 217.9,130.1 224.3,125.8 230.7,121.2 237.1,116.5 243.6,111.6 250.0,106.6 256.4,101.6 262.9,96.6 269.3,91.7 275.7,87.0 282.1,82.4 288.6,78.1 295.0,74.2 301.4,70.6 307.9,67.5 314.3,64.8 320.7,62.7 327.1,61.2 333.6,60.3 340.0,60.0 346.4,60.3 352.9,61.2 359.3,62.7 365.7,64.8 372.1,67.5 378.6,70.6 385.0,74.2 391.4,78.1 397.9,82.4 404.3,87.0 410.7,91.7 417.1,96.6 423.6,101.6 430.0,106.6 436.4,111.6 442.9,116.5 449.3,121.2 455.7,125.8 462.1,130.1 468.6,134.3 475.0,138.2 481.4,141.8 487.9,145.2 494.3,148.2 500.7,151.0 507.1,153.6 513.6,155.8 520.0,157.9 526.4,159.7 532.9,161.2 539.3,162.6 545.7,163.8 552.1,164.9 558.6,165.7 565.0,166.5 571.4,167.1 577.9,167.7 584.3,168.1 590.7,168.5 597.1,168.8 597.1,170.0" class="f2" fill-opacity="0.12"/>
+<polygon points="168.6,170.0 168.6,155.1 172.9,153.6 177.1,151.9 181.4,150.1 185.7,148.2 190.0,146.2 194.3,144.1 198.6,141.8 202.9,139.4 207.1,136.9 211.4,134.3 215.7,131.6 220.0,128.7 224.3,125.8 228.6,122.7 232.9,119.6 237.1,116.5 241.4,113.2 245.7,109.9 250.0,106.6 254.3,103.3 258.6,99.9 262.9,96.6 267.1,93.4 271.4,90.1 275.7,87.0 280.0,83.9 284.3,80.9 288.6,78.1 292.9,75.4 297.1,72.9 301.4,70.6 305.7,68.5 310.0,66.5 314.3,64.8 318.6,63.4 322.9,62.2 327.1,61.2 331.4,60.5 335.7,60.1 340.0,60.0 344.3,60.1 348.6,60.5 352.9,61.2 357.1,62.2 361.4,63.4 365.7,64.8 370.0,66.5 374.3,68.5 378.6,70.6 382.9,72.9 387.1,75.4 391.4,78.1 395.7,80.9 400.0,83.9 404.3,87.0 408.6,90.1 412.9,93.4 417.1,96.6 421.4,99.9 425.7,103.3 430.0,106.6 434.3,109.9 438.6,113.2 442.9,116.5 447.1,119.6 451.4,122.7 455.7,125.8 460.0,128.7 464.3,131.6 468.6,134.3 472.9,136.9 477.1,139.4 481.4,141.8 485.7,144.1 490.0,146.2 494.3,148.2 498.6,150.1 502.9,151.9 507.1,153.6 511.4,155.1 511.4,170.0" class="f2" fill-opacity="0.22"/>
+<polygon points="254.3,170.0 254.3,103.3 256.4,101.6 258.6,99.9 260.7,98.3 262.9,96.6 265.0,95.0 267.1,93.4 269.3,91.7 271.4,90.1 273.6,88.5 275.7,87.0 277.9,85.4 280.0,83.9 282.1,82.4 284.3,80.9 286.4,79.5 288.6,78.1 290.7,76.8 292.9,75.4 295.0,74.2 297.1,72.9 299.3,71.7 301.4,70.6 303.6,69.5 305.7,68.5 307.9,67.5 310.0,66.5 312.1,65.7 314.3,64.8 316.4,64.1 318.6,63.4 320.7,62.7 322.9,62.2 325.0,61.7 327.1,61.2 329.3,60.9 331.4,60.5 333.6,60.3 335.7,60.1 337.9,60.0 340.0,60.0 342.1,60.0 344.3,60.1 346.4,60.3 348.6,60.5 350.7,60.9 352.9,61.2 355.0,61.7 357.1,62.2 359.3,62.7 361.4,63.4 363.6,64.1 365.7,64.8 367.9,65.7 370.0,66.5 372.1,67.5 374.3,68.5 376.4,69.5 378.6,70.6 380.7,71.7 382.9,72.9 385.0,74.2 387.1,75.4 389.3,76.8 391.4,78.1 393.6,79.5 395.7,80.9 397.9,82.4 400.0,83.9 402.1,85.4 404.3,87.0 406.4,88.5 408.6,90.1 410.7,91.7 412.9,93.4 415.0,95.0 417.1,96.6 419.3,98.3 421.4,99.9 423.6,101.6 425.7,103.3 425.7,170.0" class="f2" fill-opacity="0.38"/>
+<polyline points="40.0,169.8 43.0,169.7 46.0,169.7 49.0,169.7 52.0,169.6 55.0,169.6 58.0,169.5 61.0,169.4 64.0,169.4 67.0,169.3 70.0,169.2 73.0,169.1 76.0,169.0 79.0,168.9 82.0,168.8 85.0,168.7 88.0,168.5 91.0,168.4 94.0,168.2 97.0,168.0 100.0,167.8 103.0,167.6 106.0,167.4 109.0,167.1 112.0,166.8 115.0,166.5 118.0,166.2 121.0,165.8 124.0,165.4 127.0,165.0 130.0,164.5 133.0,164.0 136.0,163.5 139.0,163.0 142.0,162.4 145.0,161.7 148.0,161.0 151.0,160.3 154.0,159.6 157.0,158.7 160.0,157.9 163.0,157.0 166.0,156.0 169.0,155.0 172.0,153.9 175.0,152.8 178.0,151.6 181.0,150.3 184.0,149.0 187.0,147.6 190.0,146.2 193.0,144.7 196.0,143.2 199.0,141.6 202.0,139.9 205.0,138.2 208.0,136.4 211.0,134.6 214.0,132.7 217.0,130.7 220.0,128.7 223.0,126.7 226.0,124.6 229.0,122.4 232.0,120.3 235.0,118.1 238.0,115.8 241.0,113.5 244.0,111.3 247.0,108.9 250.0,106.6 253.0,104.3 256.0,101.9 259.0,99.6 262.0,97.3 265.0,95.0 268.0,92.7 271.0,90.4 274.0,88.2 277.0,86.0 280.0,83.9 283.0,81.8 286.0,79.8 289.0,77.8 292.0,76.0 295.0,74.2 298.0,72.4 301.0,70.8 304.0,69.3 307.0,67.9 310.0,66.5 313.0,65.3 316.0,64.2 319.0,63.3 322.0,62.4 325.0,61.7 328.0,61.1 331.0,60.6 334.0,60.3 337.0,60.1 340.0,60.0 343.0,60.1 346.0,60.3 349.0,60.6 352.0,61.1 355.0,61.7 358.0,62.4 361.0,63.3 364.0,64.2 367.0,65.3 370.0,66.5 373.0,67.9 376.0,69.3 379.0,70.8 382.0,72.4 385.0,74.2 388.0,76.0 391.0,77.8 394.0,79.8 397.0,81.8 400.0,83.9 403.0,86.0 406.0,88.2 409.0,90.4 412.0,92.7 415.0,95.0 418.0,97.3 421.0,99.6 424.0,101.9 427.0,104.3 430.0,106.6 433.0,108.9 436.0,111.3 439.0,113.5 442.0,115.8 445.0,118.1 448.0,120.3 451.0,122.4 454.0,124.6 457.0,126.7 460.0,128.7 463.0,130.7 466.0,132.7 469.0,134.6 472.0,136.4 475.0,138.2 478.0,139.9 481.0,141.6 484.0,143.2 487.0,144.7 490.0,146.2 493.0,147.6 496.0,149.0 499.0,150.3 502.0,151.6 505.0,152.8 508.0,153.9 511.0,155.0 514.0,156.0 517.0,157.0 520.0,157.9 523.0,158.7 526.0,159.6 529.0,160.3 532.0,161.0 535.0,161.7 538.0,162.4 541.0,163.0 544.0,163.5 547.0,164.0 550.0,164.5 553.0,165.0 556.0,165.4 559.0,165.8 562.0,166.2 565.0,166.5 568.0,166.8 571.0,167.1 574.0,167.4 577.0,167.6 580.0,167.8 583.0,168.0 586.0,168.2 589.0,168.4 592.0,168.5 595.0,168.7 598.0,168.8 601.0,168.9 604.0,169.0 607.0,169.1 610.0,169.2 613.0,169.3 616.0,169.4 619.0,169.4 622.0,169.5 625.0,169.6 628.0,169.6 631.0,169.7 634.0,169.7 637.0,169.7 640.0,169.8" class="ln thick"/>
+<line x1="40.0" y1="170.0" x2="640.0" y2="170.0" class="ln"/>
+<line x1="82.9" y1="170.0" x2="82.9" y2="175.0" class="ln"/>
+<text x="82.9" y="188.0" text-anchor="middle" class="m soft">210</text>
+<line x1="168.6" y1="170.0" x2="168.6" y2="175.0" class="ln"/>
+<text x="168.6" y="188.0" text-anchor="middle" class="m soft">300</text>
+<line x1="254.3" y1="170.0" x2="254.3" y2="175.0" class="ln"/>
+<text x="254.3" y="188.0" text-anchor="middle" class="m soft">390</text>
+<line x1="340.0" y1="170.0" x2="340.0" y2="175.0" class="ln"/>
+<text x="340.0" y="188.0" text-anchor="middle" class="m soft">480</text>
+<line x1="425.7" y1="170.0" x2="425.7" y2="175.0" class="ln"/>
+<text x="425.7" y="188.0" text-anchor="middle" class="m soft">570</text>
+<line x1="511.4" y1="170.0" x2="511.4" y2="175.0" class="ln"/>
+<text x="511.4" y="188.0" text-anchor="middle" class="m soft">660</text>
+<line x1="597.1" y1="170.0" x2="597.1" y2="175.0" class="ln"/>
+<text x="597.1" y="188.0" text-anchor="middle" class="m soft">750</text>
+<line x1="254.3" y1="52.0" x2="425.7" y2="52.0" class="ln"/>
+<line x1="254.3" y1="52.0" x2="254.3" y2="58.0" class="ln"/>
+<line x1="425.7" y1="52.0" x2="425.7" y2="58.0" class="ln"/>
+<text x="340.0" y="46.0" text-anchor="middle" class="sm b t2">≈ 68%</text>
+<line x1="168.6" y1="34.0" x2="511.4" y2="34.0" class="ln"/>
+<line x1="168.6" y1="34.0" x2="168.6" y2="40.0" class="ln"/>
+<line x1="511.4" y1="34.0" x2="511.4" y2="40.0" class="ln"/>
+<text x="340.0" y="28.0" text-anchor="middle" class="sm b t2">≈ 95%</text>
+<line x1="82.9" y1="16.0" x2="597.1" y2="16.0" class="ln"/>
+<line x1="82.9" y1="16.0" x2="82.9" y2="22.0" class="ln"/>
+<line x1="597.1" y1="16.0" x2="597.1" y2="22.0" class="ln"/>
+<text x="340.0" y="11.0" text-anchor="middle" class="sm b t2">≈ 99.7%</text>
+</svg><figcaption>The empirical rule holds only for bell-shaped (normal) data. Exam scores with mean 480 and SD 90: about 68% fall in 390–570, 95% in 300–660, 99.7% in 210–750.<span class="ar">القاعدة التجريبية تصلح فقط للبيانات الجرسية (الطبيعية). درجات بمتوسط <span dir="ltr" style="white-space:nowrap">480</span> وانحراف <span dir="ltr" style="white-space:nowrap">90</span>: حوالي <span dir="ltr" style="white-space:nowrap">68%</span> بين <span dir="ltr" style="white-space:nowrap">390</span> و <span dir="ltr" style="white-space:nowrap">570</span>، و<span dir="ltr" style="white-space:nowrap">95%</span> بين <span dir="ltr" style="white-space:nowrap">300</span> و <span dir="ltr" style="white-space:nowrap">660</span>، و<span dir="ltr" style="white-space:nowrap">99.7%</span> بين <span dir="ltr" style="white-space:nowrap">210</span> و <span dir="ltr" style="white-space:nowrap">750</span>.</span></figcaption></figure>
+  <div class="ar-note"><span class="lbl">الشرح بالعربي — تشيبيشيف والقاعدة التجريبية</span>نظرية تشيبيشيف تصلح لأي بيانات مهما كان شكلها، وتقول: <b>على الأقل</b> <span class="v" dir="ltr">1 − 1/k²</span> من البيانات تقع داخل <span class="v" dir="ltr">x̄ ± k·s</span>. الخطوة الأولى دائمًا: احسب <span class="v" dir="ltr">k = (الحد − المتوسط) ÷ الانحراف</span>. ثم إذا طُلب <b>عدد</b> المشاهدات اضرب النسبة في n وقرّب <b>لأعلى</b> لـ«على الأقل». وما بالخارج = <b>على الأكثر</b> الباقي. أما القاعدة التجريبية (68 – 95 – 99.7) فتصلح <b>فقط</b> للتوزيع الجرسي (الطبيعي). إذا ذكر السؤال «bell-shaped» أو «normal» استخدم التجريبية، وإلا فاستخدم تشيبيشيف.</div>
+
+  <h3>8 · Uses of variance and SD · Table 3-2 <span class="src">Both</span></h3>
+  <div class="cols2">
+    <p>(1) They describe the <strong>spread</strong> of data and compare which of two or more data sets is more variable. (2) They measure the <strong>consistency</strong> of a variable: in manufacturing nuts and bolts, the variation in diameters must be small or the parts will not fit. (3) They give the number of values that fall within an interval (Chebyshev). (4) They are used heavily in <strong>inferential statistics</strong> in later chapters.</p>
+    <div class="tbl-wrap" style="margin:0"><table><thead><tr><th>Measure</th><th>Definition</th><th>Symbol</th></tr></thead><tbody>
+      <tr><td>Range<span class="arn">المدى</span></td><td>highest − lowest</td><td>R</td></tr>
+      <tr><td>Variance<span class="arn">التباين</span></td><td>average squared distance from the mean</td><td>σ², s²</td></tr>
+      <tr><td>Standard deviation<span class="arn">الانحراف المعياري</span></td><td>square root of the variance</td><td>σ, s</td></tr></tbody></table></div>
+  </div>
+
+  <h3>9 · Linear transformations <span class="src">Hadhrami</span></h3>
+  <figure class="dg"><svg viewBox="0 0 680 200" style="max-width:680px" role="img" aria-label="Three rows of dots: the original data, the data shifted by 5, and the data doubled, with mean and spread marked" xmlns="http://www.w3.org/2000/svg">
+<line x1="90.0" y1="176.0" x2="470.0" y2="176.0" class="ln"/>
+<line x1="90.0" y1="176.0" x2="90.0" y2="181.0" class="ln"/>
+<text x="90.0" y="194.0" text-anchor="middle" class="m soft">0</text>
+<line x1="128.0" y1="176.0" x2="128.0" y2="181.0" class="ln"/>
+<text x="128.0" y="194.0" text-anchor="middle" class="m soft">1</text>
+<line x1="166.0" y1="176.0" x2="166.0" y2="181.0" class="ln"/>
+<text x="166.0" y="194.0" text-anchor="middle" class="m soft">2</text>
+<line x1="204.0" y1="176.0" x2="204.0" y2="181.0" class="ln"/>
+<text x="204.0" y="194.0" text-anchor="middle" class="m soft">3</text>
+<line x1="242.0" y1="176.0" x2="242.0" y2="181.0" class="ln"/>
+<text x="242.0" y="194.0" text-anchor="middle" class="m soft">4</text>
+<line x1="280.0" y1="176.0" x2="280.0" y2="181.0" class="ln"/>
+<text x="280.0" y="194.0" text-anchor="middle" class="m soft">5</text>
+<line x1="318.0" y1="176.0" x2="318.0" y2="181.0" class="ln"/>
+<text x="318.0" y="194.0" text-anchor="middle" class="m soft">6</text>
+<line x1="356.0" y1="176.0" x2="356.0" y2="181.0" class="ln"/>
+<text x="356.0" y="194.0" text-anchor="middle" class="m soft">7</text>
+<line x1="394.0" y1="176.0" x2="394.0" y2="181.0" class="ln"/>
+<text x="394.0" y="194.0" text-anchor="middle" class="m soft">8</text>
+<line x1="432.0" y1="176.0" x2="432.0" y2="181.0" class="ln"/>
+<text x="432.0" y="194.0" text-anchor="middle" class="m soft">9</text>
+<line x1="470.0" y1="176.0" x2="470.0" y2="181.0" class="ln"/>
+<text x="470.0" y="194.0" text-anchor="middle" class="m soft">10</text>
+<text x="20.0" y="38.0" text-anchor="start" class="m b t1">x</text>
+<line x1="136.0" y1="48.0" x2="234.0" y2="48.0" class="ln s1 thick"/>
+<circle cx="128.0" cy="34.0" r="5" class="f1"/>
+<circle cx="166.0" cy="34.0" r="5" class="f1"/>
+<circle cx="204.0" cy="34.0" r="5" class="f1"/>
+<circle cx="242.0" cy="34.0" r="5" class="f1"/>
+<polygon points="185.0,43.0 180.0,53.0 190.0,53.0" class="f1"/>
+<text x="500.0" y="38.0" text-anchor="start" class="m">mean 2.5  ·  SD 1.29</text>
+<text x="20.0" y="88.0" text-anchor="start" class="m b t2">x + 5</text>
+<line x1="326.0" y1="98.0" x2="424.0" y2="98.0" class="ln s2 thick"/>
+<circle cx="318.0" cy="84.0" r="5" class="f2"/>
+<circle cx="356.0" cy="84.0" r="5" class="f2"/>
+<circle cx="394.0" cy="84.0" r="5" class="f2"/>
+<circle cx="432.0" cy="84.0" r="5" class="f2"/>
+<polygon points="375.0,93.0 370.0,103.0 380.0,103.0" class="f2"/>
+<text x="500.0" y="88.0" text-anchor="start" class="m">mean 7.5  ·  SD 1.29</text>
+<text x="20.0" y="138.0" text-anchor="start" class="m b t4">2x</text>
+<line x1="182.0" y1="148.0" x2="378.0" y2="148.0" class="ln s4 thick"/>
+<circle cx="166.0" cy="134.0" r="5" class="f4"/>
+<circle cx="242.0" cy="134.0" r="5" class="f4"/>
+<circle cx="318.0" cy="134.0" r="5" class="f4"/>
+<circle cx="394.0" cy="134.0" r="5" class="f4"/>
+<polygon points="280.0,143.0 275.0,153.0 285.0,153.0" class="f4"/>
+<text x="500.0" y="138.0" text-anchor="start" class="m">mean 5  ·  SD 2.58</text>
+<text x="500.0" y="18.0" text-anchor="start" class="sm soft">IQR: 2 → 2 → 4</text>
+</svg><figcaption>Adding 5 slides every point (and the mean, median) right by 5 but leaves the spread (SD, IQR) unchanged. Multiplying by 2 doubles both the centre and the spread. Triangle = mean; bar = mean ± 1 SD.<span class="ar">إضافة 5 تُزيح كل القيم (والمتوسط والوسيط) بمقدار 5 لكن التشتت <span dir="ltr" style="white-space:nowrap">(SD</span> و <span dir="ltr" style="white-space:nowrap">IQR)</span> لا يتغير. الضرب في 2 يضاعف مقاييس المركز والتشتت معًا. المثلث = المتوسط، والخط = المتوسط ± انحراف معياري واحد.</span></figcaption></figure>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Transformation</th><th>Mean, median (centre)</th><th>SD, IQR, range (spread)</th><th>Variance</th><th>CV</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Add a constant</strong> (x + c)</td><td>shift by + c</td><td><strong>unchanged</strong></td><td>unchanged</td><td><strong>changes</strong> (the mean changed)</td></tr>
+      <tr><td><strong>Multiply by a constant</strong> (c·x, c &gt; 0)</td><td>× c</td><td>× c</td><td><strong>× c²</strong></td><td>unchanged</td></tr>
+      <tr><td><strong>Both</strong> (a·x + b)</td><td>a × centre + b</td><td>× a</td><td>× a²</td><td>changes</td></tr>
+    </tbody>
+  </table></div>
+  <p>The slide's example: x = 1, 2, 3, 4 has mean 2.5, median 2.5, SD 1.29, IQR 2. Then x + 5 has 7.5, 7.5, 1.29, 2, and 2x has 5, 5, 2.58, 4. (The slide's "compare x to z" in case one should read "x to y".) The variance and CV columns are extensions you can derive from the rules; they appear in textbook HW 43–46 and 52.</p>
+  <div class="ar-note"><span class="lbl">الشرح بالعربي — التحويل الخطي</span>إذا <b>أضفنا</b> رقمًا ثابتًا لكل القيم (مثل 5 درجات إضافية لكل الطلاب): المتوسط والوسيط يزيدان بنفس المقدار، أما الانحراف المعياري والمدى الربيعي <b>فلا يتغيران</b>، لأن البيانات انزاحت كلها دون أن تتباعد. إذا <b>ضربنا</b> كل القيم في ثابت: كل المقاييس تُضرب فيه، <b>والتباين يُضرب في مربعه</b>. وتحويل <span class="v" dir="ltr">°F = 1.8°C + 32</span> مثال على الحالتين معًا.</div>
+</section>
+
+<footer>
+  <p><strong>Chapter 3 study set: 8 files.</strong> One merged source built from Dr. Amani Al-Rubkhi's Fall 2026 notes (course coordinator) and Dr. Ahmed Al-Hadhrami's Spring 2024 slides, aligned to the SQU STAT 2101 course outline (Fall 2026). Textbook: Bluman, <em>Elementary Statistics</em>, 10th ed.</p>
+  <p>00 · Exam brief: what the outline tests · 01 · Lesson 3-1: Measures of Central Tendency · <strong style="color:var(--accent)">02 · Lesson 3-2: Measures of Variation</strong> · 03 · Lesson 3-3: Measures of Position · 04 · Lesson 3-4: Exploratory Data Analysis · 05 · Revision pack: formulas, decisions, traps, R · 06 · Exam-style questions (no answers) · 07 · Full worked answers</p>
+</footer>
+</div>

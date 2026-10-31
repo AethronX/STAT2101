@@ -1,0 +1,156 @@
+<section id="s32" style="--sec:var(--ink-2);--wash:var(--ink-2-wash)">
+  <div class="sec-head">
+    <span class="sec-num">3-2</span>
+    <h2>Measures of Variation
+      <span class="ar">مقاييس التشتت — المدى والتباين والانحراف المعياري ومعامل الاختلاف ونظرية تشيبيشيف</span>
+    </h2>
+  </div>
+
+  <p><span class="term">Variation</span> (spread, dispersion) describes how far the data values are from each other, or how dispersed they are. The main measures are the <strong>range</strong>, <strong>variance</strong>, <strong>standard deviation</strong> and <strong>interquartile range</strong> (covered in 3-3). A measure of variation combined with a measure of centre gives a good picture of a distribution. <span class="src">Both</span></p>
+
+  <h3>0 · Why centre is not enough <span class="src">Amani</span></h3>
+  <p>Waiting times (minutes) at two SQU hospital clinics. A: 6.5 6.6 6.7 6.8 7.1 7.3 7.4 7.7 7.7 7.7 · B: 4.2 5.4 5.8 6.2 6.7 7.7 7.7 8.5 9.3 10.0. Both clinics have mean 7.15, median 7.2, mode 7.7 and midrange 7.1, so the centre cannot separate them. The dot plot shows the difference.</p>
+  <fig id="clinics"/>
+
+  <h3>1 · The range <span class="src">Both</span></h3>
+  <div class="cols2">
+    <div class="formula" style="margin:0"><div class="label">Range</div><p class="fx">R = highest value − lowest value</p><p class="note">The simplest measure, but it depends only on the two extremes, so one extreme value changes it markedly. It is less useful than the variance and SD. Give it as a <strong>single number</strong>.</p></div>
+    <div class="ex" style="margin:0"><div class="q"><span class="tag">Simple example <span class="src">Amani</span> · Ex 3-16 paint <span class="src">Hadhrami</span></span><p>(a) 1, 2, 4 · (b) 1, 2, 1000 · (c) months before fading: brand A 10 60 50 30 40 20, brand B 35 45 30 35 40 25.</p></div>
+      <div class="a"><p>(a) R = ⦃3⦄ · (b) R = ⦃999⦄: one extreme value multiplies the range by 333. (c) A: <span class="v">60 − 10 =</span> ⦃50 months⦄; B: <span class="v">45 − 25 =</span> ⦃20 months⦄, less than half of brand A's. Textbook: Ex 3-15, 3-17.</p></div></div>
+  </div>
+
+  <h3>2 · Variance and standard deviation <span class="src">Both</span></h3>
+  <p>Both are built on the <span class="term">deviation</span>, the distance of each value from the mean: <span class="v">(X − μ)</span> or <span class="v">(X − x̄)</span>. Deviations always sum to zero, <span class="v">Σ(X − x̄) = 0</span>, so they are squared before averaging. The <strong>variance</strong> is the average of the squared deviations, and the <strong>standard deviation</strong> is its square root.</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th></th><th>Population (parameter)</th><th>Sample (statistic)</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Variance</strong><arn>التباين</arn></td><td class="fx">σ² = ⟪Σ(X − μ)²‖N⟫</td><td class="fx">s² = ⟪Σ(X − x̄)²‖n − 1⟫</td></tr>
+      <tr><td><strong>Standard deviation</strong><arn>الانحراف المعياري</arn></td><td class="fx">σ = √σ²</td><td class="fx">s = √s²</td></tr>
+      <tr><td><strong>Shortcut (sample)</strong></td><td colspan="2" class="fx">s² = ⟪n(ΣX²) − (ΣX)²‖n(n − 1)⟫ &nbsp; or &nbsp; s² = ⟪ΣX² − n·x̄²‖n − 1⟫</td></tr>
+    </tbody>
+  </table></div>
+  <div class="cols2">
+    <div class="callout tip" style="margin:0"><span class="ct">Properties to quote</span><p>Variance and SD can <strong>never be negative</strong>, so take the positive square root. If the values sit close to the mean, the variance is small. The <strong>serious disadvantage of the variance</strong> is that its units are squared (units²). The <strong>SD has the same units as the data</strong>. The larger the SD, the more spread out the data. When two data sets have equal means, the one with the larger variance or SD is more variable. <span class="v">ΣX²</span> (square, then sum) is not <span class="v">(ΣX)²</span> (sum, then square).</p></div>
+    <div class="callout note" style="margin:0"><span class="ct">Research question in both decks: why n − 1?</span><p>The sample mean x̄ is computed from the same data, so the values sit closer to x̄ than to the true μ. Dividing by n would therefore <strong>underestimate</strong> σ². Dividing by <span class="v">n − 1</span> (the <em>degrees of freedom</em>: once x̄ is fixed, only n − 1 deviations are free) gives a slightly larger value, which makes s² an <strong>unbiased</strong> estimator of σ².</p></div>
+  </div>
+  <fig id="deviations"/>
+  <div class="cols2">
+    <div class="ex"><div class="q"><span class="tag">Ex 3-18 · Paint brand A (a population) <span class="src">Hadhrami</span></span><p>10, 60, 50, 30, 40, 20. Find σ² and σ.</p></div>
+      <div class="a"><p>μ = 210/6 = 35; Σ(X − μ)² = 1750 (see the figure).</p><p class="fx">σ² = 1750/6 = ⦃291.7⦄ &nbsp; σ = ⦃17.1 months⦄</p><p><strong>Brand B</strong> (textbook Ex 3-19): μ = 35, Σ(X − μ)² = 250, so σ² = 41.7 and σ = 6.5. Same mean, but brand A is far more variable.</p></div></div>
+    <div class="ex"><div class="q"><span class="tag">Simple example: 1, 2, 4 (sample) <span class="src">Amani</span></span><p>Find s² and s.</p></div>
+      <div class="a"><p>x̄ = 7/3. Deviations: −4/3, −1/3, 5/3, which sum to 0. Squares: 16/9 + 1/9 + 25/9 = 42/9 = 4.667.</p><p class="fx">s² = 4.667/2 = ⦃2.333⦄ &nbsp; s = ⦃1.53⦄</p><p>The notes print 2.335 because the deviations were rounded to −1.33, −0.33, 1.67 first. That is exactly why the rounding rule says <strong>never round mid-calculation</strong>.</p></div></div>
+  </div>
+  <div class="ex"><div class="q"><span class="tag">Ex 3-20 and 3-21 · Teacher strikes <span class="src">Hadhrami</span> = Ejada teacher awards <span class="src">Amani</span></span><p>A random sample of years: 9, 10, 14, 7, 8, 3. Find s² and s by the definition formula and by the shortcut formula.</p></div>
+    <div class="a"><div class="cols2">
+      <div><p><strong>Definition:</strong> x̄ = 51/6 = 8.5. Deviations 0.5, 1.5, 5.5, −1.5, −0.5, −5.5; squares 0.25, 2.25, 30.25, 2.25, 0.25, 30.25.</p><p class="fx">s² = 65.5/5 = 13.1</p></div>
+      <div><p><strong>Shortcut:</strong> ΣX = 51, ΣX² = 499.</p><p class="fx">s² = ⟪6(499) − 51²‖6(5)⟫ = ⟪2994 − 2601‖30⟫ = ⟪393‖30⟫ = 13.1</p><p class="fx">Check: (499 − 6·8.5²)/5 = 65.5/5 = 13.1</p></div></div>
+      <p>All three formulas agree: ⦃s² = 13.1, s = √13.1 ≈ 3.6⦄</p></div></div>
+  <div class="cols2">
+    <div class="ex"><div class="q"><span class="tag">Activity · range, variance, SD of both clinics <span class="src">Amani</span></span></div>
+      <div class="a"><div class="tbl-wrap" style="margin:0"><table><thead><tr><th class="num">Clinic A X</th><th class="num">X − 7.15</th><th class="num">(X − 7.15)²</th></tr></thead><tbody>
+        <tr><td class="num">6.5</td><td class="num">−0.65</td><td class="num">0.4225</td></tr><tr><td class="num">6.6</td><td class="num">−0.55</td><td class="num">0.3025</td></tr>
+        <tr><td class="num">6.7</td><td class="num">−0.45</td><td class="num">0.2025</td></tr><tr><td class="num">6.8</td><td class="num">−0.35</td><td class="num">0.1225</td></tr>
+        <tr><td class="num">7.1</td><td class="num">−0.05</td><td class="num">0.0025</td></tr><tr><td class="num">7.3</td><td class="num">0.15</td><td class="num">0.0225</td></tr>
+        <tr><td class="num">7.4</td><td class="num">0.25</td><td class="num">0.0625</td></tr><tr><td class="num">7.7 ×3</td><td class="num">0.55</td><td class="num">0.3025 ×3</td></tr>
+        <tr><td class="num"><strong>Σ</strong></td><td class="num">0</td><td class="num"><strong>2.045</strong></td></tr></tbody></table></div>
+        <p>A: R = <span class="v">1.2</span>, s² = 2.045/9 = ⦃0.227⦄, s = ⦃0.477 min⦄.<br>B: R = <span class="v">5.8</span>, Σ(X − x̄)² = 29.865, s² = ⦃3.318⦄, s = ⦃1.822 min⦄.</p>
+        <p>Clinic B's SD is almost <strong>four times</strong> clinic A's. A is the more <strong>consistent</strong> clinic: patients there know what wait to expect.</p></div></div>
+    <div class="ex"><div class="q"><span class="tag">Activity · car accidents in Muscat <span class="src">Amani</span></span><p>Five months: 22, 30, 36, 24, 5 (note: mean = 28). Find R, s², s.</p></div>
+      <div class="a"><p><strong>Version consistent with the note</strong> (last value 28): x̄ = 140/5 = 28; deviations −6, 2, 8, −4, 0; Σ = 120.</p><p class="fx">R = 36 − 22 = ⦃14⦄ &nbsp; s² = 120/4 = ⦃30⦄ &nbsp; s = ⦃5.48⦄</p><p><strong>As printed</strong> (last value 5): x̄ = 23.4, R = 31, Σ(X − x̄)² = 543.2, s² = 135.8, s = 11.65. One low month nearly doubles the SD.</p></div></div>
+  </div>
+  <ar t="الشرح بالعربي — التباين والانحراف المعياري">الانحراف = بُعد القيمة عن المتوسط ⟦X − x̄⟧. مجموع الانحرافات = صفر دائمًا، لذلك <b>نربّعها</b> ثم نأخذ متوسطها، وهذا هو التباين. التباين وحدته <b>مربعة</b> (وهذا عيبه)، فنأخذ الجذر لنحصل على الانحراف المعياري، وهو بنفس وحدة البيانات. للمجتمع نقسم على ⟦N⟧، وللعينة نقسم على ⟦n − 1⟧. انتبه: اقرأ السؤال جيدًا. «عينة» تعني ⟦n − 1⟧، و«مجتمع» أو «كل الموظفين» تعني ⟦N⟧. والقانون المختصر يعطي نفس الناتج تمامًا، لكن احذر الخلط بين ⟦ΣX²⟧ و⟦(ΣX)²⟧.</ar>
+
+  <h3>3 · Variance and SD for grouped data <span class="src">Both</span></h3>
+  <div class="formula"><div class="label">Shortcut formula: table A Class · B f · C Xₘ · D f·Xₘ · E f·Xₘ²</div>
+    <p class="fx">s² = ⟪n(Σf·Xₘ²) − (Σf·Xₘ)²‖n(n − 1)⟫ &nbsp;&nbsp;&nbsp; s = √s²</p><p class="note">Steps: find the midpoints; f·Xₘ → column D; f·Xₘ² → column E; sum columns B (= n), D and E; substitute; take the square root.</p></div>
+  <div class="cols2">
+    <div class="ex"><div class="q"><span class="tag">Ex 3-22 · Miles run per week (20 runners) <span class="src">Hadhrami</span></span>
+      <div class="tbl-wrap" style="margin:6px 0 0"><table><thead><tr><th>Class</th><th class="num">f</th><th class="num">Xₘ</th><th class="num">f·Xₘ</th><th class="num">f·Xₘ²</th></tr></thead><tbody>
+        <tr><td>5.5–10.5</td><td class="num">1</td><td class="num">8</td><td class="num">8</td><td class="num">64</td></tr>
+        <tr><td>10.5–15.5</td><td class="num">2</td><td class="num">13</td><td class="num">26</td><td class="num">338</td></tr>
+        <tr><td>15.5–20.5</td><td class="num">3</td><td class="num">18</td><td class="num">54</td><td class="num">972</td></tr>
+        <tr><td>20.5–25.5</td><td class="num">5</td><td class="num">23</td><td class="num">115</td><td class="num">2,645</td></tr>
+        <tr><td>25.5–30.5</td><td class="num">4</td><td class="num">28</td><td class="num">112</td><td class="num">3,136</td></tr>
+        <tr><td>30.5–35.5</td><td class="num">3</td><td class="num">33</td><td class="num">99</td><td class="num">3,267</td></tr>
+        <tr><td>35.5–40.5</td><td class="num">2</td><td class="num">38</td><td class="num">76</td><td class="num">2,888</td></tr>
+        <tr><td><strong>Σ</strong></td><td class="num"><strong>20</strong></td><td></td><td class="num"><strong>490</strong></td><td class="num"><strong>13,310</strong></td></tr></tbody></table></div></div>
+      <div class="a"><p class="fx">s² = ⟪20(13,310) − 490²‖20(19)⟫ = ⟪26,100‖380⟫ ≈ ⦃68.7⦄ &nbsp; s ≈ ⦃8.3 miles⦄</p></div></div>
+    <div class="ex"><div class="q"><span class="tag">Ages of drivers (table in 3-1) <span class="src">Amani</span></span><p>Find the sample variance and SD.</p></div>
+      <div class="a"><p>Column E (f·Xₘ²): 11,404.75 · 21,125 · 26,244 · 32,931.5 · 0 · 4,160.25 · 5,256.25.</p><p class="fx">n = 71, Σf·Xₘ = 2579.5, Σf·Xₘ² = 101,121.75</p><p class="fx">s² = ⟪71(101,121.75) − 2579.5²‖71(70)⟫ = ⟪525,824‖4970⟫ = ⦃105.80⦄</p><p class="fx">s = ⦃10.29 years⦄</p><p>With x̄ = 36.33 from 3-1, the CV is 10.29/36.33 = 28.3%.</p></div></div>
+  </div>
+
+  <h3>4 · Coefficient of variation (CVar) <span class="src">Both</span></h3>
+  <div class="cols2">
+    <div class="formula" style="margin:0"><div class="label">Coefficient of variation: SD as a percentage of the mean</div><p class="fx">sample: CVar = ⟪s‖x̄⟫ · 100 &nbsp;&nbsp; population: CVar = ⟪σ‖μ⟫ · 100</p><p class="note">The SD and the mean share the same units, so CVar has <strong>no units</strong>. That is why it can compare standard deviations measured in different units, or data sets with different means. Lower CV: values closer together, <strong>less variable and more consistent</strong>. Higher CV: more spread out, greater relative variability.</p></div>
+    <div class="ex" style="margin:0"><div class="q"><span class="tag">Ex 3-23 · Car sales vs commissions <span class="src">Both</span></span><p>Sales: mean 87, s = 5. Commissions: mean 5225 OMR, s = 773.</p></div>
+      <div class="a"><p class="fx">sales 5/87 · 100 ≈ ⦃5.7%⦄ &nbsp; commissions 773/5225 · 100 ≈ ⦃14.8%⦄</p><p>The commissions are more variable than the sales.</p></div></div>
+  </div>
+  <div class="cols2">
+    <div class="ex"><div class="q"><span class="tag">Ex 3-24 · Roller coasters <span class="src">Hadhrami</span></span><p>Speed: mean 69.16 mph, <strong>variance</strong> 2.76. Height: mean 177.80 ft, <strong>variance</strong> 157.70.</p></div>
+      <div class="a"><p>Take the square root first, because the variance is given, not the SD:</p><p class="fx">√2.76/69.16 · 100 ≈ ⦃2.4%⦄ &nbsp; √157.70/177.80 · 100 ≈ ⦃7.1%⦄</p><p>The speeds are less variable and more consistent.</p></div></div>
+    <div class="ex"><div class="q"><span class="tag">Activity · two departments <span class="src">Amani</span></span><p>Dept 1: 40 employees, mean 450 OMR, SD 7. Dept 2: 65 employees, mean 350 OMR, SD 9. (1) Which has the higher total salary expense? (2) Which has greater variability?</p></div>
+      <div class="a"><p>(1) The total is n·x̄: 40 × 450 = 18,000 and 65 × 350 = 22,750, so ⦃Dept 2⦄.</p><p>(2) CV₁ = 7/450 = 1.56% and CV₂ = 9/350 = 2.57%, so ⦃Dept 2⦄ varies more. Comparing raw SDs alone is not valid here because the means differ.</p></div></div>
+  </div>
+  <div class="ex"><div class="q"><span class="tag">Activity · CV to SD <span class="src">Amani</span></span><p>80 candidates: mean height 145.8 cm, coefficient of variation 2.5%. Find the SD.</p></div>
+    <div class="a"><p>Rearrange the formula: <span class="v">s = CV × x̄ / 100 = 0.025 × 145.8 =</span> ⦃3.645 cm⦄. The 80 candidates is a distractor: n is not needed.</p></div></div>
+  <ar t="الشرح بالعربي — معامل الاختلاف">معامل الاختلاف = الانحراف المعياري ÷ المتوسط × 100، وهو <b>بدون وحدة</b>. نستخدمه للمقارنة بين مجموعتين <b>تختلف وحداتهما</b> (مثلًا عدد سيارات مقابل ريالات) أو <b>تختلف متوسطاتهما</b>. الأصغر يعني تشتتًا نسبيًا أقل واتساقًا أكبر. فخّان شائعان: (1) إذا أُعطيت <b>التباين</b> فخذ الجذر أولًا قبل القسمة. (2) لا تقارن الانحرافين المعياريين مباشرة إذا اختلف المتوسطان، بل قارن معاملي الاختلاف.</ar>
+
+  <h3>5 · Range rule of thumb <span class="src">Both</span></h3>
+  <div class="cols2">
+    <div><div class="formula" style="margin:0 0 8px"><div class="label">Quick estimate of s, only for unimodal and roughly symmetric data</div><p class="fx">s ≈ ⟪range‖4⟫</p></div>
+      <p><strong>Why 4?</strong> (research question) For bell-shaped data about 95% of values lie within x̄ ± 2s, an interval of width 4s, so the range is roughly 4s. The textbook uses the same idea to approximate the smallest and largest values: about x̄ − 2s and x̄ + 2s.</p></div>
+    <div class="ex" style="margin:0"><div class="q"><span class="tag">Examples <span class="src">Amani</span> · <span class="src">Hadhrami</span></span><p>(a) 12, 12, 14, 15, 16, 18, 18, 20, 20, 25. (b) 5, 8, 8, 9, 10, 12, 13.</p></div>
+      <div class="a"><p>(a) s ≈ 13/4 = 3.25, while the formula gives s = 4.06. (b) s ≈ 8/4 = 2, while the formula gives 2.7.</p><p>The rule is quick but less accurate. In most cases it <strong>underestimates</strong> s, but not always.</p></div></div>
+  </div>
+
+  <h3>6 · Chebyshev's theorem: any shape <span class="src">Both</span></h3>
+  <div class="formula"><div class="label">Chebyshev (1821–1894): for any k &gt; 1, not necessarily an integer</div>
+    <p class="fx">at least &nbsp;1 − ⟪1‖k²⟫&nbsp; of the data lie within &nbsp;x̄ ± k·s (sample) &nbsp;or&nbsp; μ ± k·σ (population)</p>
+    <p class="note">k = 1.5: at least 55.56% · k = 2: at least <strong>75%</strong> · k = 2.5: at least 84% · k = 3: at least <strong>88.89%</strong> (8/9). Finding k: <span class="v">k = (upper limit − mean)/SD</span>. The answer is always "<strong>at least</strong>", never "exactly".</p></div>
+  <fig id="cheb"/>
+  <div class="cols2">
+    <div class="ex"><div class="q"><span class="tag">Activity · n = 50, x̄ = 28, s = 3 <span class="src">Amani</span></span><p>What can be said about the number of observations (1) inside (22, 34) and (2) outside it?</p></div>
+      <div class="a"><p>28 − 3k = 22, so k = (28 − 22)/3 = 2, and 1 − 1/4 = 75%.</p><p>(1) 0.75 × 50 = 37.5: ⦃at least 38⦄ observations inside. Round <strong>up</strong> for "at least".</p><p>(2) ⦃at most 12⦄ outside (50 − 38).</p></div></div>
+    <div>
+      <div class="ex"><div class="q"><span class="tag">Ex 3-26 · Travel allowance <span class="src">Both</span></span><p>Mean $0.25/mile, s = $0.02. Find the minimum percentage between $0.20 and $0.30.</p></div>
+        <div class="a"><p class="fx">k = (0.30 − 0.25)/0.02 = 2.5 → 1 − 1/6.25 = ⦃84%⦄</p></div></div>
+      <div class="ex"><div class="q"><span class="tag">Ex 3-25 · House prices <span class="src">Hadhrami</span></span><p>Mean $50,000, s = $10,000. Find the range containing at least 75% of prices.</p></div>
+        <div class="a"><p class="fx">k = 2: 50,000 ± 20,000 → ⦃$30,000 to $70,000⦄</p></div></div>
+    </div>
+  </div>
+
+  <h3>7 · The empirical (normal) rule: bell-shaped only <span class="src">Hadhrami</span></h3>
+  <div class="cols2">
+    <div><p>When the distribution is <strong>bell-shaped (normal)</strong>, approximately <strong>68%</strong> of values lie within 1 SD of the mean, <strong>95%</strong> within 2 SD, and <strong>99.7%</strong> within 3 SD. Chapter 6 develops this further.</p>
+      <div class="tbl-wrap" style="margin:6px 0 0"><table><thead><tr><th></th><th>Chebyshev</th><th>Empirical</th></tr></thead><tbody>
+        <tr><td>Applies to</td><td><strong>any</strong> shape</td><td><strong>bell-shaped</strong> only</td></tr>
+        <tr><td>Within 2 SD</td><td>at least 75%</td><td>about 95%</td></tr>
+        <tr><td>Within 3 SD</td><td>at least 88.89%</td><td>about 99.7%</td></tr>
+        <tr><td>Wording</td><td>"at least"</td><td>"approximately"</td></tr></tbody></table></div></div>
+    <p style="align-self:center">Example: national exam scores with mean 480 and SD 90, normally distributed. About 68% lie between 390 and 570 (480 ± 90), 95% between 300 and 660 (480 ± 180), and 99.7% between 210 and 750 (480 ± 270).</p>
+  </div>
+  <fig id="empirical"/>
+  <ar t="الشرح بالعربي — تشيبيشيف والقاعدة التجريبية">نظرية تشيبيشيف تصلح لأي بيانات مهما كان شكلها، وتقول: <b>على الأقل</b> ⟦1 − 1/k²⟧ من البيانات تقع داخل ⟦x̄ ± k·s⟧. الخطوة الأولى دائمًا: احسب ⟦k = (الحد − المتوسط) ÷ الانحراف⟧. ثم إذا طُلب <b>عدد</b> المشاهدات اضرب النسبة في n وقرّب <b>لأعلى</b> لـ«على الأقل». وما بالخارج = <b>على الأكثر</b> الباقي. أما القاعدة التجريبية (68 – 95 – 99.7) فتصلح <b>فقط</b> للتوزيع الجرسي (الطبيعي). إذا ذكر السؤال «bell-shaped» أو «normal» استخدم التجريبية، وإلا فاستخدم تشيبيشيف.</ar>
+
+  <h3>8 · Uses of variance and SD · Table 3-2 <span class="src">Both</span></h3>
+  <div class="cols2">
+    <p>(1) They describe the <strong>spread</strong> of data and compare which of two or more data sets is more variable. (2) They measure the <strong>consistency</strong> of a variable: in manufacturing nuts and bolts, the variation in diameters must be small or the parts will not fit. (3) They give the number of values that fall within an interval (Chebyshev). (4) They are used heavily in <strong>inferential statistics</strong> in later chapters.</p>
+    <div class="tbl-wrap" style="margin:0"><table><thead><tr><th>Measure</th><th>Definition</th><th>Symbol</th></tr></thead><tbody>
+      <tr><td>Range<arn>المدى</arn></td><td>highest − lowest</td><td>R</td></tr>
+      <tr><td>Variance<arn>التباين</arn></td><td>average squared distance from the mean</td><td>σ², s²</td></tr>
+      <tr><td>Standard deviation<arn>الانحراف المعياري</arn></td><td>square root of the variance</td><td>σ, s</td></tr></tbody></table></div>
+  </div>
+
+  <h3>9 · Linear transformations <span class="src">Hadhrami</span></h3>
+  <fig id="lintrans"/>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Transformation</th><th>Mean, median (centre)</th><th>SD, IQR, range (spread)</th><th>Variance</th><th>CV</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Add a constant</strong> (x + c)</td><td>shift by + c</td><td><strong>unchanged</strong></td><td>unchanged</td><td><strong>changes</strong> (the mean changed)</td></tr>
+      <tr><td><strong>Multiply by a constant</strong> (c·x, c &gt; 0)</td><td>× c</td><td>× c</td><td><strong>× c²</strong></td><td>unchanged</td></tr>
+      <tr><td><strong>Both</strong> (a·x + b)</td><td>a × centre + b</td><td>× a</td><td>× a²</td><td>changes</td></tr>
+    </tbody>
+  </table></div>
+  <p>The slide's example: x = 1, 2, 3, 4 has mean 2.5, median 2.5, SD 1.29, IQR 2. Then x + 5 has 7.5, 7.5, 1.29, 2, and 2x has 5, 5, 2.58, 4. (The slide's "compare x to z" in case one should read "x to y".) The variance and CV columns are extensions you can derive from the rules; they appear in textbook HW 43–46 and 52.</p>
+  <ar t="الشرح بالعربي — التحويل الخطي">إذا <b>أضفنا</b> رقمًا ثابتًا لكل القيم (مثل 5 درجات إضافية لكل الطلاب): المتوسط والوسيط يزيدان بنفس المقدار، أما الانحراف المعياري والمدى الربيعي <b>فلا يتغيران</b>، لأن البيانات انزاحت كلها دون أن تتباعد. إذا <b>ضربنا</b> كل القيم في ثابت: كل المقاييس تُضرب فيه، <b>والتباين يُضرب في مربعه</b>. وتحويل ⟦°F = 1.8°C + 32⟧ مثال على الحالتين معًا.</ar>
+</section>

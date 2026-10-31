@@ -1,0 +1,944 @@
+<title>Lesson 3-1 Central Tendency</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+
+<style>
+/* Layout: single reading column with a sticky rail nav; four section inks mirror the
+   overprint of a Venn diagram — the chapter's own governing picture. */
+:root{
+  --bg:#fbfaf7;
+  --surface:#ffffff;
+  --surface-2:#f2f1ec;
+  --fg:#1b2027;
+  --fg-soft:#4c5663;
+  --fg-faint:#78828f;
+  --rule:#dddcd4;
+  --rule-soft:#eceae3;
+
+  --ink-1:#1f4e79;   /* 4-1  sample spaces      */
+  --ink-2:#0f6f5c;   /* 4-2  addition rules     */
+  --ink-3:#9a5b12;   /* 4-3  multiplication     */
+  --ink-4:#7b2d6b;   /* 4-4 / 4-5 counting      */
+  --accent:#b23b2e;  /* alarms, traps, must-know */
+
+  --ink-1-wash:#eaf0f7;
+  --ink-2-wash:#e5f1ee;
+  --ink-3-wash:#f8efe1;
+  --ink-4-wash:#f4e9f2;
+  --accent-wash:#f9eae7;
+
+  --display:"Spectral",Georgia,"Times New Roman",serif;
+  --body:"IBM Plex Sans","IBM Plex Sans Arabic",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --arabic:"IBM Plex Sans Arabic","IBM Plex Sans",-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  --measure:70ch;
+  --shadow:0 1px 2px rgba(27,32,39,.05),0 8px 24px -16px rgba(27,32,39,.25);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#13171c;
+    --surface:#1a1f26;
+    --surface-2:#222932;
+    --fg:#e8e6e0;
+    --fg-soft:#b3bac4;
+    --fg-faint:#8a929e;
+    --rule:#333b45;
+    --rule-soft:#272e37;
+
+    --ink-1:#7bb0e8;
+    --ink-2:#4fc4a8;
+    --ink-3:#e2a74e;
+    --ink-4:#d089c2;
+    --accent:#ef7f70;
+
+    --ink-1-wash:#182633;
+    --ink-2-wash:#132a26;
+    --ink-3-wash:#2b2314;
+    --ink-4-wash:#2a1b28;
+    --accent-wash:#2f1c19;
+
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#13171c;
+  --surface:#1a1f26;
+  --surface-2:#222932;
+  --fg:#e8e6e0;
+  --fg-soft:#b3bac4;
+  --fg-faint:#8a929e;
+  --rule:#333b45;
+  --rule-soft:#272e37;
+
+  --ink-1:#7bb0e8;
+  --ink-2:#4fc4a8;
+  --ink-3:#e2a74e;
+  --ink-4:#d089c2;
+  --accent:#ef7f70;
+
+  --ink-1-wash:#182633;
+  --ink-2-wash:#132a26;
+  --ink-3-wash:#2b2314;
+  --ink-4-wash:#2a1b28;
+  --accent-wash:#2f1c19;
+
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{
+  max-width:980px;
+  margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 72px;
+}
+
+/* ---------- masthead ---------- */
+.masthead{
+  padding-block:56px 36px;
+  border-bottom:3px double var(--rule);
+  margin-bottom:36px;
+}
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+}
+h1{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(2.1rem,6vw,3.4rem);
+  line-height:1.08;
+  margin:0 0 10px;
+  letter-spacing:-.015em;
+  text-wrap:balance;
+}
+.subtitle{
+  font-family:var(--display);
+  font-style:italic;
+  font-size:clamp(1.05rem,2.6vw,1.3rem);
+  color:var(--fg-soft);
+  margin:0 0 22px;
+  max-width:var(--measure);
+}
+.meta-strip{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 10px;
+  margin-top:20px;
+}
+.chip{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.04em;
+  padding:5px 10px;
+  border:1px solid var(--rule);
+  border-radius:3px;
+  color:var(--fg-soft);
+  background:var(--surface);
+}
+.chip strong{color:var(--fg);font-weight:600}
+
+/* ---------- nav ---------- */
+nav.toc{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:20px 22px;
+  margin-bottom:44px;
+  box-shadow:var(--shadow);
+}
+nav.toc h2{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+  font-weight:500;
+}
+nav.toc ol{
+  margin:0;padding:0;list-style:none;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:4px 26px;
+}
+nav.toc li{min-width:0}
+nav.toc a{
+  display:flex;
+  gap:10px;
+  align-items:baseline;
+  text-decoration:none;
+  color:var(--fg);
+  padding:5px 0;
+  border-bottom:1px solid var(--rule-soft);
+  font-size:.92rem;
+}
+nav.toc a:hover{color:var(--accent)}
+nav.toc a .num{
+  font-family:var(--mono);
+  font-size:.74rem;
+  color:var(--fg-faint);
+  flex:none;
+  min-width:2.4em;
+}
+
+/* ---------- sections ---------- */
+section{margin-bottom:64px;scroll-margin-top:24px}
+.sec-head{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+  padding-bottom:14px;
+  border-bottom:2px solid var(--sec,var(--fg));
+  margin-bottom:28px;
+}
+.sec-num{
+  font-family:var(--mono);
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.06em;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:5px 9px;
+  border-radius:3px;
+  flex:none;
+  margin-top:6px;
+}
+.sec-head h2{
+  font-family:var(--display);
+  font-size:clamp(1.5rem,4vw,2.05rem);
+  line-height:1.18;
+  margin:0;
+  font-weight:600;
+  text-wrap:balance;
+  min-width:0;
+}
+.sec-head .ar{
+  display:block;
+  font-family:var(--arabic);
+  font-size:.92rem;
+  font-style:normal;
+  color:var(--fg-soft);
+  direction:rtl;
+  margin-top:4px;
+  font-weight:400;
+}
+h3{
+  font-family:var(--body);
+  font-size:1.08rem;
+  font-weight:600;
+  letter-spacing:-.005em;
+  margin:36px 0 12px;
+  color:var(--fg);
+  display:flex;
+  align-items:baseline;
+  gap:9px;
+  flex-wrap:wrap;
+}
+h3::before{
+  content:"";
+  width:18px;height:3px;
+  background:var(--sec,var(--fg));
+  flex:none;
+  border-radius:2px;
+}
+h4{
+  font-family:var(--mono);
+  font-size:.74rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:26px 0 10px;
+  font-weight:500;
+}
+p{margin:0 0 14px;max-width:var(--measure)}
+ul,ol{max-width:var(--measure);padding-left:1.25em;margin:0 0 14px}
+li{margin-bottom:7px}
+li::marker{color:var(--sec,var(--fg-faint))}
+strong{font-weight:600}
+em{font-style:italic}
+code,.v{
+  font-family:var(--mono);
+  font-size:.9em;
+  background:var(--surface-2);
+  padding:1px 5px;
+  border-radius:3px;
+  white-space:nowrap;
+}
+.term{
+  font-weight:600;
+  color:var(--sec,var(--fg));
+}
+a{color:var(--accent)}
+
+/* ---------- maths ---------- */
+.fx{
+  font-family:var(--mono);
+  font-size:1.02rem;
+  line-height:2.1;
+  white-space:nowrap;
+}
+.frac{
+  display:inline-flex;
+  flex-direction:column;
+  vertical-align:middle;
+  text-align:center;
+  font-family:var(--mono);
+  line-height:1.25;
+  margin:0 .22em;
+  position:relative;
+  top:-.08em;
+}
+.frac .num{border-bottom:1.5px solid currentColor;padding:0 .4em .08em}
+.frac .den{padding:.08em .4em 0}
+sub,sup{font-size:.72em}
+
+.formula{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-left:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:18px 20px;
+  margin:18px 0 22px;
+  box-shadow:var(--shadow);
+  overflow-x:auto;
+}
+.formula .label{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg-faint));
+  margin-bottom:10px;
+  font-weight:600;
+}
+.formula .fx{margin:4px 0}
+.formula .note{
+  font-size:.88rem;
+  color:var(--fg-soft);
+  margin:10px 0 0;
+  white-space:normal;
+  max-width:none;
+}
+
+/* ---------- example cards ---------- */
+.ex{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:5px;
+  margin:20px 0;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.ex > .q{
+  padding:16px 20px;
+  border-bottom:1px dashed var(--rule);
+  background:var(--wash,var(--surface-2));
+}
+.ex .tag{
+  font-family:var(--mono);
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg));
+  display:block;
+  margin-bottom:6px;
+}
+.ex .q p{margin:0;max-width:none}
+.ex > .a{padding:16px 20px}
+.ex > .a p{max-width:none}
+.ex > .a p:last-child{margin-bottom:0}
+.ex .steps{margin:0;padding-left:1.2em;max-width:none}
+.ex .steps li{margin-bottom:9px}
+.ans{
+  display:inline-block;
+  font-family:var(--mono);
+  font-weight:600;
+  background:var(--sec,var(--fg));
+  color:#fff;
+  padding:3px 9px;
+  border-radius:3px;
+  font-size:.92em;
+  white-space:nowrap;
+}
+
+/* ---------- callouts ---------- */
+.callout{
+  border-radius:4px;
+  padding:16px 18px;
+  margin:20px 0;
+  border:1px solid;
+  font-size:.95rem;
+}
+.callout p{max-width:none}
+.callout p:last-child{margin-bottom:0}
+.callout .ct{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-weight:600;
+  display:block;
+  margin-bottom:8px;
+}
+.trap{background:var(--accent-wash);border-color:var(--accent)}
+.trap .ct{color:var(--accent)}
+.tip{background:var(--ink-2-wash);border-color:var(--ink-2)}
+.tip .ct{color:var(--ink-2)}
+.note{background:var(--surface-2);border-color:var(--rule)}
+.note .ct{color:var(--fg-faint)}
+
+.ar-note{
+  font-family:var(--arabic);
+  direction:rtl;
+  text-align:right;
+  background:var(--surface-2);
+  border-right:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:13px 16px;
+  margin:16px 0;
+  font-size:.96rem;
+  line-height:1.95;
+  color:var(--fg-soft);
+}
+.ar-note b{color:var(--fg);font-weight:600}
+.ar-note .lbl{
+  display:block;
+  font-size:.72rem;
+  letter-spacing:.04em;
+  color:var(--sec,var(--fg-faint));
+  font-weight:600;
+  margin-bottom:4px;
+}
+.ar-note ul{padding-right:1.2em;padding-left:0;margin:6px 0 0;max-width:none}
+
+.ar-note p{margin:0 0 7px;max-width:none}
+.ar-note p:last-child{margin-bottom:0}
+.ar-note ol{padding-right:1.3em;padding-left:0;margin:6px 0 0;max-width:none}
+.ar-note li{margin-bottom:5px}
+.ar-note .v{font-size:.84em}
+.arn{display:block;font-family:var(--arabic);direction:rtl;unicode-bidi:isolate;text-align:left;font-size:.84rem;color:var(--fg-soft);font-weight:500;margin-top:2px;line-height:1.5}
+.subtitle-ar{font-family:var(--arabic);direction:rtl;text-align:right;color:var(--fg-soft);font-size:1.02rem;margin:0 0 8px;max-width:none;line-height:1.9}
+
+/* ---------- diagrams ---------- */
+figure.dg{margin:22px 0 26px;padding:16px 14px 12px;background:var(--surface);border:1px solid var(--rule);border-radius:4px;break-inside:avoid;page-break-inside:avoid}
+figure.dg svg{display:block;width:100%;height:auto;margin:0 auto;color:var(--fg);overflow:visible}
+figure.dg figcaption{font-size:.86rem;color:var(--fg-soft);margin:10px auto 0;max-width:64ch;text-align:center;line-height:1.5}
+figure.dg figcaption .ar{display:block;font-family:var(--arabic);direction:rtl;margin-top:4px;font-size:.9rem}
+.dg .ln{stroke:currentColor;fill:none;stroke-width:1.4}
+.dg .ln-soft{stroke:var(--fg-faint);fill:none;stroke-width:1.2}
+.dg .dash{stroke-dasharray:4 4}
+.dg .thick{stroke-width:2.6}
+.dg text{fill:currentColor;font-family:var(--body);font-size:13px}
+.dg text.m{font-family:var(--mono);font-size:12.5px}
+.dg text.sm{font-size:11.5px}
+.dg text.big{font-family:var(--mono);font-size:19px;font-weight:600}
+.dg text.soft{fill:var(--fg-soft)}
+.dg text.b{font-weight:600}
+.dg .bg{fill:var(--surface)}
+.dg .wash1{fill:var(--ink-1-wash)} .dg .wash2{fill:var(--ink-2-wash)} .dg .wash3{fill:var(--ink-3-wash)} .dg .wash4{fill:var(--ink-4-wash)} .dg .washA{fill:var(--accent-wash)}
+.dg .f1{fill:var(--ink-1)} .dg .f2{fill:var(--ink-2)} .dg .f3{fill:var(--ink-3)} .dg .f4{fill:var(--ink-4)} .dg .fA{fill:var(--accent)}
+.dg .s1{stroke:var(--ink-1)} .dg .s2{stroke:var(--ink-2)} .dg .s3{stroke:var(--ink-3)} .dg .s4{stroke:var(--ink-4)} .dg .sA{stroke:var(--accent)}
+.dg text.t1{fill:var(--ink-1)} .dg text.t2{fill:var(--ink-2)} .dg text.t3{fill:var(--ink-3)} .dg text.t4{fill:var(--ink-4)} .dg text.tA{fill:var(--accent)}
+
+/* ---------- tables ---------- */
+.tbl-wrap{overflow-x:auto;margin:18px 0 22px;-webkit-overflow-scrolling:touch}
+table{
+  border-collapse:collapse;
+  width:100%;
+  min-width:420px;
+  font-size:.93rem;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+}
+caption{
+  caption-side:top;
+  text-align:left;
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  padding-bottom:9px;
+  font-weight:500;
+}
+th,td{
+  padding:9px 13px;
+  border-bottom:1px solid var(--rule-soft);
+  text-align:left;
+  vertical-align:top;
+}
+thead th{
+  background:var(--sec,var(--surface-2));
+  color:#fff;
+  font-weight:600;
+  font-size:.78rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  border-bottom:none;
+}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even){background:var(--surface-2)}
+td.num,th.num{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+
+/* ---------- misc blocks ---------- */
+.grid2{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:16px;
+  margin:18px 0 22px;
+}
+.card{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-top:3px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:16px 18px;
+  min-width:0;
+}
+.card h5{
+  font-family:var(--body);
+  font-size:.97rem;
+  font-weight:600;
+  margin:0 0 8px;
+}
+.card p{font-size:.92rem;margin-bottom:0;max-width:none;color:var(--fg-soft)}
+
+.flow{
+  list-style:none;
+  padding:0;
+  margin:18px 0 22px;
+  max-width:none;
+  display:grid;
+  gap:10px;
+}
+.flow li{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:13px 16px;
+  margin:0;
+}
+.flow .k{
+  font-family:var(--mono);
+  font-size:.73rem;
+  font-weight:600;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:3px 8px;
+  border-radius:3px;
+  flex:none;
+  margin-top:3px;
+  white-space:nowrap;
+}
+.flow .t{min-width:0;font-size:.95rem}
+.flow .t b{display:block;margin-bottom:2px}
+
+.keypad{
+  font-family:var(--mono);
+  font-size:.86rem;
+  background:var(--surface-2);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:4px 9px;
+  display:inline-block;
+  white-space:nowrap;
+}
+
+hr.soft{border:none;border-top:1px solid var(--rule-soft);margin:34px 0}
+
+footer{
+  border-top:3px double var(--rule);
+  padding-top:24px;
+  margin-top:20px;
+  font-size:.86rem;
+  color:var(--fg-faint);
+}
+footer p{max-width:none}
+
+@media (max-width:520px){
+  .sec-head{gap:11px}
+  .fx{font-size:.94rem}
+  .ex > .q,.ex > .a{padding:14px 15px}
+}
+@media print{
+  body{background:#fff}
+  nav.toc{break-inside:avoid}
+  .ex,.formula,.callout,.card{break-inside:avoid}
+  section{break-before:auto}
+}
+</style>
+
+<style>
+/* Chapter 3: denser setting so pages carry more per sheet */
+body{font-size:14.5px;line-height:1.55}
+p,ul,ol{max-width:none}
+p{margin:0 0 9px}
+li{margin-bottom:4px}
+.masthead{padding-block:34px 18px;margin-bottom:20px}
+section{margin-bottom:30px}
+.sec-head{margin-bottom:16px;padding-bottom:10px}
+h3{margin:22px 0 8px;font-size:1.02rem}
+h4{margin:14px 0 6px}
+.formula{padding:11px 14px;margin:10px 0 12px}
+.formula .fx{margin:1px 0;line-height:1.9}
+.ex{margin:10px 0}
+.ex > .q,.ex > .a{padding:10px 14px}
+.ex .steps li{margin-bottom:5px}
+.callout{padding:10px 13px;margin:10px 0;font-size:.93rem}
+.ar-note{padding:9px 13px;margin:9px 0;line-height:1.8;font-size:.93rem}
+.tbl-wrap{margin:8px 0 12px}
+th,td{padding:6px 10px}
+table{font-size:.9rem;min-width:0}
+figure.dg{margin:12px 0 14px;padding:10px 10px 8px}
+figure.dg figcaption{margin-top:6px;font-size:.84rem}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+.cols2 > *{min-width:0}
+.cols2 .ex{margin:0}
+@media (max-width:640px){.cols2{grid-template-columns:1fr}}
+/* let long formulas wrap inside narrow columns instead of being clipped */
+.fx,.ex .fx,.cols2 .fx,.a .fx{white-space:normal;overflow-x:visible}
+footer{margin-top:10px;padding-top:12px;font-size:.78rem}footer p{margin:0 0 4px}
+/* allow tall example cards to split across pages so no half-empty pages */
+@media print{.ex,.a.long{break-inside:auto!important;page-break-inside:auto!important}.a:not(.long){break-inside:avoid!important}.ex > .q{break-inside:avoid}.cols2{break-inside:auto}}
+.series{list-style:none;padding:0;margin:8px 0 12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2px 22px;max-width:none}
+.series li{margin:0;padding:3px 0;border-bottom:1px solid var(--rule-soft);font-size:.82rem;color:var(--fg-faint)}
+.series li.here{color:var(--fg);font-weight:600}
+.series li.here::after{content:"  ← this file";color:var(--accent);font-weight:500}
+.src{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-faint);border:1px solid var(--rule);border-radius:3px;padding:0 5px;margin-left:6px;white-space:nowrap;font-weight:500}
+</style>
+
+<div class="wrap">
+<header class="masthead">
+  <p class="eyebrow">Sultan Qaboos University · STAT 2101 · Chapter 3: Data Description</p>
+  <div class="meta-strip"><span class="chip"><strong>Week</strong> 3</span><span class="chip"><strong>CLO</strong> 1-A · 2-A · 3-B · 3-C</span><span class="chip"><strong>Textbook</strong> p. 178 {2, 3, 10, 17}</span><span class="chip"><strong>File</strong> 2 / 8</span></div>
+</header>
+<section id="s31" style="--sec:var(--ink-1);--wash:var(--ink-1-wash)">
+  <div class="sec-head">
+    <span class="sec-num">3-1</span>
+    <h2>Measures of Central Tendency
+      <span class="ar">مقاييس النزعة المركزية — المتوسط والوسيط والمنوال ومنتصف المدى والمتوسط المرجّح</span>
+    </h2>
+  </div>
+
+  <p>Chapter 2 organised data into frequency distributions and graphs. Chapter 3 <strong>summarises data numerically</strong> with three families of measures: <strong>central tendency</strong> (mean, median, mode, midrange, weighted mean), <strong>variation</strong> (range, variance, standard deviation) and <strong>position</strong> (z-scores, percentiles, quartiles, deciles, interquartile range). Together these make up <em>traditional statistics</em>. <span class="src">Hadhrami</span></p>
+
+  <h3>0 · Parameter vs statistic, and the rounding rule <span class="src">Both · CLO1-A</span></h3>
+  <figure class="dg"><svg viewBox="0 0 660 170" style="max-width:660px" role="img" aria-label="Population with parameters and sample with statistics, linked by random selection and inference" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ps-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+<rect x="20.0" y="34.0" width="250.0" height="120.0" rx="6" class="wash1 ln s1"/>
+<text x="145.0" y="60.0" text-anchor="middle" class="b t1">Population</text>
+<text x="145.0" y="80.0" text-anchor="middle" class="sm soft">all individuals or items of interest</text>
+<text x="145.0" y="112.0" text-anchor="middle" class="sm b">parameters</text>
+<text x="145.0" y="134.0" text-anchor="middle" class="m b t1">μ · σ² · σ · p</text>
+<rect x="390.0" y="34.0" width="250.0" height="120.0" rx="6" class="wash2 ln s2"/>
+<text x="515.0" y="60.0" text-anchor="middle" class="b t2">Sample</text>
+<text x="515.0" y="80.0" text-anchor="middle" class="sm soft">a subset of the population</text>
+<text x="515.0" y="112.0" text-anchor="middle" class="sm b">statistics</text>
+<text x="515.0" y="134.0" text-anchor="middle" class="m b t2">x̄ · s² · s · p̂</text>
+<line x1="272.0" y1="66.0" x2="386.0" y2="66.0" class="ln" marker-end="url(#ps-arr)"/>
+<text x="329.0" y="56.0" text-anchor="middle" class="sm">random selection</text>
+<line x1="386.0" y1="124.0" x2="272.0" y2="124.0" class="ln" marker-end="url(#ps-arr)"/>
+<text x="329.0" y="146.0" text-anchor="middle" class="sm">inference</text>
+</svg><figcaption>Parameters describe the whole population and use Greek letters; statistics describe a sample and use Latin letters. We select a sample at random, compute a statistic, and use it to infer the parameter.<span class="ar">المعلمة <span dir="ltr" style="white-space:nowrap">(parameter)</span> تصف المجتمع كله وتُكتب بحروف يونانية، والإحصاءة <span dir="ltr" style="white-space:nowrap">(statistic)</span> تصف العينة. نسحب عينة عشوائية، نحسب الإحصاءة، ثم نستدل بها على المعلمة.</span></figcaption></figure>
+  <div class="cols2">
+    <div>
+      <p>A <span class="term">parameter</span> is a numerical value that describes an <strong>entire population</strong>, computed from all its data values (e.g. <span class="v">μ</span>, <span class="v">σ²</span>). A <span class="term">statistic</span> is a descriptive measure computed from a <strong>sample</strong> (e.g. <span class="v">x̄</span>, <span class="v">s²</span>). Statisticians usually study populations through samples. When a population is <strong>small</strong>, no sample is needed: the whole population can be studied.</p>
+    </div>
+    <div class="tbl-wrap" style="margin:0"><table>
+      <thead><tr><th>Measure</th><th>Statistic</th><th>Parameter</th></tr></thead>
+      <tbody>
+        <tr><td>Mean</td><td class="num">x̄ (x bar)</td><td class="num">μ (mu)</td></tr>
+        <tr><td>Variance</td><td class="num">s²</td><td class="num">σ² (sigma squared)</td></tr>
+        <tr><td>Standard deviation</td><td class="num">s</td><td class="num">σ (sigma)</td></tr>
+        <tr><td>Proportion</td><td class="num">p̂ (p hat)</td><td class="num">p</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="formula">
+    <div class="label">General rounding rule</div>
+    <p class="note" style="margin:0">Do <strong>not</strong> round during the calculation, only at the final answer. Carry three or four decimal places through the working. Example 3-1 gives <span class="v">578/9 ≈ 64.2</span>, but the slide marks <span class="v">64.222</span> as the better working value.</p>
+  </div>
+  <div class="ar-note"><span class="lbl">الشرح بالعربي — المعلمة والإحصاءة</span>المعلمة (parameter) رقم يصف <b>المجتمع كله</b> ويُحسب من كل بياناته، ويُرمز له بحروف يونانية: <span class="v" dir="ltr">μ</span> للمتوسط و<span class="v" dir="ltr">σ²</span> للتباين. الإحصاءة (statistic) رقم يصف <b>العينة</b>، ويُرمز له بحروف لاتينية: <span class="v" dir="ltr">x̄</span> و<span class="v" dir="ltr">s²</span>. سؤال شائع: «متوسط أعمار كل طلاب جامعة السلطان قابوس» ← معلمة. «متوسط أعمار 50 طالبًا اخترناهم» ← إحصاءة. وقاعدة التقريب: <b>لا تقرّب في منتصف الحل</b>، بل في الإجابة النهائية فقط.</div>
+
+  <h3>1 · The mean <span class="src">Both</span></h3>
+  <p>A <span class="term">measure of central tendency</span> summarises a whole data set with one value that represents its middle or centre. The <span class="term">mean</span> (arithmetic average) is the sum of the values divided by the number of values. It applies to discrete and continuous data.</p>
+  <div class="formula">
+    <div class="label">Sample mean (a statistic) · population mean (a parameter)</div>
+    <p class="fx">x̄ = <span class="frac"><span class="num">X₁ + X₂ + ⋯ + Xₙ</span><span class="den">n</span></span> = <span class="frac"><span class="num">ΣX</span><span class="den">n</span></span> &nbsp;&nbsp;&nbsp;&nbsp; μ = <span class="frac"><span class="num">X₁ + X₂ + ⋯ + X<sub>N</sub></span><span class="den">N</span></span> = <span class="frac"><span class="num">ΣX</span><span class="den">N</span></span></p>
+    <p class="note">x̄ is pronounced "X bar", μ "mew". n = number of values in the sample, N = number of values in the population.</p>
+  </div>
+  <div class="cols2">
+    <div class="ex"><div class="q"><span class="tag">Ex 3-1 · Avian flu cases <span class="src">Both</span></span><p>Flu cases over 9 years: 4, 46, 98, 115, 88, 44, 73, 48, 62. Find the mean.</p></div>
+      <div class="a"><p class="fx">x̄ = 578/9 = 64.222 ≈ <span class="ans">64.2</span></p><p>The mean number of flu cases over the 9 years is 64.2.</p></div></div>
+    <div class="ex"><div class="q"><span class="tag">Ex 3-2 · Store sales <span class="src">Hadhrami</span></span><p>Sales (in $ millions) over 5 years: 221, 239, 262, 281, 318. Find the mean.</p></div>
+      <div class="a"><p class="fx">x̄ = 1321/5 = <span class="ans">264.2</span></p><p>The mean is $264.2 million, which is <em>not</em> one of the data values.</p></div></div>
+  </div>
+  <div class="callout tip"><span class="ct">Properties of the mean · memorise all six <span class="src">Both</span></span>
+    <p>(1) It uses <strong>all</strong> the data values. (2) It varies <strong>less</strong> than the median or mode across samples from the same population. (3) It is used to compute other statistics, such as the variance. (4) It is <strong>unique</strong> and usually <strong>not</strong> one of the data values. (5) It <strong>cannot be computed</strong> for a frequency distribution with an <strong>open-ended class</strong>. (6) It is strongly affected by <strong>outliers</strong> (extremely high or low values), so it may be the wrong average to report. Also, knowing the mean alone is not enough to describe a data set; see 3-2.</p></div>
+
+  <h3>2 · The mean for grouped data <span class="src">Both</span></h3>
+  <div class="formula">
+    <div class="label">Procedure: table A Class · B Frequency f · C Midpoint Xₘ · D f·Xₘ</div>
+    <p class="fx">Xₘ = <span class="frac"><span class="num">lower + upper</span><span class="den">2</span></span> &nbsp;(limits or boundaries give the same midpoint) &nbsp;&nbsp;&nbsp; x̄ = <span class="frac"><span class="num">Σf·Xₘ</span><span class="den">n</span></span></p>
+    <p class="note">Steps: find each midpoint, multiply by the frequency (column D), sum column D, then divide by n = Σf.</p>
+  </div>
+  <div class="cols2">
+    <div class="ex"><div class="q"><span class="tag">Ex 3-3 · Salaries of CEOs ($ millions) <span class="src">Hadhrami</span></span>
+      <div class="tbl-wrap" style="margin:6px 0 0"><table><thead><tr><th>Class</th><th class="num">f</th><th class="num">Xₘ</th><th class="num">f·Xₘ</th></tr></thead><tbody>
+        <tr><td>15.5–20.5</td><td class="num">13</td><td class="num">18</td><td class="num">234</td></tr>
+        <tr><td>20.5–25.5</td><td class="num">6</td><td class="num">23</td><td class="num">138</td></tr>
+        <tr><td>25.5–30.5</td><td class="num">4</td><td class="num">28</td><td class="num">112</td></tr>
+        <tr><td>30.5–35.5</td><td class="num">1</td><td class="num">33</td><td class="num">33</td></tr>
+        <tr><td>35.5–40.5</td><td class="num">1</td><td class="num">38</td><td class="num">38</td></tr>
+        <tr><td><strong>Total</strong></td><td class="num"><strong>25</strong></td><td></td><td class="num"><strong>555</strong></td></tr></tbody></table></div></div>
+      <div class="a"><p class="fx">x̄ = 555/25 = <span class="ans">$22.2 million</span></p></div></div>
+    <div class="ex"><div class="q"><span class="tag">Ages of drivers <span class="src">Amani</span></span>
+      <div class="tbl-wrap" style="margin:6px 0 0"><table><thead><tr><th>Limits</th><th>Boundaries</th><th class="num">f</th><th class="num">Xₘ</th><th class="num">f·Xₘ</th><th class="num">CF</th></tr></thead><tbody>
+        <tr><td>21–28</td><td>20.5–28.5</td><td class="num">19</td><td class="num">24.5</td><td class="num">465.5</td><td class="num">19</td></tr>
+        <tr><td>29–36</td><td>28.5–36.5</td><td class="num">20</td><td class="num">32.5</td><td class="num">650</td><td class="num">39</td></tr>
+        <tr><td>37–44</td><td>36.5–44.5</td><td class="num">16</td><td class="num">40.5</td><td class="num">648</td><td class="num">55</td></tr>
+        <tr><td>45–52</td><td>44.5–52.5</td><td class="num">14</td><td class="num">48.5</td><td class="num">679</td><td class="num">69</td></tr>
+        <tr><td>53–60</td><td>52.5–60.5</td><td class="num">0</td><td class="num">56.5</td><td class="num">0</td><td class="num">69</td></tr>
+        <tr><td>61–68</td><td>60.5–68.5</td><td class="num">1</td><td class="num">64.5</td><td class="num">64.5</td><td class="num">70</td></tr>
+        <tr><td>69–76</td><td>68.5–76.5</td><td class="num">1</td><td class="num">72.5</td><td class="num">72.5</td><td class="num">71</td></tr>
+        <tr><td colspan="2"><strong>Total</strong></td><td class="num"><strong>71</strong></td><td></td><td class="num"><strong>2579.5</strong></td><td></td></tr></tbody></table></div></div>
+      <div class="a"><p class="fx">x̄ = 2579.5/71 = 36.331 ≈ <span class="ans">36.3 years</span></p><p>The mode and median for this table are worked out in parts 3 and 4 below; its variance is in 3-2.</p></div></div>
+  </div>
+  <div class="ar-note"><span class="lbl">الشرح بالعربي — متوسط البيانات المبوّبة</span>عندما تكون البيانات في جدول تكراري لا نعرف القيم الأصلية، فنفترض أن كل قيم الفئة تساوي <b>مركزها</b> <span class="v" dir="ltr">Xₘ</span> (الحد الأدنى + الحد الأعلى ÷ 2). نضرب كل مركز في تكراره، نجمع، ثم نقسم على مجموع التكرارات: <span class="v" dir="ltr">x̄ = Σf·Xₘ / n</span>. انتبه: لو كانت هناك <b>فئة مفتوحة</b> (مثل «60 فأكثر») فلا يمكن حساب المتوسط لأن مركزها غير معروف، وعندها نستخدم الوسيط.</div>
+
+  <h3>3 · The median (MD) <span class="src">Both</span></h3>
+  <p>The <span class="term">median</span> is the middle value of data that have been <strong>arranged in order</strong>. Steps: (1) order the data from smallest to largest; (2) count n; (3) if n is <strong>odd</strong>, the median is the middle value at position <span class="v">(n + 1)/2</span>; if n is <strong>even</strong>, it is the mean of the values at positions <span class="v">n/2</span> and <span class="v">n/2 + 1</span>.</p>
+  <figure class="dg"><svg viewBox="0 0 700 174" style="max-width:700px" role="img" aria-label="Ordered data with the middle value highlighted for an odd count and the two middle values for an even count" xmlns="http://www.w3.org/2000/svg">
+<rect x="40.0" y="30.0" width="76.0" height="30.0" rx="3" class="bg ln-soft"/>
+<text x="78.0" y="50.0" text-anchor="middle" class="m">17.6</text>
+<text x="78.0" y="76.0" text-anchor="middle" class="sm soft">1</text>
+<rect x="124.0" y="30.0" width="76.0" height="30.0" rx="3" class="bg ln-soft"/>
+<text x="162.0" y="50.0" text-anchor="middle" class="m">69.8</text>
+<text x="162.0" y="76.0" text-anchor="middle" class="sm soft">2</text>
+<rect x="208.0" y="30.0" width="76.0" height="30.0" rx="3" class="wash1 ln s1 thick"/>
+<text x="246.0" y="50.0" text-anchor="middle" class="m b t1">108.2</text>
+<text x="246.0" y="76.0" text-anchor="middle" class="sm soft">3</text>
+<rect x="292.0" y="30.0" width="76.0" height="30.0" rx="3" class="bg ln-soft"/>
+<text x="330.0" y="50.0" text-anchor="middle" class="m">159.8</text>
+<text x="330.0" y="76.0" text-anchor="middle" class="sm soft">4</text>
+<rect x="376.0" y="30.0" width="76.0" height="30.0" rx="3" class="bg ln-soft"/>
+<text x="414.0" y="50.0" text-anchor="middle" class="m">222.6</text>
+<text x="414.0" y="76.0" text-anchor="middle" class="sm soft">5</text>
+<text x="40.0" y="20.0" text-anchor="start" class="sm b">n = 5 (odd): median at position (n + 1)/2 = 3</text>
+<text x="470.0" y="50.0" text-anchor="start" class="m b t1">MD = 108.2</text>
+<rect x="40.0" y="118.0" width="50.0" height="30.0" rx="3" class="bg ln-soft"/>
+<text x="65.0" y="138.0" text-anchor="middle" class="m">656</text>
+<text x="65.0" y="164.0" text-anchor="middle" class="sm soft">1</text>
+<rect x="94.0" y="118.0" width="50.0" height="30.0" rx="3" class="bg ln-soft"/>
+<text x="119.0" y="138.0" text-anchor="middle" class="m">684</text>
+<text x="119.0" y="164.0" text-anchor="middle" class="sm soft">2</text>
+<rect x="148.0" y="118.0" width="50.0" height="30.0" rx="3" class="bg ln-soft"/>
+<text x="173.0" y="138.0" text-anchor="middle" class="m">702</text>
+<text x="173.0" y="164.0" text-anchor="middle" class="sm soft">3</text>
+<rect x="202.0" y="118.0" width="50.0" height="30.0" rx="3" class="wash1 ln s1 thick"/>
+<text x="227.0" y="138.0" text-anchor="middle" class="m b t1">764</text>
+<text x="227.0" y="164.0" text-anchor="middle" class="sm soft">4</text>
+<rect x="256.0" y="118.0" width="50.0" height="30.0" rx="3" class="wash1 ln s1 thick"/>
+<text x="281.0" y="138.0" text-anchor="middle" class="m b t1">856</text>
+<text x="281.0" y="164.0" text-anchor="middle" class="sm soft">5</text>
+<rect x="310.0" y="118.0" width="50.0" height="30.0" rx="3" class="bg ln-soft"/>
+<text x="335.0" y="138.0" text-anchor="middle" class="m">1132</text>
+<text x="335.0" y="164.0" text-anchor="middle" class="sm soft">6</text>
+<rect x="364.0" y="118.0" width="50.0" height="30.0" rx="3" class="bg ln-soft"/>
+<text x="389.0" y="138.0" text-anchor="middle" class="m">1133</text>
+<text x="389.0" y="164.0" text-anchor="middle" class="sm soft">7</text>
+<rect x="418.0" y="118.0" width="50.0" height="30.0" rx="3" class="bg ln-soft"/>
+<text x="443.0" y="138.0" text-anchor="middle" class="m">1303</text>
+<text x="443.0" y="164.0" text-anchor="middle" class="sm soft">8</text>
+<text x="40.0" y="108.0" text-anchor="start" class="sm b">n = 8 (even): average positions n/2 = 4 and n/2 + 1 = 5</text>
+<text x="484.0" y="138.0" text-anchor="start" class="m b t1">MD = (764 + 856)/2 = 810</text>
+</svg><figcaption>Order the data first. Odd n: the median is the single middle value (Example 3-4). Even n: it is the mean of the two middle values (Example 3-5). The number under each box is its position.<span class="ar">رتّب البيانات أولًا. إذا كان n فرديًا فالوسيط هو القيمة الوسطى (مثال <span dir="ltr" style="white-space:nowrap">3-4)</span>، وإذا كان زوجيًا فهو متوسط القيمتين الوسطيين (مثال <span dir="ltr" style="white-space:nowrap">3-5)</span>. الرقم تحت كل مربع هو ترتيبه.</span></figcaption></figure>
+  <div class="cols2">
+    <div class="callout tip" style="margin:0"><span class="ct">Interpreting the median <span class="src">Hadhrami</span></span><p>If the median exam score in a section is 76, then <strong>50% of students scored 76 or less and 50% scored 76 or more</strong>. The median is less sensitive to outliers and skewed data than the mean. <span class="src">Both</span></p></div>
+    <div class="ex"><div class="q"><span class="tag">Activity · median <span class="src">Amani</span></span><p>Find the median of (a) 114, 77, 21, 101, 311, 77, 159, 382 and (b) 6180, 4894, 2821, 2559, 2483.</p></div>
+      <div class="a"><p>(a) Ordered: 21, 77, 77, 101, 114, 159, 311, 382. n = 8, so average the 4th and 5th values: <span class="v">(101 + 114)/2 =</span> <span class="ans">107.5</span></p><p>(b) Ordered: 2483, 2559, 2821, 4894, 6180. n = 5, so take the 3rd value: <span class="ans">2821</span></p></div></div>
+  </div>
+  <p><strong>Properties of the median:</strong> it finds the centre (middle value) of the data; it is used to tell whether a value falls in the upper or lower half; it <strong>can</strong> be used for an <strong>open-ended</strong> distribution; it is affected less than the mean by extremely high or low values. <span class="src">Amani</span></p>
+
+  <h4>Median for grouped data <span class="src">Amani</span></h4>
+  <div class="cols2">
+    <div><p>(1) Find the total frequency N. (2) Calculate <span class="v">N/2</span>. (3) Build the cumulative frequency (CF). The class whose CF <strong>first exceeds</strong> <span class="v">N/2</span> is the <span class="term">median class</span>.</p>
+      <p><strong>Drivers:</strong> N = 71, so N/2 = 35.5. The CF column reads 19, <strong>39</strong>, …, and 39 is the first CF above 35.5. The median class is therefore <span class="ans">29–36 (28.5–36.5)</span>. In words: the middle driver is aged between 29 and 36.</p></div>
+    <div class="callout note" style="margin:0"><span class="ct">Optional: only if a question asks for one number</span><p>Interpolating inside the median class gives <span class="v">L + ((N/2 − CF<sub>before</sub>)/f)·w = 28.5 + ((35.5 − 19)/20)·8 = 35.1</span>, where L is the lower boundary, f the class frequency and w the class width. This formula is <strong>not</strong> in either deck. The course answer is the median class.</p></div>
+  </div>
+  <div class="ar-note"><span class="lbl">الشرح بالعربي — الوسيط</span>الوسيط هو <b>القيمة الوسطى بعد ترتيب البيانات</b>. إذا كان عدد القيم فرديًا نأخذ القيمة في الترتيب <span class="v" dir="ltr">(n+1)/2</span>، وإذا كان زوجيًا نأخذ متوسط القيمتين في الترتيبين <span class="v" dir="ltr">n/2</span> و<span class="v" dir="ltr">n/2 + 1</span>. أكثر خطأ شائع: <b>نسيان الترتيب قبل اختيار القيمة الوسطى</b>. ميزة الوسيط أنه لا يتأثر كثيرًا بالقيم المتطرفة ويمكن حسابه للفئات المفتوحة. وفي البيانات المبوّبة نحدد <b>فئة الوسيط</b>: أول فئة يتجاوز تكرارها المتجمع <span class="v" dir="ltr">N/2</span>.</div>
+
+  <h3>4 · The mode <span class="src">Both</span></h3>
+  <div class="cols2">
+    <div><p>The <span class="term">mode</span> is the value that occurs most often: the highest bar in a bar chart or histogram, sometimes described as the most typical case. It works for <strong>qualitative and quantitative</strong> data. Four cases:</p>
+      <ul><li><strong>Unimodal</strong>: one value has the greatest frequency.</li><li><strong>Bimodal</strong>: two values tie for the greatest frequency, and both are modes.</li><li><strong>Multimodal</strong>: more than two values tie.</li><li><strong>No mode</strong>: no value occurs more than once. Never write "the mode is zero".</li></ul></div>
+    <div class="tbl-wrap" style="margin:0"><table>
+      <thead><tr><th>Data</th><th>Mode</th></tr></thead><tbody>
+      <tr><td>Ex 3-6 libraries: 21, 77, 77, 101, 114, 159, 311, 382</td><td><strong>77</strong> · unimodal</td></tr>
+      <tr><td>Ex 3-7 nuclear reactors (15 years): 104 ×5, 107, 109 ×5, 110, 111 ×2, 112</td><td><strong>104 and 109</strong> · bimodal</td></tr>
+      <tr><td>6180, 4894, 2821, 2559, 2483</td><td><strong>no mode</strong></td></tr>
+      <tr><td>Ex 3-9 CEO table (Ex 3-3)</td><td>modal class <strong>15.5–20.5</strong> (f = 13), midpoint 18</td></tr>
+      <tr><td>Drivers table</td><td>modal class <strong>29–36</strong> (f = 20), midpoint 32.5</td></tr>
+    </tbody></table></div>
+  </div>
+  <p>For grouped data, the class with the highest frequency is the <span class="term">modal class</span>, and its midpoint is sometimes reported as the mode. <strong>Properties:</strong> the mode is used when the most typical case is wanted; it is the easiest average to compute; it is the only average for nominal or categorical data (religious preference, gender, political affiliation); it is less sensitive to outliers. Textbook self-study: Ex 3-8 (U.S. patent leaders), Ex 3-10 (nonalcoholic beverages).</p>
+  <div class="ar-note"><span class="lbl">الشرح بالعربي — المنوال</span>المنوال هو <b>القيمة الأكثر تكرارًا</b>. قد يكون منوالًا واحدًا (unimodal)، أو اثنين (bimodal)، أو أكثر (multimodal)، أو <b>لا يوجد منوال</b> إذا لم تتكرر أي قيمة. احذر: لا تكتب «المنوال = صفر»، بل اكتب «لا يوجد منوال» (no mode). المنوال هو المقياس الوحيد الذي يصلح للبيانات <b>الوصفية الاسمية</b> مثل فصيلة الدم أو الجنس. في الجداول المبوّبة نحدد <b>الفئة المنوالية</b>، وهي الفئة ذات أعلى تكرار.</div>
+
+  <h3>5 · The midrange (MR) <span class="src">Hadhrami</span></h3>
+  <div class="cols2">
+    <div class="formula" style="margin:0"><div class="label">Midrange</div><p class="fx">MR = <span class="frac"><span class="num">lowest value + highest value</span><span class="den">2</span></span></p><p class="note">A very rough estimate of the average. It uses only the two extremes, so a single outlier distorts it.</p></div>
+    <div class="ex" style="margin:0"><div class="q"><span class="tag">Ex 3-12 · Bank failures</span><p>3, 30, 148, 157, 71. Find the midrange, then compare it with the mean (in-class exercise).</p></div>
+      <div class="a"><p class="fx">MR = (3 + 157)/2 = <span class="ans">80</span> &nbsp;&nbsp; x̄ = 409/5 = <span class="ans">81.8</span></p><p>Here the two are close, but MR ignores the three middle values entirely.</p></div></div>
+  </div>
+
+  <h3>6 · The weighted mean <span class="src">Both</span></h3>
+  <div class="cols2">
+    <div><p>The <span class="term">weighted mean</span> accounts for the relative importance (weight) of each value. Use it when the values are <strong>not equally represented</strong>, that is, when some values contribute more to the average than others.</p>
+      <div class="formula" style="margin:6px 0"><div class="label">Weighted mean</div><p class="fx">x̄ = <span class="frac"><span class="num">w₁X₁ + w₂X₂ + ⋯ + wₙXₙ</span><span class="den">w₁ + w₂ + ⋯ + wₙ</span></span> = <span class="frac"><span class="num">ΣwX</span><span class="den">Σw</span></span></p></div></div>
+    <div class="ex" style="margin:0"><div class="q"><span class="tag">Ex 3-14 · GPA <span class="src">Both</span></span><p>A in English (3 credits), C in Psychology (3), B in Biology (4), D in PE (2). A = 4, B = 3, C = 2, D = 1, F = 0.</p></div>
+      <div class="a"><p class="fx">x̄ = <span class="frac"><span class="num">3·4 + 3·2 + 4·3 + 2·1</span><span class="den">3 + 3 + 4 + 2</span></span> = <span class="frac"><span class="num">32</span><span class="den">12</span></span> = 2.667 ≈ <span class="ans">2.7</span></p></div></div>
+  </div>
+  <div class="cols2">
+    <div class="ex"><div class="q"><span class="tag">Activity · course grade <span class="src">Amani</span></span><p>Homework 10%, quizzes 15%, midterm 25%, final 50%. Homework 40, 50; quizzes 50, 60, 20, 50, 40; midterm 65; final 95. Estimate the weighted mean.</p></div>
+      <div class="a"><p>Average each component first: homework <span class="v">45</span>, quizzes <span class="v">220/5 = 44</span>.</p><p class="fx">0.10(45) + 0.15(44) + 0.25(65) + 0.50(95)</p><p class="fx">= 4.5 + 6.6 + 16.25 + 47.5 = <span class="ans">74.85</span></p><p>The weights already sum to 1 (100%), so no further division is needed.</p></div></div>
+    <div>
+      <div class="ex"><div class="q"><span class="tag">HW 27 · Final grade <span class="src">Hadhrami</span></span><p>Exams 20%, term paper 30%, final 50%. Grades 83, 72, 90.</p></div>
+        <div class="a"><p class="fx">0.2(83) + 0.3(72) + 0.5(90) = <span class="ans">83.2</span></p></div></div>
+      <div class="ex"><div class="q"><span class="tag">HW 24 · Fat grams per ounce <span class="src">Hadhrami</span></span><p>3 oz shrimp 3.33 g/oz · 3 oz veal 3.00 · 2 oz beef 2.50 · 2.5 oz chicken 4.40 · 4 oz tuna 1.75.</p></div>
+        <div class="a"><p>The weights are the ounces eaten.</p><p class="fx">ΣwX = 9.99 + 9 + 5 + 11 + 7 = 41.99; Σw = 14.5</p><p class="fx">x̄ = 41.99/14.5 = <span class="ans">2.90 g/oz</span></p></div></div>
+    </div>
+  </div>
+  <div class="ar-note"><span class="lbl">الشرح بالعربي — المتوسط المرجّح</span>نستخدمه عندما <b>لا تكون كل القيم بنفس الأهمية</b>، مثل حساب المعدل التراكمي (كل مادة لها عدد ساعات مختلف)، أو الدرجة النهائية (لكل تقييم نسبة مختلفة). نضرب كل قيمة في وزنها، نجمع، ثم نقسم على <b>مجموع الأوزان</b>. إذا كانت الأوزان نسبًا مجموعها 100% فلا نقسم على شيء. خطأ شائع: نسيان أخذ متوسط مكوّنات البند الواحد أولًا (مثل متوسط الكويزات الخمسة) قبل ضربها في الوزن.</div>
+
+  <h3>7 · Which measure should you report? <span class="src">Both · CLO3-C</span></h3>
+  <div class="cols2">
+    <div class="tbl-wrap" style="margin:0"><table>
+      <thead><tr><th>Level of measurement</th><th>Possible</th><th>Best</th></tr></thead><tbody>
+      <tr><td>Nominal</td><td>mode</td><td><strong>mode</strong></td></tr>
+      <tr><td>Ordinal</td><td>median, mode</td><td><strong>median</strong></td></tr>
+      <tr><td>Interval / ratio, not skewed</td><td>mean, median, mode</td><td><strong>mean</strong></td></tr>
+      <tr><td>Interval / ratio, skewed or with outliers</td><td>mean, median, mode</td><td><strong>median</strong></td></tr>
+    </tbody></table></div>
+    <div class="tbl-wrap" style="margin:0"><table>
+      <caption>Table 3-1 · Summary <span class="src">Hadhrami</span></caption>
+      <thead><tr><th>Measure</th><th>Definition</th><th>Symbol</th></tr></thead><tbody>
+      <tr><td>Mean<span class="arn">المتوسط الحسابي</span></td><td>Sum of values ÷ number of values</td><td>μ, x̄</td></tr>
+      <tr><td>Median<span class="arn">الوسيط</span></td><td>Middle point of ordered data</td><td>MD</td></tr>
+      <tr><td>Mode<span class="arn">المنوال</span></td><td>Most frequent data value</td><td>none</td></tr>
+      <tr><td>Midrange<span class="arn">منتصف المدى</span></td><td>(lowest + highest)/2</td><td>MR</td></tr>
+    </tbody></table></div>
+  </div>
+  <div class="ex"><div class="q"><span class="tag">Ex 3-11 · Salaries of personnel (the entire population) <span class="src">Hadhrami</span></span><p>Owner $100,000 · manager 40,000 · salesperson 24,000 · two technicians 18,000 each. Find the mean, median and mode. Which best represents the company?</p></div>
+    <div class="a"><p class="fx">μ = 200,000/5 = <span class="ans">$40,000</span> &nbsp;&nbsp; MD = <span class="ans">$24,000</span> &nbsp;&nbsp; mode = <span class="ans">$18,000</span></p><figure class="dg"><svg viewBox="0 0 660 158" style="max-width:660px" role="img" aria-label="Five salaries on a number line: the mean of 40 thousand sits far right of the median and mode because of one 100 thousand salary" xmlns="http://www.w3.org/2000/svg">
+<line x1="40.0" y1="78.0" x2="620.0" y2="78.0" class="ln"/>
+<line x1="40.0" y1="78.0" x2="40.0" y2="83.0" class="ln"/>
+<text x="40.0" y="96.0" text-anchor="middle" class="m soft">0k</text>
+<line x1="92.7" y1="78.0" x2="92.7" y2="83.0" class="ln"/>
+<text x="92.7" y="96.0" text-anchor="middle" class="m soft">10k</text>
+<line x1="145.5" y1="78.0" x2="145.5" y2="83.0" class="ln"/>
+<text x="145.5" y="96.0" text-anchor="middle" class="m soft">20k</text>
+<line x1="198.2" y1="78.0" x2="198.2" y2="83.0" class="ln"/>
+<text x="198.2" y="96.0" text-anchor="middle" class="m soft">30k</text>
+<line x1="250.9" y1="78.0" x2="250.9" y2="83.0" class="ln"/>
+<text x="250.9" y="96.0" text-anchor="middle" class="m soft">40k</text>
+<line x1="303.6" y1="78.0" x2="303.6" y2="83.0" class="ln"/>
+<text x="303.6" y="96.0" text-anchor="middle" class="m soft">50k</text>
+<line x1="356.4" y1="78.0" x2="356.4" y2="83.0" class="ln"/>
+<text x="356.4" y="96.0" text-anchor="middle" class="m soft">60k</text>
+<line x1="409.1" y1="78.0" x2="409.1" y2="83.0" class="ln"/>
+<text x="409.1" y="96.0" text-anchor="middle" class="m soft">70k</text>
+<line x1="461.8" y1="78.0" x2="461.8" y2="83.0" class="ln"/>
+<text x="461.8" y="96.0" text-anchor="middle" class="m soft">80k</text>
+<line x1="514.5" y1="78.0" x2="514.5" y2="83.0" class="ln"/>
+<text x="514.5" y="96.0" text-anchor="middle" class="m soft">90k</text>
+<line x1="567.3" y1="78.0" x2="567.3" y2="83.0" class="ln"/>
+<text x="567.3" y="96.0" text-anchor="middle" class="m soft">100k</text>
+<line x1="620.0" y1="78.0" x2="620.0" y2="83.0" class="ln"/>
+<text x="620.0" y="96.0" text-anchor="middle" class="m soft">110k</text>
+<circle cx="134.9" cy="64.0" r="5.5" class="f1"/>
+<circle cx="134.9" cy="51.0" r="5.5" class="f1"/>
+<circle cx="166.5" cy="64.0" r="5.5" class="f1"/>
+<circle cx="250.9" cy="64.0" r="5.5" class="f1"/>
+<circle cx="567.3" cy="64.0" r="5.5" class="f1"/>
+<text x="567.3" y="46.0" text-anchor="middle" class="sm soft">owner</text>
+<text x="134.9" y="34.0" text-anchor="middle" class="sm soft">2 technicians</text>
+<line x1="134.9" y1="96.0" x2="134.9" y2="105.0" class="ln-soft dash"/>
+<text x="138.9" y="116.0" text-anchor="start" class="sm b t3">Mode = 18k</text>
+<line x1="166.5" y1="96.0" x2="166.5" y2="123.0" class="ln-soft dash"/>
+<text x="170.5" y="134.0" text-anchor="start" class="sm b t2">Median = 24k</text>
+<line x1="250.9" y1="96.0" x2="250.9" y2="141.0" class="ln-soft dash"/>
+<text x="254.9" y="152.0" text-anchor="start" class="sm b tA">Mean = 40k</text>
+<text x="409.1" y="24.0" text-anchor="middle" class="sm b tA">one 100k salary drags the mean to the right →</text>
+</svg><figcaption>Example 3-11. One extreme salary pulls the mean up to 40k while the median (24k) and mode (18k) stay with the typical workers. With outliers or skew, report the median.<span class="ar">مثال <span dir="ltr" style="white-space:nowrap">3-11</span>: راتب واحد كبير <span dir="ltr" style="white-space:nowrap">(100</span> ألف) يسحب المتوسط إلى <span dir="ltr" style="white-space:nowrap">40</span> ألفًا، بينما يبقى الوسيط <span dir="ltr" style="white-space:nowrap">(24</span> ألفًا) والمنوال <span dir="ltr" style="white-space:nowrap">(18</span> ألفًا) قريبين من رواتب أغلب العاملين. مع القيم المتطرفة أو الالتواء نستخدم الوسيط.</span></figcaption></figure><p>The owner's extreme salary pulls the mean far above the median and mode. The <strong>median</strong> is the more representative measure here.</p></div></div>
+
+  <h3>8 · Distribution shape <span class="src">Both · CLO3-B</span></h3>
+  <figure class="dg"><svg viewBox="0 0 680 196" style="max-width:680px" role="img" aria-label="Three distribution curves showing where the mean, median and mode fall for left-skewed, symmetric and right-skewed data" xmlns="http://www.w3.org/2000/svg">
+<line x1="18.0" y1="150.0" x2="212.0" y2="150.0" class="ln"/>
+<polyline points="20.0,144.3 20.9,144.2 21.9,144.1 22.9,144.0 23.8,143.9 24.8,143.8 25.7,143.6 26.6,143.5 27.6,143.4 28.5,143.3 29.5,143.1 30.4,143.0 31.4,142.9 32.4,142.7 33.3,142.6 34.2,142.4 35.2,142.3 36.2,142.1 37.1,142.0 38.0,141.8 39.0,141.7 40.0,141.5 40.9,141.3 41.9,141.2 42.8,141.0 43.8,140.8 44.7,140.6 45.7,140.4 46.6,140.2 47.5,140.0 48.5,139.8 49.5,139.6 50.4,139.4 51.4,139.2 52.3,139.0 53.2,138.8 54.2,138.5 55.1,138.3 56.1,138.1 57.1,137.8 58.0,137.6 58.9,137.3 59.9,137.1 60.9,136.8 61.8,136.5 62.8,136.3 63.7,136.0 64.7,135.7 65.6,135.4 66.5,135.1 67.5,134.8 68.5,134.5 69.4,134.1 70.3,133.8 71.3,133.5 72.2,133.1 73.2,132.8 74.2,132.4 75.1,132.1 76.0,131.7 77.0,131.3 77.9,130.9 78.9,130.5 79.8,130.1 80.8,129.7 81.8,129.3 82.7,128.9 83.7,128.4 84.6,128.0 85.5,127.5 86.5,127.0 87.5,126.6 88.4,126.1 89.3,125.6 90.3,125.1 91.2,124.5 92.2,124.0 93.2,123.5 94.1,122.9 95.0,122.3 96.0,121.8 97.0,121.2 97.9,120.6 98.8,120.0 99.8,119.3 100.8,118.7 101.7,118.1 102.7,117.4 103.6,116.7 104.5,116.0 105.5,115.3 106.5,114.6 107.4,113.9 108.4,113.1 109.3,112.4 110.2,111.6 111.2,110.8 112.1,110.0 113.1,109.2 114.0,108.4 115.0,107.5 116.0,106.7 116.9,105.8 117.9,104.9 118.8,104.0 119.8,103.1 120.7,102.1 121.7,101.2 122.6,100.2 123.6,99.3 124.5,98.3 125.5,97.3 126.4,96.3 127.3,95.2 128.3,94.2 129.2,93.1 130.2,92.1 131.1,91.0 132.1,89.9 133.1,88.8 134.0,87.7 134.9,86.6 135.9,85.5 136.8,84.3 137.8,83.2 138.8,82.1 139.7,80.9 140.7,79.8 141.6,78.7 142.6,77.5 143.5,76.4 144.4,75.3 145.4,74.1 146.4,73.0 147.3,71.9 148.2,70.8 149.2,69.8 150.2,68.7 151.1,67.7 152.0,66.7 153.0,65.7 153.9,64.8 154.9,63.9 155.8,63.1 156.8,62.3 157.8,61.5 158.7,60.8 159.7,60.2 160.6,59.6 161.6,59.1 162.5,58.7 163.4,58.4 164.4,58.2 165.3,58.0 166.3,58.0 167.2,58.1 168.2,58.3 169.2,58.6 170.1,59.1 171.1,59.7 172.0,60.5 173.0,61.4 173.9,62.5 174.8,63.8 175.8,65.2 176.8,66.9 177.7,68.7 178.7,70.7 179.6,72.9 180.5,75.3 181.5,77.9 182.4,80.7 183.4,83.7 184.3,86.9 185.3,90.3 186.2,93.8 187.2,97.5 188.2,101.3 189.1,105.2 190.1,109.1 191.0,113.2 192.0,117.2 192.9,121.1 193.8,125.0 194.8,128.8 195.8,132.3 196.7,135.7 197.7,138.7 198.6,141.4 199.5,143.7 200.5,145.7 201.4,147.2 202.4,148.3 203.3,149.1 204.3,149.6 205.2,149.9 206.2,150.0 207.2,150.0 208.1,150.0 209.1,150.0 210.0,150.0" class="ln thick"/>
+<line x1="166.0" y1="150.0" x2="166.0" y2="58.0" class="ln-soft dash"/>
+<line x1="166.0" y1="58.0" x2="166.0" y2="25.0" class="ln-soft"/>
+<text x="162.0" y="22.0" text-anchor="end" class="sm b t3">Mode</text>
+<line x1="145.4" y1="150.0" x2="145.4" y2="74.1" class="ln-soft dash"/>
+<line x1="145.4" y1="74.1" x2="145.4" y2="41.0" class="ln-soft"/>
+<text x="141.4" y="38.0" text-anchor="end" class="sm b t2">Median</text>
+<line x1="131.8" y1="150.0" x2="131.8" y2="90.3" class="ln-soft dash"/>
+<line x1="131.8" y1="90.3" x2="131.8" y2="57.0" class="ln-soft"/>
+<text x="127.8" y="54.0" text-anchor="end" class="sm b tA">Mean</text>
+<text x="115.0" y="170.0" text-anchor="middle" class="sm b">Negatively (left) skewed</text>
+<text x="115.0" y="187.0" text-anchor="middle" class="m">mean < median < mode</text>
+<line x1="243.0" y1="150.0" x2="437.0" y2="150.0" class="ln"/>
+<polyline points="245.0,149.8 245.9,149.8 246.9,149.7 247.8,149.7 248.8,149.7 249.8,149.6 250.7,149.6 251.7,149.5 252.6,149.5 253.6,149.4 254.5,149.3 255.4,149.2 256.4,149.2 257.4,149.1 258.3,149.0 259.2,148.8 260.2,148.7 261.1,148.6 262.1,148.4 263.1,148.3 264.0,148.1 264.9,147.9 265.9,147.7 266.9,147.5 267.8,147.2 268.8,146.9 269.7,146.6 270.6,146.3 271.6,146.0 272.6,145.6 273.5,145.3 274.4,144.8 275.4,144.4 276.4,143.9 277.3,143.4 278.2,142.9 279.2,142.3 280.1,141.7 281.1,141.0 282.1,140.3 283.0,139.6 283.9,138.8 284.9,138.0 285.9,137.1 286.8,136.2 287.8,135.2 288.7,134.2 289.6,133.2 290.6,132.1 291.6,130.9 292.5,129.7 293.4,128.5 294.4,127.2 295.4,125.8 296.3,124.4 297.2,123.0 298.2,121.5 299.1,119.9 300.1,118.4 301.1,116.7 302.0,115.0 302.9,113.3 303.9,111.6 304.9,109.8 305.8,108.0 306.8,106.2 307.7,104.3 308.6,102.4 309.6,100.5 310.6,98.6 311.5,96.6 312.4,94.7 313.4,92.7 314.4,90.8 315.3,88.9 316.2,87.0 317.2,85.1 318.1,83.2 319.1,81.4 320.1,79.5 321.0,77.8 321.9,76.0 322.9,74.4 323.9,72.8 324.8,71.2 325.8,69.7 326.7,68.3 327.6,66.9 328.6,65.7 329.6,64.5 330.5,63.4 331.4,62.4 332.4,61.5 333.4,60.7 334.3,60.0 335.2,59.4 336.2,58.9 337.1,58.5 338.1,58.2 339.1,58.1 340.0,58.0 340.9,58.1 341.9,58.2 342.9,58.5 343.8,58.9 344.8,59.4 345.7,60.0 346.6,60.7 347.6,61.5 348.6,62.4 349.5,63.4 350.4,64.5 351.4,65.7 352.4,66.9 353.3,68.3 354.2,69.7 355.2,71.2 356.1,72.8 357.1,74.4 358.1,76.0 359.0,77.8 359.9,79.5 360.9,81.4 361.9,83.2 362.8,85.1 363.8,87.0 364.7,88.9 365.6,90.8 366.6,92.7 367.6,94.7 368.5,96.6 369.4,98.6 370.4,100.5 371.4,102.4 372.3,104.3 373.2,106.2 374.2,108.0 375.1,109.8 376.1,111.6 377.0,113.3 378.0,115.0 378.9,116.7 379.9,118.4 380.9,119.9 381.8,121.5 382.8,123.0 383.7,124.4 384.6,125.8 385.6,127.2 386.6,128.5 387.5,129.7 388.4,130.9 389.4,132.1 390.4,133.2 391.3,134.2 392.2,135.2 393.2,136.2 394.1,137.1 395.1,138.0 396.1,138.8 397.0,139.6 398.0,140.3 398.9,141.0 399.9,141.7 400.8,142.3 401.8,142.9 402.7,143.4 403.6,143.9 404.6,144.4 405.5,144.8 406.5,145.3 407.4,145.6 408.4,146.0 409.4,146.3 410.3,146.6 411.2,146.9 412.2,147.2 413.1,147.5 414.1,147.7 415.1,147.9 416.0,148.1 417.0,148.3 417.9,148.4 418.9,148.6 419.8,148.7 420.8,148.8 421.7,149.0 422.6,149.1 423.6,149.2 424.5,149.2 425.5,149.3 426.4,149.4 427.4,149.5 428.4,149.5 429.3,149.6 430.2,149.6 431.2,149.7 432.1,149.7 433.1,149.7 434.1,149.8 435.0,149.8" class="ln thick"/>
+<line x1="340.0" y1="150.0" x2="340.0" y2="58.0" class="ln-soft dash"/>
+<text x="340.0" y="50.0" text-anchor="middle" class="sm b">mean = median = mode</text>
+<text x="340.0" y="170.0" text-anchor="middle" class="sm b">Symmetric</text>
+<text x="340.0" y="187.0" text-anchor="middle" class="m">mean = median = mode</text>
+<line x1="468.0" y1="150.0" x2="662.0" y2="150.0" class="ln"/>
+<polyline points="470.0,150.0 470.9,150.0 471.9,150.0 472.9,150.0 473.8,150.0 474.8,149.9 475.7,149.6 476.6,149.1 477.6,148.3 478.6,147.2 479.5,145.7 480.4,143.7 481.4,141.4 482.4,138.7 483.3,135.7 484.2,132.3 485.2,128.8 486.1,125.0 487.1,121.1 488.1,117.2 489.0,113.2 489.9,109.1 490.9,105.2 491.9,101.3 492.8,97.5 493.8,93.8 494.7,90.3 495.6,86.9 496.6,83.7 497.6,80.7 498.5,77.9 499.4,75.3 500.4,72.9 501.4,70.7 502.3,68.7 503.2,66.9 504.2,65.2 505.1,63.8 506.1,62.5 507.1,61.4 508.0,60.5 508.9,59.7 509.9,59.1 510.9,58.6 511.8,58.3 512.8,58.1 513.7,58.0 514.6,58.0 515.6,58.2 516.5,58.4 517.5,58.7 518.5,59.1 519.4,59.6 520.4,60.2 521.3,60.8 522.2,61.5 523.2,62.3 524.1,63.1 525.1,63.9 526.0,64.8 527.0,65.7 528.0,66.7 528.9,67.7 529.9,68.7 530.8,69.8 531.8,70.8 532.7,71.9 533.6,73.0 534.6,74.1 535.5,75.3 536.5,76.4 537.5,77.5 538.4,78.7 539.4,79.8 540.3,80.9 541.2,82.1 542.2,83.2 543.1,84.3 544.1,85.5 545.0,86.6 546.0,87.7 547.0,88.8 547.9,89.9 548.9,91.0 549.8,92.1 550.8,93.1 551.7,94.2 552.6,95.2 553.6,96.3 554.5,97.3 555.5,98.3 556.5,99.3 557.4,100.2 558.4,101.2 559.3,102.1 560.2,103.1 561.2,104.0 562.1,104.9 563.1,105.8 564.0,106.7 565.0,107.5 566.0,108.4 566.9,109.2 567.9,110.0 568.8,110.8 569.8,111.6 570.7,112.4 571.6,113.1 572.6,113.9 573.5,114.6 574.5,115.3 575.5,116.0 576.4,116.7 577.4,117.4 578.3,118.1 579.2,118.7 580.2,119.3 581.1,120.0 582.1,120.6 583.0,121.2 584.0,121.8 585.0,122.3 585.9,122.9 586.9,123.5 587.8,124.0 588.8,124.5 589.7,125.1 590.6,125.6 591.6,126.1 592.5,126.6 593.5,127.0 594.5,127.5 595.4,128.0 596.4,128.4 597.3,128.9 598.2,129.3 599.2,129.7 600.1,130.1 601.1,130.5 602.0,130.9 603.0,131.3 604.0,131.7 604.9,132.1 605.9,132.4 606.8,132.8 607.8,133.1 608.7,133.5 609.6,133.8 610.6,134.1 611.5,134.5 612.5,134.8 613.5,135.1 614.4,135.4 615.4,135.7 616.3,136.0 617.2,136.3 618.2,136.5 619.1,136.8 620.1,137.1 621.0,137.3 622.0,137.6 623.0,137.8 623.9,138.1 624.9,138.3 625.8,138.5 626.8,138.8 627.7,139.0 628.6,139.2 629.6,139.4 630.5,139.6 631.5,139.8 632.5,140.0 633.4,140.2 634.4,140.4 635.3,140.6 636.2,140.8 637.2,141.0 638.1,141.2 639.1,141.3 640.0,141.5 641.0,141.7 642.0,141.8 642.9,142.0 643.9,142.1 644.8,142.3 645.8,142.4 646.7,142.6 647.6,142.7 648.6,142.9 649.5,143.0 650.5,143.1 651.5,143.3 652.4,143.4 653.4,143.5 654.3,143.6 655.2,143.8 656.2,143.9 657.1,144.0 658.1,144.1 659.0,144.2 660.0,144.3" class="ln thick"/>
+<line x1="514.0" y1="150.0" x2="514.0" y2="58.0" class="ln-soft dash"/>
+<line x1="514.0" y1="58.0" x2="514.0" y2="25.0" class="ln-soft"/>
+<text x="518.0" y="22.0" text-anchor="start" class="sm b t3">Mode</text>
+<line x1="534.6" y1="150.0" x2="534.6" y2="74.1" class="ln-soft dash"/>
+<line x1="534.6" y1="74.1" x2="534.6" y2="41.0" class="ln-soft"/>
+<text x="538.6" y="38.0" text-anchor="start" class="sm b t2">Median</text>
+<line x1="548.2" y1="150.0" x2="548.2" y2="90.3" class="ln-soft dash"/>
+<line x1="548.2" y1="90.3" x2="548.2" y2="57.0" class="ln-soft"/>
+<text x="552.2" y="54.0" text-anchor="start" class="sm b tA">Mean</text>
+<text x="565.0" y="170.0" text-anchor="middle" class="sm b">Positively (right) skewed</text>
+<text x="565.0" y="187.0" text-anchor="middle" class="m">mode < median < mean</text>
+</svg><figcaption>The mean is pulled toward the long tail; the mode stays at the peak; the median sits between them. Read the shape from the order of the three measures.<span class="ar">المتوسط ينسحب نحو الذيل الطويل، والمنوال يبقى عند القمة، والوسيط بينهما. من ترتيب المقاييس الثلاثة نعرف شكل التوزيع.</span></figcaption></figure>
+  <div class="cols2">
+    <div class="ex"><div class="q"><span class="tag">Homework · stem-and-leaf (key 1 | 0 = 10) <span class="src">Amani</span></span><p>1 | 0 2 3 5 5 5 6 7 7 9 &nbsp;·&nbsp; 2 | 0 2 3 &nbsp;·&nbsp; 3 | &nbsp;·&nbsp; 4 | 5. Find the mean, median and mode, and describe the shape.</p></div>
+      <div class="a"><p><strong>As plotted</strong> (n = 14, ΣX = 259): <span class="v">x̄ = 18.5</span>; median = mean of the 7th and 8th values = <span class="v">(16 + 17)/2 = 16.5</span>; mode = <span class="v">15</span>.</p><p><strong>Printed answers</strong> (19.6, 17, 15) correspond to one extra value, 35 (n = 15, ΣX = 294).</p><p>In both versions mode &lt; median &lt; mean: <span class="ans">positively (right) skewed</span>. The value 45 forms the long right tail.</p></div></div>
+    <div class="ex"><div class="q"><span class="tag">Active learning · stem-and-leaf <span class="src">Amani</span></span><p>1 | 2 3 4 · 2 | 3 4 5 6 7 · 3 | 0 1 2 · 4 | 2 4 5 6 7. (1) Minimum and maximum. (2) Mean, median, mode. (3) Shape.</p></div>
+      <div class="a"><p>(1) min = <span class="ans">12</span>, max = <span class="ans">47</span>. (2) n = 16, ΣX = 481, so <span class="v">x̄ = 30.06</span>; median = <span class="v">(27 + 30)/2 = 28.5</span>; <span class="ans">no mode</span>, since every value appears once.</p><p>(3) The mean is only slightly above the median: the distribution is roughly symmetric with a slight right skew. With no mode, compare the mean and median.</p></div></div>
+  </div>
+  <div class="ar-note"><span class="lbl">الشرح بالعربي — شكل التوزيع</span>نعرف الشكل من <b>ترتيب المقاييس الثلاثة</b>. إذا كان المنوال &lt; الوسيط &lt; المتوسط فالتوزيع <b>ملتوٍ لليمين</b> (موجب)، لأن الذيل الطويل يمين والمتوسط ينسحب نحوه. إذا كان المتوسط &lt; الوسيط &lt; المنوال فهو <b>ملتوٍ لليسار</b> (سالب). وإذا تساوت الثلاثة فهو <b>متماثل</b>. قاعدة سريعة: <b>المتوسط يتبع الذيل</b>. وإذا لم يوجد منوال فقارن المتوسط بالوسيط فقط.</div>
+</section>
+
+<footer>
+  <p><strong>Chapter 3 study set: 8 files.</strong> One merged source built from Dr. Amani Al-Rubkhi's Fall 2026 notes (course coordinator) and Dr. Ahmed Al-Hadhrami's Spring 2024 slides, aligned to the SQU STAT 2101 course outline (Fall 2026). Textbook: Bluman, <em>Elementary Statistics</em>, 10th ed.</p>
+  <p>00 · Exam brief: what the outline tests · <strong style="color:var(--accent)">01 · Lesson 3-1: Measures of Central Tendency</strong> · 02 · Lesson 3-2: Measures of Variation · 03 · Lesson 3-3: Measures of Position · 04 · Lesson 3-4: Exploratory Data Analysis · 05 · Revision pack: formulas, decisions, traps, R · 06 · Exam-style questions (no answers) · 07 · Full worked answers</p>
+</footer>
+</div>

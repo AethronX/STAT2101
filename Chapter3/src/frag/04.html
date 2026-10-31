@@ -1,0 +1,60 @@
+<section id="s34" style="--sec:var(--ink-4);--wash:var(--ink-4-wash)">
+  <div class="sec-head">
+    <span class="sec-num">3-4</span>
+    <h2>Exploratory Data Analysis
+      <span class="ar">التحليل الاستكشافي للبيانات — الملخص الخماسي والمخطط الصندوقي وقراءة الشكل والمقارنة</span>
+    </h2>
+  </div>
+
+  <h3>1 · Traditional statistics vs EDA <span class="src">Amani · Hadhrami Table 3-5</span></h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Aspect</th><th>Traditional statistics</th><th>Exploratory data analysis (EDA)</th></tr></thead>
+    <tbody>
+      <tr><td>Data organisation</td><td>frequency distribution</td><td><strong>stem-and-leaf plot</strong></td></tr>
+      <tr><td>Main graphs</td><td>histogram, ogive</td><td><strong>boxplot</strong> (box-and-whisker plot)</td></tr>
+      <tr><td>Measure of centre</td><td>mean</td><td><strong>median</strong></td></tr>
+      <tr><td>Measure of variation</td><td>standard deviation</td><td><strong>IQR = Q₃ − Q₁</strong></td></tr>
+      <tr><td>Purpose</td><td>test specific hypotheses or confirm assumptions from collected data, e.g. has the average income increased compared with last year?</td><td>explore the data and find patterns, trends or outliers <strong>without prior assumptions</strong></td></tr>
+    </tbody>
+  </table></div>
+  <ar t="الشرح بالعربي — لماذا التحليل الاستكشافي؟">الإحصاء التقليدي يبدأ بفرضية ويختبرها باستخدام المتوسط والانحراف المعياري. أما التحليل الاستكشافي فيبدأ <b>بلا افتراضات</b>: ننظر إلى البيانات لنكتشف شكلها وقيمها الشاذة. ولذلك يستخدم <b>الوسيط والمدى الربيعي</b> بدل المتوسط والانحراف، لأنهما <b>لا يتأثران بالقيم الشاذة</b> التي نبحث عنها أصلًا. احفظ الجدول بأعمدته الثلاثة، فهو سؤال تعريف مباشر في الكويز.</ar>
+
+  <h3>2 · Five-number summary and boxplot <span class="src">Both</span></h3>
+  <div class="cols2">
+    <div><p>A data set is summarised by five values, reported <strong>in this order</strong>: (1) minimum; (2) <span class="v">Q₁ = P₂₅</span>; (3) <span class="v">Q₂ = median = P₅₀</span>; (4) <span class="v">Q₃ = P₇₅</span>; (5) maximum.</p>
+      <p><strong>Constructing a boxplot</strong> <span class="src">Amani</span>: <strong>Step 1</strong> find the five-number summary. <strong>Step 2</strong> draw a horizontal axis with a scale that includes the minimum and maximum. <strong>Step 3</strong> draw a box whose vertical sides pass through Q₁ and Q₃, with a vertical line through the median. <strong>Step 4</strong> draw a line (whisker) from the minimum to the left side of the box and from the maximum to the right side.</p>
+      <p>The appearance of a boxplot changes with skewness, but its structure stays the same.</p></div>
+    <div class="ex" style="margin:0"><div class="q"><span class="tag">Simple example <span class="src">Amani</span></span><p>7, 15, 36, 39, 42, 43, 46, 49, 50, 51, 52, 61, 69, 80, 90. Construct a boxplot.</p></div>
+      <div class="a"><p>n = 15 (odd), so the median is the 8th value, ⦃49⦄. Lower seven: 7 15 36 <strong>39</strong> 42 43 46, so Q₁ = ⦃39⦄. Upper seven: 50 51 52 <strong>61</strong> 69 80 90, so Q₃ = ⦃61⦄.</p><p>Five-number summary: <strong>7, 39, 49, 61, 90</strong>.</p></div></div>
+  </div>
+  <fig id="boxanat"/>
+  <div class="cols2">
+    <div class="ex"><div class="q"><span class="tag">Activity <span class="src">Amani</span></span><p>Construct a boxplot for 12, 5, 22, 30, 7, 36, 14, 42, 15, 53, 25.</p></div>
+      <div class="a"><p>Ordered: 5 7 12 14 15 <strong>22</strong> 25 30 36 42 53 (n = 11). MD = ⦃22⦄. Q₁ = median of 5 7 12 14 15 = ⦃12⦄. Q₃ = median of 25 30 36 42 53 = ⦃36⦄.</p><p>Five-number summary: <strong>5, 12, 22, 36, 53</strong>. IQR = 24 and the fences are −24 and 72, so there are no outliers.</p></div></div>
+    <div class="ex"><div class="q"><span class="tag">Ex 3-37 · Meteorites in 10 U.S. states <span class="src">Hadhrami</span></span><p>89, 47, 164, 296, 30, 215, 138, 78, 48, 39</p></div>
+      <div class="a"><p>Ordered: 30 39 47 48 78 89 138 164 215 296. MD = (78 + 89)/2 = ⦃83.5⦄. Q₁ = ⦃47⦄, Q₃ = ⦃164⦄; min 30, max 296.</p><p>Five-number summary: <strong>30, 47, 83.5, 164, 296</strong>.</p></div></div>
+  </div>
+  <fig id="boxact"/>
+  <fig id="meteor"/>
+
+  <h3>3 · Reading shape from a boxplot <span class="src">Both · CLO3-B</span></h3>
+  <div class="cols2">
+    <div class="tbl-wrap" style="margin:0"><table>
+      <thead><tr><th>Shape</th><th>Median inside the box</th><th>Whiskers (lines)</th></tr></thead><tbody>
+        <tr><td><strong>Symmetric</strong></td><td>near the centre</td><td>about the same length</td></tr>
+        <tr><td><strong>Positively (right) skewed</strong></td><td>left of centre</td><td>right line longer</td></tr>
+        <tr><td><strong>Negatively (left) skewed</strong></td><td>right of centre</td><td>left line longer</td></tr></tbody></table></div>
+    <div class="callout tip" style="margin:0"><span class="ct">How to answer "describe the shape" for full marks</span><p>Quote the evidence with numbers: "The median (83.5) is closer to Q₁ (47) than to Q₃ (164): 36.5 versus 80.5. The right whisker (132) is much longer than the left (17). So the distribution is <strong>positively skewed</strong>." Dr. Amani's notes join the two clues with AND. If they disagree, say so and give more weight to the median position.</p></div>
+  </div>
+  <fig id="skewbox"/>
+
+  <h3>4 · Side-by-side boxplots <span class="src">Both · CLO3-C</span></h3>
+  <div class="ex"><div class="q"><span class="tag">Ex 3-38 · Roller coaster speeds (mph) <span class="src">Hadhrami</span></span><p>Wood: 50 56 60 48 35 67 72 68 · Steel: 55 70 48 28 100 106 102 120. Compare the distributions using boxplots.</p></div>
+    <div class="a"><p>Wood ordered: 35 48 50 56 | 60 67 68 72, giving five-number summary <strong>35, 49, 58, 67.5, 72</strong>. Steel ordered: 28 48 55 70 | 100 102 106 120, giving <strong>28, 51.5, 85, 104, 120</strong>.</p>
+      <fig id="woodsteel"/>
+      <p>(1) The median of the steel coasters is much higher (85 vs 58). (2) The IQR (spread) of the steel coasters is much larger (52.5 vs 18.5). (3) The range of the steel coasters is larger (92 vs 37). (4) The steel coasters are <strong>negatively skewed</strong> (median nearer Q₃); the wooden coasters are about symmetric.</p></div></div>
+  <div class="callout note"><span class="ct">Comparing two classes' grades <span class="src">Amani</span></span><p>The same four-point comparison: Class B's <strong>median</strong> is higher (it performed better overall); Class B's <strong>IQR</strong> is larger (grades more spread out); its <strong>range</strong> is wider (more variation in performance); Class B is <strong>left-skewed</strong> (some students scored much lower than the median) while Class A is <strong>right-skewed</strong>. Use this template, <em>centre → spread (IQR) → range → shape</em>, for every side-by-side question.</p></div>
+  <ar t="الشرح بالعربي — قراءة المخطط الصندوقي والمقارنة">المخطط الصندوقي يُرسم من <b>الملخص الخماسي</b>: أصغر قيمة، ⟦Q₁⟧، الوسيط، ⟦Q₃⟧، أكبر قيمة. وكل جزء من أجزائه الأربعة يحتوي <b>25%</b> من البيانات مهما كان طوله، فالجزء الأطول لا يعني بيانات أكثر بل <b>تشتتًا أكبر</b>. لمعرفة الشكل: إذا كان الوسيط <b>يسار</b> منتصف الصندوق والخط <b>الأيمن</b> أطول ← ملتوٍ لليمين (موجب)، والعكس ← ملتوٍ لليسار (سالب). وعند المقارنة بين مجموعتين اكتب أربع نقاط بالترتيب: (1) الوسيط، (2) المدى الربيعي، (3) المدى، (4) الشكل. ودعّم كل نقطة <b>بالأرقام</b>.</ar>
+
+  <div class="callout note"><span class="ct">R for Lab Quiz I (outline CLO3-D)</span><p><span class="v">fivenum(x)</span> gives the five-number summary, <span class="v">boxplot(x, horizontal = TRUE)</span> draws the boxplot, and <span class="v">boxplot(wood, steel, names = c("Wood", "Steel"), horizontal = TRUE)</span> draws side-by-side boxplots. R's boxplot whiskers stop at the last value inside the 1.5·IQR fences and draw any outliers as separate points. <span class="v">fivenum()</span> can differ from the hand method when n is odd: for Dr. Amani's 15 values it gives hinges 40.5 and 56.5 instead of Q₁ = 39 and Q₃ = 61.</p></div>
+</section>

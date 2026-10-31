@@ -1,0 +1,100 @@
+<section id="s33" style="--sec:var(--ink-3);--wash:var(--ink-3-wash)">
+  <div class="sec-head">
+    <span class="sec-num">3-3</span>
+    <h2>Measures of Position
+      <span class="ar">مقاييس الموقع — الدرجة المعيارية والمئينات والربيعات والعشيرات والقيم الشاذة</span>
+    </h2>
+  </div>
+
+  <p>Measures of position (location) give the <strong>relative position of a data value</strong> compared with the other values in a data set: <strong>standard scores (z)</strong>, <strong>percentiles</strong>, <strong>deciles</strong> and <strong>quartiles</strong>. <span class="src">Both</span></p>
+
+  <h3>1 · Standard scores (z-scores) <span class="src">Hadhrami</span></h3>
+  <div class="cols2">
+    <div class="formula" style="margin:0"><div class="label">z-score: how many SDs a value lies above (+) or below (−) the mean</div>
+      <p class="fx">z = ⟪value − mean‖standard deviation⟫</p>
+      <p class="fx">sample: z = ⟪X − x̄‖s⟫ &nbsp;&nbsp; population: z = ⟪X − μ‖σ⟫</p>
+      <p class="note">z = 0: the value equals the mean. Rearranged: <span class="v">X = x̄ + z·s</span>. If <em>every</em> value is converted to z, the new data have <strong>mean 0 and SD 1</strong>.</p></div>
+    <div>
+      <div class="ex"><div class="q"><span class="tag">Ex 3-27 · Test scores</span><p>English 85 (mean 76, s = 4) and French 42 (mean 36, s = 3). Compare her relative positions.</p></div>
+        <div class="a"><p class="fx">z<sub>E</sub> = (85 − 76)/4 = ⦃2.25⦄ &nbsp; z<sub>F</sub> = (42 − 36)/3 = ⦃2.00⦄</p><p>Her relative position is higher in <strong>English</strong>.</p></div></div>
+      <div class="ex"><div class="q"><span class="tag">Ex 3-28 · Marriage ages</span><p>Men: mean 26.4, s = 2; a man marries at 24. Women: mean 23.5, s = 2.3; a woman marries at 22.</p></div>
+        <div class="a"><p class="fx">z<sub>man</sub> = (24 − 26.4)/2 = ⦃−1.2⦄ &nbsp; z<sub>woman</sub> = (22 − 23.5)/2.3 ≈ ⦃−0.65⦄</p><p>The woman's age at marriage is relatively <strong>higher</strong>: −0.65 is closer to her group's mean than −1.2 is to his.</p></div></div>
+    </div>
+  </div>
+  <fig id="zscore"/>
+  <ar t="الشرح بالعربي — الدرجة المعيارية z">تقيس <b>كم انحرافًا معياريًا</b> تبعد القيمة عن المتوسط: ⟦z = (X − x̄)/s⟧. الموجبة تعني فوق المتوسط، والسالبة تحته، والصفر يعني عند المتوسط تمامًا. فائدتها: <b>مقارنة قيم من مجموعات مختلفة</b>. درجة 85 في الإنجليزي لا تُقارن مباشرة بـ 42 في الفرنسي، لكن ⟦z = 2.25⟧ أفضل من ⟦z = 2.00⟧. انتبه مع الأرقام السالبة: ⟦−0.65⟧ أكبر من ⟦−1.2⟧، أي أفضل موقعًا.</ar>
+
+  <h3>2 · Percentiles <span class="src">Both</span></h3>
+  <div class="cols2">
+    <div><p><span class="term">Percentiles</span> divide <strong>ordered</strong> data into 100 equal parts, written <span class="v">P₁, P₂, …, P₉₉</span>. The <span class="v">p</span>th percentile <span class="v">Pₚ</span> is the value that is greater than p% of the data values: p% lie below it and (100 − p)% above. P₁: 1% below. P₅₀ is the <strong>median</strong>. P₉₉: 99% below. There is <strong>no 100th percentile</strong>: a percentile counts the data <em>below</em> a value, and no value can be higher than the highest value in the data set, so percentiles run from 1 to 99. They are used in education and health (growth charts).</p>
+      <p><strong>You are the 4th tallest of 20.</strong> 16 people are shorter than you: 16/20 × 100 = 80%, so you are at the <strong>80th percentile, P₈₀</strong>. If your height is 1.85 m, then 80% of the group are shorter than 1.85 m. <span class="src">Amani</span></p></div>
+    <div class="callout tip" style="margin:0"><span class="ct">Percentile ≠ percentage <span class="src">Amani</span></span>
+      <p>A <strong>percentage</strong> measures your own score (40 out of 50 = 80%) and compares you with nobody. A <strong>percentile</strong> measures your position relative to others.</p>
+      <p>If 100 people sit a 50-question test and you get 40 right (80%), you don't know your percentile until you see the other scores. If all 99 others scored 60% or less, you beat 99% of the group: <strong>99th percentile</strong>. It is quite possible to score 60% and be in the 95th percentile on a hard exam.</p></div>
+  </div>
+
+  <h4>Case 1 · Percentile rank of a given value X</h4>
+  <div class="formula"><div class="label">Percentile formula (order the data first)</div>
+    <p class="fx">Percentile of X = ⟪(number of values below X) + 0.5‖total number of values⟫ · 100</p></div>
+  <fig id="pctjim"/>
+  <div class="cols2">
+    <div class="ex"><div class="q"><span class="tag">Activity · Jim's 78 <span class="src">Amani</span></span><p>20 scores: 34 37 48 59 62 75 76 78 79 80 82 85 90 91 92 92 94 97 99 100.</p></div>
+      <div class="a"><p>7 values are below 78: <span class="v">(7 + 0.5)/20 × 100 =</span> ⦃37.5th percentile⦄. 37.5% of students scored lower than Jim.</p></div></div>
+    <div class="ex"><div class="q"><span class="tag">Ex 3-30, 3-31 · Traffic violations <span class="src">Hadhrami</span></span><p>10 days: 22 19 25 24 18 15 9 12 16 20. Ordered: 9 12 15 16 18 19 20 22 24 25. Percentile rank of 16, and of 24.</p></div>
+      <div class="a"><p>16: 3 values below, (3.5/10)·100 = ⦃35th⦄. 24: 8 below, (8.5/10)·100 = ⦃85th⦄. So 24 is higher than 85% of the values.</p></div></div>
+  </div>
+
+  <h4>Case 2 · The value at a given percentile p</h4>
+  <div class="formula"><div class="label">Procedure: (1) order the data · (2) c = n·p/100</div>
+    <p class="fx">c = ⟪n · p‖100⟫ &nbsp;&nbsp;(n = number of values, p = percentile)</p>
+    <p class="note"><strong>3A</strong>: if c is <strong>not</strong> a whole number, round <strong>up</strong> to the next whole number and count up to that position. <strong>3B</strong>: if c <strong>is</strong> a whole number, take the value halfway between the c-th and (c + 1)-th values.</p></div>
+  <div class="cols2">
+    <div class="ex"><div class="q"><span class="tag">Activity · Jim's class: P₅₀ and P₇₄ <span class="src">Amani</span></span></div>
+      <div class="a"><p>P₅₀: c = 20·50/100 = 10, a whole number, so <span class="v">(10th + 11th)/2 = (80 + 82)/2 =</span> ⦃81⦄.</p><p>P₇₄: c = 20·74/100 = 14.8, not whole, so round up to 15. The 15th value = ⦃92⦄.</p></div></div>
+    <div class="ex"><div class="q"><span class="tag">Ex 3-32, 3-33 · Traffic: P₆₅ and P₃₀ <span class="src">Hadhrami</span></span></div>
+      <div class="a"><p>P₆₅: c = 10·65/100 = 6.5, rounds up to 7. The 7th value = ⦃20⦄.</p><p>P₃₀: c = 3, whole, so <span class="v">(15 + 16)/2 =</span> ⦃15.5⦄.</p></div></div>
+  </div>
+  <ar t="الشرح بالعربي — المئينات">المئين يخبرك <b>كم بالمئة من البيانات أقل من قيمتك</b>. مثلًا P₈₀ يعني أن 80% أقل منك. لا تخلط بين <b>النسبة المئوية</b> (درجتك أنت من 100) و<b>المئين</b> (ترتيبك بين الآخرين). هناك سؤالان مختلفان: (1) <b>لديك قيمة وتريد ترتيبها</b> ← عدّ القيم الأقل منها، أضف 0.5، اقسم على n، واضرب في 100. (2) <b>لديك مئين وتريد قيمته</b> ← احسب ⟦c = n·p/100⟧. إذا كان c عشريًا قرّب <b>لأعلى</b> وخذ القيمة في ذلك الترتيب، وإذا كان صحيحًا خذ متوسط القيمتين c و c + 1. ولا تنسَ ترتيب البيانات أولًا.</ar>
+
+  <h3>3 · Quartiles <span class="src">Both</span></h3>
+  <div class="cols2">
+    <div><p><span class="term">Quartiles</span> divide ordered data into four equal groups: <span class="v">Q₁ = P₂₅</span>, <span class="v">Q₂ = P₅₀ = median</span>, <span class="v">Q₃ = P₇₅</span>.</p>
+      <p><strong>Method 1, medians</strong> (the textbook procedure table): order the data; Q₂ = the median; Q₁ = the median of the values <strong>below</strong> Q₂; Q₃ = the median of the values <strong>above</strong> Q₂. When n is odd, leave the median itself out of both halves.</p>
+      <p><strong>Method 2, percentile formula</strong>: apply the Case 2 procedure with p = 25, 50, 75.</p></div>
+    <div class="ex" style="margin:0"><div class="q"><span class="tag">Activity · quartiles of Jim's class, both methods <span class="src">Amani</span></span></div>
+      <div class="a"><p><strong>Method 1:</strong> n = 20 (even), so Q₂ = (80 + 82)/2 = ⦃81⦄. Lower ten: 34 … 80, Q₁ = (62 + 75)/2 = ⦃68.5⦄. Upper ten: 82 … 100, Q₃ = (92 + 92)/2 = ⦃92⦄.</p>
+        <p><strong>Method 2:</strong> Q₁: c = 5, whole, so (5th + 6th)/2 = 68.5. Q₂: c = 10, giving 81. Q₃: c = 15, whole, so (15th + 16th)/2 = 92. Both methods agree.</p></div></div>
+  </div>
+  <div class="ex"><div class="q"><span class="tag">Ex 3-34 · Traffic data (n = 10) <span class="src">Hadhrami</span></span></div>
+    <div class="a"><p>MD = (18 + 19)/2 = ⦃18.5⦄. Below: 9 12 <strong>15</strong> 16 18, so Q₁ = ⦃15⦄. Above: 19 20 <strong>22</strong> 24 25, so Q₃ = ⦃22⦄.</p></div></div>
+  <fig id="rulers"/>
+
+  <h3>4 · Deciles and the summary of position measures <span class="src">Hadhrami</span></h3>
+  <p><span class="term">Deciles</span> divide the distribution into 10 groups: <span class="v">D₁, …, D₉</span> correspond to <span class="v">P₁₀, …, P₉₀</span>, and are found with the percentile formulas. The median = <span class="v">P₅₀ = Q₂ = D₅</span>. Textbook Table 3-4 summarises all position measures.</p>
+
+  <h3>5 · Interquartile range (IQR) <span class="src">Both</span></h3>
+  <div class="cols2">
+    <div class="formula" style="margin:0"><div class="label">IQR: the range of the middle 50% of the data</div><p class="fx">IQR = Q₃ − Q₁</p><p class="note">A rough measure of variability. Like the SD, the more variable the data, the larger the IQR. Unlike the SD, it hardly reacts to outliers.</p></div>
+    <div class="ex" style="margin:0"><div class="q"><span class="tag">Ex 3-35 · Traffic · Jim's class</span></div>
+      <div class="a"><p>Traffic: 22 − 15 = ⦃7⦄. Jim's class: 92 − 68.5 = ⦃23.5⦄.</p></div></div>
+  </div>
+
+  <h3>6 · Outliers <span class="src">Both</span></h3>
+  <div class="cols2">
+    <div><p>An <span class="term">outlier</span> is an extremely high or extremely low value compared with the rest of the data. Outliers strongly affect the <strong>mean</strong> and <strong>standard deviation</strong>; the <strong>median</strong> and <strong>IQR</strong> are much less affected.</p>
+      <div class="formula" style="margin:6px 0"><div class="label">Procedure for identifying outliers</div>
+        <p class="note" style="margin:0">(1) Order the data, find Q₁ and Q₃. (2) IQR = Q₃ − Q₁. (3) Compute 1.5 × IQR. (4) Lower fence Q₁ − 1.5·IQR; upper fence Q₃ + 1.5·IQR. (5) Any value <strong>below</strong> the lower fence or <strong>above</strong> the upper fence is an outlier.</p></div>
+      <p><strong>Why outliers occur</strong> <span class="src">Amani</span>: (1) measurement or observational error; (2) recording error, such as a value written or typed wrongly; (3) a rare value that is real but occurred by chance.</p></div>
+    <div>
+      <div class="ex" style="margin:0 0 8px"><div class="q"><span class="tag">Ex 3-36 <span class="src">Hadhrami</span></span><p>5, 6, 12, 13, 15, 18, 22, 50</p></div>
+        <div class="a"><p>Q₁ = (6 + 12)/2 = 9, Q₃ = (18 + 22)/2 = 20, IQR = 11, 1.5·IQR = 16.5.</p><p>Fences: 9 − 16.5 = −7.5 and 20 + 16.5 = 36.5. Since 50 &gt; 36.5, ⦃50 is an outlier⦄.</p></div></div>
+      <div class="ex" style="margin:0"><div class="q"><span class="tag">Activity · Jim's class <span class="src">Amani</span></span></div>
+        <div class="a"><p>1.5 × 23.5 = 35.25. Fences: 68.5 − 35.25 = 33.25 and 92 + 35.25 = 127.25. The smallest value, 34, is above 33.25: ⦃no outliers⦄.</p></div></div>
+    </div>
+  </div>
+  <fig id="fences"/>
+  <ar t="الشرح بالعربي — الربيعات والقيم الشاذة">الربيعات تقسم البيانات المرتبة إلى <b>4 أجزاء</b>، ⟦Q₂⟧ هو الوسيط، و⟦Q₁⟧ هو وسيط النصف الأدنى، و⟦Q₃⟧ هو وسيط النصف الأعلى. وإذا كان n فرديًا <b>لا ندخل الوسيط</b> في أي من النصفين. المدى الربيعي ⟦IQR = Q₃ − Q₁⟧ هو مدى الـ 50% الوسطى. لكشف القيم الشاذة نحسب الحدّين ⟦Q₁ − 1.5·IQR⟧ و⟦Q₃ + 1.5·IQR⟧، وأي قيمة <b>خارجهما</b> تعتبر شاذة. وانتبه: القيمة التي تساوي الحد تمامًا <b>ليست</b> شاذة. أسباب القيم الشاذة: خطأ في القياس، أو خطأ في التسجيل، أو قيمة نادرة حقيقية.</ar>
+
+  <div class="callout note"><span class="ct">R for Lab Quiz I (outline CLO2-D): know why R can disagree with your paper answer</span>
+    <p><span class="v">quantile(x, 0.25)</span>, <span class="v">summary(x)</span> and <span class="v">IQR(x)</span> use R's default method, which <strong>interpolates</strong> between positions. For Jim's 20 scores R gives Q₁ = 71.75 and Q₃ = 92 (IQR 20.25), not the 68.5 and 92 (IQR 23.5) from the procedure table. <span class="v">fivenum(x)</span> uses Tukey's hinges, which match the course method when n is even but not always when n is odd. In a <strong>written</strong> exam always use the procedure tables. In the lab, report what R gives. Percentile rank has no single R function: <span class="v">(sum(x &lt; 78) + 0.5)/length(x)*100</span> reproduces the formula.</p></div>
+</section>

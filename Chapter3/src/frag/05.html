@@ -1,0 +1,110 @@
+<section id="rev" style="--sec:var(--fg);--wash:var(--surface-2)">
+  <div class="sec-head">
+    <span class="sec-num">REV</span>
+    <h2>Revision pack: formulas, decisions, traps, R, A+ plan
+      <span class="ar">حزمة المراجعة — القوانين، اختيار المقياس، الأخطاء، أوامر R، وخطة A+</span>
+    </h2>
+  </div>
+
+  <h3>1 · Master formula sheet</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th style="width:24%">Name</th><th style="width:40%">Formula</th><th>Use / remember</th></tr></thead>
+    <tbody>
+      <tr><td colspan="3" style="background:var(--ink-1-wash);font-weight:600;color:var(--ink-1)">3-1 · Central tendency</td></tr>
+      <tr><td>Mean<arn>المتوسط</arn></td><td class="fx">x̄ = ΣX/n &nbsp; μ = ΣX/N</td><td>uses all values; affected by outliers; not for open-ended classes</td></tr>
+      <tr><td>Grouped mean</td><td class="fx">x̄ = Σf·Xₘ / n</td><td>Xₘ = class midpoint</td></tr>
+      <tr><td>Median<arn>الوسيط</arn></td><td class="fx">position (n+1)/2; even: mean of n/2 and n/2 + 1</td><td>order first; grouped: first class with CF &gt; N/2</td></tr>
+      <tr><td>Mode<arn>المنوال</arn></td><td>most frequent value</td><td>none / uni / bi / multimodal; grouped: modal class</td></tr>
+      <tr><td>Midrange<arn>منتصف المدى</arn></td><td class="fx">MR = (lowest + highest)/2</td><td>very rough; outlier-sensitive</td></tr>
+      <tr><td>Weighted mean<arn>المتوسط المرجّح</arn></td><td class="fx">x̄ = ΣwX / Σw</td><td>unequal importance (GPA, course grade, combining group means)</td></tr>
+      <tr><td colspan="3" style="background:var(--ink-2-wash);font-weight:600;color:var(--ink-2)">3-2 · Variation</td></tr>
+      <tr><td>Range<arn>المدى</arn></td><td class="fx">R = highest − lowest</td><td>a single number</td></tr>
+      <tr><td>Population variance / SD</td><td class="fx">σ² = Σ(X − μ)²/N &nbsp; σ = √σ²</td><td>whole population: divide by N</td></tr>
+      <tr><td>Sample variance / SD</td><td class="fx">s² = Σ(X − x̄)²/(n − 1) &nbsp; s = √s²</td><td>sample: divide by n − 1</td></tr>
+      <tr><td>Shortcut</td><td class="fx">s² = [n(ΣX²) − (ΣX)²] / [n(n − 1)]</td><td>also (ΣX² − n·x̄²)/(n − 1)</td></tr>
+      <tr><td>Grouped</td><td class="fx">s² = [n(Σf·Xₘ²) − (Σf·Xₘ)²] / [n(n − 1)]</td><td>columns D = f·Xₘ, E = f·Xₘ²</td></tr>
+      <tr><td>Coefficient of variation<arn>معامل الاختلاف</arn></td><td class="fx">CVar = (s/x̄)·100 &nbsp; (σ/μ)·100</td><td>no units; compare across units or means; smaller = more consistent</td></tr>
+      <tr><td>Range rule of thumb</td><td class="fx">s ≈ R/4</td><td>unimodal and symmetric only; usually underestimates</td></tr>
+      <tr><td>Chebyshev<arn>نظرية تشيبيشيف</arn></td><td class="fx">at least 1 − 1/k² within x̄ ± ks</td><td>any shape; k = (limit − mean)/SD; k = 2: 75%, k = 3: 88.89%</td></tr>
+      <tr><td>Empirical rule<arn>القاعدة التجريبية</arn></td><td class="fx">≈ 68% · 95% · 99.7% within 1 · 2 · 3 SD</td><td>bell-shaped only</td></tr>
+      <tr><td>Linear transformation</td><td class="fx">y = a·x + b</td><td>centre → a·c + b; SD, IQR → ×|a|; variance → ×a²</td></tr>
+      <tr><td colspan="3" style="background:var(--ink-3-wash);font-weight:600;color:var(--ink-3)">3-3 · Position</td></tr>
+      <tr><td>z-score<arn>الدرجة المعيارية</arn></td><td class="fx">z = (X − x̄)/s &nbsp; z = (X − μ)/σ</td><td>X = x̄ + z·s; all z-scores: mean 0, SD 1</td></tr>
+      <tr><td>Percentile rank<arn>رتبة المئين</arn></td><td class="fx">[(# below X) + 0.5]/n · 100</td><td>order the data first</td></tr>
+      <tr><td>Value at Pₚ</td><td class="fx">c = n·p/100</td><td>decimal: round up and take that value · whole: average of c-th and (c + 1)-th</td></tr>
+      <tr><td>Quartiles · deciles</td><td class="fx">Q₁ = P₂₅, Q₂ = P₅₀ = MD = D₅, Q₃ = P₇₅; Dₖ = P₁₀ₖ</td><td>median method or percentile formula</td></tr>
+      <tr><td>IQR · outlier fences</td><td class="fx">IQR = Q₃ − Q₁; Q₁ − 1.5·IQR, Q₃ + 1.5·IQR</td><td>outside the fences = outlier</td></tr>
+      <tr><td colspan="3" style="background:var(--ink-4-wash);font-weight:600;color:var(--ink-4)">3-4 · EDA</td></tr>
+      <tr><td>Five-number summary<arn>الملخص الخماسي</arn></td><td class="fx">min, Q₁, MD, Q₃, max</td><td>in this order; it draws the boxplot</td></tr>
+      <tr><td>Shape from a boxplot</td><td>median position + whisker lengths</td><td>median left and right whisker long → right skew</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>2 · Which tool? Ten-second decisions</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th style="width:42%">The question says…</th><th>Use</th></tr></thead>
+    <tbody>
+      <tr><td>"all employees", "the entire population", "every …"</td><td>μ, σ², σ, dividing by <strong>N</strong></td></tr>
+      <tr><td>"a sample of", "a random sample", "selected"</td><td>x̄, s², s, dividing by <strong>n − 1</strong></td></tr>
+      <tr><td>nominal data (colour, blood type, brand)</td><td><strong>mode</strong> only</td></tr>
+      <tr><td>outliers, skew, income or salary data, open-ended class</td><td><strong>median</strong> (and IQR)</td></tr>
+      <tr><td>values of unequal importance; combining group means</td><td><strong>weighted mean</strong></td></tr>
+      <tr><td>"which is more variable / consistent?" with different units or means</td><td><strong>CV</strong>, never raw SDs</td></tr>
+      <tr><td>"what can be said about the number / percentage…", shape unknown</td><td><strong>Chebyshev</strong>: "at least"</td></tr>
+      <tr><td>"bell-shaped", "normal", "mound-shaped"</td><td><strong>empirical rule</strong>: "approximately"</td></tr>
+      <tr><td>"compare relative position / who did better relative to their group"</td><td><strong>z-scores</strong></td></tr>
+      <tr><td>"what percentile is X?" / "what value is at P<sub>p</sub>?"</td><td>percentile formula / c = n·p/100</td></tr>
+      <tr><td>"check for outliers", "unusual value"</td><td>fences Q₁ − 1.5·IQR, Q₃ + 1.5·IQR</td></tr>
+      <tr><td>"add 5 to every score" / "convert units"</td><td>linear transformation rules</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>3 · Fifteen traps that cost marks</h3>
+  <div class="cols2">
+    <ol style="margin:0">
+      <li>Finding the median or quartiles <strong>without ordering</strong> the data first.</li>
+      <li>Dividing a <strong>sample</strong> variance by n, or a <strong>population</strong> variance by n − 1.</li>
+      <li>Treating <span class="v">ΣX²</span> as <span class="v">(ΣX)²</span>.</li>
+      <li>Rounding deviations mid-calculation (the 2.335 vs 2.333 lesson).</li>
+      <li>Writing "mode = 0" instead of "no mode".</li>
+      <li>Computing a mean for a table with an <strong>open-ended class</strong>.</li>
+      <li>Comparing raw SDs when the means or units differ; use the CV.</li>
+      <li>Forgetting to take the √ when the question gives the <strong>variance</strong>.</li>
+    </ol>
+    <ol start="9" style="margin:0">
+      <li>Writing "exactly 75%" for Chebyshev; it is <strong>at least</strong>. Round counts <strong>up</strong> for "at least".</li>
+      <li>Using the empirical rule when the shape is not stated as bell-shaped.</li>
+      <li>Percentile rank: counting values ≤ X instead of strictly <strong>below</strong> X, or forgetting + 0.5.</li>
+      <li>c = n·p/100 with a decimal c: rounding to the nearest number instead of <strong>up</strong>.</li>
+      <li>Including the median in both halves when n is odd (course method).</li>
+      <li>Thinking a longer boxplot section holds more data; every section is 25%.</li>
+      <li>"Adding a constant changes the SD": it does not. Multiplying changes the variance by c², not c.</li>
+    </ol>
+  </div>
+
+  <h3>4 · R for Lab Quiz I (outline CLO2-D, CLO3-D)</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Task</th><th>R</th><th>Watch out</th></tr></thead>
+    <tbody>
+      <tr><td>mean, median</td><td class="fx">mean(x) &nbsp; median(x)</td><td>use <span class="v">na.rm = TRUE</span> if there are missing values</td></tr>
+      <tr><td>mode</td><td class="fx">names(which.max(table(x)))</td><td><span class="v">mode(x)</span> is <strong>not</strong> the statistical mode; it returns the storage type</td></tr>
+      <tr><td>weighted mean</td><td class="fx">weighted.mean(x, w)</td><td></td></tr>
+      <tr><td>range</td><td class="fx">diff(range(x)) &nbsp; or &nbsp; max(x) − min(x)</td><td><span class="v">range(x)</span> returns the min <strong>and</strong> max, not R</td></tr>
+      <tr><td>variance, SD</td><td class="fx">var(x) &nbsp; sd(x)</td><td><strong>sample</strong> formulas (n − 1)</td></tr>
+      <tr><td>CV</td><td class="fx">sd(x)/mean(x)*100</td><td></td></tr>
+      <tr><td>z-scores</td><td class="fx">(x − mean(x))/sd(x) &nbsp; or &nbsp; scale(x)</td><td></td></tr>
+      <tr><td>quartiles, IQR, summary</td><td class="fx">quantile(x, c(.25,.5,.75)) &nbsp; IQR(x) &nbsp; summary(x)</td><td>interpolated: may differ from the hand method</td></tr>
+      <tr><td>five-number summary, boxplot</td><td class="fx">fivenum(x) &nbsp; boxplot(x, horizontal = TRUE)</td><td>Tukey hinges; outliers drawn as points</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>5 · The A+ plan for Chapter 3</h3>
+  <ol class="flow">
+    <li><span class="k">DAY 1</span><span class="t"><b>Lessons 3-1 and 3-2, one solved example per formula.</b> Close the file and redo Ex 3-20/3-21 both ways (definition and shortcut) until both give 13.1 without notes. That one example covers half the variance marks in the chapter.</span></li>
+    <li><span class="k">DAY 2</span><span class="t"><b>Lessons 3-3 and 3-4.</b> Use Jim's 20 scores as your master data set: percentile rank, P₅₀, P₇₄, quartiles by both methods, IQR, fences, boxplot. One data set, every position skill.</span></li>
+    <li><span class="k">DAY 3</span><span class="t"><b>Interpretation drill (CLO3).</b> For every number you computed, write one sentence of meaning: "more consistent", "at least 75%", "positively skewed because…". This is where students who calculate perfectly still lose marks.</span></li>
+    <li><span class="k">DAY 4</span><span class="t"><b>The question bank</b>, closed book, then check against the answers file. Textbook page 178, Q 2, 3, 10, 17 and the Moodle sets: these are the outline's assigned exercises.</span></li>
+    <li><span class="k">QUIZ</span><span class="t"><b>In the exam:</b> underline "sample" or "population" and "bell-shaped" before you write anything. Order the data before any median or percentile. Finish every answer with one interpretation sentence.</span></li>
+  </ol>
+  <ar t="خطة A+ بالعربي">(1) احفظ القوانين بالكتابة من الذاكرة ثم التصحيح. (2) خذ <b>بيانات Jim العشرين</b> وطبّق عليها كل مهارات الموقع: المئين، الربيعات بالطريقتين، المدى الربيعي، القيم الشاذة، والمخطط الصندوقي. (3) <b>درّب نفسك على التفسير</b>: بعد كل رقم اكتب جملة تشرح معناه، فهذا ما يقيسه مخرج التعلم CLO3. (4) حل بنك الأسئلة مغلق الكتاب، ثم صحّح من ملف الإجابات. (5) في الامتحان: ضع خطًا تحت كلمة <b>sample</b> أو <b>population</b> وكلمة <b>bell-shaped</b> قبل البدء، و<b>رتّب البيانات</b> قبل أي وسيط أو مئين.</ar>
+</section>

@@ -1,0 +1,61 @@
+<section id="brief" style="--sec:var(--accent);--wash:var(--accent-wash)">
+  <div class="sec-head">
+    <span class="sec-num">00</span>
+    <h2>Chapter 3 exam brief
+      <span class="ar">ماذا يطلب الكورس أوت لاين من الفصل الثالث — اقرأ هذا أولًا</span>
+    </h2>
+  </div>
+
+  <p>This set merges two lecture decks into one: <strong>Dr. Amani Al-Rubkhi's Fall 2026 notes</strong> and <strong>Dr. Ahmed Al-Hadhrami's Spring 2024 slides</strong>. Every definition, rule, example and activity from both appears exactly once. Where both decks teach the same thing, it is written once and tagged with both sources. Dr. Amani is the <strong>course coordinator</strong> named in the outline, so where the two decks differ, her version comes first.</p>
+
+  <div class="tbl-wrap"><table>
+    <caption>Chapter 3 in the Fall 2026 schedule</caption>
+    <thead><tr><th>Week</th><th>Lectures</th><th>Lab (R)</th><th>Assessment / exercises</th></tr></thead>
+    <tbody>
+      <tr><td class="num">3</td><td>3-1 Measures of Central Tendency<br>3-2 Measures of Variation</td><td>Lab 3 — RStat2101: Data Basics (cont.)</td><td>Exercises Chapter 3, <strong>page 178: {2, 3, 10, 17}</strong> + Moodle exercises</td></tr>
+      <tr><td class="num">4</td><td>3-3 Measures of Position<br>3-4 Exploratory Data Analysis</td><td>Lab 4 — RStat2101: Tabulation, Graphs</td><td>Moodle exercises (cont.) + <strong>In-Class Quiz I</strong></td></tr>
+      <tr><td class="num">5</td><td>(Chapter 4 starts)</td><td>Lab 5 — RStat2101: <strong>Descriptive Measures</strong></td><td><strong>Lab Quiz I</strong> (R)</td></tr>
+      <tr><td class="num">8</td><td colspan="2">—</td><td><strong>Midterm</strong> 25% · 3/11/2026 · Chapters 1, 2, 3, 4</td></tr>
+      <tr><td class="num">16</td><td colspan="2">—</td><td><strong>Final</strong> 45% · all chapters</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>The outcomes Chapter 3 is graded against</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th style="width:15%">Outcome</th><th>Criterion (verbatim from the outline)</th><th style="width:31%">Assessed by</th></tr></thead>
+    <tbody>
+      <tr><td><strong>CLO1-A</strong></td><td>Define essential statistical terminology, including … sample, population, <strong>parameters, and statistics</strong>.</td><td>Tutorial, In-Class Quiz, Midterm, Final</td></tr>
+      <tr><td><strong>CLO2-A</strong></td><td><strong>Calculate</strong> different statistical measures including measures of central tendency, measures of variability and measures of position.</td><td>Tutorial, In-Class Quiz, Active Learning, Midterm, Final</td></tr>
+      <tr><td><strong>CLO2-D</strong></td><td>Use R to perform basic descriptive statistics, create tables, and visualize data.</td><td>Active Learning, <strong>Lab Quiz</strong></td></tr>
+      <tr><td><strong>CLO3-B</strong></td><td>Extract meaningful insights from visual data representations.</td><td>Tutorial, In-Class Quiz, Midterm</td></tr>
+      <tr><td><strong>CLO3-C</strong></td><td><strong>Derive reasoned insights</strong> based on the interpretation of graphs and summary statistics.</td><td>Tutorial, In-Class Quiz, Midterm</td></tr>
+      <tr><td><strong>CLO3-D</strong></td><td>Utilize R to perform exploratory data analysis.</td><td>Active Learning, Lab Quiz</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout trap">
+    <span class="ct">What this means for how you study</span>
+    <p>Two of the outcomes are about <strong>interpretation</strong> (CLO3-B, CLO3-C), not calculation. Exam questions in this chapter rarely stop at "find the mean". They continue: <em>which measure is more appropriate, and why?</em> · <em>which data set is more consistent?</em> · <em>what does this boxplot say about the shape?</em> · <em>what can be said about the number of observations in this interval?</em> Every calculation in these files ends with a sentence of interpretation. Write that sentence in the exam too, because it carries marks.</p>
+  </div>
+
+  <ar t="الخلاصة بالعربي">الفصل الثالث يُدرَّس في الأسبوعين <b>3 و 4</b>، ويُختبر في <b>الكويز الصفي الأول</b> (الأسبوع 4)، ثم في <b>كويز اللاب الأول</b> بلغة R (الأسبوع 5)، ثم في الميدتيرم والنهائي. المخرجات المطلوبة نوعان: <b>الحساب</b> (CLO2-A: مقاييس النزعة المركزية والتشتت والموقع)، و<b>التفسير</b> (CLO3-B و CLO3-C: استخراج استنتاجات من الرسوم والمقاييس). لذلك لا يكفي أن تحسب الرقم، بل يجب أن تكتب ماذا يعني. التمارين المطلوبة من الكتاب: صفحة 178، الأسئلة <b>2 و 3 و 10 و 17</b>.</ar>
+
+  <h3>Where the two decks differ, and what to write in the exam</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th style="width:4%">#</th><th style="width:34%">Point</th><th>What to do</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>Dr. Amani's population-variance table labels <span class="v">N</span> as "sample size".</td><td>It is the <strong>population size</strong>. <span class="v">N</span> always means population and <span class="v">n</span> means sample.</td></tr>
+      <tr><td class="num">2</td><td>Her population SD box is headed "Population variance, σ".</td><td>σ is the population <strong>standard deviation</strong>; σ² is the variance.</td></tr>
+      <tr><td class="num">3</td><td>"Coefficient of variance" in one activity.</td><td>The term is <strong>coefficient of variation</strong> (CVar).</td></tr>
+      <tr><td class="num">4</td><td>CV use. Dr. Ahmed: "same means but different SDs". Dr. Amani: "different means and different SDs".</td><td>Both are true. CV works in every case and is <strong>essential</strong> when the means or the units differ.</td></tr>
+      <tr><td class="num">5</td><td>Dr. Amani's variance example for 1, 2, 4 gives <span class="v">s² = 2.335</span>.</td><td>The exact value is <span class="v">7/3 = 2.333</span>. The 2.335 comes from rounding deviations early, which is exactly what the general rounding rule warns against (see 3-2).</td></tr>
+      <tr><td class="num">6</td><td>Homework stem-and-leaf: printed answers (mean 19.6, median 17) do not match the plotted 14 values.</td><td>Both versions are solved in 3-1. The printed answers need one more value, 35 (a leaf "3 | 5"), that is missing from the plot.</td></tr>
+      <tr><td class="num">7</td><td>Car-accident activity: data 22, 30, 36, 24, 5 with the note "mean = 28".</td><td>Those values have mean 23.4. The note fits only if the last value is 28. Both versions are solved in 3-2.</td></tr>
+      <tr><td class="num">8</td><td>Median of grouped data appears only in Dr. Amani's notes, and only as "find the median class".</td><td>Give the <strong>median class</strong>. A one-number interpolation is shown as optional, only if a question asks for a value.</td></tr>
+      <tr><td class="num">9</td><td>Z-scores, the empirical rule, deciles, midrange and linear transformations appear only in Dr. Ahmed's slides.</td><td>All are included. They are in the textbook (Bluman 10e) that the outline names, so treat them as examinable.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>The method rule for quartiles and percentiles</h3>
+  <p>Hand methods, R and calculators can give different quartiles for the same data. On paper, use the course's procedure tables. In 3-3 and 3-4 you will see where R's <span class="v">summary()</span> and <span class="v">quantile()</span> disagree with them. If a question names a method ("using the percentile formula"), use that method.</p>
+</section>

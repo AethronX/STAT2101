@@ -1,0 +1,1102 @@
+<title>Lesson 3-3 Position</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+
+<style>
+/* Layout: single reading column with a sticky rail nav; four section inks mirror the
+   overprint of a Venn diagram — the chapter's own governing picture. */
+:root{
+  --bg:#fbfaf7;
+  --surface:#ffffff;
+  --surface-2:#f2f1ec;
+  --fg:#1b2027;
+  --fg-soft:#4c5663;
+  --fg-faint:#78828f;
+  --rule:#dddcd4;
+  --rule-soft:#eceae3;
+
+  --ink-1:#1f4e79;   /* 4-1  sample spaces      */
+  --ink-2:#0f6f5c;   /* 4-2  addition rules     */
+  --ink-3:#9a5b12;   /* 4-3  multiplication     */
+  --ink-4:#7b2d6b;   /* 4-4 / 4-5 counting      */
+  --accent:#b23b2e;  /* alarms, traps, must-know */
+
+  --ink-1-wash:#eaf0f7;
+  --ink-2-wash:#e5f1ee;
+  --ink-3-wash:#f8efe1;
+  --ink-4-wash:#f4e9f2;
+  --accent-wash:#f9eae7;
+
+  --display:"Spectral",Georgia,"Times New Roman",serif;
+  --body:"IBM Plex Sans","IBM Plex Sans Arabic",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --arabic:"IBM Plex Sans Arabic","IBM Plex Sans",-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  --measure:70ch;
+  --shadow:0 1px 2px rgba(27,32,39,.05),0 8px 24px -16px rgba(27,32,39,.25);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#13171c;
+    --surface:#1a1f26;
+    --surface-2:#222932;
+    --fg:#e8e6e0;
+    --fg-soft:#b3bac4;
+    --fg-faint:#8a929e;
+    --rule:#333b45;
+    --rule-soft:#272e37;
+
+    --ink-1:#7bb0e8;
+    --ink-2:#4fc4a8;
+    --ink-3:#e2a74e;
+    --ink-4:#d089c2;
+    --accent:#ef7f70;
+
+    --ink-1-wash:#182633;
+    --ink-2-wash:#132a26;
+    --ink-3-wash:#2b2314;
+    --ink-4-wash:#2a1b28;
+    --accent-wash:#2f1c19;
+
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#13171c;
+  --surface:#1a1f26;
+  --surface-2:#222932;
+  --fg:#e8e6e0;
+  --fg-soft:#b3bac4;
+  --fg-faint:#8a929e;
+  --rule:#333b45;
+  --rule-soft:#272e37;
+
+  --ink-1:#7bb0e8;
+  --ink-2:#4fc4a8;
+  --ink-3:#e2a74e;
+  --ink-4:#d089c2;
+  --accent:#ef7f70;
+
+  --ink-1-wash:#182633;
+  --ink-2-wash:#132a26;
+  --ink-3-wash:#2b2314;
+  --ink-4-wash:#2a1b28;
+  --accent-wash:#2f1c19;
+
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{
+  max-width:980px;
+  margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 72px;
+}
+
+/* ---------- masthead ---------- */
+.masthead{
+  padding-block:56px 36px;
+  border-bottom:3px double var(--rule);
+  margin-bottom:36px;
+}
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+}
+h1{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(2.1rem,6vw,3.4rem);
+  line-height:1.08;
+  margin:0 0 10px;
+  letter-spacing:-.015em;
+  text-wrap:balance;
+}
+.subtitle{
+  font-family:var(--display);
+  font-style:italic;
+  font-size:clamp(1.05rem,2.6vw,1.3rem);
+  color:var(--fg-soft);
+  margin:0 0 22px;
+  max-width:var(--measure);
+}
+.meta-strip{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 10px;
+  margin-top:20px;
+}
+.chip{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.04em;
+  padding:5px 10px;
+  border:1px solid var(--rule);
+  border-radius:3px;
+  color:var(--fg-soft);
+  background:var(--surface);
+}
+.chip strong{color:var(--fg);font-weight:600}
+
+/* ---------- nav ---------- */
+nav.toc{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:20px 22px;
+  margin-bottom:44px;
+  box-shadow:var(--shadow);
+}
+nav.toc h2{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+  font-weight:500;
+}
+nav.toc ol{
+  margin:0;padding:0;list-style:none;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:4px 26px;
+}
+nav.toc li{min-width:0}
+nav.toc a{
+  display:flex;
+  gap:10px;
+  align-items:baseline;
+  text-decoration:none;
+  color:var(--fg);
+  padding:5px 0;
+  border-bottom:1px solid var(--rule-soft);
+  font-size:.92rem;
+}
+nav.toc a:hover{color:var(--accent)}
+nav.toc a .num{
+  font-family:var(--mono);
+  font-size:.74rem;
+  color:var(--fg-faint);
+  flex:none;
+  min-width:2.4em;
+}
+
+/* ---------- sections ---------- */
+section{margin-bottom:64px;scroll-margin-top:24px}
+.sec-head{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+  padding-bottom:14px;
+  border-bottom:2px solid var(--sec,var(--fg));
+  margin-bottom:28px;
+}
+.sec-num{
+  font-family:var(--mono);
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.06em;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:5px 9px;
+  border-radius:3px;
+  flex:none;
+  margin-top:6px;
+}
+.sec-head h2{
+  font-family:var(--display);
+  font-size:clamp(1.5rem,4vw,2.05rem);
+  line-height:1.18;
+  margin:0;
+  font-weight:600;
+  text-wrap:balance;
+  min-width:0;
+}
+.sec-head .ar{
+  display:block;
+  font-family:var(--arabic);
+  font-size:.92rem;
+  font-style:normal;
+  color:var(--fg-soft);
+  direction:rtl;
+  margin-top:4px;
+  font-weight:400;
+}
+h3{
+  font-family:var(--body);
+  font-size:1.08rem;
+  font-weight:600;
+  letter-spacing:-.005em;
+  margin:36px 0 12px;
+  color:var(--fg);
+  display:flex;
+  align-items:baseline;
+  gap:9px;
+  flex-wrap:wrap;
+}
+h3::before{
+  content:"";
+  width:18px;height:3px;
+  background:var(--sec,var(--fg));
+  flex:none;
+  border-radius:2px;
+}
+h4{
+  font-family:var(--mono);
+  font-size:.74rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:26px 0 10px;
+  font-weight:500;
+}
+p{margin:0 0 14px;max-width:var(--measure)}
+ul,ol{max-width:var(--measure);padding-left:1.25em;margin:0 0 14px}
+li{margin-bottom:7px}
+li::marker{color:var(--sec,var(--fg-faint))}
+strong{font-weight:600}
+em{font-style:italic}
+code,.v{
+  font-family:var(--mono);
+  font-size:.9em;
+  background:var(--surface-2);
+  padding:1px 5px;
+  border-radius:3px;
+  white-space:nowrap;
+}
+.term{
+  font-weight:600;
+  color:var(--sec,var(--fg));
+}
+a{color:var(--accent)}
+
+/* ---------- maths ---------- */
+.fx{
+  font-family:var(--mono);
+  font-size:1.02rem;
+  line-height:2.1;
+  white-space:nowrap;
+}
+.frac{
+  display:inline-flex;
+  flex-direction:column;
+  vertical-align:middle;
+  text-align:center;
+  font-family:var(--mono);
+  line-height:1.25;
+  margin:0 .22em;
+  position:relative;
+  top:-.08em;
+}
+.frac .num{border-bottom:1.5px solid currentColor;padding:0 .4em .08em}
+.frac .den{padding:.08em .4em 0}
+sub,sup{font-size:.72em}
+
+.formula{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-left:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:18px 20px;
+  margin:18px 0 22px;
+  box-shadow:var(--shadow);
+  overflow-x:auto;
+}
+.formula .label{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg-faint));
+  margin-bottom:10px;
+  font-weight:600;
+}
+.formula .fx{margin:4px 0}
+.formula .note{
+  font-size:.88rem;
+  color:var(--fg-soft);
+  margin:10px 0 0;
+  white-space:normal;
+  max-width:none;
+}
+
+/* ---------- example cards ---------- */
+.ex{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:5px;
+  margin:20px 0;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.ex > .q{
+  padding:16px 20px;
+  border-bottom:1px dashed var(--rule);
+  background:var(--wash,var(--surface-2));
+}
+.ex .tag{
+  font-family:var(--mono);
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg));
+  display:block;
+  margin-bottom:6px;
+}
+.ex .q p{margin:0;max-width:none}
+.ex > .a{padding:16px 20px}
+.ex > .a p{max-width:none}
+.ex > .a p:last-child{margin-bottom:0}
+.ex .steps{margin:0;padding-left:1.2em;max-width:none}
+.ex .steps li{margin-bottom:9px}
+.ans{
+  display:inline-block;
+  font-family:var(--mono);
+  font-weight:600;
+  background:var(--sec,var(--fg));
+  color:#fff;
+  padding:3px 9px;
+  border-radius:3px;
+  font-size:.92em;
+  white-space:nowrap;
+}
+
+/* ---------- callouts ---------- */
+.callout{
+  border-radius:4px;
+  padding:16px 18px;
+  margin:20px 0;
+  border:1px solid;
+  font-size:.95rem;
+}
+.callout p{max-width:none}
+.callout p:last-child{margin-bottom:0}
+.callout .ct{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-weight:600;
+  display:block;
+  margin-bottom:8px;
+}
+.trap{background:var(--accent-wash);border-color:var(--accent)}
+.trap .ct{color:var(--accent)}
+.tip{background:var(--ink-2-wash);border-color:var(--ink-2)}
+.tip .ct{color:var(--ink-2)}
+.note{background:var(--surface-2);border-color:var(--rule)}
+.note .ct{color:var(--fg-faint)}
+
+.ar-note{
+  font-family:var(--arabic);
+  direction:rtl;
+  text-align:right;
+  background:var(--surface-2);
+  border-right:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:13px 16px;
+  margin:16px 0;
+  font-size:.96rem;
+  line-height:1.95;
+  color:var(--fg-soft);
+}
+.ar-note b{color:var(--fg);font-weight:600}
+.ar-note .lbl{
+  display:block;
+  font-size:.72rem;
+  letter-spacing:.04em;
+  color:var(--sec,var(--fg-faint));
+  font-weight:600;
+  margin-bottom:4px;
+}
+.ar-note ul{padding-right:1.2em;padding-left:0;margin:6px 0 0;max-width:none}
+
+.ar-note p{margin:0 0 7px;max-width:none}
+.ar-note p:last-child{margin-bottom:0}
+.ar-note ol{padding-right:1.3em;padding-left:0;margin:6px 0 0;max-width:none}
+.ar-note li{margin-bottom:5px}
+.ar-note .v{font-size:.84em}
+.arn{display:block;font-family:var(--arabic);direction:rtl;unicode-bidi:isolate;text-align:left;font-size:.84rem;color:var(--fg-soft);font-weight:500;margin-top:2px;line-height:1.5}
+.subtitle-ar{font-family:var(--arabic);direction:rtl;text-align:right;color:var(--fg-soft);font-size:1.02rem;margin:0 0 8px;max-width:none;line-height:1.9}
+
+/* ---------- diagrams ---------- */
+figure.dg{margin:22px 0 26px;padding:16px 14px 12px;background:var(--surface);border:1px solid var(--rule);border-radius:4px;break-inside:avoid;page-break-inside:avoid}
+figure.dg svg{display:block;width:100%;height:auto;margin:0 auto;color:var(--fg);overflow:visible}
+figure.dg figcaption{font-size:.86rem;color:var(--fg-soft);margin:10px auto 0;max-width:64ch;text-align:center;line-height:1.5}
+figure.dg figcaption .ar{display:block;font-family:var(--arabic);direction:rtl;margin-top:4px;font-size:.9rem}
+.dg .ln{stroke:currentColor;fill:none;stroke-width:1.4}
+.dg .ln-soft{stroke:var(--fg-faint);fill:none;stroke-width:1.2}
+.dg .dash{stroke-dasharray:4 4}
+.dg .thick{stroke-width:2.6}
+.dg text{fill:currentColor;font-family:var(--body);font-size:13px}
+.dg text.m{font-family:var(--mono);font-size:12.5px}
+.dg text.sm{font-size:11.5px}
+.dg text.big{font-family:var(--mono);font-size:19px;font-weight:600}
+.dg text.soft{fill:var(--fg-soft)}
+.dg text.b{font-weight:600}
+.dg .bg{fill:var(--surface)}
+.dg .wash1{fill:var(--ink-1-wash)} .dg .wash2{fill:var(--ink-2-wash)} .dg .wash3{fill:var(--ink-3-wash)} .dg .wash4{fill:var(--ink-4-wash)} .dg .washA{fill:var(--accent-wash)}
+.dg .f1{fill:var(--ink-1)} .dg .f2{fill:var(--ink-2)} .dg .f3{fill:var(--ink-3)} .dg .f4{fill:var(--ink-4)} .dg .fA{fill:var(--accent)}
+.dg .s1{stroke:var(--ink-1)} .dg .s2{stroke:var(--ink-2)} .dg .s3{stroke:var(--ink-3)} .dg .s4{stroke:var(--ink-4)} .dg .sA{stroke:var(--accent)}
+.dg text.t1{fill:var(--ink-1)} .dg text.t2{fill:var(--ink-2)} .dg text.t3{fill:var(--ink-3)} .dg text.t4{fill:var(--ink-4)} .dg text.tA{fill:var(--accent)}
+
+/* ---------- tables ---------- */
+.tbl-wrap{overflow-x:auto;margin:18px 0 22px;-webkit-overflow-scrolling:touch}
+table{
+  border-collapse:collapse;
+  width:100%;
+  min-width:420px;
+  font-size:.93rem;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+}
+caption{
+  caption-side:top;
+  text-align:left;
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  padding-bottom:9px;
+  font-weight:500;
+}
+th,td{
+  padding:9px 13px;
+  border-bottom:1px solid var(--rule-soft);
+  text-align:left;
+  vertical-align:top;
+}
+thead th{
+  background:var(--sec,var(--surface-2));
+  color:#fff;
+  font-weight:600;
+  font-size:.78rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  border-bottom:none;
+}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even){background:var(--surface-2)}
+td.num,th.num{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+
+/* ---------- misc blocks ---------- */
+.grid2{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:16px;
+  margin:18px 0 22px;
+}
+.card{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-top:3px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:16px 18px;
+  min-width:0;
+}
+.card h5{
+  font-family:var(--body);
+  font-size:.97rem;
+  font-weight:600;
+  margin:0 0 8px;
+}
+.card p{font-size:.92rem;margin-bottom:0;max-width:none;color:var(--fg-soft)}
+
+.flow{
+  list-style:none;
+  padding:0;
+  margin:18px 0 22px;
+  max-width:none;
+  display:grid;
+  gap:10px;
+}
+.flow li{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:13px 16px;
+  margin:0;
+}
+.flow .k{
+  font-family:var(--mono);
+  font-size:.73rem;
+  font-weight:600;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:3px 8px;
+  border-radius:3px;
+  flex:none;
+  margin-top:3px;
+  white-space:nowrap;
+}
+.flow .t{min-width:0;font-size:.95rem}
+.flow .t b{display:block;margin-bottom:2px}
+
+.keypad{
+  font-family:var(--mono);
+  font-size:.86rem;
+  background:var(--surface-2);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:4px 9px;
+  display:inline-block;
+  white-space:nowrap;
+}
+
+hr.soft{border:none;border-top:1px solid var(--rule-soft);margin:34px 0}
+
+footer{
+  border-top:3px double var(--rule);
+  padding-top:24px;
+  margin-top:20px;
+  font-size:.86rem;
+  color:var(--fg-faint);
+}
+footer p{max-width:none}
+
+@media (max-width:520px){
+  .sec-head{gap:11px}
+  .fx{font-size:.94rem}
+  .ex > .q,.ex > .a{padding:14px 15px}
+}
+@media print{
+  body{background:#fff}
+  nav.toc{break-inside:avoid}
+  .ex,.formula,.callout,.card{break-inside:avoid}
+  section{break-before:auto}
+}
+</style>
+
+<style>
+/* Chapter 3: denser setting so pages carry more per sheet */
+body{font-size:14.5px;line-height:1.55}
+p,ul,ol{max-width:none}
+p{margin:0 0 9px}
+li{margin-bottom:4px}
+.masthead{padding-block:34px 18px;margin-bottom:20px}
+section{margin-bottom:30px}
+.sec-head{margin-bottom:16px;padding-bottom:10px}
+h3{margin:22px 0 8px;font-size:1.02rem}
+h4{margin:14px 0 6px}
+.formula{padding:11px 14px;margin:10px 0 12px}
+.formula .fx{margin:1px 0;line-height:1.9}
+.ex{margin:10px 0}
+.ex > .q,.ex > .a{padding:10px 14px}
+.ex .steps li{margin-bottom:5px}
+.callout{padding:10px 13px;margin:10px 0;font-size:.93rem}
+.ar-note{padding:9px 13px;margin:9px 0;line-height:1.8;font-size:.93rem}
+.tbl-wrap{margin:8px 0 12px}
+th,td{padding:6px 10px}
+table{font-size:.9rem;min-width:0}
+figure.dg{margin:12px 0 14px;padding:10px 10px 8px}
+figure.dg figcaption{margin-top:6px;font-size:.84rem}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+.cols2 > *{min-width:0}
+.cols2 .ex{margin:0}
+@media (max-width:640px){.cols2{grid-template-columns:1fr}}
+/* let long formulas wrap inside narrow columns instead of being clipped */
+.fx,.ex .fx,.cols2 .fx,.a .fx{white-space:normal;overflow-x:visible}
+footer{margin-top:10px;padding-top:12px;font-size:.78rem}footer p{margin:0 0 4px}
+/* allow tall example cards to split across pages so no half-empty pages */
+@media print{.ex,.a.long{break-inside:auto!important;page-break-inside:auto!important}.a:not(.long){break-inside:avoid!important}.ex > .q{break-inside:avoid}.cols2{break-inside:auto}}
+.series{list-style:none;padding:0;margin:8px 0 12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2px 22px;max-width:none}
+.series li{margin:0;padding:3px 0;border-bottom:1px solid var(--rule-soft);font-size:.82rem;color:var(--fg-faint)}
+.series li.here{color:var(--fg);font-weight:600}
+.series li.here::after{content:"  ← this file";color:var(--accent);font-weight:500}
+.src{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-faint);border:1px solid var(--rule);border-radius:3px;padding:0 5px;margin-left:6px;white-space:nowrap;font-weight:500}
+</style>
+
+<div class="wrap">
+<header class="masthead">
+  <p class="eyebrow">Sultan Qaboos University · STAT 2101 · Chapter 3: Data Description</p>
+  <div class="meta-strip"><span class="chip"><strong>Week</strong> 4</span><span class="chip"><strong>CLO</strong> 2-A · 3-C · 2-D (R)</span><span class="chip"><strong>Before</strong> In-Class Quiz I</span><span class="chip"><strong>File</strong> 4 / 8</span></div>
+</header>
+<section id="s33" style="--sec:var(--ink-3);--wash:var(--ink-3-wash)">
+  <div class="sec-head">
+    <span class="sec-num">3-3</span>
+    <h2>Measures of Position
+      <span class="ar">مقاييس الموقع — الدرجة المعيارية والمئينات والربيعات والعشيرات والقيم الشاذة</span>
+    </h2>
+  </div>
+
+  <p>Measures of position (location) give the <strong>relative position of a data value</strong> compared with the other values in a data set: <strong>standard scores (z)</strong>, <strong>percentiles</strong>, <strong>deciles</strong> and <strong>quartiles</strong>. <span class="src">Both</span></p>
+
+  <h3>1 · Standard scores (z-scores) <span class="src">Hadhrami</span></h3>
+  <div class="cols2">
+    <div class="formula" style="margin:0"><div class="label">z-score: how many SDs a value lies above (+) or below (−) the mean</div>
+      <p class="fx">z = <span class="frac"><span class="num">value − mean</span><span class="den">standard deviation</span></span></p>
+      <p class="fx">sample: z = <span class="frac"><span class="num">X − x̄</span><span class="den">s</span></span> &nbsp;&nbsp; population: z = <span class="frac"><span class="num">X − μ</span><span class="den">σ</span></span></p>
+      <p class="note">z = 0: the value equals the mean. Rearranged: <span class="v">X = x̄ + z·s</span>. If <em>every</em> value is converted to z, the new data have <strong>mean 0 and SD 1</strong>.</p></div>
+    <div>
+      <div class="ex"><div class="q"><span class="tag">Ex 3-27 · Test scores</span><p>English 85 (mean 76, s = 4) and French 42 (mean 36, s = 3). Compare her relative positions.</p></div>
+        <div class="a"><p class="fx">z<sub>E</sub> = (85 − 76)/4 = <span class="ans">2.25</span> &nbsp; z<sub>F</sub> = (42 − 36)/3 = <span class="ans">2.00</span></p><p>Her relative position is higher in <strong>English</strong>.</p></div></div>
+      <div class="ex"><div class="q"><span class="tag">Ex 3-28 · Marriage ages</span><p>Men: mean 26.4, s = 2; a man marries at 24. Women: mean 23.5, s = 2.3; a woman marries at 22.</p></div>
+        <div class="a"><p class="fx">z<sub>man</sub> = (24 − 26.4)/2 = <span class="ans">−1.2</span> &nbsp; z<sub>woman</sub> = (22 − 23.5)/2.3 ≈ <span class="ans">−0.65</span></p><p>The woman's age at marriage is relatively <strong>higher</strong>: −0.65 is closer to her group's mean than −1.2 is to his.</p></div></div>
+    </div>
+  </div>
+  <figure class="dg"><svg viewBox="0 0 660 192" style="max-width:660px" role="img" aria-label="Two test scores placed on a common z-score scale: English 85 at z 2.25 and French 42 at z 2.00" xmlns="http://www.w3.org/2000/svg">
+<line x1="110.0" y1="40.0" x2="610.0" y2="40.0" class="ln-soft"/>
+<text x="20.0" y="44.0" text-anchor="start" class="sm b t1">English</text>
+<line x1="110.0" y1="36.0" x2="110.0" y2="44.0" class="ln-soft"/>
+<text x="110.0" y="31.0" text-anchor="middle" class="sm soft">64</text>
+<line x1="193.3" y1="36.0" x2="193.3" y2="44.0" class="ln-soft"/>
+<text x="193.3" y="31.0" text-anchor="middle" class="sm soft">68</text>
+<line x1="276.7" y1="36.0" x2="276.7" y2="44.0" class="ln-soft"/>
+<text x="276.7" y="31.0" text-anchor="middle" class="sm soft">72</text>
+<line x1="360.0" y1="36.0" x2="360.0" y2="44.0" class="ln-soft"/>
+<text x="360.0" y="31.0" text-anchor="middle" class="sm soft">76</text>
+<line x1="443.3" y1="36.0" x2="443.3" y2="44.0" class="ln-soft"/>
+<text x="443.3" y="31.0" text-anchor="middle" class="sm soft">80</text>
+<line x1="526.7" y1="36.0" x2="526.7" y2="44.0" class="ln-soft"/>
+<text x="526.7" y="31.0" text-anchor="middle" class="sm soft">84</text>
+<line x1="610.0" y1="36.0" x2="610.0" y2="44.0" class="ln-soft"/>
+<text x="610.0" y="31.0" text-anchor="middle" class="sm soft">88</text>
+<circle cx="547.5" cy="40.0" r="6" class="f1"/>
+<text x="559.5" y="60.0" text-anchor="start" class="m b t1">85 → z = 2.25</text>
+<line x1="110.0" y1="102.0" x2="610.0" y2="102.0" class="ln-soft"/>
+<text x="20.0" y="106.0" text-anchor="start" class="sm b t3">French</text>
+<line x1="110.0" y1="98.0" x2="110.0" y2="106.0" class="ln-soft"/>
+<text x="110.0" y="93.0" text-anchor="middle" class="sm soft">27</text>
+<line x1="193.3" y1="98.0" x2="193.3" y2="106.0" class="ln-soft"/>
+<text x="193.3" y="93.0" text-anchor="middle" class="sm soft">30</text>
+<line x1="276.7" y1="98.0" x2="276.7" y2="106.0" class="ln-soft"/>
+<text x="276.7" y="93.0" text-anchor="middle" class="sm soft">33</text>
+<line x1="360.0" y1="98.0" x2="360.0" y2="106.0" class="ln-soft"/>
+<text x="360.0" y="93.0" text-anchor="middle" class="sm soft">36</text>
+<line x1="443.3" y1="98.0" x2="443.3" y2="106.0" class="ln-soft"/>
+<text x="443.3" y="93.0" text-anchor="middle" class="sm soft">39</text>
+<line x1="526.7" y1="98.0" x2="526.7" y2="106.0" class="ln-soft"/>
+<text x="526.7" y="93.0" text-anchor="middle" class="sm soft">42</text>
+<line x1="610.0" y1="98.0" x2="610.0" y2="106.0" class="ln-soft"/>
+<text x="610.0" y="93.0" text-anchor="middle" class="sm soft">45</text>
+<circle cx="526.7" cy="102.0" r="6" class="f3"/>
+<text x="538.7" y="122.0" text-anchor="start" class="m b t3">42 → z = 2.00</text>
+<line x1="110.0" y1="150.0" x2="610.0" y2="150.0" class="ln"/>
+<line x1="110.0" y1="150.0" x2="110.0" y2="155.0" class="ln"/>
+<text x="110.0" y="168.0" text-anchor="middle" class="m soft">-3</text>
+<line x1="193.3" y1="150.0" x2="193.3" y2="155.0" class="ln"/>
+<text x="193.3" y="168.0" text-anchor="middle" class="m soft">-2</text>
+<line x1="276.7" y1="150.0" x2="276.7" y2="155.0" class="ln"/>
+<text x="276.7" y="168.0" text-anchor="middle" class="m soft">-1</text>
+<line x1="360.0" y1="150.0" x2="360.0" y2="155.0" class="ln"/>
+<text x="360.0" y="168.0" text-anchor="middle" class="m soft">0</text>
+<line x1="443.3" y1="150.0" x2="443.3" y2="155.0" class="ln"/>
+<text x="443.3" y="168.0" text-anchor="middle" class="m soft">+1</text>
+<line x1="526.7" y1="150.0" x2="526.7" y2="155.0" class="ln"/>
+<text x="526.7" y="168.0" text-anchor="middle" class="m soft">+2</text>
+<line x1="610.0" y1="150.0" x2="610.0" y2="155.0" class="ln"/>
+<text x="610.0" y="168.0" text-anchor="middle" class="m soft">+3</text>
+<text x="360.0" y="184.0" text-anchor="middle" class="sm b">z (standard deviations from the mean)</text>
+</svg><figcaption>Example 3-27. Raw scores 85 and 42 cannot be compared directly. On the common z scale, English (z = 2.25) sits further above its class mean than French (z = 2.00), so English is her better relative position.<span class="ar">مثال <span dir="ltr" style="white-space:nowrap">3-27</span>: لا يمكن مقارنة <span dir="ltr" style="white-space:nowrap">85</span> و <span dir="ltr" style="white-space:nowrap">42</span> مباشرة. على مقياس z الموحد، الإنجليزي <span dir="ltr" style="white-space:nowrap">(z = 2.25)</span> أبعد فوق متوسط فصله من الفرنسي <span dir="ltr" style="white-space:nowrap">(z = 2.00)</span>، إذن موقعها النسبي في الإنجليزي أفضل.</span></figcaption></figure>
+  <div class="ar-note"><span class="lbl">الشرح بالعربي — الدرجة المعيارية z</span>تقيس <b>كم انحرافًا معياريًا</b> تبعد القيمة عن المتوسط: <span class="v" dir="ltr">z = (X − x̄)/s</span>. الموجبة تعني فوق المتوسط، والسالبة تحته، والصفر يعني عند المتوسط تمامًا. فائدتها: <b>مقارنة قيم من مجموعات مختلفة</b>. درجة 85 في الإنجليزي لا تُقارن مباشرة بـ 42 في الفرنسي، لكن <span class="v" dir="ltr">z = 2.25</span> أفضل من <span class="v" dir="ltr">z = 2.00</span>. انتبه مع الأرقام السالبة: <span class="v" dir="ltr">−0.65</span> أكبر من <span class="v" dir="ltr">−1.2</span>، أي أفضل موقعًا.</div>
+
+  <h3>2 · Percentiles <span class="src">Both</span></h3>
+  <div class="cols2">
+    <div><p><span class="term">Percentiles</span> divide <strong>ordered</strong> data into 100 equal parts, written <span class="v">P₁, P₂, …, P₉₉</span>. The <span class="v">p</span>th percentile <span class="v">Pₚ</span> is the value that is greater than p% of the data values: p% lie below it and (100 − p)% above. P₁: 1% below. P₅₀ is the <strong>median</strong>. P₉₉: 99% below. There is <strong>no 100th percentile</strong>: a percentile counts the data <em>below</em> a value, and no value can be higher than the highest value in the data set, so percentiles run from 1 to 99. They are used in education and health (growth charts).</p>
+      <p><strong>You are the 4th tallest of 20.</strong> 16 people are shorter than you: 16/20 × 100 = 80%, so you are at the <strong>80th percentile, P₈₀</strong>. If your height is 1.85 m, then 80% of the group are shorter than 1.85 m. <span class="src">Amani</span></p></div>
+    <div class="callout tip" style="margin:0"><span class="ct">Percentile ≠ percentage <span class="src">Amani</span></span>
+      <p>A <strong>percentage</strong> measures your own score (40 out of 50 = 80%) and compares you with nobody. A <strong>percentile</strong> measures your position relative to others.</p>
+      <p>If 100 people sit a 50-question test and you get 40 right (80%), you don't know your percentile until you see the other scores. If all 99 others scored 60% or less, you beat 99% of the group: <strong>99th percentile</strong>. It is quite possible to score 60% and be in the 95th percentile on a hard exam.</p></div>
+  </div>
+
+  <h4>Case 1 · Percentile rank of a given value X</h4>
+  <div class="formula"><div class="label">Percentile formula (order the data first)</div>
+    <p class="fx">Percentile of X = <span class="frac"><span class="num">(number of values below X) + 0.5</span><span class="den">total number of values</span></span> · 100</p></div>
+  <figure class="dg"><svg viewBox="0 0 640 154" style="max-width:640px" role="img" aria-label="Twenty ordered exam scores with the seven below Jim's 78 shaded, and the 10th, 11th and 15th positions highlighted" xmlns="http://www.w3.org/2000/svg">
+<text x="30.0" y="20.0" text-anchor="start" class="sm b">Percentile rank of Jim's 78: 7 values below → (7 + 0.5)/20 × 100 = 37.5</text>
+<rect x="30.0" y="30.0" width="27.0" height="24.0" rx="2" class="wash3 ln s3"/>
+<text x="43.5" y="47.0" text-anchor="middle" class="m">34</text>
+<rect x="60.0" y="30.0" width="27.0" height="24.0" rx="2" class="wash3 ln s3"/>
+<text x="73.5" y="47.0" text-anchor="middle" class="m">37</text>
+<rect x="90.0" y="30.0" width="27.0" height="24.0" rx="2" class="wash3 ln s3"/>
+<text x="103.5" y="47.0" text-anchor="middle" class="m">48</text>
+<rect x="120.0" y="30.0" width="27.0" height="24.0" rx="2" class="wash3 ln s3"/>
+<text x="133.5" y="47.0" text-anchor="middle" class="m">59</text>
+<rect x="150.0" y="30.0" width="27.0" height="24.0" rx="2" class="wash3 ln s3"/>
+<text x="163.5" y="47.0" text-anchor="middle" class="m">62</text>
+<rect x="180.0" y="30.0" width="27.0" height="24.0" rx="2" class="wash3 ln s3"/>
+<text x="193.5" y="47.0" text-anchor="middle" class="m">75</text>
+<rect x="210.0" y="30.0" width="27.0" height="24.0" rx="2" class="wash3 ln s3"/>
+<text x="223.5" y="47.0" text-anchor="middle" class="m">76</text>
+<rect x="240.0" y="30.0" width="27.0" height="24.0" rx="2" class="washA ln sA thick"/>
+<text x="253.5" y="47.0" text-anchor="middle" class="m b tA">78</text>
+<rect x="270.0" y="30.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="283.5" y="47.0" text-anchor="middle" class="m soft">79</text>
+<rect x="300.0" y="30.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="313.5" y="47.0" text-anchor="middle" class="m soft">80</text>
+<rect x="330.0" y="30.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="343.5" y="47.0" text-anchor="middle" class="m soft">82</text>
+<rect x="360.0" y="30.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="373.5" y="47.0" text-anchor="middle" class="m soft">85</text>
+<rect x="390.0" y="30.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="403.5" y="47.0" text-anchor="middle" class="m soft">90</text>
+<rect x="420.0" y="30.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="433.5" y="47.0" text-anchor="middle" class="m soft">91</text>
+<rect x="450.0" y="30.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="463.5" y="47.0" text-anchor="middle" class="m soft">92</text>
+<rect x="480.0" y="30.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="493.5" y="47.0" text-anchor="middle" class="m soft">92</text>
+<rect x="510.0" y="30.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="523.5" y="47.0" text-anchor="middle" class="m soft">94</text>
+<rect x="540.0" y="30.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="553.5" y="47.0" text-anchor="middle" class="m soft">97</text>
+<rect x="570.0" y="30.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="583.5" y="47.0" text-anchor="middle" class="m soft">99</text>
+<rect x="600.0" y="30.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="613.5" y="47.0" text-anchor="middle" class="m soft">100</text>
+<text x="30.0" y="80.0" text-anchor="start" class="sm b">Value at P74: c = 20 × 74/100 = 14.8 → round up to 15 → 15th value = 92</text>
+<text x="30.0" y="98.0" text-anchor="start" class="sm b">Value at P50: c = 10 (whole) → mean of 10th and 11th = (80 + 82)/2 = 81</text>
+<rect x="30.0" y="108.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="43.5" y="125.0" text-anchor="middle" class="m">34</text>
+<text x="43.5" y="146.0" text-anchor="middle" class="sm soft">1</text>
+<rect x="60.0" y="108.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="73.5" y="125.0" text-anchor="middle" class="m">37</text>
+<text x="73.5" y="146.0" text-anchor="middle" class="sm soft">2</text>
+<rect x="90.0" y="108.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="103.5" y="125.0" text-anchor="middle" class="m">48</text>
+<text x="103.5" y="146.0" text-anchor="middle" class="sm soft">3</text>
+<rect x="120.0" y="108.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="133.5" y="125.0" text-anchor="middle" class="m">59</text>
+<text x="133.5" y="146.0" text-anchor="middle" class="sm soft">4</text>
+<rect x="150.0" y="108.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="163.5" y="125.0" text-anchor="middle" class="m">62</text>
+<text x="163.5" y="146.0" text-anchor="middle" class="sm soft">5</text>
+<rect x="180.0" y="108.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="193.5" y="125.0" text-anchor="middle" class="m">75</text>
+<text x="193.5" y="146.0" text-anchor="middle" class="sm soft">6</text>
+<rect x="210.0" y="108.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="223.5" y="125.0" text-anchor="middle" class="m">76</text>
+<text x="223.5" y="146.0" text-anchor="middle" class="sm soft">7</text>
+<rect x="240.0" y="108.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="253.5" y="125.0" text-anchor="middle" class="m">78</text>
+<text x="253.5" y="146.0" text-anchor="middle" class="sm soft">8</text>
+<rect x="270.0" y="108.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="283.5" y="125.0" text-anchor="middle" class="m">79</text>
+<text x="283.5" y="146.0" text-anchor="middle" class="sm soft">9</text>
+<rect x="300.0" y="108.0" width="27.0" height="24.0" rx="2" class="wash2 ln s2 thick"/>
+<text x="313.5" y="125.0" text-anchor="middle" class="m">80</text>
+<text x="313.5" y="146.0" text-anchor="middle" class="sm soft">10</text>
+<rect x="330.0" y="108.0" width="27.0" height="24.0" rx="2" class="wash2 ln s2 thick"/>
+<text x="343.5" y="125.0" text-anchor="middle" class="m">82</text>
+<text x="343.5" y="146.0" text-anchor="middle" class="sm soft">11</text>
+<rect x="360.0" y="108.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="373.5" y="125.0" text-anchor="middle" class="m">85</text>
+<text x="373.5" y="146.0" text-anchor="middle" class="sm soft">12</text>
+<rect x="390.0" y="108.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="403.5" y="125.0" text-anchor="middle" class="m">90</text>
+<text x="403.5" y="146.0" text-anchor="middle" class="sm soft">13</text>
+<rect x="420.0" y="108.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="433.5" y="125.0" text-anchor="middle" class="m">91</text>
+<text x="433.5" y="146.0" text-anchor="middle" class="sm soft">14</text>
+<rect x="450.0" y="108.0" width="27.0" height="24.0" rx="2" class="wash4 ln s4 thick"/>
+<text x="463.5" y="125.0" text-anchor="middle" class="m">92</text>
+<text x="463.5" y="146.0" text-anchor="middle" class="sm soft">15</text>
+<rect x="480.0" y="108.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="493.5" y="125.0" text-anchor="middle" class="m">92</text>
+<text x="493.5" y="146.0" text-anchor="middle" class="sm soft">16</text>
+<rect x="510.0" y="108.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="523.5" y="125.0" text-anchor="middle" class="m">94</text>
+<text x="523.5" y="146.0" text-anchor="middle" class="sm soft">17</text>
+<rect x="540.0" y="108.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="553.5" y="125.0" text-anchor="middle" class="m">97</text>
+<text x="553.5" y="146.0" text-anchor="middle" class="sm soft">18</text>
+<rect x="570.0" y="108.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="583.5" y="125.0" text-anchor="middle" class="m">99</text>
+<text x="583.5" y="146.0" text-anchor="middle" class="sm soft">19</text>
+<rect x="600.0" y="108.0" width="27.0" height="24.0" rx="2" class="bg ln-soft"/>
+<text x="613.5" y="125.0" text-anchor="middle" class="m">100</text>
+<text x="613.5" y="146.0" text-anchor="middle" class="sm soft">20</text>
+</svg><figcaption>Top: count the values strictly below X, add 0.5, divide by n. Bottom: c = n·p/100 gives a position. A decimal c rounds up to one position; a whole c means averaging positions c and c + 1.<span class="ar">أعلى: عُدّ القيم الأقل من X، أضف <span dir="ltr" style="white-space:nowrap">0.5</span>، واقسم على n. أسفل: <span dir="ltr" style="white-space:nowrap">c = n·p/100</span> يعطي الترتيب؛ إذا كان c عشريًا نقرّبه لأعلى، وإذا كان عددًا صحيحًا نأخذ متوسط القيمتين c و <span dir="ltr" style="white-space:nowrap">c + 1</span>.</span></figcaption></figure>
+  <div class="cols2">
+    <div class="ex"><div class="q"><span class="tag">Activity · Jim's 78 <span class="src">Amani</span></span><p>20 scores: 34 37 48 59 62 75 76 78 79 80 82 85 90 91 92 92 94 97 99 100.</p></div>
+      <div class="a"><p>7 values are below 78: <span class="v">(7 + 0.5)/20 × 100 =</span> <span class="ans">37.5th percentile</span>. 37.5% of students scored lower than Jim.</p></div></div>
+    <div class="ex"><div class="q"><span class="tag">Ex 3-30, 3-31 · Traffic violations <span class="src">Hadhrami</span></span><p>10 days: 22 19 25 24 18 15 9 12 16 20. Ordered: 9 12 15 16 18 19 20 22 24 25. Percentile rank of 16, and of 24.</p></div>
+      <div class="a"><p>16: 3 values below, (3.5/10)·100 = <span class="ans">35th</span>. 24: 8 below, (8.5/10)·100 = <span class="ans">85th</span>. So 24 is higher than 85% of the values.</p></div></div>
+  </div>
+
+  <h4>Case 2 · The value at a given percentile p</h4>
+  <div class="formula"><div class="label">Procedure: (1) order the data · (2) c = n·p/100</div>
+    <p class="fx">c = <span class="frac"><span class="num">n · p</span><span class="den">100</span></span> &nbsp;&nbsp;(n = number of values, p = percentile)</p>
+    <p class="note"><strong>3A</strong>: if c is <strong>not</strong> a whole number, round <strong>up</strong> to the next whole number and count up to that position. <strong>3B</strong>: if c <strong>is</strong> a whole number, take the value halfway between the c-th and (c + 1)-th values.</p></div>
+  <div class="cols2">
+    <div class="ex"><div class="q"><span class="tag">Activity · Jim's class: P₅₀ and P₇₄ <span class="src">Amani</span></span></div>
+      <div class="a"><p>P₅₀: c = 20·50/100 = 10, a whole number, so <span class="v">(10th + 11th)/2 = (80 + 82)/2 =</span> <span class="ans">81</span>.</p><p>P₇₄: c = 20·74/100 = 14.8, not whole, so round up to 15. The 15th value = <span class="ans">92</span>.</p></div></div>
+    <div class="ex"><div class="q"><span class="tag">Ex 3-32, 3-33 · Traffic: P₆₅ and P₃₀ <span class="src">Hadhrami</span></span></div>
+      <div class="a"><p>P₆₅: c = 10·65/100 = 6.5, rounds up to 7. The 7th value = <span class="ans">20</span>.</p><p>P₃₀: c = 3, whole, so <span class="v">(15 + 16)/2 =</span> <span class="ans">15.5</span>.</p></div></div>
+  </div>
+  <div class="ar-note"><span class="lbl">الشرح بالعربي — المئينات</span>المئين يخبرك <b>كم بالمئة من البيانات أقل من قيمتك</b>. مثلًا P₈₀ يعني أن 80% أقل منك. لا تخلط بين <b>النسبة المئوية</b> (درجتك أنت من 100) و<b>المئين</b> (ترتيبك بين الآخرين). هناك سؤالان مختلفان: (1) <b>لديك قيمة وتريد ترتيبها</b> ← عدّ القيم الأقل منها، أضف 0.5، اقسم على n، واضرب في 100. (2) <b>لديك مئين وتريد قيمته</b> ← احسب <span class="v" dir="ltr">c = n·p/100</span>. إذا كان c عشريًا قرّب <b>لأعلى</b> وخذ القيمة في ذلك الترتيب، وإذا كان صحيحًا خذ متوسط القيمتين c و c + 1. ولا تنسَ ترتيب البيانات أولًا.</div>
+
+  <h3>3 · Quartiles <span class="src">Both</span></h3>
+  <div class="cols2">
+    <div><p><span class="term">Quartiles</span> divide ordered data into four equal groups: <span class="v">Q₁ = P₂₅</span>, <span class="v">Q₂ = P₅₀ = median</span>, <span class="v">Q₃ = P₇₅</span>.</p>
+      <p><strong>Method 1, medians</strong> (the textbook procedure table): order the data; Q₂ = the median; Q₁ = the median of the values <strong>below</strong> Q₂; Q₃ = the median of the values <strong>above</strong> Q₂. When n is odd, leave the median itself out of both halves.</p>
+      <p><strong>Method 2, percentile formula</strong>: apply the Case 2 procedure with p = 25, 50, 75.</p></div>
+    <div class="ex" style="margin:0"><div class="q"><span class="tag">Activity · quartiles of Jim's class, both methods <span class="src">Amani</span></span></div>
+      <div class="a"><p><strong>Method 1:</strong> n = 20 (even), so Q₂ = (80 + 82)/2 = <span class="ans">81</span>. Lower ten: 34 … 80, Q₁ = (62 + 75)/2 = <span class="ans">68.5</span>. Upper ten: 82 … 100, Q₃ = (92 + 92)/2 = <span class="ans">92</span>.</p>
+        <p><strong>Method 2:</strong> Q₁: c = 5, whole, so (5th + 6th)/2 = 68.5. Q₂: c = 10, giving 81. Q₃: c = 15, whole, so (15th + 16th)/2 = 92. Both methods agree.</p></div></div>
+  </div>
+  <div class="ex"><div class="q"><span class="tag">Ex 3-34 · Traffic data (n = 10) <span class="src">Hadhrami</span></span></div>
+    <div class="a"><p>MD = (18 + 19)/2 = <span class="ans">18.5</span>. Below: 9 12 <strong>15</strong> 16 18, so Q₁ = <span class="ans">15</span>. Above: 19 20 <strong>22</strong> 24 25, so Q₃ = <span class="ans">22</span>.</p></div></div>
+  <figure class="dg"><svg viewBox="0 0 660 178" style="max-width:660px" role="img" aria-label="Three aligned rulers dividing ordered data into 100 percentiles, 10 deciles and 4 quartiles, with matching positions linked" xmlns="http://www.w3.org/2000/svg">
+<line x1="120.0" y1="30.0" x2="620.0" y2="30.0" class="ln"/>
+<text x="20.0" y="34.0" text-anchor="start" class="sm b t3">Percentiles</text>
+<text x="120.0" y="48.0" text-anchor="middle" class="sm soft">min</text>
+<text x="620.0" y="48.0" text-anchor="middle" class="sm soft">max</text>
+<line x1="125.0" y1="27.0" x2="125.0" y2="33.0" class="ln"/>
+<line x1="130.0" y1="27.0" x2="130.0" y2="33.0" class="ln"/>
+<line x1="135.0" y1="27.0" x2="135.0" y2="33.0" class="ln"/>
+<line x1="140.0" y1="27.0" x2="140.0" y2="33.0" class="ln"/>
+<line x1="145.0" y1="27.0" x2="145.0" y2="33.0" class="ln"/>
+<line x1="150.0" y1="27.0" x2="150.0" y2="33.0" class="ln"/>
+<line x1="155.0" y1="27.0" x2="155.0" y2="33.0" class="ln"/>
+<line x1="160.0" y1="27.0" x2="160.0" y2="33.0" class="ln"/>
+<line x1="165.0" y1="27.0" x2="165.0" y2="33.0" class="ln"/>
+<line x1="170.0" y1="27.0" x2="170.0" y2="33.0" class="ln"/>
+<line x1="175.0" y1="27.0" x2="175.0" y2="33.0" class="ln"/>
+<line x1="180.0" y1="27.0" x2="180.0" y2="33.0" class="ln"/>
+<line x1="185.0" y1="27.0" x2="185.0" y2="33.0" class="ln"/>
+<line x1="190.0" y1="27.0" x2="190.0" y2="33.0" class="ln"/>
+<line x1="195.0" y1="27.0" x2="195.0" y2="33.0" class="ln"/>
+<line x1="200.0" y1="27.0" x2="200.0" y2="33.0" class="ln"/>
+<line x1="205.0" y1="27.0" x2="205.0" y2="33.0" class="ln"/>
+<line x1="210.0" y1="27.0" x2="210.0" y2="33.0" class="ln"/>
+<line x1="215.0" y1="27.0" x2="215.0" y2="33.0" class="ln"/>
+<line x1="220.0" y1="27.0" x2="220.0" y2="33.0" class="ln"/>
+<line x1="225.0" y1="27.0" x2="225.0" y2="33.0" class="ln"/>
+<line x1="230.0" y1="27.0" x2="230.0" y2="33.0" class="ln"/>
+<line x1="235.0" y1="27.0" x2="235.0" y2="33.0" class="ln"/>
+<line x1="240.0" y1="27.0" x2="240.0" y2="33.0" class="ln"/>
+<line x1="245.0" y1="27.0" x2="245.0" y2="33.0" class="ln"/>
+<line x1="250.0" y1="27.0" x2="250.0" y2="33.0" class="ln"/>
+<line x1="255.0" y1="27.0" x2="255.0" y2="33.0" class="ln"/>
+<line x1="260.0" y1="27.0" x2="260.0" y2="33.0" class="ln"/>
+<line x1="265.0" y1="27.0" x2="265.0" y2="33.0" class="ln"/>
+<line x1="270.0" y1="27.0" x2="270.0" y2="33.0" class="ln"/>
+<line x1="275.0" y1="27.0" x2="275.0" y2="33.0" class="ln"/>
+<line x1="280.0" y1="27.0" x2="280.0" y2="33.0" class="ln"/>
+<line x1="285.0" y1="27.0" x2="285.0" y2="33.0" class="ln"/>
+<line x1="290.0" y1="27.0" x2="290.0" y2="33.0" class="ln"/>
+<line x1="295.0" y1="27.0" x2="295.0" y2="33.0" class="ln"/>
+<line x1="300.0" y1="27.0" x2="300.0" y2="33.0" class="ln"/>
+<line x1="305.0" y1="27.0" x2="305.0" y2="33.0" class="ln"/>
+<line x1="310.0" y1="27.0" x2="310.0" y2="33.0" class="ln"/>
+<line x1="315.0" y1="27.0" x2="315.0" y2="33.0" class="ln"/>
+<line x1="320.0" y1="27.0" x2="320.0" y2="33.0" class="ln"/>
+<line x1="325.0" y1="27.0" x2="325.0" y2="33.0" class="ln"/>
+<line x1="330.0" y1="27.0" x2="330.0" y2="33.0" class="ln"/>
+<line x1="335.0" y1="27.0" x2="335.0" y2="33.0" class="ln"/>
+<line x1="340.0" y1="27.0" x2="340.0" y2="33.0" class="ln"/>
+<line x1="345.0" y1="27.0" x2="345.0" y2="33.0" class="ln"/>
+<line x1="350.0" y1="27.0" x2="350.0" y2="33.0" class="ln"/>
+<line x1="355.0" y1="27.0" x2="355.0" y2="33.0" class="ln"/>
+<line x1="360.0" y1="27.0" x2="360.0" y2="33.0" class="ln"/>
+<line x1="365.0" y1="27.0" x2="365.0" y2="33.0" class="ln"/>
+<line x1="370.0" y1="27.0" x2="370.0" y2="33.0" class="ln"/>
+<line x1="375.0" y1="27.0" x2="375.0" y2="33.0" class="ln"/>
+<line x1="380.0" y1="27.0" x2="380.0" y2="33.0" class="ln"/>
+<line x1="385.0" y1="27.0" x2="385.0" y2="33.0" class="ln"/>
+<line x1="390.0" y1="27.0" x2="390.0" y2="33.0" class="ln"/>
+<line x1="395.0" y1="27.0" x2="395.0" y2="33.0" class="ln"/>
+<line x1="400.0" y1="27.0" x2="400.0" y2="33.0" class="ln"/>
+<line x1="405.0" y1="27.0" x2="405.0" y2="33.0" class="ln"/>
+<line x1="410.0" y1="27.0" x2="410.0" y2="33.0" class="ln"/>
+<line x1="415.0" y1="27.0" x2="415.0" y2="33.0" class="ln"/>
+<line x1="420.0" y1="27.0" x2="420.0" y2="33.0" class="ln"/>
+<line x1="425.0" y1="27.0" x2="425.0" y2="33.0" class="ln"/>
+<line x1="430.0" y1="27.0" x2="430.0" y2="33.0" class="ln"/>
+<line x1="435.0" y1="27.0" x2="435.0" y2="33.0" class="ln"/>
+<line x1="440.0" y1="27.0" x2="440.0" y2="33.0" class="ln"/>
+<line x1="445.0" y1="27.0" x2="445.0" y2="33.0" class="ln"/>
+<line x1="450.0" y1="27.0" x2="450.0" y2="33.0" class="ln"/>
+<line x1="455.0" y1="27.0" x2="455.0" y2="33.0" class="ln"/>
+<line x1="460.0" y1="27.0" x2="460.0" y2="33.0" class="ln"/>
+<line x1="465.0" y1="27.0" x2="465.0" y2="33.0" class="ln"/>
+<line x1="470.0" y1="27.0" x2="470.0" y2="33.0" class="ln"/>
+<line x1="475.0" y1="27.0" x2="475.0" y2="33.0" class="ln"/>
+<line x1="480.0" y1="27.0" x2="480.0" y2="33.0" class="ln"/>
+<line x1="485.0" y1="27.0" x2="485.0" y2="33.0" class="ln"/>
+<line x1="490.0" y1="27.0" x2="490.0" y2="33.0" class="ln"/>
+<line x1="495.0" y1="27.0" x2="495.0" y2="33.0" class="ln"/>
+<line x1="500.0" y1="27.0" x2="500.0" y2="33.0" class="ln"/>
+<line x1="505.0" y1="27.0" x2="505.0" y2="33.0" class="ln"/>
+<line x1="510.0" y1="27.0" x2="510.0" y2="33.0" class="ln"/>
+<line x1="515.0" y1="27.0" x2="515.0" y2="33.0" class="ln"/>
+<line x1="520.0" y1="27.0" x2="520.0" y2="33.0" class="ln"/>
+<line x1="525.0" y1="27.0" x2="525.0" y2="33.0" class="ln"/>
+<line x1="530.0" y1="27.0" x2="530.0" y2="33.0" class="ln"/>
+<line x1="535.0" y1="27.0" x2="535.0" y2="33.0" class="ln"/>
+<line x1="540.0" y1="27.0" x2="540.0" y2="33.0" class="ln"/>
+<line x1="545.0" y1="27.0" x2="545.0" y2="33.0" class="ln"/>
+<line x1="550.0" y1="27.0" x2="550.0" y2="33.0" class="ln"/>
+<line x1="555.0" y1="27.0" x2="555.0" y2="33.0" class="ln"/>
+<line x1="560.0" y1="27.0" x2="560.0" y2="33.0" class="ln"/>
+<line x1="565.0" y1="27.0" x2="565.0" y2="33.0" class="ln"/>
+<line x1="570.0" y1="27.0" x2="570.0" y2="33.0" class="ln"/>
+<line x1="575.0" y1="27.0" x2="575.0" y2="33.0" class="ln"/>
+<line x1="580.0" y1="27.0" x2="580.0" y2="33.0" class="ln"/>
+<line x1="585.0" y1="27.0" x2="585.0" y2="33.0" class="ln"/>
+<line x1="590.0" y1="27.0" x2="590.0" y2="33.0" class="ln"/>
+<line x1="595.0" y1="27.0" x2="595.0" y2="33.0" class="ln"/>
+<line x1="600.0" y1="27.0" x2="600.0" y2="33.0" class="ln"/>
+<line x1="605.0" y1="27.0" x2="605.0" y2="33.0" class="ln"/>
+<line x1="610.0" y1="27.0" x2="610.0" y2="33.0" class="ln"/>
+<line x1="615.0" y1="27.0" x2="615.0" y2="33.0" class="ln"/>
+<text x="125.0" y="20.0" text-anchor="middle" class="sm b t3">P1</text>
+<text x="245.0" y="20.0" text-anchor="middle" class="sm b t3">P25</text>
+<text x="370.0" y="20.0" text-anchor="middle" class="sm b t3">P50</text>
+<text x="495.0" y="20.0" text-anchor="middle" class="sm b t3">P75</text>
+<text x="615.0" y="20.0" text-anchor="middle" class="sm b t3">P99</text>
+<line x1="120.0" y1="80.0" x2="620.0" y2="80.0" class="ln"/>
+<text x="20.0" y="84.0" text-anchor="start" class="sm b t2">Deciles</text>
+<text x="120.0" y="98.0" text-anchor="middle" class="sm soft">min</text>
+<text x="620.0" y="98.0" text-anchor="middle" class="sm soft">max</text>
+<line x1="170.0" y1="74.0" x2="170.0" y2="86.0" class="ln"/>
+<line x1="220.0" y1="74.0" x2="220.0" y2="86.0" class="ln"/>
+<line x1="270.0" y1="74.0" x2="270.0" y2="86.0" class="ln"/>
+<line x1="320.0" y1="74.0" x2="320.0" y2="86.0" class="ln"/>
+<line x1="370.0" y1="74.0" x2="370.0" y2="86.0" class="ln"/>
+<line x1="420.0" y1="74.0" x2="420.0" y2="86.0" class="ln"/>
+<line x1="470.0" y1="74.0" x2="470.0" y2="86.0" class="ln"/>
+<line x1="520.0" y1="74.0" x2="520.0" y2="86.0" class="ln"/>
+<line x1="570.0" y1="74.0" x2="570.0" y2="86.0" class="ln"/>
+<text x="170.0" y="70.0" text-anchor="middle" class="sm b t2">D1</text>
+<text x="220.0" y="70.0" text-anchor="middle" class="sm b t2">D2</text>
+<text x="270.0" y="70.0" text-anchor="middle" class="sm b t2">D3</text>
+<text x="320.0" y="70.0" text-anchor="middle" class="sm b t2">D4</text>
+<text x="370.0" y="70.0" text-anchor="middle" class="sm b t2">D5</text>
+<text x="420.0" y="70.0" text-anchor="middle" class="sm b t2">D6</text>
+<text x="470.0" y="70.0" text-anchor="middle" class="sm b t2">D7</text>
+<text x="520.0" y="70.0" text-anchor="middle" class="sm b t2">D8</text>
+<text x="570.0" y="70.0" text-anchor="middle" class="sm b t2">D9</text>
+<line x1="120.0" y1="130.0" x2="620.0" y2="130.0" class="ln"/>
+<text x="20.0" y="134.0" text-anchor="start" class="sm b t4">Quartiles</text>
+<text x="120.0" y="148.0" text-anchor="middle" class="sm soft">min</text>
+<text x="620.0" y="148.0" text-anchor="middle" class="sm soft">max</text>
+<line x1="245.0" y1="124.0" x2="245.0" y2="136.0" class="ln"/>
+<line x1="370.0" y1="124.0" x2="370.0" y2="136.0" class="ln"/>
+<line x1="495.0" y1="124.0" x2="495.0" y2="136.0" class="ln"/>
+<text x="245.0" y="120.0" text-anchor="middle" class="sm b t4">Q1</text>
+<text x="370.0" y="120.0" text-anchor="middle" class="sm b t4">Q2</text>
+<text x="495.0" y="120.0" text-anchor="middle" class="sm b t4">Q3</text>
+<line x1="245.0" y1="34.0" x2="245.0" y2="64.0" class="ln sA dash"/>
+<line x1="245.0" y1="86.0" x2="245.0" y2="114.0" class="ln sA dash"/>
+<line x1="245.0" y1="136.0" x2="245.0" y2="156.0" class="ln sA dash"/>
+<text x="245.0" y="170.0" text-anchor="middle" class="sm b tA">P25 = Q1</text>
+<line x1="370.0" y1="34.0" x2="370.0" y2="64.0" class="ln sA dash"/>
+<line x1="370.0" y1="86.0" x2="370.0" y2="114.0" class="ln sA dash"/>
+<line x1="370.0" y1="136.0" x2="370.0" y2="156.0" class="ln sA dash"/>
+<text x="370.0" y="170.0" text-anchor="middle" class="sm b tA">P50 = D5 = Q2 = MD</text>
+<line x1="495.0" y1="34.0" x2="495.0" y2="64.0" class="ln sA dash"/>
+<line x1="495.0" y1="86.0" x2="495.0" y2="114.0" class="ln sA dash"/>
+<line x1="495.0" y1="136.0" x2="495.0" y2="156.0" class="ln sA dash"/>
+<text x="495.0" y="170.0" text-anchor="middle" class="sm b tA">P75 = Q3</text>
+</svg><figcaption>Percentiles cut ordered data into 100 parts, deciles into 10, quartiles into 4. They are the same scale: Q1 = P25, the median = P50 = D5 = Q2, Q3 = P75, and each Dk = P(10k).<span class="ar">المئينات تقسم البيانات المرتبة إلى <span dir="ltr" style="white-space:nowrap">100</span> جزء، والعشيرات إلى <span dir="ltr" style="white-space:nowrap">10</span>، والربيعات إلى 4. وكلها على نفس المقياس: <span dir="ltr" style="white-space:nowrap">Q1 = P25</span>، والوسيط = <span dir="ltr" style="white-space:nowrap">P50 = D5 = Q2</span>، و <span dir="ltr" style="white-space:nowrap">Q3 = P75</span>.</span></figcaption></figure>
+
+  <h3>4 · Deciles and the summary of position measures <span class="src">Hadhrami</span></h3>
+  <p><span class="term">Deciles</span> divide the distribution into 10 groups: <span class="v">D₁, …, D₉</span> correspond to <span class="v">P₁₀, …, P₉₀</span>, and are found with the percentile formulas. The median = <span class="v">P₅₀ = Q₂ = D₅</span>. Textbook Table 3-4 summarises all position measures.</p>
+
+  <h3>5 · Interquartile range (IQR) <span class="src">Both</span></h3>
+  <div class="cols2">
+    <div class="formula" style="margin:0"><div class="label">IQR: the range of the middle 50% of the data</div><p class="fx">IQR = Q₃ − Q₁</p><p class="note">A rough measure of variability. Like the SD, the more variable the data, the larger the IQR. Unlike the SD, it hardly reacts to outliers.</p></div>
+    <div class="ex" style="margin:0"><div class="q"><span class="tag">Ex 3-35 · Traffic · Jim's class</span></div>
+      <div class="a"><p>Traffic: 22 − 15 = <span class="ans">7</span>. Jim's class: 92 − 68.5 = <span class="ans">23.5</span>.</p></div></div>
+  </div>
+
+  <h3>6 · Outliers <span class="src">Both</span></h3>
+  <div class="cols2">
+    <div><p>An <span class="term">outlier</span> is an extremely high or extremely low value compared with the rest of the data. Outliers strongly affect the <strong>mean</strong> and <strong>standard deviation</strong>; the <strong>median</strong> and <strong>IQR</strong> are much less affected.</p>
+      <div class="formula" style="margin:6px 0"><div class="label">Procedure for identifying outliers</div>
+        <p class="note" style="margin:0">(1) Order the data, find Q₁ and Q₃. (2) IQR = Q₃ − Q₁. (3) Compute 1.5 × IQR. (4) Lower fence Q₁ − 1.5·IQR; upper fence Q₃ + 1.5·IQR. (5) Any value <strong>below</strong> the lower fence or <strong>above</strong> the upper fence is an outlier.</p></div>
+      <p><strong>Why outliers occur</strong> <span class="src">Amani</span>: (1) measurement or observational error; (2) recording error, such as a value written or typed wrongly; (3) a rare value that is real but occurred by chance.</p></div>
+    <div>
+      <div class="ex" style="margin:0 0 8px"><div class="q"><span class="tag">Ex 3-36 <span class="src">Hadhrami</span></span><p>5, 6, 12, 13, 15, 18, 22, 50</p></div>
+        <div class="a"><p>Q₁ = (6 + 12)/2 = 9, Q₃ = (18 + 22)/2 = 20, IQR = 11, 1.5·IQR = 16.5.</p><p>Fences: 9 − 16.5 = −7.5 and 20 + 16.5 = 36.5. Since 50 &gt; 36.5, <span class="ans">50 is an outlier</span>.</p></div></div>
+      <div class="ex" style="margin:0"><div class="q"><span class="tag">Activity · Jim's class <span class="src">Amani</span></span></div>
+        <div class="a"><p>1.5 × 23.5 = 35.25. Fences: 68.5 − 35.25 = 33.25 and 92 + 35.25 = 127.25. The smallest value, 34, is above 33.25: <span class="ans">no outliers</span>.</p></div></div>
+    </div>
+  </div>
+  <figure class="dg"><svg viewBox="0 0 660 146" style="max-width:660px" role="img" aria-label="Twenty scores with their box from Q1 68.5 to Q3 92 and outlier fences at 33.25 and 127.25" xmlns="http://www.w3.org/2000/svg">
+<line x1="50.0" y1="120.0" x2="630.0" y2="120.0" class="ln"/>
+<line x1="50.0" y1="120.0" x2="50.0" y2="125.0" class="ln"/>
+<text x="50.0" y="138.0" text-anchor="middle" class="m soft">20</text>
+<line x1="146.7" y1="120.0" x2="146.7" y2="125.0" class="ln"/>
+<text x="146.7" y="138.0" text-anchor="middle" class="m soft">40</text>
+<line x1="243.3" y1="120.0" x2="243.3" y2="125.0" class="ln"/>
+<text x="243.3" y="138.0" text-anchor="middle" class="m soft">60</text>
+<line x1="340.0" y1="120.0" x2="340.0" y2="125.0" class="ln"/>
+<text x="340.0" y="138.0" text-anchor="middle" class="m soft">80</text>
+<line x1="436.7" y1="120.0" x2="436.7" y2="125.0" class="ln"/>
+<text x="436.7" y="138.0" text-anchor="middle" class="m soft">100</text>
+<line x1="533.3" y1="120.0" x2="533.3" y2="125.0" class="ln"/>
+<text x="533.3" y="138.0" text-anchor="middle" class="m soft">120</text>
+<line x1="630.0" y1="120.0" x2="630.0" y2="125.0" class="ln"/>
+<text x="630.0" y="138.0" text-anchor="middle" class="m soft">140</text>
+<circle cx="117.7" cy="96.0" r="3.2" class="f3"/>
+<circle cx="132.2" cy="96.0" r="3.2" class="f3"/>
+<circle cx="185.3" cy="96.0" r="3.2" class="f3"/>
+<circle cx="238.5" cy="96.0" r="3.2" class="f3"/>
+<circle cx="253.0" cy="96.0" r="3.2" class="f3"/>
+<circle cx="315.8" cy="96.0" r="3.2" class="f3"/>
+<circle cx="320.7" cy="96.0" r="3.2" class="f3"/>
+<circle cx="330.3" cy="96.0" r="3.2" class="f3"/>
+<circle cx="335.2" cy="96.0" r="3.2" class="f3"/>
+<circle cx="340.0" cy="96.0" r="3.2" class="f3"/>
+<circle cx="349.7" cy="96.0" r="3.2" class="f3"/>
+<circle cx="364.2" cy="96.0" r="3.2" class="f3"/>
+<circle cx="388.3" cy="96.0" r="3.2" class="f3"/>
+<circle cx="393.2" cy="96.0" r="3.2" class="f3"/>
+<circle cx="398.0" cy="96.0" r="3.2" class="f3"/>
+<circle cx="398.0" cy="96.0" r="3.2" class="f3"/>
+<circle cx="407.7" cy="96.0" r="3.2" class="f3"/>
+<circle cx="422.2" cy="96.0" r="3.2" class="f3"/>
+<circle cx="431.8" cy="96.0" r="3.2" class="f3"/>
+<circle cx="436.7" cy="96.0" r="3.2" class="f3"/>
+<line x1="117.7" y1="60.0" x2="284.4" y2="60.0" class="ln"/>
+<line x1="398.0" y1="60.0" x2="436.7" y2="60.0" class="ln"/>
+<line x1="117.7" y1="52.0" x2="117.7" y2="68.0" class="ln"/>
+<line x1="436.7" y1="52.0" x2="436.7" y2="68.0" class="ln"/>
+<rect x="284.4" y="47.0" width="113.6" height="26.0" rx="0" class="wash3 ln s3"/>
+<line x1="344.8" y1="47.0" x2="344.8" y2="73.0" class="ln s3 thick"/>
+<text x="284.4" y="38.0" text-anchor="middle" class="sm b">Q1 = 68.5</text>
+<text x="398.0" y="38.0" text-anchor="middle" class="sm b">Q3 = 92</text>
+<line x1="114.0" y1="22.0" x2="114.0" y2="120.0" class="ln sA dash"/>
+<text x="114.0" y="16.0" text-anchor="middle" class="sm b tA">Q1 − 1.5·IQR = 33.25</text>
+<line x1="568.4" y1="22.0" x2="568.4" y2="120.0" class="ln sA dash"/>
+<text x="568.4" y="16.0" text-anchor="middle" class="sm b tA">Q3 + 1.5·IQR = 127.25</text>
+<text x="125.7" y="112.0" text-anchor="start" class="sm tA">34 is just inside → not an outlier</text>
+</svg><figcaption>IQR = 92 − 68.5 = 23.5, so 1.5·IQR = 35.25. Anything below 33.25 or above 127.25 would be an outlier. The lowest score, 34, misses the fence by 0.75, so there are no outliers.<span class="ar">المدى الربيعي = <span dir="ltr" style="white-space:nowrap">23.5</span>، و <span dir="ltr" style="white-space:nowrap">1.5 × 23.5 = 35.25</span>. أي قيمة أقل من <span dir="ltr" style="white-space:nowrap">33.25</span> أو أكبر من <span dir="ltr" style="white-space:nowrap">127.25</span> تعتبر قيمة شاذة. أقل درجة <span dir="ltr" style="white-space:nowrap">34</span> داخل الحد بفارق <span dir="ltr" style="white-space:nowrap">0.75</span> فقط، إذن لا توجد قيم شاذة.</span></figcaption></figure>
+  <div class="ar-note"><span class="lbl">الشرح بالعربي — الربيعات والقيم الشاذة</span>الربيعات تقسم البيانات المرتبة إلى <b>4 أجزاء</b>، <span class="v" dir="ltr">Q₂</span> هو الوسيط، و<span class="v" dir="ltr">Q₁</span> هو وسيط النصف الأدنى، و<span class="v" dir="ltr">Q₃</span> هو وسيط النصف الأعلى. وإذا كان n فرديًا <b>لا ندخل الوسيط</b> في أي من النصفين. المدى الربيعي <span class="v" dir="ltr">IQR = Q₃ − Q₁</span> هو مدى الـ 50% الوسطى. لكشف القيم الشاذة نحسب الحدّين <span class="v" dir="ltr">Q₁ − 1.5·IQR</span> و<span class="v" dir="ltr">Q₃ + 1.5·IQR</span>، وأي قيمة <b>خارجهما</b> تعتبر شاذة. وانتبه: القيمة التي تساوي الحد تمامًا <b>ليست</b> شاذة. أسباب القيم الشاذة: خطأ في القياس، أو خطأ في التسجيل، أو قيمة نادرة حقيقية.</div>
+
+  <div class="callout note"><span class="ct">R for Lab Quiz I (outline CLO2-D): know why R can disagree with your paper answer</span>
+    <p><span class="v">quantile(x, 0.25)</span>, <span class="v">summary(x)</span> and <span class="v">IQR(x)</span> use R's default method, which <strong>interpolates</strong> between positions. For Jim's 20 scores R gives Q₁ = 71.75 and Q₃ = 92 (IQR 20.25), not the 68.5 and 92 (IQR 23.5) from the procedure table. <span class="v">fivenum(x)</span> uses Tukey's hinges, which match the course method when n is even but not always when n is odd. In a <strong>written</strong> exam always use the procedure tables. In the lab, report what R gives. Percentile rank has no single R function: <span class="v">(sum(x &lt; 78) + 0.5)/length(x)*100</span> reproduces the formula.</p></div>
+</section>
+
+<footer>
+  <p><strong>Chapter 3 study set: 8 files.</strong> One merged source built from Dr. Amani Al-Rubkhi's Fall 2026 notes (course coordinator) and Dr. Ahmed Al-Hadhrami's Spring 2024 slides, aligned to the SQU STAT 2101 course outline (Fall 2026). Textbook: Bluman, <em>Elementary Statistics</em>, 10th ed.</p>
+  <p>00 · Exam brief: what the outline tests · 01 · Lesson 3-1: Measures of Central Tendency · 02 · Lesson 3-2: Measures of Variation · <strong style="color:var(--accent)">03 · Lesson 3-3: Measures of Position</strong> · 04 · Lesson 3-4: Exploratory Data Analysis · 05 · Revision pack: formulas, decisions, traps, R · 06 · Exam-style questions (no answers) · 07 · Full worked answers</p>
+</footer>
+</div>

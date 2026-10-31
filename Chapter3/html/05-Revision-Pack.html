@@ -1,0 +1,753 @@
+<title>Chapter 3 Revision Pack</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+
+<style>
+/* Layout: single reading column with a sticky rail nav; four section inks mirror the
+   overprint of a Venn diagram — the chapter's own governing picture. */
+:root{
+  --bg:#fbfaf7;
+  --surface:#ffffff;
+  --surface-2:#f2f1ec;
+  --fg:#1b2027;
+  --fg-soft:#4c5663;
+  --fg-faint:#78828f;
+  --rule:#dddcd4;
+  --rule-soft:#eceae3;
+
+  --ink-1:#1f4e79;   /* 4-1  sample spaces      */
+  --ink-2:#0f6f5c;   /* 4-2  addition rules     */
+  --ink-3:#9a5b12;   /* 4-3  multiplication     */
+  --ink-4:#7b2d6b;   /* 4-4 / 4-5 counting      */
+  --accent:#b23b2e;  /* alarms, traps, must-know */
+
+  --ink-1-wash:#eaf0f7;
+  --ink-2-wash:#e5f1ee;
+  --ink-3-wash:#f8efe1;
+  --ink-4-wash:#f4e9f2;
+  --accent-wash:#f9eae7;
+
+  --display:"Spectral",Georgia,"Times New Roman",serif;
+  --body:"IBM Plex Sans","IBM Plex Sans Arabic",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --arabic:"IBM Plex Sans Arabic","IBM Plex Sans",-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  --measure:70ch;
+  --shadow:0 1px 2px rgba(27,32,39,.05),0 8px 24px -16px rgba(27,32,39,.25);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#13171c;
+    --surface:#1a1f26;
+    --surface-2:#222932;
+    --fg:#e8e6e0;
+    --fg-soft:#b3bac4;
+    --fg-faint:#8a929e;
+    --rule:#333b45;
+    --rule-soft:#272e37;
+
+    --ink-1:#7bb0e8;
+    --ink-2:#4fc4a8;
+    --ink-3:#e2a74e;
+    --ink-4:#d089c2;
+    --accent:#ef7f70;
+
+    --ink-1-wash:#182633;
+    --ink-2-wash:#132a26;
+    --ink-3-wash:#2b2314;
+    --ink-4-wash:#2a1b28;
+    --accent-wash:#2f1c19;
+
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#13171c;
+  --surface:#1a1f26;
+  --surface-2:#222932;
+  --fg:#e8e6e0;
+  --fg-soft:#b3bac4;
+  --fg-faint:#8a929e;
+  --rule:#333b45;
+  --rule-soft:#272e37;
+
+  --ink-1:#7bb0e8;
+  --ink-2:#4fc4a8;
+  --ink-3:#e2a74e;
+  --ink-4:#d089c2;
+  --accent:#ef7f70;
+
+  --ink-1-wash:#182633;
+  --ink-2-wash:#132a26;
+  --ink-3-wash:#2b2314;
+  --ink-4-wash:#2a1b28;
+  --accent-wash:#2f1c19;
+
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{
+  max-width:980px;
+  margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 72px;
+}
+
+/* ---------- masthead ---------- */
+.masthead{
+  padding-block:56px 36px;
+  border-bottom:3px double var(--rule);
+  margin-bottom:36px;
+}
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+}
+h1{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(2.1rem,6vw,3.4rem);
+  line-height:1.08;
+  margin:0 0 10px;
+  letter-spacing:-.015em;
+  text-wrap:balance;
+}
+.subtitle{
+  font-family:var(--display);
+  font-style:italic;
+  font-size:clamp(1.05rem,2.6vw,1.3rem);
+  color:var(--fg-soft);
+  margin:0 0 22px;
+  max-width:var(--measure);
+}
+.meta-strip{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 10px;
+  margin-top:20px;
+}
+.chip{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.04em;
+  padding:5px 10px;
+  border:1px solid var(--rule);
+  border-radius:3px;
+  color:var(--fg-soft);
+  background:var(--surface);
+}
+.chip strong{color:var(--fg);font-weight:600}
+
+/* ---------- nav ---------- */
+nav.toc{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:20px 22px;
+  margin-bottom:44px;
+  box-shadow:var(--shadow);
+}
+nav.toc h2{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+  font-weight:500;
+}
+nav.toc ol{
+  margin:0;padding:0;list-style:none;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:4px 26px;
+}
+nav.toc li{min-width:0}
+nav.toc a{
+  display:flex;
+  gap:10px;
+  align-items:baseline;
+  text-decoration:none;
+  color:var(--fg);
+  padding:5px 0;
+  border-bottom:1px solid var(--rule-soft);
+  font-size:.92rem;
+}
+nav.toc a:hover{color:var(--accent)}
+nav.toc a .num{
+  font-family:var(--mono);
+  font-size:.74rem;
+  color:var(--fg-faint);
+  flex:none;
+  min-width:2.4em;
+}
+
+/* ---------- sections ---------- */
+section{margin-bottom:64px;scroll-margin-top:24px}
+.sec-head{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+  padding-bottom:14px;
+  border-bottom:2px solid var(--sec,var(--fg));
+  margin-bottom:28px;
+}
+.sec-num{
+  font-family:var(--mono);
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.06em;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:5px 9px;
+  border-radius:3px;
+  flex:none;
+  margin-top:6px;
+}
+.sec-head h2{
+  font-family:var(--display);
+  font-size:clamp(1.5rem,4vw,2.05rem);
+  line-height:1.18;
+  margin:0;
+  font-weight:600;
+  text-wrap:balance;
+  min-width:0;
+}
+.sec-head .ar{
+  display:block;
+  font-family:var(--arabic);
+  font-size:.92rem;
+  font-style:normal;
+  color:var(--fg-soft);
+  direction:rtl;
+  margin-top:4px;
+  font-weight:400;
+}
+h3{
+  font-family:var(--body);
+  font-size:1.08rem;
+  font-weight:600;
+  letter-spacing:-.005em;
+  margin:36px 0 12px;
+  color:var(--fg);
+  display:flex;
+  align-items:baseline;
+  gap:9px;
+  flex-wrap:wrap;
+}
+h3::before{
+  content:"";
+  width:18px;height:3px;
+  background:var(--sec,var(--fg));
+  flex:none;
+  border-radius:2px;
+}
+h4{
+  font-family:var(--mono);
+  font-size:.74rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:26px 0 10px;
+  font-weight:500;
+}
+p{margin:0 0 14px;max-width:var(--measure)}
+ul,ol{max-width:var(--measure);padding-left:1.25em;margin:0 0 14px}
+li{margin-bottom:7px}
+li::marker{color:var(--sec,var(--fg-faint))}
+strong{font-weight:600}
+em{font-style:italic}
+code,.v{
+  font-family:var(--mono);
+  font-size:.9em;
+  background:var(--surface-2);
+  padding:1px 5px;
+  border-radius:3px;
+  white-space:nowrap;
+}
+.term{
+  font-weight:600;
+  color:var(--sec,var(--fg));
+}
+a{color:var(--accent)}
+
+/* ---------- maths ---------- */
+.fx{
+  font-family:var(--mono);
+  font-size:1.02rem;
+  line-height:2.1;
+  white-space:nowrap;
+}
+.frac{
+  display:inline-flex;
+  flex-direction:column;
+  vertical-align:middle;
+  text-align:center;
+  font-family:var(--mono);
+  line-height:1.25;
+  margin:0 .22em;
+  position:relative;
+  top:-.08em;
+}
+.frac .num{border-bottom:1.5px solid currentColor;padding:0 .4em .08em}
+.frac .den{padding:.08em .4em 0}
+sub,sup{font-size:.72em}
+
+.formula{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-left:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:18px 20px;
+  margin:18px 0 22px;
+  box-shadow:var(--shadow);
+  overflow-x:auto;
+}
+.formula .label{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg-faint));
+  margin-bottom:10px;
+  font-weight:600;
+}
+.formula .fx{margin:4px 0}
+.formula .note{
+  font-size:.88rem;
+  color:var(--fg-soft);
+  margin:10px 0 0;
+  white-space:normal;
+  max-width:none;
+}
+
+/* ---------- example cards ---------- */
+.ex{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:5px;
+  margin:20px 0;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.ex > .q{
+  padding:16px 20px;
+  border-bottom:1px dashed var(--rule);
+  background:var(--wash,var(--surface-2));
+}
+.ex .tag{
+  font-family:var(--mono);
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg));
+  display:block;
+  margin-bottom:6px;
+}
+.ex .q p{margin:0;max-width:none}
+.ex > .a{padding:16px 20px}
+.ex > .a p{max-width:none}
+.ex > .a p:last-child{margin-bottom:0}
+.ex .steps{margin:0;padding-left:1.2em;max-width:none}
+.ex .steps li{margin-bottom:9px}
+.ans{
+  display:inline-block;
+  font-family:var(--mono);
+  font-weight:600;
+  background:var(--sec,var(--fg));
+  color:#fff;
+  padding:3px 9px;
+  border-radius:3px;
+  font-size:.92em;
+  white-space:nowrap;
+}
+
+/* ---------- callouts ---------- */
+.callout{
+  border-radius:4px;
+  padding:16px 18px;
+  margin:20px 0;
+  border:1px solid;
+  font-size:.95rem;
+}
+.callout p{max-width:none}
+.callout p:last-child{margin-bottom:0}
+.callout .ct{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-weight:600;
+  display:block;
+  margin-bottom:8px;
+}
+.trap{background:var(--accent-wash);border-color:var(--accent)}
+.trap .ct{color:var(--accent)}
+.tip{background:var(--ink-2-wash);border-color:var(--ink-2)}
+.tip .ct{color:var(--ink-2)}
+.note{background:var(--surface-2);border-color:var(--rule)}
+.note .ct{color:var(--fg-faint)}
+
+.ar-note{
+  font-family:var(--arabic);
+  direction:rtl;
+  text-align:right;
+  background:var(--surface-2);
+  border-right:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:13px 16px;
+  margin:16px 0;
+  font-size:.96rem;
+  line-height:1.95;
+  color:var(--fg-soft);
+}
+.ar-note b{color:var(--fg);font-weight:600}
+.ar-note .lbl{
+  display:block;
+  font-size:.72rem;
+  letter-spacing:.04em;
+  color:var(--sec,var(--fg-faint));
+  font-weight:600;
+  margin-bottom:4px;
+}
+.ar-note ul{padding-right:1.2em;padding-left:0;margin:6px 0 0;max-width:none}
+
+.ar-note p{margin:0 0 7px;max-width:none}
+.ar-note p:last-child{margin-bottom:0}
+.ar-note ol{padding-right:1.3em;padding-left:0;margin:6px 0 0;max-width:none}
+.ar-note li{margin-bottom:5px}
+.ar-note .v{font-size:.84em}
+.arn{display:block;font-family:var(--arabic);direction:rtl;unicode-bidi:isolate;text-align:left;font-size:.84rem;color:var(--fg-soft);font-weight:500;margin-top:2px;line-height:1.5}
+.subtitle-ar{font-family:var(--arabic);direction:rtl;text-align:right;color:var(--fg-soft);font-size:1.02rem;margin:0 0 8px;max-width:none;line-height:1.9}
+
+/* ---------- diagrams ---------- */
+figure.dg{margin:22px 0 26px;padding:16px 14px 12px;background:var(--surface);border:1px solid var(--rule);border-radius:4px;break-inside:avoid;page-break-inside:avoid}
+figure.dg svg{display:block;width:100%;height:auto;margin:0 auto;color:var(--fg);overflow:visible}
+figure.dg figcaption{font-size:.86rem;color:var(--fg-soft);margin:10px auto 0;max-width:64ch;text-align:center;line-height:1.5}
+figure.dg figcaption .ar{display:block;font-family:var(--arabic);direction:rtl;margin-top:4px;font-size:.9rem}
+.dg .ln{stroke:currentColor;fill:none;stroke-width:1.4}
+.dg .ln-soft{stroke:var(--fg-faint);fill:none;stroke-width:1.2}
+.dg .dash{stroke-dasharray:4 4}
+.dg .thick{stroke-width:2.6}
+.dg text{fill:currentColor;font-family:var(--body);font-size:13px}
+.dg text.m{font-family:var(--mono);font-size:12.5px}
+.dg text.sm{font-size:11.5px}
+.dg text.big{font-family:var(--mono);font-size:19px;font-weight:600}
+.dg text.soft{fill:var(--fg-soft)}
+.dg text.b{font-weight:600}
+.dg .bg{fill:var(--surface)}
+.dg .wash1{fill:var(--ink-1-wash)} .dg .wash2{fill:var(--ink-2-wash)} .dg .wash3{fill:var(--ink-3-wash)} .dg .wash4{fill:var(--ink-4-wash)} .dg .washA{fill:var(--accent-wash)}
+.dg .f1{fill:var(--ink-1)} .dg .f2{fill:var(--ink-2)} .dg .f3{fill:var(--ink-3)} .dg .f4{fill:var(--ink-4)} .dg .fA{fill:var(--accent)}
+.dg .s1{stroke:var(--ink-1)} .dg .s2{stroke:var(--ink-2)} .dg .s3{stroke:var(--ink-3)} .dg .s4{stroke:var(--ink-4)} .dg .sA{stroke:var(--accent)}
+.dg text.t1{fill:var(--ink-1)} .dg text.t2{fill:var(--ink-2)} .dg text.t3{fill:var(--ink-3)} .dg text.t4{fill:var(--ink-4)} .dg text.tA{fill:var(--accent)}
+
+/* ---------- tables ---------- */
+.tbl-wrap{overflow-x:auto;margin:18px 0 22px;-webkit-overflow-scrolling:touch}
+table{
+  border-collapse:collapse;
+  width:100%;
+  min-width:420px;
+  font-size:.93rem;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+}
+caption{
+  caption-side:top;
+  text-align:left;
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  padding-bottom:9px;
+  font-weight:500;
+}
+th,td{
+  padding:9px 13px;
+  border-bottom:1px solid var(--rule-soft);
+  text-align:left;
+  vertical-align:top;
+}
+thead th{
+  background:var(--sec,var(--surface-2));
+  color:#fff;
+  font-weight:600;
+  font-size:.78rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  border-bottom:none;
+}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even){background:var(--surface-2)}
+td.num,th.num{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+
+/* ---------- misc blocks ---------- */
+.grid2{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:16px;
+  margin:18px 0 22px;
+}
+.card{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-top:3px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:16px 18px;
+  min-width:0;
+}
+.card h5{
+  font-family:var(--body);
+  font-size:.97rem;
+  font-weight:600;
+  margin:0 0 8px;
+}
+.card p{font-size:.92rem;margin-bottom:0;max-width:none;color:var(--fg-soft)}
+
+.flow{
+  list-style:none;
+  padding:0;
+  margin:18px 0 22px;
+  max-width:none;
+  display:grid;
+  gap:10px;
+}
+.flow li{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:13px 16px;
+  margin:0;
+}
+.flow .k{
+  font-family:var(--mono);
+  font-size:.73rem;
+  font-weight:600;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:3px 8px;
+  border-radius:3px;
+  flex:none;
+  margin-top:3px;
+  white-space:nowrap;
+}
+.flow .t{min-width:0;font-size:.95rem}
+.flow .t b{display:block;margin-bottom:2px}
+
+.keypad{
+  font-family:var(--mono);
+  font-size:.86rem;
+  background:var(--surface-2);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:4px 9px;
+  display:inline-block;
+  white-space:nowrap;
+}
+
+hr.soft{border:none;border-top:1px solid var(--rule-soft);margin:34px 0}
+
+footer{
+  border-top:3px double var(--rule);
+  padding-top:24px;
+  margin-top:20px;
+  font-size:.86rem;
+  color:var(--fg-faint);
+}
+footer p{max-width:none}
+
+@media (max-width:520px){
+  .sec-head{gap:11px}
+  .fx{font-size:.94rem}
+  .ex > .q,.ex > .a{padding:14px 15px}
+}
+@media print{
+  body{background:#fff}
+  nav.toc{break-inside:avoid}
+  .ex,.formula,.callout,.card{break-inside:avoid}
+  section{break-before:auto}
+}
+</style>
+
+<style>
+/* Chapter 3: denser setting so pages carry more per sheet */
+body{font-size:14.5px;line-height:1.55}
+p,ul,ol{max-width:none}
+p{margin:0 0 9px}
+li{margin-bottom:4px}
+.masthead{padding-block:34px 18px;margin-bottom:20px}
+section{margin-bottom:30px}
+.sec-head{margin-bottom:16px;padding-bottom:10px}
+h3{margin:22px 0 8px;font-size:1.02rem}
+h4{margin:14px 0 6px}
+.formula{padding:11px 14px;margin:10px 0 12px}
+.formula .fx{margin:1px 0;line-height:1.9}
+.ex{margin:10px 0}
+.ex > .q,.ex > .a{padding:10px 14px}
+.ex .steps li{margin-bottom:5px}
+.callout{padding:10px 13px;margin:10px 0;font-size:.93rem}
+.ar-note{padding:9px 13px;margin:9px 0;line-height:1.8;font-size:.93rem}
+.tbl-wrap{margin:8px 0 12px}
+th,td{padding:6px 10px}
+table{font-size:.9rem;min-width:0}
+figure.dg{margin:12px 0 14px;padding:10px 10px 8px}
+figure.dg figcaption{margin-top:6px;font-size:.84rem}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+.cols2 > *{min-width:0}
+.cols2 .ex{margin:0}
+@media (max-width:640px){.cols2{grid-template-columns:1fr}}
+/* let long formulas wrap inside narrow columns instead of being clipped */
+.fx,.ex .fx,.cols2 .fx,.a .fx{white-space:normal;overflow-x:visible}
+footer{margin-top:10px;padding-top:12px;font-size:.78rem}footer p{margin:0 0 4px}
+/* allow tall example cards to split across pages so no half-empty pages */
+@media print{.ex,.a.long{break-inside:auto!important;page-break-inside:auto!important}.a:not(.long){break-inside:avoid!important}.ex > .q{break-inside:avoid}.cols2{break-inside:auto}}
+.series{list-style:none;padding:0;margin:8px 0 12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2px 22px;max-width:none}
+.series li{margin:0;padding:3px 0;border-bottom:1px solid var(--rule-soft);font-size:.82rem;color:var(--fg-faint)}
+.series li.here{color:var(--fg);font-weight:600}
+.series li.here::after{content:"  ← this file";color:var(--accent);font-weight:500}
+.src{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-faint);border:1px solid var(--rule);border-radius:3px;padding:0 5px;margin-left:6px;white-space:nowrap;font-weight:500}
+</style>
+
+<div class="wrap">
+<header class="masthead">
+  <p class="eyebrow">Sultan Qaboos University · STAT 2101 · Chapter 3: Data Description</p>
+  <div class="meta-strip"><span class="chip"><strong>Revision</strong></span><span class="chip"><strong>Covers</strong> 3-1 → 3-4</span><span class="chip"><strong>R</strong> Lab Quiz I</span><span class="chip"><strong>File</strong> 6 / 8</span></div>
+</header>
+<section id="rev" style="--sec:var(--fg);--wash:var(--surface-2)">
+  <div class="sec-head">
+    <span class="sec-num">REV</span>
+    <h2>Revision pack: formulas, decisions, traps, R, A+ plan
+      <span class="ar">حزمة المراجعة — القوانين، اختيار المقياس، الأخطاء، أوامر R، وخطة A+</span>
+    </h2>
+  </div>
+
+  <h3>1 · Master formula sheet</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th style="width:24%">Name</th><th style="width:40%">Formula</th><th>Use / remember</th></tr></thead>
+    <tbody>
+      <tr><td colspan="3" style="background:var(--ink-1-wash);font-weight:600;color:var(--ink-1)">3-1 · Central tendency</td></tr>
+      <tr><td>Mean<span class="arn">المتوسط</span></td><td class="fx">x̄ = ΣX/n &nbsp; μ = ΣX/N</td><td>uses all values; affected by outliers; not for open-ended classes</td></tr>
+      <tr><td>Grouped mean</td><td class="fx">x̄ = Σf·Xₘ / n</td><td>Xₘ = class midpoint</td></tr>
+      <tr><td>Median<span class="arn">الوسيط</span></td><td class="fx">position (n+1)/2; even: mean of n/2 and n/2 + 1</td><td>order first; grouped: first class with CF &gt; N/2</td></tr>
+      <tr><td>Mode<span class="arn">المنوال</span></td><td>most frequent value</td><td>none / uni / bi / multimodal; grouped: modal class</td></tr>
+      <tr><td>Midrange<span class="arn">منتصف المدى</span></td><td class="fx">MR = (lowest + highest)/2</td><td>very rough; outlier-sensitive</td></tr>
+      <tr><td>Weighted mean<span class="arn">المتوسط المرجّح</span></td><td class="fx">x̄ = ΣwX / Σw</td><td>unequal importance (GPA, course grade, combining group means)</td></tr>
+      <tr><td colspan="3" style="background:var(--ink-2-wash);font-weight:600;color:var(--ink-2)">3-2 · Variation</td></tr>
+      <tr><td>Range<span class="arn">المدى</span></td><td class="fx">R = highest − lowest</td><td>a single number</td></tr>
+      <tr><td>Population variance / SD</td><td class="fx">σ² = Σ(X − μ)²/N &nbsp; σ = √σ²</td><td>whole population: divide by N</td></tr>
+      <tr><td>Sample variance / SD</td><td class="fx">s² = Σ(X − x̄)²/(n − 1) &nbsp; s = √s²</td><td>sample: divide by n − 1</td></tr>
+      <tr><td>Shortcut</td><td class="fx">s² = [n(ΣX²) − (ΣX)²] / [n(n − 1)]</td><td>also (ΣX² − n·x̄²)/(n − 1)</td></tr>
+      <tr><td>Grouped</td><td class="fx">s² = [n(Σf·Xₘ²) − (Σf·Xₘ)²] / [n(n − 1)]</td><td>columns D = f·Xₘ, E = f·Xₘ²</td></tr>
+      <tr><td>Coefficient of variation<span class="arn">معامل الاختلاف</span></td><td class="fx">CVar = (s/x̄)·100 &nbsp; (σ/μ)·100</td><td>no units; compare across units or means; smaller = more consistent</td></tr>
+      <tr><td>Range rule of thumb</td><td class="fx">s ≈ R/4</td><td>unimodal and symmetric only; usually underestimates</td></tr>
+      <tr><td>Chebyshev<span class="arn">نظرية تشيبيشيف</span></td><td class="fx">at least 1 − 1/k² within x̄ ± ks</td><td>any shape; k = (limit − mean)/SD; k = 2: 75%, k = 3: 88.89%</td></tr>
+      <tr><td>Empirical rule<span class="arn">القاعدة التجريبية</span></td><td class="fx">≈ 68% · 95% · 99.7% within 1 · 2 · 3 SD</td><td>bell-shaped only</td></tr>
+      <tr><td>Linear transformation</td><td class="fx">y = a·x + b</td><td>centre → a·c + b; SD, IQR → ×|a|; variance → ×a²</td></tr>
+      <tr><td colspan="3" style="background:var(--ink-3-wash);font-weight:600;color:var(--ink-3)">3-3 · Position</td></tr>
+      <tr><td>z-score<span class="arn">الدرجة المعيارية</span></td><td class="fx">z = (X − x̄)/s &nbsp; z = (X − μ)/σ</td><td>X = x̄ + z·s; all z-scores: mean 0, SD 1</td></tr>
+      <tr><td>Percentile rank<span class="arn">رتبة المئين</span></td><td class="fx">[(# below X) + 0.5]/n · 100</td><td>order the data first</td></tr>
+      <tr><td>Value at Pₚ</td><td class="fx">c = n·p/100</td><td>decimal: round up and take that value · whole: average of c-th and (c + 1)-th</td></tr>
+      <tr><td>Quartiles · deciles</td><td class="fx">Q₁ = P₂₅, Q₂ = P₅₀ = MD = D₅, Q₃ = P₇₅; Dₖ = P₁₀ₖ</td><td>median method or percentile formula</td></tr>
+      <tr><td>IQR · outlier fences</td><td class="fx">IQR = Q₃ − Q₁; Q₁ − 1.5·IQR, Q₃ + 1.5·IQR</td><td>outside the fences = outlier</td></tr>
+      <tr><td colspan="3" style="background:var(--ink-4-wash);font-weight:600;color:var(--ink-4)">3-4 · EDA</td></tr>
+      <tr><td>Five-number summary<span class="arn">الملخص الخماسي</span></td><td class="fx">min, Q₁, MD, Q₃, max</td><td>in this order; it draws the boxplot</td></tr>
+      <tr><td>Shape from a boxplot</td><td>median position + whisker lengths</td><td>median left and right whisker long → right skew</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>2 · Which tool? Ten-second decisions</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th style="width:42%">The question says…</th><th>Use</th></tr></thead>
+    <tbody>
+      <tr><td>"all employees", "the entire population", "every …"</td><td>μ, σ², σ, dividing by <strong>N</strong></td></tr>
+      <tr><td>"a sample of", "a random sample", "selected"</td><td>x̄, s², s, dividing by <strong>n − 1</strong></td></tr>
+      <tr><td>nominal data (colour, blood type, brand)</td><td><strong>mode</strong> only</td></tr>
+      <tr><td>outliers, skew, income or salary data, open-ended class</td><td><strong>median</strong> (and IQR)</td></tr>
+      <tr><td>values of unequal importance; combining group means</td><td><strong>weighted mean</strong></td></tr>
+      <tr><td>"which is more variable / consistent?" with different units or means</td><td><strong>CV</strong>, never raw SDs</td></tr>
+      <tr><td>"what can be said about the number / percentage…", shape unknown</td><td><strong>Chebyshev</strong>: "at least"</td></tr>
+      <tr><td>"bell-shaped", "normal", "mound-shaped"</td><td><strong>empirical rule</strong>: "approximately"</td></tr>
+      <tr><td>"compare relative position / who did better relative to their group"</td><td><strong>z-scores</strong></td></tr>
+      <tr><td>"what percentile is X?" / "what value is at P<sub>p</sub>?"</td><td>percentile formula / c = n·p/100</td></tr>
+      <tr><td>"check for outliers", "unusual value"</td><td>fences Q₁ − 1.5·IQR, Q₃ + 1.5·IQR</td></tr>
+      <tr><td>"add 5 to every score" / "convert units"</td><td>linear transformation rules</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>3 · Fifteen traps that cost marks</h3>
+  <div class="cols2">
+    <ol style="margin:0">
+      <li>Finding the median or quartiles <strong>without ordering</strong> the data first.</li>
+      <li>Dividing a <strong>sample</strong> variance by n, or a <strong>population</strong> variance by n − 1.</li>
+      <li>Treating <span class="v">ΣX²</span> as <span class="v">(ΣX)²</span>.</li>
+      <li>Rounding deviations mid-calculation (the 2.335 vs 2.333 lesson).</li>
+      <li>Writing "mode = 0" instead of "no mode".</li>
+      <li>Computing a mean for a table with an <strong>open-ended class</strong>.</li>
+      <li>Comparing raw SDs when the means or units differ; use the CV.</li>
+      <li>Forgetting to take the √ when the question gives the <strong>variance</strong>.</li>
+    </ol>
+    <ol start="9" style="margin:0">
+      <li>Writing "exactly 75%" for Chebyshev; it is <strong>at least</strong>. Round counts <strong>up</strong> for "at least".</li>
+      <li>Using the empirical rule when the shape is not stated as bell-shaped.</li>
+      <li>Percentile rank: counting values ≤ X instead of strictly <strong>below</strong> X, or forgetting + 0.5.</li>
+      <li>c = n·p/100 with a decimal c: rounding to the nearest number instead of <strong>up</strong>.</li>
+      <li>Including the median in both halves when n is odd (course method).</li>
+      <li>Thinking a longer boxplot section holds more data; every section is 25%.</li>
+      <li>"Adding a constant changes the SD": it does not. Multiplying changes the variance by c², not c.</li>
+    </ol>
+  </div>
+
+  <h3>4 · R for Lab Quiz I (outline CLO2-D, CLO3-D)</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Task</th><th>R</th><th>Watch out</th></tr></thead>
+    <tbody>
+      <tr><td>mean, median</td><td class="fx">mean(x) &nbsp; median(x)</td><td>use <span class="v">na.rm = TRUE</span> if there are missing values</td></tr>
+      <tr><td>mode</td><td class="fx">names(which.max(table(x)))</td><td><span class="v">mode(x)</span> is <strong>not</strong> the statistical mode; it returns the storage type</td></tr>
+      <tr><td>weighted mean</td><td class="fx">weighted.mean(x, w)</td><td></td></tr>
+      <tr><td>range</td><td class="fx">diff(range(x)) &nbsp; or &nbsp; max(x) − min(x)</td><td><span class="v">range(x)</span> returns the min <strong>and</strong> max, not R</td></tr>
+      <tr><td>variance, SD</td><td class="fx">var(x) &nbsp; sd(x)</td><td><strong>sample</strong> formulas (n − 1)</td></tr>
+      <tr><td>CV</td><td class="fx">sd(x)/mean(x)*100</td><td></td></tr>
+      <tr><td>z-scores</td><td class="fx">(x − mean(x))/sd(x) &nbsp; or &nbsp; scale(x)</td><td></td></tr>
+      <tr><td>quartiles, IQR, summary</td><td class="fx">quantile(x, c(.25,.5,.75)) &nbsp; IQR(x) &nbsp; summary(x)</td><td>interpolated: may differ from the hand method</td></tr>
+      <tr><td>five-number summary, boxplot</td><td class="fx">fivenum(x) &nbsp; boxplot(x, horizontal = TRUE)</td><td>Tukey hinges; outliers drawn as points</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>5 · The A+ plan for Chapter 3</h3>
+  <ol class="flow">
+    <li><span class="k">DAY 1</span><span class="t"><b>Lessons 3-1 and 3-2, one solved example per formula.</b> Close the file and redo Ex 3-20/3-21 both ways (definition and shortcut) until both give 13.1 without notes. That one example covers half the variance marks in the chapter.</span></li>
+    <li><span class="k">DAY 2</span><span class="t"><b>Lessons 3-3 and 3-4.</b> Use Jim's 20 scores as your master data set: percentile rank, P₅₀, P₇₄, quartiles by both methods, IQR, fences, boxplot. One data set, every position skill.</span></li>
+    <li><span class="k">DAY 3</span><span class="t"><b>Interpretation drill (CLO3).</b> For every number you computed, write one sentence of meaning: "more consistent", "at least 75%", "positively skewed because…". This is where students who calculate perfectly still lose marks.</span></li>
+    <li><span class="k">DAY 4</span><span class="t"><b>The question bank</b>, closed book, then check against the answers file. Textbook page 178, Q 2, 3, 10, 17 and the Moodle sets: these are the outline's assigned exercises.</span></li>
+    <li><span class="k">QUIZ</span><span class="t"><b>In the exam:</b> underline "sample" or "population" and "bell-shaped" before you write anything. Order the data before any median or percentile. Finish every answer with one interpretation sentence.</span></li>
+  </ol>
+  <div class="ar-note"><span class="lbl">خطة A+ بالعربي</span>(1) احفظ القوانين بالكتابة من الذاكرة ثم التصحيح. (2) خذ <b>بيانات Jim العشرين</b> وطبّق عليها كل مهارات الموقع: المئين، الربيعات بالطريقتين، المدى الربيعي، القيم الشاذة، والمخطط الصندوقي. (3) <b>درّب نفسك على التفسير</b>: بعد كل رقم اكتب جملة تشرح معناه، فهذا ما يقيسه مخرج التعلم CLO3. (4) حل بنك الأسئلة مغلق الكتاب، ثم صحّح من ملف الإجابات. (5) في الامتحان: ضع خطًا تحت كلمة <b>sample</b> أو <b>population</b> وكلمة <b>bell-shaped</b> قبل البدء، و<b>رتّب البيانات</b> قبل أي وسيط أو مئين.</div>
+</section>
+
+<footer>
+  <p><strong>Chapter 3 study set: 8 files.</strong> One merged source built from Dr. Amani Al-Rubkhi's Fall 2026 notes (course coordinator) and Dr. Ahmed Al-Hadhrami's Spring 2024 slides, aligned to the SQU STAT 2101 course outline (Fall 2026). Textbook: Bluman, <em>Elementary Statistics</em>, 10th ed.</p>
+  <p>00 · Exam brief: what the outline tests · 01 · Lesson 3-1: Measures of Central Tendency · 02 · Lesson 3-2: Measures of Variation · 03 · Lesson 3-3: Measures of Position · 04 · Lesson 3-4: Exploratory Data Analysis · <strong style="color:var(--accent)">05 · Revision pack: formulas, decisions, traps, R</strong> · 06 · Exam-style questions (no answers) · 07 · Full worked answers</p>
+</footer>
+</div>
