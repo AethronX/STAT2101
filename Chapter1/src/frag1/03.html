@@ -1,0 +1,74 @@
+<section id="s13" style="--sec:var(--ink-3);--wash:var(--ink-3-wash)">
+  <div class="sec-head">
+    <span class="sec-num">1-3</span>
+    <h2>Data Collection and Sampling Techniques
+      <span class="ar">جمع البيانات وطرق المعاينة — العشوائية البسيطة والمنتظمة والطبقية والعنقودية وأخطاء المعاينة</span>
+    </h2>
+  </div>
+
+  <h3>1 · How data are collected <span class="src">Ahmed · CLO1-C</span></h3>
+  <div class="cols2">
+    <p>The most common method is the <strong>survey</strong>, done by <strong>telephone survey</strong>, <strong>mailed / emailed / online questionnaire</strong>, or <strong>personal interview</strong>. Data can also come from <strong>surveying records</strong>, <strong>direct observation</strong>, <strong>experiments</strong>, <strong>existing data</strong> (online or archived), <strong>census data</strong>, and <strong>simulation</strong>.</p>
+    <p>Dr. Ahmed's sample instrument, an "Academic Performance Scale", has 8 statements rated SA / A / N / D / SD and scored 5, 4, 3, 2, 1. Each item response is <strong>ordinal</strong> (a Likert scale), even though it is scored with numbers.</p>
+  </div>
+
+  <h3>2 · Unbiased sampling: the four methods <span class="src">Both · CLO1-C</span></h3>
+  <p>An <span class="term">unbiased sample</span> gives each subject in the population an equally likely chance of being selected. The four methods are <strong>simple random</strong>, <strong>systematic</strong>, <strong>stratified</strong> and <strong>cluster</strong>.</p>
+
+  <h4>2.1 Simple random sample (SRS)</h4>
+  <div class="cols2">
+    <div><p>Units are selected by chance, so every member of the population has a known, <strong>equal</strong> probability of selection. Three ways to select one: <span class="src">Amani</span></p>
+      <ol style="margin:0"><li><strong>Lottery method</strong>: number the population 1 to N, write each number on paper, mix in a bowl, draw n pieces without replacement. Disadvantages: uneven mixing causes bias; slow and impractical for large N.</li>
+        <li><strong>Random numbers by computer or calculator</strong>: generate n different random numbers between 1 and N, without replacement.</li>
+        <li><strong>Random-number table</strong> (Table D, Appendix A), used before computers.</li></ol></div>
+    <div class="formula" style="margin:0"><div class="label">Using Table D</div>
+      <p class="note" style="margin:0">(1) Number the population from 1 to N. (2) Fix the sample size n. (3) Start at any cell and move in one fixed direction (row by row or column by column). (4) Read numbers with <strong>the same number of digits as N</strong> (N = 950 → 3-digit groups 001–950). (5) Keep going until n different values are collected; <strong>discard any number greater than N, and any duplicate</strong>.</p></div>
+  </div>
+  <p>Row 2 of Table D, used by both lecturers: <span class="v">06512 07836 88456 36313 30879 51323 76451 25578 15986 50845 57015 53684 57054 93261</span></p>
+  <div class="cols2">
+    <div class="ex"><div class="q"><span class="tag">Laptops · N = 4998, n = 10 <span class="src">Ahmed</span></span><p>Number the laptops 0001–4998 (4 digits) and read 4-digit groups from row 2, column 1.</p></div>
+      <div class="a"><p>Groups: 0651 2078 3688 4563 <s>6313</s> 3087 <s>9513</s> 2376 4512 <s>5578</s> 1598 <s>6508</s> 4557 0155 …</p><p>Selected: ⦃0651, 2078, 3688, 4563, 3087, 2376, 4512, 1598, 4557, 0155⦄</p></div></div>
+    <div class="ex"><div class="q"><span class="tag">Dinner invitation · choose 9 students <span class="src">Amani</span></span><p>The notes leave N blank. Solve with a class of <strong>N = 65</strong>: 2-digit numbers 01–65, n = 9.</p></div>
+      <div class="a"><p>2-digit groups: 06 51 20 <s>78</s> 36 <s>88</s> 45 63 <s>63</s> 13 30 <s>87</s> <s>95</s> <s>13</s> 23 …</p><p>Selected: ⦃06, 51, 20, 36, 45, 63, 13, 30, 23⦄ (the second 63 and second 13 are repeats, so they are skipped). With a different N only the cut-off changes.</p></div></div>
+  </div>
+  <fig id="srs"/>
+
+  <h4>2.2 Systematic sample</h4>
+  <div class="cols2">
+    <div><p>Select <strong>every k-th member</strong> of a population arranged in some natural sequential order (a queue, a list of students, employee records), starting from a <strong>random</strong> point.</p>
+      <div class="formula" style="margin:6px 0"><div class="label">Steps</div><p class="fx">k = ⟪N‖n⟫ &nbsp;→ round <strong>down</strong> to a whole number</p>
+        <p class="note">(1) Arrange the population in order. (2) Compute k. (3) Choose the first subject at random from 1 to k. (4) Keep adding k: start, start + k, start + 2k, …</p></div></div>
+    <div class="ex" style="margin:0"><div class="q"><span class="tag">86 lemon trees along a fence, select 6 <span class="src">Both</span></span></div>
+      <div class="a"><p>N = 86, n = 6, k = 86/6 = 14.33, rounded <strong>down</strong> to ⦃k = 14⦄. Random start between 1 and 14, say 6:</p><p class="fx">6, 20, 34, 48, 62, 76</p>
+        <p>Dr. Ahmed rounds up to k = 15 with start 8: 8, 23, 38, 53, 68, 83. That happens to work, but a start of 15 gives 15, 30, 45, 60, 75 and then 90 &gt; 86: only five trees. <strong>Round down</strong> and you can never fall short.</p></div></div>
+  </div>
+  <fig id="systematic"/>
+
+  <h4>2.3 Stratified and 2.4 cluster samples</h4>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th></th><th>Stratified<arn>طبقية</arn></th><th>Cluster<arn>عنقودية</arn></th></tr></thead>
+    <tbody>
+      <tr><td>Divide into</td><td><strong>strata</strong>: subgroups of individuals who share a characteristic relevant to the study</td><td><strong>clusters</strong>: ready-made sections, used when the population is very large or spread over a wide area</td></tr>
+      <tr><td>Groups are</td><td>similar <strong>within</strong> each stratum</td><td>clusters similar <strong>to each other</strong> (homogeneous); individuals <strong>within</strong> a cluster diverse (heterogeneous)</td></tr>
+      <tr><td>Then</td><td>take an SRS from <strong>every</strong> stratum; sizes need not be equal (e.g. 12 from Statistics, 24 from Mathematics)</td><td>randomly choose <strong>some</strong> clusters and include <strong>all</strong> members of those clusters</td></tr>
+      <tr><td>Example</td><td>College of Science students, strata = departments: every department is represented</td><td>Muscat primary schools as clusters: pick 5 schools, include every student in them; or SQU colleges as clusters</td></tr>
+    </tbody>
+  </table></div>
+  <fig id="stratclust"/>
+  <div class="ex"><div class="q"><span class="tag">Activity · sampling method <span class="src">Amani</span></span><p>(1) In a large Muscat school, all teachers from two buildings are interviewed about homework. (2) The Oman Traffic Authority groups drivers by experience (&lt; 5, 5–10, &gt; 10 years) and randomly selects drivers from each group. (3) A Muscat Grand Mall supermarket surveys every 10th customer at checkout. (4) The Ministry of Health randomly generates phone numbers from a national database and calls citizens.</p></div>
+    <div class="a"><p>(1) ⦃cluster⦄: buildings are the clusters, and everyone in the chosen ones is included. (2) ⦃stratified⦄: a random sample from every experience group. (3) ⦃systematic⦄: every k-th with k = 10. (4) ⦃simple random⦄: every number in the database has an equal chance.</p></div></div>
+
+  <h3>3 · Other (non-random) sampling methods <span class="src">Ahmed</span></h3>
+  <div class="cols2">
+    <div class="formula" style="margin:0"><div class="label">Convenience sample</div><p class="note" style="margin:0">Subjects who are convenient and readily available, easy to reach. Examples: the first 10 students entering class; interviewing people leaving a local hypermarket.</p></div>
+    <div class="formula" style="margin:0"><div class="label">Volunteer (self-selected) sample</div><p class="note" style="margin:0">Respondents decide for themselves whether to be included. Examples: clinic patients who choose to fill a satisfaction survey; students who choose to complete a course evaluation.</p></div>
+  </div>
+  <p>Neither is an unbiased sample: both usually lead to a <strong>biased</strong> sample, because the people who are easy to reach, or who volunteer, often differ from the rest of the population.</p>
+
+  <h3>4 · Sampling and nonsampling errors <span class="src">Ahmed</span></h3>
+  <div class="cols2">
+    <div class="formula" style="margin:0"><div class="label">Sampling error</div><p class="note" style="margin:0">The difference between a sample result and the population result, caused only by chance in who was sampled. Example: 56% of a sample of full-time students are female, but the admissions office shows 54%. The 2% difference is sampling error.</p></div>
+    <div class="formula" style="margin:0"><div class="label">Nonsampling error</div><p class="note" style="margin:0">The data are obtained incorrectly, or the sample is biased (nonrepresentative). Examples: instrument errors (a defective thermostat reading 1.3° off), data entry or recording errors, measuring errors.</p></div>
+  </div>
+  <ar t="الشرح بالعربي — طرق المعاينة">(1) <b>العشوائية البسيطة</b>: كل فرد له نفس الفرصة، بالقرعة أو بالحاسوب أو بجدول الأرقام العشوائية. نقرأ مجموعات بعدد خانات ⟦N⟧، ونتجاوز الأكبر من ⟦N⟧ والمكرر. (2) <b>المنتظمة</b>: ⟦k = N/n⟧ نقرّبه <b>لأسفل</b>، نختار بداية عشوائية من 1 إلى k ثم نضيف k كل مرة. (3) <b>الطبقية</b>: نقسم حسب خاصية، ونأخذ عينة من <b>كل</b> طبقة. (4) <b>العنقودية</b>: نقسم إلى مجموعات جاهزة، نختار <b>بعضها</b>، ونأخذ <b>كل</b> أفرادها. الفرق الذي يُسأل عنه دائمًا: الطبقية «بعض من الكل»، والعنقودية «كل من البعض». وطرق غير عشوائية: <b>الملاءمة</b> (من يسهل الوصول إليه) و<b>التطوعية</b> (من يختار المشاركة)، وكلاهما متحيز. وخطأ المعاينة = فرق ناتج عن الصدفة في اختيار العينة، أما الخطأ غير المعاينيّ فسببه خطأ في القياس أو التسجيل أو عينة متحيزة.</ar>
+</section>

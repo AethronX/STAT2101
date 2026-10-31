@@ -1,0 +1,85 @@
+<section id="rev" style="--sec:var(--fg);--wash:var(--surface-2)">
+  <div class="sec-head">
+    <span class="sec-num">REV</span>
+    <h2>Chapter 1 revision pack
+      <span class="ar">حزمة المراجعة — شجرة التصنيف، الحالات الحدّية، الأخطاء الشائعة، وخطة A+</span>
+    </h2>
+  </div>
+
+  <h3>1 · Classify any variable in three questions</h3>
+  <ol class="flow">
+    <li><span class="k">Q1</span><span class="t"><b>Category or number with arithmetic meaning?</b> Category → qualitative (nominal or ordinal). Number → quantitative (interval or ratio). A number used only as a label (ID, zip code, jersey number) counts as a category.</span></li>
+    <li><span class="k">Q2</span><span class="t"><b>If a category: does it have a natural order?</b> No → nominal. Yes → ordinal.</span></li>
+    <li><span class="k">Q3</span><span class="t"><b>If a number: counted or measured?</b> Counted → discrete; measured → continuous. Then <b>does zero mean "none"?</b> Yes → ratio. No → interval.</span></li>
+  </ol>
+
+  <h3>2 · Borderline cases table</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Variable</th><th>Type</th><th>Level</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Student ID 10234</td><td>qualitative</td><td>nominal</td><td>the number is only a label</td></tr>
+      <tr><td>Letter grade A, B, C</td><td>qualitative</td><td>ordinal</td><td>ordered, but the gaps are not equal</td></tr>
+      <tr><td>Exam mark out of 100</td><td>quantitative, continuous</td><td>ratio</td><td>0 marks = none (Dr. Ahmed's list)</td></tr>
+      <tr><td>GPA</td><td>quantitative, continuous</td><td>ratio</td><td>both decks</td></tr>
+      <tr><td>Temperature °C / °F</td><td>quantitative, continuous</td><td>interval</td><td>0 °C ≠ no heat</td></tr>
+      <tr><td>Temperature in Kelvin</td><td>quantitative, continuous</td><td>ratio</td><td>0 K = absolute zero</td></tr>
+      <tr><td>Calendar year, date, clock time</td><td>quantitative</td><td>interval</td><td>year 0 is not "no time"</td></tr>
+      <tr><td>Time taken (45 minutes)</td><td>quantitative, continuous</td><td>ratio</td><td>a duration: 0 min = none</td></tr>
+      <tr><td>Money earned per week</td><td>quantitative, <strong>discrete</strong></td><td>ratio</td><td>Bluman: counted in the smallest unit</td></tr>
+      <tr><td>Likert item (agree … disagree)</td><td>qualitative</td><td>ordinal</td><td>even when scored 1–5</td></tr>
+      <tr><td>IQ, SAT score</td><td>quantitative</td><td>interval</td><td>no true zero</td></tr>
+      <tr><td>Number of steps per day</td><td>quantitative, discrete</td><td>ratio</td><td>counted; 0 steps = none</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>3 · Sampling method, recognised from the wording</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>The scenario says…</th><th>Method</th></tr></thead>
+    <tbody>
+      <tr><td>"randomly generated numbers", "names drawn from a box", "random number table"</td><td><strong>simple random</strong></td></tr>
+      <tr><td>"every 10th customer", "every 5th name on the list"</td><td><strong>systematic</strong></td></tr>
+      <tr><td>"grouped by … then a number <em>from each group</em> randomly selected"</td><td><strong>stratified</strong></td></tr>
+      <tr><td>"randomly chose 5 schools / 2 buildings and surveyed <em>everyone</em> in them"</td><td><strong>cluster</strong></td></tr>
+      <tr><td>"the first 10 who arrived", "people leaving the mall"</td><td><strong>convenience</strong></td></tr>
+      <tr><td>"those who chose to respond", "an online poll anyone can answer"</td><td><strong>volunteer</strong></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>4 · Ten traps</h3>
+  <div class="cols2">
+    <ol style="margin:0">
+      <li>Calling a numeric ID quantitative.</li>
+      <li>Calling a sample percentage ("55% of those surveyed") inferential: it is descriptive.</li>
+      <li>Putting year or °C at the ratio level.</li>
+      <li>Treating letter grades as interval because they look like scores.</li>
+      <li>Rounding k <strong>up</strong> in systematic sampling.</li>
+    </ol>
+    <ol start="6" style="margin:0">
+      <li>Keeping a repeated or out-of-range number from Table D.</li>
+      <li>Reading Table D in groups that don't match the number of digits in N.</li>
+      <li>Swapping stratified and cluster: is it <em>some from every group</em>, or <em>all from some groups</em>?</li>
+      <li>Calling convenience or volunteer samples random.</li>
+      <li>Calling a defective instrument "sampling error": it is <strong>nonsampling</strong> error.</li>
+    </ol>
+  </div>
+
+  <h3>5 · R for Lab 1 (outline: Get RStudio, Get started with R, R Project, R Markdown)</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Task</th><th>R</th></tr></thead>
+    <tbody>
+      <tr><td>store data / look at a data set</td><td class="fx">x &lt;- c(150, 165, 172, 180, 190) &nbsp; head(df) &nbsp; str(df)</td></tr>
+      <tr><td>variable type in R (qualitative is a <em>factor</em>, quantitative is <em>numeric</em>)</td><td class="fx">class(df$gender) &nbsp; df$grade &lt;- factor(df$grade, levels = c("C","B","A"), ordered = TRUE)</td></tr>
+      <tr><td>simple random sample of n = 10 from 1 to 4998</td><td class="fx">sample(1:4998, 10) &nbsp;&nbsp; (without replacement by default)</td></tr>
+      <tr><td>systematic sample, k = 14, start 6</td><td class="fx">seq(6, 86, by = 14)</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>6 · A+ plan for Chapter 1</h3>
+  <ol class="flow">
+    <li><span class="k">1</span><span class="t"><b>Learn the definitions as sentences</b>: statistics, data, datum, variable, population, sample, census, survey, descriptive, inferential, biased sample. Each is a one-mark CLO1-A question.</span></li>
+    <li><span class="k">2</span><span class="t"><b>Drill the borderline table</b> until you can justify every row in one line, because classification questions are built on exactly those rows.</span></li>
+    <li><span class="k">3</span><span class="t"><b>Do one SRS from Table D and one systematic sample by hand</b> without notes. These are the only calculations in the chapter.</span></li>
+    <li><span class="k">4</span><span class="t"><b>Textbook page 34, Q 6, 22, 39, 42</b> (assigned in the outline), then the question bank.</span></li>
+  </ol>
+  <ar t="خطة A+ بالعربي">(1) احفظ التعاريف كجمل كاملة. (2) تدرّب على جدول الحالات الحدّية حتى تبرّر كل صف بسطر واحد. (3) طبّق مرة واحدة <b>عينة عشوائية بجدول الأرقام</b> ومرة <b>عينة منتظمة</b> بيدك دون النظر للحل. (4) حل تمارين الكتاب صفحة 34 (6، 22، 39، 42) ثم بنك الأسئلة.</ar>
+</section>

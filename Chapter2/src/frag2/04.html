@@ -1,0 +1,88 @@
+<section id="rev" style="--sec:var(--fg);--wash:var(--surface-2)">
+  <div class="sec-head">
+    <span class="sec-num">REV</span>
+    <h2>Chapter 2 revision pack
+      <span class="ar">حزمة المراجعة — القوانين، اختيار الرسم، الأخطاء، أوامر R، وخطة A+</span>
+    </h2>
+  </div>
+
+  <h3>1 · Formula and rule sheet</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th style="width:26%">Item</th><th style="width:38%">Rule</th><th>Remember</th></tr></thead>
+    <tbody>
+      <tr><td>Class width<arn>طول الفئة</arn></td><td class="fx">(H − L) / k → round UP</td><td>even 4.0 → 5; k is given</td></tr>
+      <tr><td>Next lower limit</td><td class="fx">LCL<sub>i+1</sub> = LCL<sub>i</sub> + width</td><td>LCL₁ = smallest value</td></tr>
+      <tr><td>Upper limit</td><td class="fx">UCL<sub>i</sub> = LCL<sub>i+1</sub> − 1</td><td>for whole-number data</td></tr>
+      <tr><td>Boundaries<arn>الحدود الفعلية</arn></td><td class="fx">LCB = LCL − ½ unit &nbsp; UCB = UCL + ½ unit</td><td>±0.5, ±0.05, ±0.005 …</td></tr>
+      <tr><td>Width from a table</td><td class="fx">UCL − LCL + 1 &nbsp;=&nbsp; UCB − LCB &nbsp;=&nbsp; next LCL − LCL</td><td>not (UCB − LCB) + 1</td></tr>
+      <tr><td>Midpoint<arn>مركز الفئة</arn></td><td class="fx">(LCL + UCL)/2 = (LCB + UCB)/2</td><td>x-axis of the polygon</td></tr>
+      <tr><td>Relative frequency</td><td class="fx">RF = f / n</td><td>ΣRF ≈ 1</td></tr>
+      <tr><td>Cumulative frequency</td><td class="fx">CF = running total of f</td><td>starts at 0, ends at n</td></tr>
+      <tr><td>Cumulative RF</td><td class="fx">CRF = CF / n</td><td>ends at 1</td></tr>
+      <tr><td>Percent</td><td class="fx">% = f / n × 100</td><td>categorical table, pie</td></tr>
+      <tr><td>Pie angle</td><td class="fx">degrees = f / n × 360°</td><td>angles sum to 360°</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>2 · Which graph?</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Data and purpose</th><th>Graph</th><th>x-axis</th></tr></thead>
+    <tbody>
+      <tr><td>Quantitative, grouped: show the shape</td><td>histogram</td><td>class boundaries</td></tr>
+      <tr><td>Quantitative, grouped: shape as a line; compare two distributions on one axis</td><td>frequency polygon</td><td>midpoints (+1 empty class each end)</td></tr>
+      <tr><td>Quantitative: how many values are below x</td><td>ogive</td><td>upper boundaries</td></tr>
+      <tr><td>Categories: compare frequencies</td><td>bar graph</td><td>categories (gaps)</td></tr>
+      <tr><td>Categories × groups</td><td>compound bar (grouped or stacked)</td><td>categories</td></tr>
+      <tr><td>Categories: parts of a whole</td><td>pie</td><td>—</td></tr>
+      <tr><td>Values over time: trend</td><td>time series</td><td>time</td></tr>
+      <tr><td>Small quantitative data set: shape and keeping every value</td><td>stem-and-leaf</td><td>stems</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>3 · Twelve traps</h3>
+  <div class="cols2">
+    <ol style="margin:0">
+      <li>Rounding the width to the <em>nearest</em> whole number instead of <strong>up</strong>.</li>
+      <li>Leaving a whole-number width (4.0) unchanged.</li>
+      <li>Putting class <strong>limits</strong> under histogram bars instead of boundaries.</li>
+      <li>Leaving gaps between histogram bars, or no gaps in a bar graph.</li>
+      <li>Deleting a class with f = 0.</li>
+      <li>Plotting an ogive at midpoints or lower boundaries; it uses <strong>upper</strong> boundaries and starts at 0.</li>
+    </ol>
+    <ol start="7" style="margin:0">
+      <li>Forgetting the extra empty class at both ends of a frequency polygon.</li>
+      <li>Reading a stacked section as its top value instead of top − bottom.</li>
+      <li>Pie angles that don't total 360° (check!).</li>
+      <li>A stem-and-leaf plot with unordered leaves, a missing key, or a dropped empty stem.</li>
+      <li>Naming skew after the peak instead of the tail.</li>
+      <li>No title, unlabelled axes, or a missing zig-zag on an axis that doesn't start at 0.</li>
+    </ol>
+  </div>
+
+  <h3>4 · Removed this semester (recognise them only)</h3>
+  <p><strong>Pareto chart</strong>: a bar graph of a categorical variable with bars arranged from highest to lowest. <strong>Dot plot</strong>: each value plotted as a dot above a number line. <strong>Back-to-back stem-and-leaf</strong>: two data sets sharing one column of stems. <strong>Misleading graphs</strong>: a truncated y-axis or pictures scaled by area that exaggerate differences. These are marked "removed / not included" on the lecture slides and are absent from Dr. Amani's notes.</p>
+
+  <h3>5 · R for Lab 2 (Data Basics) and Lab 4 (Tabulation, Graphs)</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Task</th><th>R</th></tr></thead>
+    <tbody>
+      <tr><td>categorical frequency and percent</td><td class="fx">t &lt;- table(blood); t; prop.table(t)*100</td></tr>
+      <tr><td>grouped frequency table with given classes</td><td class="fx">table(cut(temp, breaks = seq(99.5, 134.5, by = 5)))</td></tr>
+      <tr><td>cumulative frequency</td><td class="fx">cumsum(table(cut(temp, breaks = seq(99.5, 134.5, 5))))</td></tr>
+      <tr><td>histogram with the course boundaries</td><td class="fx">hist(temp, breaks = seq(99.5, 134.5, 5), main = "Record highs", xlab = "°F")</td></tr>
+      <tr><td>bar graph, horizontal bar graph</td><td class="fx">barplot(table(drinks)) &nbsp; barplot(table(drinks), horiz = TRUE)</td></tr>
+      <tr><td>grouped and stacked bars from a matrix</td><td class="fx">barplot(m, beside = TRUE, legend = TRUE) &nbsp; barplot(m)</td></tr>
+      <tr><td>pie, time series, stem-and-leaf</td><td class="fx">pie(table(x)) &nbsp; plot(year, cost, type = "b") &nbsp; stem(x)</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">R's <span class="v">hist()</span> picks its own breaks unless you pass <span class="v">breaks</span>, so always give the course boundaries. <span class="v">stem()</span> may split stems automatically; use <span class="v">stem(x, scale = 2)</span> to change that.</p>
+
+  <h3>6 · A+ plan for Chapter 2</h3>
+  <ol class="flow">
+    <li><span class="k">1</span><span class="t"><b>Build the Example 2-2 table from the raw data</b> without notes: width, limits, boundaries, f, RF, CF, CRF. If yours matches, the procedure is learned.</span></li>
+    <li><span class="k">2</span><span class="t"><b>Draw the histogram, polygon and ogive</b> for the same table on graph paper, with title, axis labels and zig-zag. Memorise what goes on each x-axis.</span></li>
+    <li><span class="k">3</span><span class="t"><b>Read graphs back:</b> for each figure in the lessons, write one value you can read off it and one sentence of interpretation (CLO3).</span></li>
+    <li><span class="k">4</span><span class="t"><b>Textbook page 101, Q 5, 7, 19, 23</b> (assigned in the outline), then the question bank, closed book.</span></li>
+  </ol>
+  <ar t="خطة A+ بالعربي">(1) ابنِ جدول مثال 2-2 من البيانات الخام وحدك: الطول والحدود والحدود الفعلية والتكرارات النسبية والمتجمعة. (2) ارسم المدرج والمضلع والمنحنى المتجمع لنفس الجدول بالعناوين الكاملة، واحفظ ما يوضع على المحور الأفقي لكل رسم. (3) تدرّب على <b>القراءة</b>: من كل رسم استخرج قيمة واكتب جملة تفسير. (4) حل تمارين الكتاب صفحة 101 (5، 7، 19، 23) ثم بنك الأسئلة.</ar>
+</section>

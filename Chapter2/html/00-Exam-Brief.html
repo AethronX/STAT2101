@@ -1,0 +1,703 @@
+<title>Chapter 2 Exam Brief</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+
+<style>
+/* Layout: single reading column with a sticky rail nav; four section inks mirror the
+   overprint of a Venn diagram — the chapter's own governing picture. */
+:root{
+  --bg:#fbfaf7;
+  --surface:#ffffff;
+  --surface-2:#f2f1ec;
+  --fg:#1b2027;
+  --fg-soft:#4c5663;
+  --fg-faint:#78828f;
+  --rule:#dddcd4;
+  --rule-soft:#eceae3;
+
+  --ink-1:#1f4e79;   /* 4-1  sample spaces      */
+  --ink-2:#0f6f5c;   /* 4-2  addition rules     */
+  --ink-3:#9a5b12;   /* 4-3  multiplication     */
+  --ink-4:#7b2d6b;   /* 4-4 / 4-5 counting      */
+  --accent:#b23b2e;  /* alarms, traps, must-know */
+
+  --ink-1-wash:#eaf0f7;
+  --ink-2-wash:#e5f1ee;
+  --ink-3-wash:#f8efe1;
+  --ink-4-wash:#f4e9f2;
+  --accent-wash:#f9eae7;
+
+  --display:"Spectral",Georgia,"Times New Roman",serif;
+  --body:"IBM Plex Sans","IBM Plex Sans Arabic",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --arabic:"IBM Plex Sans Arabic","IBM Plex Sans",-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  --measure:70ch;
+  --shadow:0 1px 2px rgba(27,32,39,.05),0 8px 24px -16px rgba(27,32,39,.25);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#13171c;
+    --surface:#1a1f26;
+    --surface-2:#222932;
+    --fg:#e8e6e0;
+    --fg-soft:#b3bac4;
+    --fg-faint:#8a929e;
+    --rule:#333b45;
+    --rule-soft:#272e37;
+
+    --ink-1:#7bb0e8;
+    --ink-2:#4fc4a8;
+    --ink-3:#e2a74e;
+    --ink-4:#d089c2;
+    --accent:#ef7f70;
+
+    --ink-1-wash:#182633;
+    --ink-2-wash:#132a26;
+    --ink-3-wash:#2b2314;
+    --ink-4-wash:#2a1b28;
+    --accent-wash:#2f1c19;
+
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#13171c;
+  --surface:#1a1f26;
+  --surface-2:#222932;
+  --fg:#e8e6e0;
+  --fg-soft:#b3bac4;
+  --fg-faint:#8a929e;
+  --rule:#333b45;
+  --rule-soft:#272e37;
+
+  --ink-1:#7bb0e8;
+  --ink-2:#4fc4a8;
+  --ink-3:#e2a74e;
+  --ink-4:#d089c2;
+  --accent:#ef7f70;
+
+  --ink-1-wash:#182633;
+  --ink-2-wash:#132a26;
+  --ink-3-wash:#2b2314;
+  --ink-4-wash:#2a1b28;
+  --accent-wash:#2f1c19;
+
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{
+  max-width:980px;
+  margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 72px;
+}
+
+/* ---------- masthead ---------- */
+.masthead{
+  padding-block:56px 36px;
+  border-bottom:3px double var(--rule);
+  margin-bottom:36px;
+}
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+}
+h1{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(2.1rem,6vw,3.4rem);
+  line-height:1.08;
+  margin:0 0 10px;
+  letter-spacing:-.015em;
+  text-wrap:balance;
+}
+.subtitle{
+  font-family:var(--display);
+  font-style:italic;
+  font-size:clamp(1.05rem,2.6vw,1.3rem);
+  color:var(--fg-soft);
+  margin:0 0 22px;
+  max-width:var(--measure);
+}
+.meta-strip{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 10px;
+  margin-top:20px;
+}
+.chip{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.04em;
+  padding:5px 10px;
+  border:1px solid var(--rule);
+  border-radius:3px;
+  color:var(--fg-soft);
+  background:var(--surface);
+}
+.chip strong{color:var(--fg);font-weight:600}
+
+/* ---------- nav ---------- */
+nav.toc{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:20px 22px;
+  margin-bottom:44px;
+  box-shadow:var(--shadow);
+}
+nav.toc h2{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+  font-weight:500;
+}
+nav.toc ol{
+  margin:0;padding:0;list-style:none;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:4px 26px;
+}
+nav.toc li{min-width:0}
+nav.toc a{
+  display:flex;
+  gap:10px;
+  align-items:baseline;
+  text-decoration:none;
+  color:var(--fg);
+  padding:5px 0;
+  border-bottom:1px solid var(--rule-soft);
+  font-size:.92rem;
+}
+nav.toc a:hover{color:var(--accent)}
+nav.toc a .num{
+  font-family:var(--mono);
+  font-size:.74rem;
+  color:var(--fg-faint);
+  flex:none;
+  min-width:2.4em;
+}
+
+/* ---------- sections ---------- */
+section{margin-bottom:64px;scroll-margin-top:24px}
+.sec-head{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+  padding-bottom:14px;
+  border-bottom:2px solid var(--sec,var(--fg));
+  margin-bottom:28px;
+}
+.sec-num{
+  font-family:var(--mono);
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.06em;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:5px 9px;
+  border-radius:3px;
+  flex:none;
+  margin-top:6px;
+}
+.sec-head h2{
+  font-family:var(--display);
+  font-size:clamp(1.5rem,4vw,2.05rem);
+  line-height:1.18;
+  margin:0;
+  font-weight:600;
+  text-wrap:balance;
+  min-width:0;
+}
+.sec-head .ar{
+  display:block;
+  font-family:var(--arabic);
+  font-size:.92rem;
+  font-style:normal;
+  color:var(--fg-soft);
+  direction:rtl;
+  margin-top:4px;
+  font-weight:400;
+}
+h3{
+  font-family:var(--body);
+  font-size:1.08rem;
+  font-weight:600;
+  letter-spacing:-.005em;
+  margin:36px 0 12px;
+  color:var(--fg);
+  display:flex;
+  align-items:baseline;
+  gap:9px;
+  flex-wrap:wrap;
+}
+h3::before{
+  content:"";
+  width:18px;height:3px;
+  background:var(--sec,var(--fg));
+  flex:none;
+  border-radius:2px;
+}
+h4{
+  font-family:var(--mono);
+  font-size:.74rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:26px 0 10px;
+  font-weight:500;
+}
+p{margin:0 0 14px;max-width:var(--measure)}
+ul,ol{max-width:var(--measure);padding-left:1.25em;margin:0 0 14px}
+li{margin-bottom:7px}
+li::marker{color:var(--sec,var(--fg-faint))}
+strong{font-weight:600}
+em{font-style:italic}
+code,.v{
+  font-family:var(--mono);
+  font-size:.9em;
+  background:var(--surface-2);
+  padding:1px 5px;
+  border-radius:3px;
+  white-space:nowrap;
+}
+.term{
+  font-weight:600;
+  color:var(--sec,var(--fg));
+}
+a{color:var(--accent)}
+
+/* ---------- maths ---------- */
+.fx{
+  font-family:var(--mono);
+  font-size:1.02rem;
+  line-height:2.1;
+  white-space:nowrap;
+}
+.frac{
+  display:inline-flex;
+  flex-direction:column;
+  vertical-align:middle;
+  text-align:center;
+  font-family:var(--mono);
+  line-height:1.25;
+  margin:0 .22em;
+  position:relative;
+  top:-.08em;
+}
+.frac .num{border-bottom:1.5px solid currentColor;padding:0 .4em .08em}
+.frac .den{padding:.08em .4em 0}
+sub,sup{font-size:.72em}
+
+.formula{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-left:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:18px 20px;
+  margin:18px 0 22px;
+  box-shadow:var(--shadow);
+  overflow-x:auto;
+}
+.formula .label{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg-faint));
+  margin-bottom:10px;
+  font-weight:600;
+}
+.formula .fx{margin:4px 0}
+.formula .note{
+  font-size:.88rem;
+  color:var(--fg-soft);
+  margin:10px 0 0;
+  white-space:normal;
+  max-width:none;
+}
+
+/* ---------- example cards ---------- */
+.ex{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:5px;
+  margin:20px 0;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.ex > .q{
+  padding:16px 20px;
+  border-bottom:1px dashed var(--rule);
+  background:var(--wash,var(--surface-2));
+}
+.ex .tag{
+  font-family:var(--mono);
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg));
+  display:block;
+  margin-bottom:6px;
+}
+.ex .q p{margin:0;max-width:none}
+.ex > .a{padding:16px 20px}
+.ex > .a p{max-width:none}
+.ex > .a p:last-child{margin-bottom:0}
+.ex .steps{margin:0;padding-left:1.2em;max-width:none}
+.ex .steps li{margin-bottom:9px}
+.ans{
+  display:inline-block;
+  font-family:var(--mono);
+  font-weight:600;
+  background:var(--sec,var(--fg));
+  color:#fff;
+  padding:3px 9px;
+  border-radius:3px;
+  font-size:.92em;
+  white-space:nowrap;
+}
+
+/* ---------- callouts ---------- */
+.callout{
+  border-radius:4px;
+  padding:16px 18px;
+  margin:20px 0;
+  border:1px solid;
+  font-size:.95rem;
+}
+.callout p{max-width:none}
+.callout p:last-child{margin-bottom:0}
+.callout .ct{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-weight:600;
+  display:block;
+  margin-bottom:8px;
+}
+.trap{background:var(--accent-wash);border-color:var(--accent)}
+.trap .ct{color:var(--accent)}
+.tip{background:var(--ink-2-wash);border-color:var(--ink-2)}
+.tip .ct{color:var(--ink-2)}
+.note{background:var(--surface-2);border-color:var(--rule)}
+.note .ct{color:var(--fg-faint)}
+
+.ar-note{
+  font-family:var(--arabic);
+  direction:rtl;
+  text-align:right;
+  background:var(--surface-2);
+  border-right:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:13px 16px;
+  margin:16px 0;
+  font-size:.96rem;
+  line-height:1.95;
+  color:var(--fg-soft);
+}
+.ar-note b{color:var(--fg);font-weight:600}
+.ar-note .lbl{
+  display:block;
+  font-size:.72rem;
+  letter-spacing:.04em;
+  color:var(--sec,var(--fg-faint));
+  font-weight:600;
+  margin-bottom:4px;
+}
+.ar-note ul{padding-right:1.2em;padding-left:0;margin:6px 0 0;max-width:none}
+
+.ar-note p{margin:0 0 7px;max-width:none}
+.ar-note p:last-child{margin-bottom:0}
+.ar-note ol{padding-right:1.3em;padding-left:0;margin:6px 0 0;max-width:none}
+.ar-note li{margin-bottom:5px}
+.ar-note .v{font-size:.84em}
+.arn{display:block;font-family:var(--arabic);direction:rtl;unicode-bidi:isolate;text-align:left;font-size:.84rem;color:var(--fg-soft);font-weight:500;margin-top:2px;line-height:1.5}
+.subtitle-ar{font-family:var(--arabic);direction:rtl;text-align:right;color:var(--fg-soft);font-size:1.02rem;margin:0 0 8px;max-width:none;line-height:1.9}
+
+/* ---------- diagrams ---------- */
+figure.dg{margin:22px 0 26px;padding:16px 14px 12px;background:var(--surface);border:1px solid var(--rule);border-radius:4px;break-inside:avoid;page-break-inside:avoid}
+figure.dg svg{display:block;width:100%;height:auto;margin:0 auto;color:var(--fg);overflow:visible}
+figure.dg figcaption{font-size:.86rem;color:var(--fg-soft);margin:10px auto 0;max-width:64ch;text-align:center;line-height:1.5}
+figure.dg figcaption .ar{display:block;font-family:var(--arabic);direction:rtl;margin-top:4px;font-size:.9rem}
+.dg .ln{stroke:currentColor;fill:none;stroke-width:1.4}
+.dg .ln-soft{stroke:var(--fg-faint);fill:none;stroke-width:1.2}
+.dg .dash{stroke-dasharray:4 4}
+.dg .thick{stroke-width:2.6}
+.dg text{fill:currentColor;font-family:var(--body);font-size:13px}
+.dg text.m{font-family:var(--mono);font-size:12.5px}
+.dg text.sm{font-size:11.5px}
+.dg text.big{font-family:var(--mono);font-size:19px;font-weight:600}
+.dg text.soft{fill:var(--fg-soft)}
+.dg text.b{font-weight:600}
+.dg .bg{fill:var(--surface)}
+.dg .wash1{fill:var(--ink-1-wash)} .dg .wash2{fill:var(--ink-2-wash)} .dg .wash3{fill:var(--ink-3-wash)} .dg .wash4{fill:var(--ink-4-wash)} .dg .washA{fill:var(--accent-wash)}
+.dg .f1{fill:var(--ink-1)} .dg .f2{fill:var(--ink-2)} .dg .f3{fill:var(--ink-3)} .dg .f4{fill:var(--ink-4)} .dg .fA{fill:var(--accent)}
+.dg .s1{stroke:var(--ink-1)} .dg .s2{stroke:var(--ink-2)} .dg .s3{stroke:var(--ink-3)} .dg .s4{stroke:var(--ink-4)} .dg .sA{stroke:var(--accent)}
+.dg text.t1{fill:var(--ink-1)} .dg text.t2{fill:var(--ink-2)} .dg text.t3{fill:var(--ink-3)} .dg text.t4{fill:var(--ink-4)} .dg text.tA{fill:var(--accent)}
+
+/* ---------- tables ---------- */
+.tbl-wrap{overflow-x:auto;margin:18px 0 22px;-webkit-overflow-scrolling:touch}
+table{
+  border-collapse:collapse;
+  width:100%;
+  min-width:420px;
+  font-size:.93rem;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+}
+caption{
+  caption-side:top;
+  text-align:left;
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  padding-bottom:9px;
+  font-weight:500;
+}
+th,td{
+  padding:9px 13px;
+  border-bottom:1px solid var(--rule-soft);
+  text-align:left;
+  vertical-align:top;
+}
+thead th{
+  background:var(--sec,var(--surface-2));
+  color:#fff;
+  font-weight:600;
+  font-size:.78rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  border-bottom:none;
+}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even){background:var(--surface-2)}
+td.num,th.num{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+
+/* ---------- misc blocks ---------- */
+.grid2{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:16px;
+  margin:18px 0 22px;
+}
+.card{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-top:3px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:16px 18px;
+  min-width:0;
+}
+.card h5{
+  font-family:var(--body);
+  font-size:.97rem;
+  font-weight:600;
+  margin:0 0 8px;
+}
+.card p{font-size:.92rem;margin-bottom:0;max-width:none;color:var(--fg-soft)}
+
+.flow{
+  list-style:none;
+  padding:0;
+  margin:18px 0 22px;
+  max-width:none;
+  display:grid;
+  gap:10px;
+}
+.flow li{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:13px 16px;
+  margin:0;
+}
+.flow .k{
+  font-family:var(--mono);
+  font-size:.73rem;
+  font-weight:600;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:3px 8px;
+  border-radius:3px;
+  flex:none;
+  margin-top:3px;
+  white-space:nowrap;
+}
+.flow .t{min-width:0;font-size:.95rem}
+.flow .t b{display:block;margin-bottom:2px}
+
+.keypad{
+  font-family:var(--mono);
+  font-size:.86rem;
+  background:var(--surface-2);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:4px 9px;
+  display:inline-block;
+  white-space:nowrap;
+}
+
+hr.soft{border:none;border-top:1px solid var(--rule-soft);margin:34px 0}
+
+footer{
+  border-top:3px double var(--rule);
+  padding-top:24px;
+  margin-top:20px;
+  font-size:.86rem;
+  color:var(--fg-faint);
+}
+footer p{max-width:none}
+
+@media (max-width:520px){
+  .sec-head{gap:11px}
+  .fx{font-size:.94rem}
+  .ex > .q,.ex > .a{padding:14px 15px}
+}
+@media print{
+  body{background:#fff}
+  nav.toc{break-inside:avoid}
+  .ex,.formula,.callout,.card{break-inside:avoid}
+  section{break-before:auto}
+}
+</style>
+
+<style>
+/* Chapter 3: denser setting so pages carry more per sheet */
+body{font-size:14.5px;line-height:1.55}
+p,ul,ol{max-width:none}
+p{margin:0 0 9px}
+li{margin-bottom:4px}
+.masthead{padding-block:34px 18px;margin-bottom:20px}
+section{margin-bottom:30px}
+.sec-head{margin-bottom:16px;padding-bottom:10px}
+h3{margin:22px 0 8px;font-size:1.02rem}
+h4{margin:14px 0 6px}
+.formula{padding:11px 14px;margin:10px 0 12px}
+.formula .fx{margin:1px 0;line-height:1.9}
+.ex{margin:10px 0}
+.ex > .q,.ex > .a{padding:10px 14px}
+.ex .steps li{margin-bottom:5px}
+.callout{padding:10px 13px;margin:10px 0;font-size:.93rem}
+.ar-note{padding:9px 13px;margin:9px 0;line-height:1.8;font-size:.93rem}
+.tbl-wrap{margin:8px 0 12px}
+th,td{padding:6px 10px}
+table{font-size:.9rem;min-width:0}
+figure.dg{margin:12px 0 14px;padding:10px 10px 8px}
+figure.dg figcaption{margin-top:6px;font-size:.84rem}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+.cols2 > *{min-width:0}
+.cols2 .ex{margin:0}
+@media (max-width:640px){.cols2{grid-template-columns:1fr}}
+/* let long formulas wrap inside narrow columns instead of being clipped */
+.fx,.ex .fx,.cols2 .fx,.a .fx{white-space:normal;overflow-x:visible}
+footer{margin-top:10px;padding-top:12px;font-size:.78rem}footer p{margin:0 0 4px}
+/* allow tall example cards to split across pages so no half-empty pages */
+@media print{.ex,.a.long{break-inside:auto!important;page-break-inside:auto!important}.a:not(.long){break-inside:avoid!important}.ex > .q{break-inside:avoid}.cols2{break-inside:auto}}
+.series{list-style:none;padding:0;margin:8px 0 12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2px 22px;max-width:none}
+.series li{margin:0;padding:3px 0;border-bottom:1px solid var(--rule-soft);font-size:.82rem;color:var(--fg-faint)}
+.series li.here{color:var(--fg);font-weight:600}
+.series li.here::after{content:"  ← this file";color:var(--accent);font-weight:500}
+.src{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-faint);border:1px solid var(--rule);border-radius:3px;padding:0 5px;margin-left:6px;white-space:nowrap;font-weight:500}
+</style>
+
+<div class="wrap">
+<header class="masthead">
+  <p class="eyebrow">Sultan Qaboos University · STAT 2101 · Chapter 2: Frequency Distributions and Graphs</p>
+  <div class="meta-strip"><span class="chip"><strong>Week</strong> 2</span><span class="chip"><strong>CLO</strong> 2-B · 2-C · 3-A · 3-B · 3-C</span><span class="chip"><strong>Textbook</strong> p. 101 {5, 7, 19, 23}</span><span class="chip"><strong>File</strong> 1 / 7</span></div>
+</header>
+<section id="brief" style="--sec:var(--accent);--wash:var(--accent-wash)">
+  <div class="sec-head">
+    <span class="sec-num">00</span>
+    <h2>Chapter 2 exam brief
+      <span class="ar">ماذا يطلب الكورس أوت لاين من الفصل الثاني — اقرأ هذا أولًا</span>
+    </h2>
+  </div>
+
+  <p>This set merges <strong>Dr. Amani Al-Rubkhi's Fall 2026 notes</strong> (the course coordinator) and the <strong>STAT 2101 Chapter 2 slides</strong> from Dr. Ahmed's pack (prepared by Iman Al Hasani and Ronald Wesonga, with handwritten lecture marks). Every example from both appears once, tagged with its source. The handwritten marks crossed several topics out as removed; the course outline is used to decide what stays.</p>
+
+  <div class="tbl-wrap"><table>
+    <caption>Chapter 2 in the Fall 2026 schedule</caption>
+    <thead><tr><th>Week</th><th>Lectures</th><th>Lab (R)</th><th>Assessment / exercises</th></tr></thead>
+    <tbody>
+      <tr><td class="num">2</td><td>2-1 Organizing Data · 2-2 Histograms, <strong>Frequency Polygons</strong> and Ogives · 2-3 Other Types of Graphs</td><td>Lab 2: Data Basics</td><td>Exercises Chapter 2, <strong>page 101: {5, 7, 19, 23}</strong> + Moodle exercises</td></tr>
+      <tr><td class="num">4</td><td colspan="2">Lab 4: Tabulation, Graphs</td><td><strong>In-Class Quiz I</strong> (Chapters 1–3)</td></tr>
+      <tr><td class="num">8</td><td colspan="2">—</td><td><strong>Midterm</strong> 25% · 3/11/2026 · Chapters 1–4</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>The outcomes Chapter 2 is graded against</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th style="width:12%">Criterion</th><th>Verbatim from the outline</th><th style="width:26%">Assessed by</th></tr></thead>
+    <tbody>
+      <tr><td><strong>CLO2-B</strong></td><td>Construct frequency distribution and summary tables.</td><td rowspan="2">Tutorial, In-Class Quiz, Active Learning, Midterm, Final</td></tr>
+      <tr><td><strong>CLO2-C</strong></td><td>Display data using various graphs.</td></tr>
+      <tr><td><strong>CLO2-D</strong></td><td>Use R to perform basic descriptive statistics, create tables, and visualize data.</td><td>Active Learning, Lab Quiz</td></tr>
+      <tr><td><strong>CLO3-A</strong></td><td>Recognize the key components of graphs, such as axes, labels, and legends.</td><td rowspan="3">Tutorial, In-Class Quiz, Midterm</td></tr>
+      <tr><td><strong>CLO3-B</strong></td><td>Extract meaningful insights from visual data representations.</td></tr>
+      <tr><td><strong>CLO3-C</strong></td><td>Derive reasoned insights based on the interpretation of graphs and summary statistics.</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout trap"><span class="ct">How Chapter 2 is actually examined</span>
+    <p>Two kinds of mark. <strong>Construction</strong> (CLO2-B, C): build a grouped table (width, limits, boundaries, frequencies, RF, CF) and draw a correctly labelled graph. <strong>Reading</strong> (CLO3): given a table, histogram, ogive, bar, pie or stem-and-leaf, extract values and say something reasoned. Typical reads: "how many values are below 119.5?" from an ogive; "what is the class width?" from a table; "describe the shape" from a histogram; or "build the frequency table from this stacked bar graph", which is Dr. Amani's own activity. Every example here ends with that reading step, because the slides end each graph with "Interpret the graph".</p></div>
+
+  <h3>Topics in and out this semester</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Topic</th><th>Status</th><th>Reason</th></tr></thead>
+    <tbody>
+      <tr><td>Categorical, grouped, ungrouped distributions; CF, RF, CRF</td><td><strong>In</strong></td><td>both decks</td></tr>
+      <tr><td>Histogram, relative frequency histogram, ogive (CF and CRF)</td><td><strong>In</strong></td><td>both decks</td></tr>
+      <tr><td><strong>Frequency polygon</strong> and relative frequency polygon</td><td><strong>In</strong></td><td>crossed out on the old slides and absent from Dr. Amani's notes, but named in the <strong>outline</strong> ("2-2 Histograms, Frequency Polygons and Ogives"). Kept and marked.</td></tr>
+      <tr><td>Bar (vertical, horizontal), compound (grouped, stacked), pie, time series, stem-and-leaf (including split stems)</td><td><strong>In</strong></td><td>both decks</td></tr>
+      <tr><td>Pareto charts, dot plots, back-to-back stem-and-leaf, misleading graphs</td><td><strong>Out</strong></td><td>handwritten "removed / not included" on the slides; not in Dr. Amani's notes. Defined once in the revision pack, in case they appear as a distractor.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Errors in the source material</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th style="width:4%">#</th><th style="width:40%">Point</th><th>What to do</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td><strong>Drivers' ages</strong> (Dr. Amani). The raw data printed in her notes has <strong>79</strong> values, but her frequency table uses n = 71 (19, 20, 16, 14, 0, 1, 1).</td><td>Counting the printed grid gives <strong>21, 22, 18, 16, 0, 1, 1 (n = 79)</strong>. Lesson 2-1 builds the table from the raw data and shows both. The histogram and ogive examples (and her Chapter 3 calculations) use her n = 71 table. In an exam, build from whatever data you are given.</td></tr>
+      <tr><td class="num">2</td><td>Dr. Amani's notes give "class width = (upper class <em>boundary</em> − lower class <em>boundary</em>) + 1".</td><td>Wrong as written: 28.5 − 20.5 + 1 = 9, but the width is 8. Correct versions: <strong>UCL − LCL + 1</strong> = 28 − 21 + 1 = 8, or <strong>UCB − LCB</strong> = 8 (the slide's handwritten version).</td></tr>
+      <tr><td class="num">3</td><td>The slides' Example 2-2 CRF table lists the last class as "130–132 / 129.5–132.5".</td><td>Typo: it is <strong>130–134 / 129.5–134.5</strong>, as in the original table.</td></tr>
+      <tr><td class="num">4</td><td>Trust-in-internet survey (Dr. Amani): the printed responses number <strong>34</strong>.</td><td>The table here uses the 34 printed responses: M 24, A 4, H 4, S 2.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="ar-note"><span class="lbl">الخلاصة بالعربي</span>الفصل الثاني يُدرَّس في <b>الأسبوع الثاني</b>، ويُختبر في الكويز الصفي الأول والميدتيرم. المطلوب نوعان: <b>البناء</b> (جدول تكراري بالطول والحدود والتكرارات، ورسم صحيح بعناوين محاور) و<b>القراءة والتفسير</b> (استخراج قيمة من منحنى أو جدول، ووصف الشكل). المضلع التكراري <b>مطلوب</b> لأن الكورس أوت لاين يذكره رغم شطبه في الشرائح القديمة. أما Pareto والنقطي والساق والورقة المزدوج والرسوم المضللة فـ<b>محذوفة</b> هذا الفصل. انتبه: بيانات أعمار السائقين في مذكرة د. أماني 79 قيمة، بينما جدولها مبني على 71. التمارين المطلوبة من الكتاب: صفحة 101، الأسئلة <b>5 و 7 و 19 و 23</b>.</div>
+</section>
+
+<footer>
+  <p><strong>Chapter 2 study set: 7 files.</strong> One merged source built from Dr. Amani Al-Rubkhi's Fall 2026 notes (course coordinator) and Dr. Ahmed Al-Hadhrami's slide pack, aligned to the SQU STAT 2101 course outline (Fall 2026). Textbook: Bluman, <em>Elementary Statistics</em>, 10th ed.</p>
+  <p><strong style="color:var(--accent)">00 · Exam brief</strong> · 01 · Lesson 2-1: Organizing Data · 02 · Lesson 2-2: Histograms, Frequency Polygons, Ogives · 03 · Lesson 2-3: Other Types of Graphs · 04 · Revision pack · 05 · Exam-style questions · 06 · Full worked answers</p>
+</footer>
+</div>

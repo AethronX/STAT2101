@@ -1,0 +1,69 @@
+<section id="s22" style="--sec:var(--ink-2);--wash:var(--ink-2-wash)">
+  <div class="sec-head">
+    <span class="sec-num">2-2</span>
+    <h2>Histograms, Frequency Polygons and Ogives
+      <span class="ar">المدرج التكراري والمضلع التكراري والمنحنى المتجمع وأشكال التوزيع</span>
+    </h2>
+  </div>
+
+  <p><strong>Why graphs?</strong> Graphs are easier than tables for most people, especially those with little statistical background; they summarise data clearly, and they reveal trends or patterns over time. The workflow is: <em>organise data → frequency distribution → present → graph</em>. <span class="src">Amani</span></p>
+
+  <div class="tbl-wrap"><table>
+    <caption>The three graphs of a grouped distribution: what goes on each axis</caption>
+    <thead><tr><th>Graph</th><th>x-axis</th><th>y-axis</th><th>Drawn with</th><th>Ends</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Histogram</strong> (frequency or relative frequency)<arn>المدرج التكراري</arn></td><td><strong>class boundaries</strong></td><td>f (or RF)</td><td>vertical bars that <strong>touch</strong>, equally wide</td><td>—</td></tr>
+      <tr><td><strong>Frequency polygon</strong> (or relative frequency polygon)<arn>المضلع التكراري</arn></td><td><strong>class midpoints</strong></td><td>f (or RF)</td><td>points joined by straight line segments</td><td>add one empty class at <strong>each end</strong>, so it touches the x-axis on both sides</td></tr>
+      <tr><td><strong>Ogive</strong> (CF or CRF)<arn>المنحنى التكراري المتجمع</arn></td><td><strong>upper class boundaries</strong> (plus the first lower boundary)</td><td>CF (or CRF)</td><td>points joined by straight line segments</td><td>starts at 0 on the <strong>first lower boundary</strong>; ends at n (or 1)</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>1 · Histogram <span class="src">Both · CLO2-C</span></h3>
+  <div class="cols2">
+    <div><p>A <span class="term">histogram</span> is a <strong>continuous</strong> bar graph showing the number of data items that fall <strong>within</strong> each interval. Bars must touch and be equally spaced.</p>
+      <p><strong>Steps:</strong> (1) draw the x and y axes; (2) put the <strong>class boundaries</strong> on the x-axis and the frequency (or relative frequency) on the y-axis; (3) draw a bar for each class, spanning its boundaries, with height equal to its f (or RF); (4) <strong>title</strong> the graph and <strong>label both axes</strong>.</p></div>
+    <div class="callout tip" style="margin:0"><span class="ct">Marks for a correct graph (CLO3-A)</span><p>Title · labelled axes with units · boundaries (not limits) under the bars · bars touching · a <strong>jagged / broken line</strong> (zig-zag) on the x-axis when it does not start at 0 · empty classes left as gaps. Histograms are the main tool for judging the <strong>shape</strong> of a distribution (part 4).</p></div>
+  </div>
+  <fig id="histtemp"/>
+  <div class="cols2">
+    <fig id="histgov"/>
+    <fig id="histdrv"/>
+  </div>
+
+  <h3>2 · Frequency polygon <span class="src">Ahmed's slides · in the outline</span></h3>
+  <div class="cols2">
+    <div><p><strong>Steps:</strong> (1) construct the frequency distribution; (2) draw and label the axes; (3) on the x-axis, mark the <strong>class midpoints</strong> (class marks); (4) plot each class's frequency as a <strong>point</strong>; (5) join neighbouring points with line segments; (6) add one class <strong>below</strong> the lowest and one <strong>above</strong> the highest, each with frequency 0, so the polygon touches the x-axis on both sides.</p>
+      <div class="formula" style="margin:6px 0"><div class="label">Midpoint (class mark)</div><p class="fx">Xₘ = ⟪LCL + UCL‖2⟫ = ⟪LCB + UCB‖2⟫ &nbsp;&nbsp; e.g. (100 + 104)/2 = 102</p></div>
+      <p>A <strong>relative frequency polygon</strong> is the same graph with RF on the y-axis. Example 2-7 (governors) has midpoints 45, 50, …, 75, RF 0.08, 0.08, 0.22, 0.28, 0.18, 0.10, 0.06, and extra end points at 40 and 80.</p></div>
+    <fig id="polygon"/>
+  </div>
+
+  <h3>3 · Ogive (cumulative frequency graph) <span class="src">Both</span></h3>
+  <div class="cols2">
+    <div><p>An <span class="term">ogive</span> is a <strong>line graph</strong> (not bars) of the cumulative frequencies of the classes. <strong>Steps:</strong> (1) draw both axes; (2) on the x-axis mark the first lower boundary and every upper boundary; (3) on the y-axis mark the cumulative frequencies; (4) label the axes; (5) plot each class's CF at its <strong>upper</strong> boundary; (6) join the points with straight lines; (7) start the line at 0 on the first lower boundary; (8) title it.</p>
+      <p>A <strong>cumulative relative frequency ogive</strong> is identical with CRF on the y-axis, so it ends at 1.</p></div>
+    <div class="callout tip" style="margin:0"><span class="ct">Reading an ogive (CLO3-B)</span><p>Go up from an x-value to the line, then across: <strong>that many values lie below it</strong>. From the temperature ogive, 41 states had a record below 119.5 °F, so 9 had 119.5 or more. The <strong>steepest</strong> segment is the class with the most data; a <strong>flat</strong> segment is an empty class. Governors (Example 2-7): CF 0, 4, 8, 19, 33, 42, 47, 50; CRF 0, 0.08, 0.16, 0.38, 0.66, 0.84, 0.94, 1.00, so 66% of governors were younger than 62.5.</p></div>
+  </div>
+  <div class="cols2">
+    <fig id="ogivetemp"/>
+    <fig id="ogivedrv"/>
+  </div>
+
+  <h3>4 · Distribution shapes <span class="src">Both · CLO3-B</span></h3>
+  <p>Displaying data reveals its shape; the shape tells you the type of distribution, and knowing it is essential for choosing the right analysis (Chapter 3 uses it to choose between the mean and the median).</p>
+  <fig id="shapes"/>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th style="width:20%">Shape</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>Bell-shaped</td><td>a single peak, values spread evenly on both sides</td></tr>
+      <tr><td>Uniform</td><td>rectangular: about the same frequency everywhere</td></tr>
+      <tr><td>J-shaped</td><td>few values on the left, increasing to the right</td></tr>
+      <tr><td>Reverse J-shaped</td><td>many values on the left, decreasing to the right</td></tr>
+      <tr><td>Right (positively) skewed</td><td>the peak is on the left and most values trail off to the <strong>right</strong> of it</td></tr>
+      <tr><td>Left (negatively) skewed</td><td>the peak is on the right and values trail off to the <strong>left</strong> of it</td></tr>
+      <tr><td>Bimodal</td><td>two peaks of about the same height, with some values between them</td></tr>
+      <tr><td>U-shaped</td><td>high at both ends, low in the middle</td></tr>
+    </tbody>
+  </table></div>
+  <ar t="الشرح بالعربي — الرسوم الثلاثة للجدول المبوّب">احفظ ما يوضع على المحور الأفقي لكل رسم، فهذا هو السؤال: (1) <b>المدرج التكراري</b>: الحدود الفعلية، وأعمدة متلاصقة. (2) <b>المضلع التكراري</b>: <b>مراكز</b> الفئات ونقاط موصولة، ونضيف فئة فارغة في البداية والنهاية حتى يلمس المحور. (3) <b>المنحنى المتجمع (Ogive)</b>: الحدود الفعلية <b>العليا</b>، ويبدأ من الصفر عند أول حد فعلي أدنى، وينتهي عند n أو 1. لقراءة المنحنى المتجمع: اصعد من القيمة إلى المنحنى ثم اتجه أفقيًا، فتحصل على عدد القيم الأقل منها. أشد جزء انحدارًا = الفئة الأكثر تكرارًا، والجزء الأفقي = فئة فارغة. وفي الأشكال: الالتواء يُسمّى <b>باتجاه الذيل</b>. ولا تنسَ عنوان الرسم وعناوين المحاور، والخط المتعرج إذا لم يبدأ المحور من الصفر.</ar>
+</section>

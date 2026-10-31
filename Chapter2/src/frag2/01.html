@@ -1,0 +1,102 @@
+<section id="s21" style="--sec:var(--ink-1);--wash:var(--ink-1-wash)">
+  <div class="sec-head">
+    <span class="sec-num">2-1</span>
+    <h2>Organizing Data
+      <span class="ar">تنظيم البيانات — التوزيعات التكرارية: الوصفية والمبوّبة وغير المبوّبة، والتكرار النسبي والمتجمع</span>
+    </h2>
+  </div>
+
+  <p>Raw data (data in their original form) are too large to work with directly. Dr. Amani's motivating case is road accidents in Oman in 2024, with variables such as date, governorate, severity and day or night. The data are first <strong>organised</strong> into a frequency distribution (2-1), then <strong>presented</strong> with graphs (2-2, 2-3).</p>
+  <div class="formula"><div class="label">Definitions <span class="src">Both · CLO2-B</span></div>
+    <p class="note" style="margin:0">A <strong>frequency distribution</strong> is the organization of raw data in table form, using <strong>classes</strong> and <strong>frequencies</strong>. A <strong>class</strong> is a category or interval in which each data value belongs to exactly one class (mutually exclusive). The <strong>frequency</strong> f is the number of data values that fall into that class.</p></div>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Type</th><th>Data</th><th>Use when</th><th>Classes look like</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Categorical</strong><arn>وصفي</arn></td><td>qualitative (nominal or ordinal)</td><td>the data are categories</td><td>A, B, O, AB</td></tr>
+      <tr><td><strong>Grouped</strong><arn>مبوّب</arn></td><td>quantitative</td><td>the range is <strong>large</strong>: each class is an interval wider than one unit</td><td>100–104, 105–109, …</td></tr>
+      <tr><td><strong>Ungrouped</strong><arn>غير مبوّب</arn></td><td>quantitative</td><td>the range is <strong>small</strong>: each class is a single value</td><td>5, 6, 7, 8, 9, 10</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>1 · Categorical frequency distribution <span class="src">Both</span></h3>
+  <div class="cols2">
+    <div class="formula" style="margin:0"><div class="label">Steps</div><p class="note" style="margin:0">(1) Make a table: Class · Tally · Frequency · Percent. (2) Tally the data. (3) Count the tallies to get f. (4) Percent = <span class="v">f/n × 100</span>. (5) Check: Σf = n and the percents total about 100%. Then <strong>interpret</strong> the table in a sentence.</p></div>
+    <div class="ex" style="margin:0"><div class="q"><span class="tag">Example 2-1 · Blood types of 25 army officers <span class="src">Ahmed</span></span></div>
+      <div class="a"><div class="tbl-wrap" style="margin:0"><table><thead><tr><th>Class</th><th class="num">f</th><th class="num">%</th></tr></thead><tbody>
+        <tr><td>A</td><td class="num">5</td><td class="num">20</td></tr><tr><td>B</td><td class="num">7</td><td class="num">28</td></tr><tr><td>O</td><td class="num">9</td><td class="num">36</td></tr><tr><td>AB</td><td class="num">4</td><td class="num">16</td></tr><tr><td><strong>Total</strong></td><td class="num"><strong>25</strong></td><td class="num"><strong>100</strong></td></tr></tbody></table></div>
+        <p>Type O is the most common (36%) and AB the least (16%).</p></div></div>
+  </div>
+  <div class="ex"><div class="q"><span class="tag">Trust in internet information <span class="src">Amani · Exercises 2-1</span></span><p>A = trusts everything, M = trusts most, H = trusts about half, S = trusts a small portion. Responses: M M M A H S M H M S M M M A M M M A M M H M H M M M M A M M M M M M.</p></div>
+    <div class="a"><div class="cols2"><div class="tbl-wrap" style="margin:0"><table><thead><tr><th>Class</th><th>Tally</th><th class="num">f</th><th class="num">%</th></tr></thead><tbody>
+      <tr><td>A</td><td>||||</td><td class="num">4</td><td class="num">11.76</td></tr><tr><td>M</td><td><s>||||</s> <s>||||</s> <s>||||</s> <s>||||</s> ||||</td><td class="num">24</td><td class="num">70.59</td></tr>
+      <tr><td>H</td><td>||||</td><td class="num">4</td><td class="num">11.76</td></tr><tr><td>S</td><td>||</td><td class="num">2</td><td class="num">5.88</td></tr>
+      <tr><td><strong>Total</strong></td><td></td><td class="num"><strong>34</strong></td><td class="num"><strong>99.99 ≈ 100</strong></td></tr></tbody></table></div>
+      <div><p>The printed list has 34 responses. Interpretation: ⦃about 71%⦄ trust <em>most</em> of what they read online, while only ⦃11.76%⦄ trust <em>everything</em>.</p><p>The total is 99.99% because of rounding. Dr. Amani's note says the percent column should be "approximately 100", so 99.99 is accepted.</p></div></div></div></div>
+
+  <h3>2 · Grouped frequency distribution <span class="src">Both</span></h3>
+  <div class="formula"><div class="label">Procedure (number of classes is always given in this course; usually 5–20)</div>
+    <p class="fx">width = ⟪range‖number of classes⟫ = ⟪H − L‖k⟫ → <strong>always round UP</strong> to the next whole number (4.2 → 5, 4.8 → 5, <strong>4.0 → 5</strong>)</p>
+    <p class="note">(1) Number of classes k. (2) Width. (3) Starting point: the lowest value L (or a convenient number slightly less). (4) Lower limits: <span class="v">LCL₁ = min</span>, each next LCL = previous LCL + width; each <span class="v">UCL = next LCL − 1</span>. (5) Boundaries: LCB = LCL − ½ unit, UCB = UCL + ½ unit. (6) Tally and count. (7) Relative frequency f/n. (8) Check Σf = n and ΣRF ≈ 1.</p></div>
+  <div class="callout tip"><span class="ct">Why a whole-number width still goes up (4.0 → 5)</span><p>With whole-number data, k classes of width w cover values from L to L + k·w − 1, and that must reach H. So k·w must be <strong>greater than</strong> the range. Range 28 with 7 classes gives exactly 4, and 7 × 4 = 28 classes would stop at L + 27, one short of H. That is why the rule says round <em>up</em> even from a whole number.</p></div>
+  <div class="cols2">
+    <div class="tbl-wrap" style="margin:0"><table>
+      <caption>Boundaries: half the smallest unit <span class="src">Amani</span></caption>
+      <thead><tr><th>Class limits</th><th>Unit</th><th>½ unit</th><th>Boundaries</th></tr></thead><tbody>
+      <tr><td>15–20</td><td class="num">1</td><td class="num">0.5</td><td class="num">14.5–20.5</td></tr>
+      <tr><td>2.2–10.3</td><td class="num">0.1</td><td class="num">0.05</td><td class="num">2.15–10.35</td></tr>
+      <tr><td>4.26–7.20</td><td class="num">0.01</td><td class="num">0.005</td><td class="num">4.255–7.205</td></tr>
+      <tr><td>12–24</td><td class="num">1</td><td class="num">0.5</td><td class="num"><strong>11.5–24.5</strong></td></tr>
+      <tr><td>10.24–15.02</td><td class="num">0.01</td><td class="num">0.005</td><td class="num"><strong>10.235–15.025</strong></td></tr></tbody></table></div>
+    <div class="callout note" style="margin:0"><span class="ct">Important notes <span class="src">Amani</span></span><p><strong>Classes must be continuous</strong>: a class with no data still appears, with f = 0. There must be enough classes to cover all the data. All classes have the <strong>same width</strong>. The width can be read from a table three ways: <strong>UCL − LCL + 1</strong>; the next LCL − this LCL; the next LCB − this LCB (= UCB − LCB).</p></div>
+  </div>
+  <fig id="limbound"/>
+  <div class="ex"><div class="q"><span class="tag">Example 2-2 · Record high temperatures of 50 states, 7 classes <span class="src">Ahmed</span></span><p>112 100 127 120 134 118 105 110 109 112 · 110 118 117 116 118 122 114 114 105 109 · 107 112 114 115 118 117 118 122 106 110 · 116 108 110 121 113 120 119 111 104 111 · 120 113 120 117 105 110 118 112 114 114</p></div>
+    <div class="a"><p>R = 134 − 100 = 34; width = 34/7 = 4.86 → ⦃5⦄. LCL₁ = 100, UCL₁ = 100 + 5 − 1 = 104; LCB₁ = 99.5, UCB₁ = 104.5.</p>
+      <div class="tbl-wrap" style="margin:0"><table><thead><tr><th>Limits</th><th>Boundaries</th><th class="num">f</th><th class="num">RF</th><th class="num">CF</th><th class="num">CRF</th></tr></thead><tbody>
+        <tr><td>100–104</td><td>99.5–104.5</td><td class="num">2</td><td class="num">0.04</td><td class="num">2</td><td class="num">0.04</td></tr>
+        <tr><td>105–109</td><td>104.5–109.5</td><td class="num">8</td><td class="num">0.16</td><td class="num">10</td><td class="num">0.20</td></tr>
+        <tr><td>110–114</td><td>109.5–114.5</td><td class="num">18</td><td class="num">0.36</td><td class="num">28</td><td class="num">0.56</td></tr>
+        <tr><td>115–119</td><td>114.5–119.5</td><td class="num">13</td><td class="num">0.26</td><td class="num">41</td><td class="num">0.82</td></tr>
+        <tr><td>120–124</td><td>119.5–124.5</td><td class="num">7</td><td class="num">0.14</td><td class="num">48</td><td class="num">0.96</td></tr>
+        <tr><td>125–129</td><td>124.5–129.5</td><td class="num">1</td><td class="num">0.02</td><td class="num">49</td><td class="num">0.98</td></tr>
+        <tr><td>130–134</td><td>129.5–134.5</td><td class="num">1</td><td class="num">0.02</td><td class="num">50</td><td class="num">1.00</td></tr></tbody></table></div>
+      <p>Most states' record highs lie between 110 and 119 °F (31 of 50 = 62%).</p></div></div>
+  <div class="ex"><div class="q"><span class="tag">Ages of drivers, 7 classes <span class="src">Amani</span></span><p>21 21 21 23 23 23 23 24 25 25 26 26 26 26 27 27 28 28 28 28 28 29 29 29 29 29 30 30 30 30 31 31 31 31 31 31 32 34 35 35 35 36 36 37 37 37 38 38 39 41 42 42 42 43 43 43 43 44 44 44 44 45 45 45 46 47 48 48 48 49 49 49 49 50 50 51 51 65 72</p></div>
+    <div class="a"><p>R = 72 − 21 = 51; width = 51/7 = 7.29 → ⦃8⦄; start at L = 21.</p>
+      <div class="tbl-wrap" style="margin:0"><table><thead><tr><th>Limits</th><th>Boundaries</th><th class="num">f from the printed data</th><th class="num">f in Dr. Amani's table</th><th class="num">RF (table)</th></tr></thead><tbody>
+        <tr><td>21–28</td><td>20.5–28.5</td><td class="num">21</td><td class="num">19</td><td class="num">0.268</td></tr>
+        <tr><td>29–36</td><td>28.5–36.5</td><td class="num">22</td><td class="num">20</td><td class="num">0.282</td></tr>
+        <tr><td>37–44</td><td>36.5–44.5</td><td class="num">18</td><td class="num">16</td><td class="num">0.225</td></tr>
+        <tr><td>45–52</td><td>44.5–52.5</td><td class="num">16</td><td class="num">14</td><td class="num">0.197</td></tr>
+        <tr><td>53–60</td><td>52.5–60.5</td><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr>
+        <tr><td>61–68</td><td>60.5–68.5</td><td class="num">1</td><td class="num">1</td><td class="num">0.014</td></tr>
+        <tr><td>69–76</td><td>68.5–76.5</td><td class="num">1</td><td class="num">1</td><td class="num">0.014</td></tr>
+        <tr><td colspan="2"><strong>Total</strong></td><td class="num"><strong>79</strong></td><td class="num"><strong>71</strong></td><td class="num"><strong>1</strong></td></tr></tbody></table></div>
+      <p>The class limits, boundaries and the empty 53–60 class are the same in both versions; only the first four counts differ by 2 each. The 53–60 class stays in the table with f = 0 because classes must be continuous.</p></div></div>
+
+  <h3>3 · Ungrouped frequency distribution <span class="src">Ahmed</span></h3>
+  <div class="ex"><div class="q"><span class="tag">Example 2-3 · Hours of sleep, 30 students</span><p>8 6 6 8 5 7 7 8 7 6 6 7 9 7 7 · 6 8 10 6 7 6 7 8 7 7 8 7 8 9 8</p></div>
+    <div class="a"><p>Range = 10 − 5 = 5 (small), so one class per value.</p><div class="tbl-wrap" style="margin:0"><table><thead><tr><th>Limits</th><th>Boundaries</th><th class="num">f</th><th class="num">CF (≤ UCB)</th></tr></thead><tbody>
+      <tr><td>5</td><td>4.5–5.5</td><td class="num">1</td><td class="num">1</td></tr><tr><td>6</td><td>5.5–6.5</td><td class="num">7</td><td class="num">8</td></tr>
+      <tr><td>7</td><td>6.5–7.5</td><td class="num">11</td><td class="num">19</td></tr><tr><td>8</td><td>7.5–8.5</td><td class="num">8</td><td class="num">27</td></tr>
+      <tr><td>9</td><td>8.5–9.5</td><td class="num">2</td><td class="num">29</td></tr><tr><td>10</td><td>9.5–10.5</td><td class="num">1</td><td class="num">30</td></tr></tbody></table></div>
+      <p>7 hours is the most common (11 students); 19 of 30 sleep 7 hours or less.</p></div></div>
+
+  <h3>4 · Relative, cumulative and cumulative relative frequency <span class="src">Both</span></h3>
+  <div class="cols2">
+    <div class="formula" style="margin:0"><div class="label">Formulas</div>
+      <p class="fx">RF = ⟪f‖n⟫ &nbsp;&nbsp; CF = f₁ + f₂ + ⋯ (up to this class) &nbsp;&nbsp; CRF = ⟪CF‖n⟫</p>
+      <p class="note">RF can be a fraction, decimal or percent. CF counts the values <strong>less than or equal to</strong> a class's upper boundary. The first row ("less than the first LCB") is always <strong>0</strong>; the last CF is <strong>n</strong> and the last CRF is <strong>1</strong> (100%). Example: frequencies 5, 8, 12 give a third-class CF of 5 + 8 + 12 = 25.</p></div>
+    <div class="tbl-wrap" style="margin:0"><table><caption>Drivers, Dr. Amani's table (n = 71)</caption><thead><tr><th>Less than</th><th class="num">CF</th><th class="num">CRF</th></tr></thead><tbody>
+      <tr><td>20.5</td><td class="num">0</td><td class="num">0</td></tr><tr><td>28.5</td><td class="num">19</td><td class="num">0.268</td></tr><tr><td>36.5</td><td class="num">39</td><td class="num">0.549</td></tr>
+      <tr><td>44.5</td><td class="num">55</td><td class="num">0.775</td></tr><tr><td>52.5</td><td class="num">69</td><td class="num">0.972</td></tr><tr><td>60.5</td><td class="num">69</td><td class="num">0.972</td></tr>
+      <tr><td>68.5</td><td class="num">70</td><td class="num">0.986</td></tr><tr><td>76.5</td><td class="num">71</td><td class="num">1.000</td></tr></tbody></table></div>
+  </div>
+  <div class="ex"><div class="q"><span class="tag">Active learning · reading a frequency distribution <span class="src">Amani</span></span>
+    <div class="tbl-wrap" style="margin:4px 0 0"><table><thead><tr><th>Limits</th><th>Boundaries</th><th class="num">f</th></tr></thead><tbody>
+      <tr><td>10.0–19.9</td><td>9.95–19.95</td><td class="num">3</td></tr><tr><td>20.0–29.9</td><td>19.95–29.95</td><td class="num">7</td></tr><tr><td>30.0–39.9</td><td>29.95–39.95</td><td class="num">12</td></tr>
+      <tr><td>40.0–49.9</td><td>39.95–49.95</td><td class="num">9</td></tr><tr><td>50.0–59.9</td><td>49.95–59.95</td><td class="num">6</td></tr><tr><td>60.0–69.9</td><td>59.95–69.95</td><td class="num">3</td></tr></tbody></table></div>
+    <p>(1) Class width? (2) Number of classes? (3) Range of the data set? (4) Which class has the highest frequency?</p></div>
+    <div class="a"><p>(1) ⦃10⦄: 20.0 − 10.0, or 19.95 − 9.95. (Not 9.9: UCL − LCL + <em>one unit</em>, and the unit here is 0.1, gives 19.9 − 10.0 + 0.1 = 10.) (2) ⦃6⦄. (3) The exact range needs the raw data. The table only bounds it: at most <span class="v">69.95 − 9.95 = 60</span>, and the answer usually expected is ⦃about 60⦄. (4) ⦃30.0–39.9, f = 12⦄. Also n = 40.</p></div></div>
+  <ar t="الشرح بالعربي — بناء الجدول التكراري المبوّب">(1) عدد الفئات معطى دائمًا. (2) <b>الطول</b> = المدى ÷ عدد الفئات، ونقرّبه <b>لأعلى دائمًا</b>، حتى لو كان عددًا صحيحًا (4.0 تصبح 5)، وإلا فلن تدخل أكبر قيمة في آخر فئة. (3) أول حد أدنى = أصغر قيمة. (4) الحد الأدنى التالي = السابق + الطول، والحد الأعلى = الحد الأدنى التالي − 1. (5) <b>الحدود الفعلية</b>: نطرح ونضيف نصف أصغر وحدة (0.5 للأعداد الصحيحة، 0.05 لخانة عشرية، 0.005 لخانتين). (6) نفرز ونعدّ. (7) التكرار النسبي ⟦f/n⟧، والمتجمع نجمعه تراكميًا، أول قيمة فيه صفر وآخر قيمة n. (8) الفئة الفارغة <b>لا تُحذف</b>. انتبه: د. أماني كتبت أن الطول = (الحد الفعلي الأعلى − الأدنى) + 1، وهذا خطأ. الصحيح: الحد الأعلى − الحد الأدنى + 1، أو الحد الفعلي الأعلى − الحد الفعلي الأدنى.</ar>
+</section>

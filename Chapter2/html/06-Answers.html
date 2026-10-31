@@ -1,0 +1,666 @@
+<title>Chapter 2 Full Answers</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+
+<style>
+/* Layout: single reading column with a sticky rail nav; four section inks mirror the
+   overprint of a Venn diagram — the chapter's own governing picture. */
+:root{
+  --bg:#fbfaf7;
+  --surface:#ffffff;
+  --surface-2:#f2f1ec;
+  --fg:#1b2027;
+  --fg-soft:#4c5663;
+  --fg-faint:#78828f;
+  --rule:#dddcd4;
+  --rule-soft:#eceae3;
+
+  --ink-1:#1f4e79;   /* 4-1  sample spaces      */
+  --ink-2:#0f6f5c;   /* 4-2  addition rules     */
+  --ink-3:#9a5b12;   /* 4-3  multiplication     */
+  --ink-4:#7b2d6b;   /* 4-4 / 4-5 counting      */
+  --accent:#b23b2e;  /* alarms, traps, must-know */
+
+  --ink-1-wash:#eaf0f7;
+  --ink-2-wash:#e5f1ee;
+  --ink-3-wash:#f8efe1;
+  --ink-4-wash:#f4e9f2;
+  --accent-wash:#f9eae7;
+
+  --display:"Spectral",Georgia,"Times New Roman",serif;
+  --body:"IBM Plex Sans","IBM Plex Sans Arabic",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --arabic:"IBM Plex Sans Arabic","IBM Plex Sans",-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  --measure:70ch;
+  --shadow:0 1px 2px rgba(27,32,39,.05),0 8px 24px -16px rgba(27,32,39,.25);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#13171c;
+    --surface:#1a1f26;
+    --surface-2:#222932;
+    --fg:#e8e6e0;
+    --fg-soft:#b3bac4;
+    --fg-faint:#8a929e;
+    --rule:#333b45;
+    --rule-soft:#272e37;
+
+    --ink-1:#7bb0e8;
+    --ink-2:#4fc4a8;
+    --ink-3:#e2a74e;
+    --ink-4:#d089c2;
+    --accent:#ef7f70;
+
+    --ink-1-wash:#182633;
+    --ink-2-wash:#132a26;
+    --ink-3-wash:#2b2314;
+    --ink-4-wash:#2a1b28;
+    --accent-wash:#2f1c19;
+
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#13171c;
+  --surface:#1a1f26;
+  --surface-2:#222932;
+  --fg:#e8e6e0;
+  --fg-soft:#b3bac4;
+  --fg-faint:#8a929e;
+  --rule:#333b45;
+  --rule-soft:#272e37;
+
+  --ink-1:#7bb0e8;
+  --ink-2:#4fc4a8;
+  --ink-3:#e2a74e;
+  --ink-4:#d089c2;
+  --accent:#ef7f70;
+
+  --ink-1-wash:#182633;
+  --ink-2-wash:#132a26;
+  --ink-3-wash:#2b2314;
+  --ink-4-wash:#2a1b28;
+  --accent-wash:#2f1c19;
+
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{
+  max-width:980px;
+  margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 72px;
+}
+
+/* ---------- masthead ---------- */
+.masthead{
+  padding-block:56px 36px;
+  border-bottom:3px double var(--rule);
+  margin-bottom:36px;
+}
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+}
+h1{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(2.1rem,6vw,3.4rem);
+  line-height:1.08;
+  margin:0 0 10px;
+  letter-spacing:-.015em;
+  text-wrap:balance;
+}
+.subtitle{
+  font-family:var(--display);
+  font-style:italic;
+  font-size:clamp(1.05rem,2.6vw,1.3rem);
+  color:var(--fg-soft);
+  margin:0 0 22px;
+  max-width:var(--measure);
+}
+.meta-strip{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 10px;
+  margin-top:20px;
+}
+.chip{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.04em;
+  padding:5px 10px;
+  border:1px solid var(--rule);
+  border-radius:3px;
+  color:var(--fg-soft);
+  background:var(--surface);
+}
+.chip strong{color:var(--fg);font-weight:600}
+
+/* ---------- nav ---------- */
+nav.toc{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:20px 22px;
+  margin-bottom:44px;
+  box-shadow:var(--shadow);
+}
+nav.toc h2{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+  font-weight:500;
+}
+nav.toc ol{
+  margin:0;padding:0;list-style:none;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:4px 26px;
+}
+nav.toc li{min-width:0}
+nav.toc a{
+  display:flex;
+  gap:10px;
+  align-items:baseline;
+  text-decoration:none;
+  color:var(--fg);
+  padding:5px 0;
+  border-bottom:1px solid var(--rule-soft);
+  font-size:.92rem;
+}
+nav.toc a:hover{color:var(--accent)}
+nav.toc a .num{
+  font-family:var(--mono);
+  font-size:.74rem;
+  color:var(--fg-faint);
+  flex:none;
+  min-width:2.4em;
+}
+
+/* ---------- sections ---------- */
+section{margin-bottom:64px;scroll-margin-top:24px}
+.sec-head{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+  padding-bottom:14px;
+  border-bottom:2px solid var(--sec,var(--fg));
+  margin-bottom:28px;
+}
+.sec-num{
+  font-family:var(--mono);
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.06em;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:5px 9px;
+  border-radius:3px;
+  flex:none;
+  margin-top:6px;
+}
+.sec-head h2{
+  font-family:var(--display);
+  font-size:clamp(1.5rem,4vw,2.05rem);
+  line-height:1.18;
+  margin:0;
+  font-weight:600;
+  text-wrap:balance;
+  min-width:0;
+}
+.sec-head .ar{
+  display:block;
+  font-family:var(--arabic);
+  font-size:.92rem;
+  font-style:normal;
+  color:var(--fg-soft);
+  direction:rtl;
+  margin-top:4px;
+  font-weight:400;
+}
+h3{
+  font-family:var(--body);
+  font-size:1.08rem;
+  font-weight:600;
+  letter-spacing:-.005em;
+  margin:36px 0 12px;
+  color:var(--fg);
+  display:flex;
+  align-items:baseline;
+  gap:9px;
+  flex-wrap:wrap;
+}
+h3::before{
+  content:"";
+  width:18px;height:3px;
+  background:var(--sec,var(--fg));
+  flex:none;
+  border-radius:2px;
+}
+h4{
+  font-family:var(--mono);
+  font-size:.74rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:26px 0 10px;
+  font-weight:500;
+}
+p{margin:0 0 14px;max-width:var(--measure)}
+ul,ol{max-width:var(--measure);padding-left:1.25em;margin:0 0 14px}
+li{margin-bottom:7px}
+li::marker{color:var(--sec,var(--fg-faint))}
+strong{font-weight:600}
+em{font-style:italic}
+code,.v{
+  font-family:var(--mono);
+  font-size:.9em;
+  background:var(--surface-2);
+  padding:1px 5px;
+  border-radius:3px;
+  white-space:nowrap;
+}
+.term{
+  font-weight:600;
+  color:var(--sec,var(--fg));
+}
+a{color:var(--accent)}
+
+/* ---------- maths ---------- */
+.fx{
+  font-family:var(--mono);
+  font-size:1.02rem;
+  line-height:2.1;
+  white-space:nowrap;
+}
+.frac{
+  display:inline-flex;
+  flex-direction:column;
+  vertical-align:middle;
+  text-align:center;
+  font-family:var(--mono);
+  line-height:1.25;
+  margin:0 .22em;
+  position:relative;
+  top:-.08em;
+}
+.frac .num{border-bottom:1.5px solid currentColor;padding:0 .4em .08em}
+.frac .den{padding:.08em .4em 0}
+sub,sup{font-size:.72em}
+
+.formula{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-left:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:18px 20px;
+  margin:18px 0 22px;
+  box-shadow:var(--shadow);
+  overflow-x:auto;
+}
+.formula .label{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg-faint));
+  margin-bottom:10px;
+  font-weight:600;
+}
+.formula .fx{margin:4px 0}
+.formula .note{
+  font-size:.88rem;
+  color:var(--fg-soft);
+  margin:10px 0 0;
+  white-space:normal;
+  max-width:none;
+}
+
+/* ---------- example cards ---------- */
+.ex{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:5px;
+  margin:20px 0;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.ex > .q{
+  padding:16px 20px;
+  border-bottom:1px dashed var(--rule);
+  background:var(--wash,var(--surface-2));
+}
+.ex .tag{
+  font-family:var(--mono);
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg));
+  display:block;
+  margin-bottom:6px;
+}
+.ex .q p{margin:0;max-width:none}
+.ex > .a{padding:16px 20px}
+.ex > .a p{max-width:none}
+.ex > .a p:last-child{margin-bottom:0}
+.ex .steps{margin:0;padding-left:1.2em;max-width:none}
+.ex .steps li{margin-bottom:9px}
+.ans{
+  display:inline-block;
+  font-family:var(--mono);
+  font-weight:600;
+  background:var(--sec,var(--fg));
+  color:#fff;
+  padding:3px 9px;
+  border-radius:3px;
+  font-size:.92em;
+  white-space:nowrap;
+}
+
+/* ---------- callouts ---------- */
+.callout{
+  border-radius:4px;
+  padding:16px 18px;
+  margin:20px 0;
+  border:1px solid;
+  font-size:.95rem;
+}
+.callout p{max-width:none}
+.callout p:last-child{margin-bottom:0}
+.callout .ct{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-weight:600;
+  display:block;
+  margin-bottom:8px;
+}
+.trap{background:var(--accent-wash);border-color:var(--accent)}
+.trap .ct{color:var(--accent)}
+.tip{background:var(--ink-2-wash);border-color:var(--ink-2)}
+.tip .ct{color:var(--ink-2)}
+.note{background:var(--surface-2);border-color:var(--rule)}
+.note .ct{color:var(--fg-faint)}
+
+.ar-note{
+  font-family:var(--arabic);
+  direction:rtl;
+  text-align:right;
+  background:var(--surface-2);
+  border-right:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:13px 16px;
+  margin:16px 0;
+  font-size:.96rem;
+  line-height:1.95;
+  color:var(--fg-soft);
+}
+.ar-note b{color:var(--fg);font-weight:600}
+.ar-note .lbl{
+  display:block;
+  font-size:.72rem;
+  letter-spacing:.04em;
+  color:var(--sec,var(--fg-faint));
+  font-weight:600;
+  margin-bottom:4px;
+}
+.ar-note ul{padding-right:1.2em;padding-left:0;margin:6px 0 0;max-width:none}
+
+.ar-note p{margin:0 0 7px;max-width:none}
+.ar-note p:last-child{margin-bottom:0}
+.ar-note ol{padding-right:1.3em;padding-left:0;margin:6px 0 0;max-width:none}
+.ar-note li{margin-bottom:5px}
+.ar-note .v{font-size:.84em}
+.arn{display:block;font-family:var(--arabic);direction:rtl;unicode-bidi:isolate;text-align:left;font-size:.84rem;color:var(--fg-soft);font-weight:500;margin-top:2px;line-height:1.5}
+.subtitle-ar{font-family:var(--arabic);direction:rtl;text-align:right;color:var(--fg-soft);font-size:1.02rem;margin:0 0 8px;max-width:none;line-height:1.9}
+
+/* ---------- diagrams ---------- */
+figure.dg{margin:22px 0 26px;padding:16px 14px 12px;background:var(--surface);border:1px solid var(--rule);border-radius:4px;break-inside:avoid;page-break-inside:avoid}
+figure.dg svg{display:block;width:100%;height:auto;margin:0 auto;color:var(--fg);overflow:visible}
+figure.dg figcaption{font-size:.86rem;color:var(--fg-soft);margin:10px auto 0;max-width:64ch;text-align:center;line-height:1.5}
+figure.dg figcaption .ar{display:block;font-family:var(--arabic);direction:rtl;margin-top:4px;font-size:.9rem}
+.dg .ln{stroke:currentColor;fill:none;stroke-width:1.4}
+.dg .ln-soft{stroke:var(--fg-faint);fill:none;stroke-width:1.2}
+.dg .dash{stroke-dasharray:4 4}
+.dg .thick{stroke-width:2.6}
+.dg text{fill:currentColor;font-family:var(--body);font-size:13px}
+.dg text.m{font-family:var(--mono);font-size:12.5px}
+.dg text.sm{font-size:11.5px}
+.dg text.big{font-family:var(--mono);font-size:19px;font-weight:600}
+.dg text.soft{fill:var(--fg-soft)}
+.dg text.b{font-weight:600}
+.dg .bg{fill:var(--surface)}
+.dg .wash1{fill:var(--ink-1-wash)} .dg .wash2{fill:var(--ink-2-wash)} .dg .wash3{fill:var(--ink-3-wash)} .dg .wash4{fill:var(--ink-4-wash)} .dg .washA{fill:var(--accent-wash)}
+.dg .f1{fill:var(--ink-1)} .dg .f2{fill:var(--ink-2)} .dg .f3{fill:var(--ink-3)} .dg .f4{fill:var(--ink-4)} .dg .fA{fill:var(--accent)}
+.dg .s1{stroke:var(--ink-1)} .dg .s2{stroke:var(--ink-2)} .dg .s3{stroke:var(--ink-3)} .dg .s4{stroke:var(--ink-4)} .dg .sA{stroke:var(--accent)}
+.dg text.t1{fill:var(--ink-1)} .dg text.t2{fill:var(--ink-2)} .dg text.t3{fill:var(--ink-3)} .dg text.t4{fill:var(--ink-4)} .dg text.tA{fill:var(--accent)}
+
+/* ---------- tables ---------- */
+.tbl-wrap{overflow-x:auto;margin:18px 0 22px;-webkit-overflow-scrolling:touch}
+table{
+  border-collapse:collapse;
+  width:100%;
+  min-width:420px;
+  font-size:.93rem;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+}
+caption{
+  caption-side:top;
+  text-align:left;
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  padding-bottom:9px;
+  font-weight:500;
+}
+th,td{
+  padding:9px 13px;
+  border-bottom:1px solid var(--rule-soft);
+  text-align:left;
+  vertical-align:top;
+}
+thead th{
+  background:var(--sec,var(--surface-2));
+  color:#fff;
+  font-weight:600;
+  font-size:.78rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  border-bottom:none;
+}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even){background:var(--surface-2)}
+td.num,th.num{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+
+/* ---------- misc blocks ---------- */
+.grid2{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:16px;
+  margin:18px 0 22px;
+}
+.card{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-top:3px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:16px 18px;
+  min-width:0;
+}
+.card h5{
+  font-family:var(--body);
+  font-size:.97rem;
+  font-weight:600;
+  margin:0 0 8px;
+}
+.card p{font-size:.92rem;margin-bottom:0;max-width:none;color:var(--fg-soft)}
+
+.flow{
+  list-style:none;
+  padding:0;
+  margin:18px 0 22px;
+  max-width:none;
+  display:grid;
+  gap:10px;
+}
+.flow li{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:13px 16px;
+  margin:0;
+}
+.flow .k{
+  font-family:var(--mono);
+  font-size:.73rem;
+  font-weight:600;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:3px 8px;
+  border-radius:3px;
+  flex:none;
+  margin-top:3px;
+  white-space:nowrap;
+}
+.flow .t{min-width:0;font-size:.95rem}
+.flow .t b{display:block;margin-bottom:2px}
+
+.keypad{
+  font-family:var(--mono);
+  font-size:.86rem;
+  background:var(--surface-2);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:4px 9px;
+  display:inline-block;
+  white-space:nowrap;
+}
+
+hr.soft{border:none;border-top:1px solid var(--rule-soft);margin:34px 0}
+
+footer{
+  border-top:3px double var(--rule);
+  padding-top:24px;
+  margin-top:20px;
+  font-size:.86rem;
+  color:var(--fg-faint);
+}
+footer p{max-width:none}
+
+@media (max-width:520px){
+  .sec-head{gap:11px}
+  .fx{font-size:.94rem}
+  .ex > .q,.ex > .a{padding:14px 15px}
+}
+@media print{
+  body{background:#fff}
+  nav.toc{break-inside:avoid}
+  .ex,.formula,.callout,.card{break-inside:avoid}
+  section{break-before:auto}
+}
+</style>
+
+<style>
+/* Chapter 3: denser setting so pages carry more per sheet */
+body{font-size:14.5px;line-height:1.55}
+p,ul,ol{max-width:none}
+p{margin:0 0 9px}
+li{margin-bottom:4px}
+.masthead{padding-block:34px 18px;margin-bottom:20px}
+section{margin-bottom:30px}
+.sec-head{margin-bottom:16px;padding-bottom:10px}
+h3{margin:22px 0 8px;font-size:1.02rem}
+h4{margin:14px 0 6px}
+.formula{padding:11px 14px;margin:10px 0 12px}
+.formula .fx{margin:1px 0;line-height:1.9}
+.ex{margin:10px 0}
+.ex > .q,.ex > .a{padding:10px 14px}
+.ex .steps li{margin-bottom:5px}
+.callout{padding:10px 13px;margin:10px 0;font-size:.93rem}
+.ar-note{padding:9px 13px;margin:9px 0;line-height:1.8;font-size:.93rem}
+.tbl-wrap{margin:8px 0 12px}
+th,td{padding:6px 10px}
+table{font-size:.9rem;min-width:0}
+figure.dg{margin:12px 0 14px;padding:10px 10px 8px}
+figure.dg figcaption{margin-top:6px;font-size:.84rem}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+.cols2 > *{min-width:0}
+.cols2 .ex{margin:0}
+@media (max-width:640px){.cols2{grid-template-columns:1fr}}
+/* let long formulas wrap inside narrow columns instead of being clipped */
+.fx,.ex .fx,.cols2 .fx,.a .fx{white-space:normal;overflow-x:visible}
+footer{margin-top:10px;padding-top:12px;font-size:.78rem}footer p{margin:0 0 4px}
+/* allow tall example cards to split across pages so no half-empty pages */
+@media print{.ex,.a.long{break-inside:auto!important;page-break-inside:auto!important}.a:not(.long){break-inside:avoid!important}.ex > .q{break-inside:avoid}.cols2{break-inside:auto}}
+.series{list-style:none;padding:0;margin:8px 0 12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2px 22px;max-width:none}
+.series li{margin:0;padding:3px 0;border-bottom:1px solid var(--rule-soft);font-size:.82rem;color:var(--fg-faint)}
+.series li.here{color:var(--fg);font-weight:600}
+.series li.here::after{content:"  ← this file";color:var(--accent);font-weight:500}
+.src{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-faint);border:1px solid var(--rule);border-radius:3px;padding:0 5px;margin-left:6px;white-space:nowrap;font-weight:500}
+</style>
+<style>
+.q{background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:10px 13px;margin:0 0 9px;display:flex;gap:11px;align-items:flex-start;break-inside:avoid}
+.q .id,.a .id{font-family:var(--mono);font-size:.74rem;font-weight:600;color:#fff;background:var(--sec,var(--fg));padding:3px 7px;border-radius:3px;flex:none;min-width:2.6em;text-align:center}
+.q .bd{min-width:0;flex:1}.q .bd p{margin:6px 0 0}
+.tag{font-family:var(--mono);font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;color:var(--sec,var(--fg));border:1px solid currentColor;border-radius:20px;padding:0 7px;display:inline-block;font-weight:600}
+.opts{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:3px 16px}.opts li{margin:0;font-size:.9rem}
+.subs{margin:6px 0 0;padding-left:1.3em}.subs li{margin-bottom:3px}
+.a{background:var(--surface);border:1px solid var(--rule);border-left:4px solid var(--sec,var(--fg));border-radius:4px;padding:10px 13px;margin:0 0 9px}
+.a:not(.long){break-inside:avoid}
+.a .ahead{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px}
+.a p{margin:0 0 6px}.a p:last-child{margin-bottom:0}
+.why{font-size:.88rem;color:var(--fg-soft);border-top:1px dashed var(--rule);padding-top:6px;margin-top:6px}
+.lead{color:var(--fg-soft);font-size:.92rem;margin:0 0 10px}
+@media (max-width:640px){.opts{grid-template-columns:1fr}}
+</style>
+<div class="wrap">
+<header class="masthead">
+  <p class="eyebrow">Sultan Qaboos University · STAT 2101 · Chapter 2: Frequency Distributions and Graphs</p>
+  <div class="meta-strip"><span class="chip"><strong>Every</strong> step shown</span><span class="chip"><strong>File</strong> 7 / 7</span></div>
+</header>
+<section style="--sec:var(--accent);--wash:var(--accent-wash)"><div class="sec-head"><span class="sec-num">ANS</span><h2>Chapter 2 full worked answers<span class="ar">الإجابات الكاملة: افتحه بعد حل ملف الأسئلة</span></h2></div>
+<p>Each answer gives the result, the reason a marker looks for, and in the <span class="v">why</span> lines the trap the question was built on. Numeric answers were computed by code from the question data.</p></section>
+<section style="--sec:var(--ink-1);--wash:var(--ink-1-wash)"><h3 class="grp">Part A · Concept and interpretation (multiple choice)</h3><p class="lead">Give the letter and a one-line reason.</p><div class="a"><div class="ahead"><span class="id">A1</span><span class="tag">2-1</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-B</span></div><p><span class="ans">(c)</span></p><p class="why">Width = UCL − LCL + 1 = 44 − 35 + 1 = 10 (or the next LCL − this LCL = 45 − 35). The value 9 is the classic trap.</p></div><div class="a"><div class="ahead"><span class="id">A2</span><span class="tag">2-1</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-B</span></div><p><span class="ans">(c)</span></p><p class="why">42/6 = 7 exactly, but the width is rounded <strong>up</strong> even from a whole number. With width 7, six classes cover only 18–59 and miss the value 60.</p></div><div class="a"><div class="ahead"><span class="id">A3</span><span class="tag">2-1</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-B</span></div><p><span class="ans">(d)</span></p><p class="why">A class with no values stays in the table with f = 0.</p></div><div class="a"><div class="ahead"><span class="id">A4</span><span class="tag">2-1</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-B</span></div><p><span class="ans">(b)</span></p><p class="why">f = RF × n = 0.15 × 60 = 9.</p></div><div class="a"><div class="ahead"><span class="id">A5</span><span class="tag">2-2</span> <span class="tag" style="--sec:var(--fg-faint)">CLO3-A</span></div><p><span class="ans">(c)</span></p><p class="why">Midpoints for polygons; boundaries for histograms; upper boundaries for ogives.</p></div><div class="a"><div class="ahead"><span class="id">A6</span><span class="tag">2-2</span> <span class="tag" style="--sec:var(--fg-faint)">CLO3-A</span></div><p><span class="ans">(b)</span></p><p class="why">The line starts at zero on the first lower class boundary.</p></div><div class="a"><div class="ahead"><span class="id">A7</span><span class="tag">2-2</span> <span class="tag" style="--sec:var(--fg-faint)">CLO3-B</span></div><p><span class="ans">(b)</span></p><p class="why">The cumulative frequency does not increase across the class, so no values fall in it (the 52.5–60.5 drivers class).</p></div><div class="a"><div class="ahead"><span class="id">A8</span><span class="tag">2-2</span> <span class="tag" style="--sec:var(--fg-faint)">CLO3-B</span></div><p><span class="ans">(b)</span></p><p class="why">Skew is named after the long tail, here on the right.</p></div><div class="a"><div class="ahead"><span class="id">A9</span><span class="tag">2-3</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-C</span></div><p><span class="ans">(c)</span></p><p class="why">Nationality is qualitative (nominal), so a bar graph or pie chart. Histograms and ogives need quantitative classes.</p></div><div class="a"><div class="ahead"><span class="id">A10</span><span class="tag">2-3</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-C</span></div><p><span class="ans">(c)</span></p><p class="why">0.15 × 360° = 54°.</p></div><div class="a"><div class="ahead"><span class="id">A11</span><span class="tag">2-3</span> <span class="tag" style="--sec:var(--fg-faint)">CLO3-B</span></div><p><span class="ans">(c)</span></p><p class="why">A section's frequency is its top minus its bottom: 35 − 20.</p></div><div class="a"><div class="ahead"><span class="id">A12</span><span class="tag">2-3</span> <span class="tag" style="--sec:var(--fg-faint)">CLO3-A</span></div><p><span class="ans">(c)</span></p><p class="why">Same place values as the key: stem tenths, leaf hundredths.</p></div></section>
+<section style="--sec:var(--ink-2);--wash:var(--ink-2-wash)"><h3 class="grp">Part B · Short exam problems by lesson</h3><p class="lead">Construction, completing tables, reading graphs, choosing graphs, find-the-mistake.</p><div class="a"><div class="ahead"><span class="id">B1</span><span class="tag">2-1</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-B</span></div><p>R = 47 − 12 = 35; width = 35/5 = 7, a whole number, but still rounded <strong>up</strong> to <span class="ans">8</span>. With width 7, the five classes would end at 46 and miss 47.</p><div class="tbl-wrap"><table><thead><tr><th>Limits</th><th>Boundaries</th><th>f</th><th>RF</th><th>CF</th></tr></thead><tbody><tr><td class="num">12–19</td><td class="num">11.5–19.5</td><td class="num">5</td><td class="num">0.167</td><td class="num">5</td></tr><tr><td class="num">20–27</td><td class="num">19.5–27.5</td><td class="num">9</td><td class="num">0.3</td><td class="num">14</td></tr><tr><td class="num">28–35</td><td class="num">27.5–35.5</td><td class="num">9</td><td class="num">0.3</td><td class="num">23</td></tr><tr><td class="num">36–43</td><td class="num">35.5–43.5</td><td class="num">4</td><td class="num">0.133</td><td class="num">27</td></tr><tr><td class="num">44–51</td><td class="num">43.5–51.5</td><td class="num">3</td><td class="num">0.1</td><td class="num">30</td></tr></tbody></table></div><p>Check: Σf = 30 = n ✓. The last class reaches 51 ≥ 47 ✓.</p></div><div class="a"><div class="ahead"><span class="id">B2</span><span class="tag">2-1</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-B</span></div><p>f₂ = 11 − 3 = <span class="ans">8</span>; CF₃ = 11 + 12 = <span class="ans">23</span>; f₄ = 36 − 23 = <span class="ans">13</span>; f₅ = 40 − 36 = <span class="ans">4</span>. RF: 0.075, 0.2, 0.3, 0.325, 0.1 (sum 1).</p><p>Below 39.5 = CF of the third class: 23/40 = <span class="ans">57.5%</span>.</p></div><div class="a"><div class="ahead"><span class="id">B3</span><span class="tag">2-1</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-B</span></div><p>Limits: <span class="ans">16–20, 21–25, 26–30, 31–35</span> (add and subtract 0.5). Width <span class="ans">5</span> (= 20.5 − 15.5). Midpoints <span class="ans">18, 23, 28, 33</span>.</p></div><div class="a"><div class="ahead"><span class="id">B4</span><span class="tag">2-1</span> <span class="tag">2-3</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-B · CLO3-B</span></div><div class="tbl-wrap"><table><thead><tr><th>Major</th><th>f</th><th>%</th><th>degrees</th></tr></thead><tbody><tr><td class="num">Statistics</td><td class="num">9</td><td class="num">22.5</td><td class="num">81°</td></tr><tr><td class="num">Mathematics</td><td class="num">12</td><td class="num">30</td><td class="num">108°</td></tr><tr><td class="num">Physics</td><td class="num">6</td><td class="num">15</td><td class="num">54°</td></tr><tr><td class="num">Chemistry</td><td class="num">8</td><td class="num">20</td><td class="num">72°</td></tr><tr><td class="num">Biology</td><td class="num">5</td><td class="num">12.5</td><td class="num">45°</td></tr><tr><td class="num"><strong>Total</strong></td><td class="num">40</td><td class="num">100</td><td class="num">360°</td></tr></tbody></table></div><p><span class="ans">Mathematics is the most common major (30%)</span>, while Biology is the least (12.5%).</p></div><div class="a"><div class="ahead"><span class="id">B5</span><span class="tag">2-2</span> <span class="tag" style="--sec:var(--fg-faint)">CLO3-B</span></div><p>(a) 50 − 28 = <span class="ans">22 states</span>. (b) (48 − 10)/50 = <span class="ans">76%</span>. (c) <span class="ans">109.5–114.5</span> (18 states): the ogive's steepest segment.</p></div><div class="a"><div class="ahead"><span class="id">B6</span><span class="tag">2-2</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-C</span></div><p>(a) Midpoints with the extra empty classes: <span class="ans">(14.5, 0), (24.5, 4), (34.5, 9), (44.5, 15), (54.5, 7), (64.5, 5), (74.5, 0)</span>.</p><p>(b) Upper boundaries with CF, starting at the first lower boundary: <span class="ans">(19.5, 0), (29.5, 4), (39.5, 13), (49.5, 28), (59.5, 35), (69.5, 40)</span>.</p></div><div class="a"><div class="ahead"><span class="id">B7</span><span class="tag">2-2</span> <span class="tag" style="--sec:var(--fg-faint)">CLO3-B</span></div><p>(a) <span class="ans">bell-shaped</span> (b) <span class="ans">reverse J-shaped</span>: highest at the left and falling steadily (c) <span class="ans">U-shaped</span> (d) <span class="ans">bimodal</span> (e) <span class="ans">uniform</span></p></div><div class="a"><div class="ahead"><span class="id">B8</span><span class="tag">2-2</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-C · CLO3-A</span></div><p>(1) The x-axis must show <strong>boundaries</strong> (99.5, 104.5, …), not limits. (2) Histogram bars must <strong>touch</strong>. (3) Title and axis labels are required. (4) A frequency axis should start at 0. If an axis doesn't start at 0, mark the break with a zig-zag.</p></div><div class="a"><div class="ahead"><span class="id">B9</span><span class="tag">2-3</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-C</span></div><div class="tbl-wrap"><table><thead><tr><th>Mode</th><th>f</th><th>%</th><th>degrees</th></tr></thead><tbody><tr><td class="num">Bus</td><td class="num">14</td><td class="num">35</td><td class="num">126°</td></tr><tr><td class="num">Car</td><td class="num">18</td><td class="num">45</td><td class="num">162°</td></tr><tr><td class="num">Walk</td><td class="num">5</td><td class="num">12.5</td><td class="num">45°</td></tr><tr><td class="num">Taxi</td><td class="num">3</td><td class="num">7.5</td><td class="num">27°</td></tr></tbody></table></div><p><span class="ans">Car and bus: 32/40 = 80%, i.e. 288°</span>.</p></div><div class="a"><div class="ahead"><span class="id">B10</span><span class="tag">2-3</span> <span class="tag" style="--sec:var(--fg-faint)">CLO3-B</span></div><div class="tbl-wrap"><table><thead><tr><th>Year</th><th>Males</th><th>Females</th><th>Total</th></tr></thead><tbody><tr><td class="num">1</td><td class="num">14</td><td class="num">25 − 14 = 11</td><td class="num">25</td></tr><tr><td class="num">2</td><td class="num">18</td><td class="num">34 − 18 = 16</td><td class="num">34</td></tr><tr><td class="num">3</td><td class="num">22</td><td class="num">40 − 22 = 18</td><td class="num">40</td></tr></tbody></table></div><p><span class="ans">Enrolment grows every year (25 → 40)</span>, and males outnumber females each year.</p></div><div class="a"><div class="ahead"><span class="id">B11</span><span class="tag">2-3</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-C · CLO3-B</span></div><p class="fx" style="white-space:pre;line-height:1.5">1 | 3 5 8
+2 | 0 2 2 4 7 9
+3 | 1 3 4 4 6 8
+4 | 1 5      key: 1 | 3 = 1.3 s</p><p>Leaf counts 3, 6, 6, 2: <span class="ans">roughly symmetric (mound-shaped)</span>, with the peak of <span class="ans">6</span> values at stems 2 and 3.</p></div><div class="a"><div class="ahead"><span class="id">B12</span><span class="tag">2-3</span> <span class="tag" style="--sec:var(--fg-faint)">CLO3-B</span></div><p><span class="ans">Upward trend</span>: sales rose from 42 to 71 (+29), with a single dip in April. The fastest change was <span class="ans">May to June (+8)</span>, the steepest segment.</p></div><div class="a"><div class="ahead"><span class="id">B13</span><span class="tag">2-2</span> <span class="tag">2-3</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-C</span></div><p>(a) <span class="ans">time series</span>: change over time (b) <span class="ans">bar graph</span>: categorical (c) <span class="ans">histogram</span> (or frequency polygon): quantitative shape (d) <span class="ans">pie</span>: parts of a whole (e) <span class="ans">ogive</span>: counts below a value</p></div></section>
+<section style="--sec:var(--ink-3);--wash:var(--ink-3-wash)"><h3 class="grp">Part C · Long structured questions</h3><p class="lead">Full table-to-graph workups. Marks in brackets.</p><div class="a long"><div class="ahead"><span class="id">C1</span><span class="tag">2-1</span> <span class="tag">2-2</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-B · CLO2-C · CLO3-B</span> <strong>[16 marks]</strong></div><p><strong>1.</strong> R = 44 − 27 = 17; width = 2.833 → <span class="ans">3</span>.</p><div class="tbl-wrap"><table><thead><tr><th>Limits</th><th>Boundaries</th><th>Midpoint</th><th>f</th><th>RF</th><th>CF</th><th>CRF</th></tr></thead><tbody><tr><td class="num">27–29</td><td class="num">26.5–29.5</td><td class="num">28</td><td class="num">2</td><td class="num">0.05</td><td class="num">2</td><td class="num">0.05</td></tr><tr><td class="num">30–32</td><td class="num">29.5–32.5</td><td class="num">31</td><td class="num">3</td><td class="num">0.075</td><td class="num">5</td><td class="num">0.125</td></tr><tr><td class="num">33–35</td><td class="num">32.5–35.5</td><td class="num">34</td><td class="num">11</td><td class="num">0.275</td><td class="num">16</td><td class="num">0.4</td></tr><tr><td class="num">36–38</td><td class="num">35.5–38.5</td><td class="num">37</td><td class="num">14</td><td class="num">0.35</td><td class="num">30</td><td class="num">0.75</td></tr><tr><td class="num">39–41</td><td class="num">38.5–41.5</td><td class="num">40</td><td class="num">7</td><td class="num">0.175</td><td class="num">37</td><td class="num">0.925</td></tr><tr><td class="num">42–44</td><td class="num">41.5–44.5</td><td class="num">43</td><td class="num">3</td><td class="num">0.075</td><td class="num">40</td><td class="num">1</td></tr></tbody></table></div><p><strong>2.</strong> Modal class <span class="ans">36–38</span> (f = 14). The frequencies 2, 3, 11, 14, 7, 3 rise to one central peak and fall away: <span class="ans">roughly bell-shaped</span>.</p><p><strong>3.</strong> CF at 35.5 = <span class="ans">16 days</span>, i.e. 40%.</p><p><strong>4.</strong> Histogram: boundaries 26.5, 29.5, …, 44.5. Polygon: midpoints 25 (extra), 28, 31, 34, 37, 40, 43, 46 (extra). Ogive: 26.5 (CF 0), then each upper boundary.</p></div><div class="a long"><div class="ahead"><span class="id">C2</span><span class="tag">2-1</span> <span class="tag">2-2</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-B · CLO3-B</span> <strong>[10 marks]</strong></div><p><strong>1.</strong> Width <span class="ans">10</span>; limits <span class="ans">30–39, 40–49, 50–59, 60–69, 70–79</span>; n = <span class="ans">40</span>.</p><p><strong>2.</strong> Midpoints 34.5, 44.5, 54.5, 64.5, 74.5; RF 0.10, 0.175, 0.325, 0.25, 0.15.</p><p><strong>3.</strong> (4 + 7 + 13)/40 = <span class="ans">60%</span>.</p><p><strong>4.</strong> <span class="ans">49.5–59.5</span>: it holds the largest frequency (13), so the CF climbs fastest there.</p></div><div class="a long"><div class="ahead"><span class="id">C3</span><span class="tag">2-1</span> <span class="tag">2-3</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-B · CLO2-C · CLO3-C</span> <strong>[12 marks]</strong></div><div class="tbl-wrap"><table><thead><tr><th>Place</th><th>f</th><th>%</th><th>degrees</th><th>Males</th><th>Females</th></tr></thead><tbody><tr><td class="num">Library</td><td class="num">21</td><td class="num">35</td><td class="num">126°</td><td class="num">9</td><td class="num">12</td></tr><tr><td class="num">Home</td><td class="num">18</td><td class="num">30</td><td class="num">108°</td><td class="num">11</td><td class="num">7</td></tr><tr><td class="num">Café</td><td class="num">9</td><td class="num">15</td><td class="num">54°</td><td class="num">4</td><td class="num">5</td></tr><tr><td class="num">Lab</td><td class="num">12</td><td class="num">20</td><td class="num">72°</td><td class="num">6</td><td class="num">6</td></tr><tr><td class="num"><strong>Total</strong></td><td class="num">60</td><td class="num">100</td><td class="num">360°</td><td class="num">30</td><td class="num">30</td></tr></tbody></table></div><p><strong>3.</strong> Grouped: two bars side by side (male, female) for each place. Stacked: one bar per place of total height f, split into a male section and a female section on top.</p><p><strong>4.</strong> <span class="ans">The library is the most popular place (35%)</span>; <span class="ans">home is preferred more by males (11 vs 7), the library more by females (12 vs 9)</span>.</p></div></section>
+<section style="--sec:var(--ink-4);--wash:var(--ink-4-wash)"><h3 class="grp">Part D · True / false with justification</h3><p class="lead">The justification is the mark.</p><div class="a"><div class="ahead"><span class="id">D1</span><span class="tag">2-1</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-B · CLO3-A</span></div><p><span class="ans">False</span>. Classes must be continuous, so the empty class stays with f = 0.</p></div><div class="a"><div class="ahead"><span class="id">D2</span><span class="tag">2-1</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-B · CLO3-A</span></div><p><span class="ans">False</span>. Round up even from a whole number, to 7. Otherwise the largest value falls outside the last class.</p></div><div class="a"><div class="ahead"><span class="id">D3</span><span class="tag">2-2</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-B · CLO3-A</span></div><p><span class="ans">False</span>. Cumulative frequency never decreases. It is flat when a class is empty.</p></div><div class="a"><div class="ahead"><span class="id">D4</span><span class="tag">2-2</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-B · CLO3-A</span></div><p><span class="ans">False</span>. A histogram shows quantitative classes on a number line with touching bars; a bar graph shows categories with separated bars.</p></div><div class="a"><div class="ahead"><span class="id">D5</span><span class="tag">2-3</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-B · CLO3-A</span></div><p><span class="ans">True</span>. Every value can be read back from its stem and leaf, which a histogram cannot do.</p></div><div class="a"><div class="ahead"><span class="id">D6</span><span class="tag">2-3</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-B · CLO3-A</span></div><p><span class="ans">True</span>. The parts must make up the whole circle.</p></div><div class="a"><div class="ahead"><span class="id">D7</span><span class="tag">2-2</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-B · CLO3-A</span></div><p><span class="ans">False</span>. Every bar is divided by the same n, so only the y-scale changes.</p></div><div class="a"><div class="ahead"><span class="id">D8</span><span class="tag">2-1</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-B · CLO3-A</span></div><p><span class="ans">False</span>. That gives 9 for the class 20.5–28.5, whose width is 8. Use UCB − LCB, or UCL − LCL + 1.</p></div></section>
+<section style="--sec:var(--accent);--wash:var(--accent-wash)"><h3 class="grp">Part F · In-Class Quiz I simulation, Chapter 2 part (15 marks · 15 minutes)</h3><p class="lead">Closed book, calculator allowed.</p><div class="a"><div class="ahead"><span class="id">F1</span><span class="tag">2-1</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-B</span></div><p>45/5 = 9, a whole number, so rounded up to <span class="ans">10</span>. Classes <span class="ans">47–56 (46.5–56.5)</span> and <span class="ans">57–66 (56.5–66.5)</span>.</p></div><div class="a"><div class="ahead"><span class="id">F2</span><span class="tag">2-1</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-B</span></div><p>CF₃ = <span class="ans">32</span>; CRF₃ = <span class="ans">0.8</span>; RF₄ = 8/40 = <span class="ans">0.2</span>.</p></div><div class="a"><div class="ahead"><span class="id">F3</span><span class="tag">2-2</span> <span class="tag" style="--sec:var(--fg-faint)">CLO3-A</span></div><p>Histogram: boundaries <span class="ans">119.5–129.5</span>; polygon: midpoint <span class="ans">124.5</span>; ogive: upper boundary <span class="ans">129.5</span>.</p></div><div class="a"><div class="ahead"><span class="id">F4</span><span class="tag">2-3</span> <span class="tag" style="--sec:var(--fg-faint)">CLO2-C</span></div><p>27/120 = <span class="ans">22.5%</span>; 0.225 × 360 = <span class="ans">81°</span>.</p></div><div class="a"><div class="ahead"><span class="id">F5</span><span class="tag">2-3</span> <span class="tag" style="--sec:var(--fg-faint)">CLO3-B</span></div><p>n = 2 + 4 + 7 + 4 + 1 = <span class="ans">18</span>; peak <span class="ans">7 values in the 60s</span>; <span class="ans">roughly bell-shaped (symmetric)</span>.</p></div></section>
+<footer>
+  <p><strong>Chapter 2 study set: 7 files.</strong> One merged source built from Dr. Amani Al-Rubkhi's Fall 2026 notes (course coordinator) and Dr. Ahmed Al-Hadhrami's slide pack, aligned to the SQU STAT 2101 course outline (Fall 2026). Textbook: Bluman, <em>Elementary Statistics</em>, 10th ed.</p>
+  <p>00 · Exam brief · 01 · Lesson 2-1: Organizing Data · 02 · Lesson 2-2: Histograms, Frequency Polygons, Ogives · 03 · Lesson 2-3: Other Types of Graphs · 04 · Revision pack · 05 · Exam-style questions · <strong style="color:var(--accent)">06 · Full worked answers</strong></p>
+</footer>
+</div>

@@ -1,0 +1,1031 @@
+<title>Lesson 1-3 Sampling Techniques</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+
+<style>
+/* Layout: single reading column with a sticky rail nav; four section inks mirror the
+   overprint of a Venn diagram — the chapter's own governing picture. */
+:root{
+  --bg:#fbfaf7;
+  --surface:#ffffff;
+  --surface-2:#f2f1ec;
+  --fg:#1b2027;
+  --fg-soft:#4c5663;
+  --fg-faint:#78828f;
+  --rule:#dddcd4;
+  --rule-soft:#eceae3;
+
+  --ink-1:#1f4e79;   /* 4-1  sample spaces      */
+  --ink-2:#0f6f5c;   /* 4-2  addition rules     */
+  --ink-3:#9a5b12;   /* 4-3  multiplication     */
+  --ink-4:#7b2d6b;   /* 4-4 / 4-5 counting      */
+  --accent:#b23b2e;  /* alarms, traps, must-know */
+
+  --ink-1-wash:#eaf0f7;
+  --ink-2-wash:#e5f1ee;
+  --ink-3-wash:#f8efe1;
+  --ink-4-wash:#f4e9f2;
+  --accent-wash:#f9eae7;
+
+  --display:"Spectral",Georgia,"Times New Roman",serif;
+  --body:"IBM Plex Sans","IBM Plex Sans Arabic",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --arabic:"IBM Plex Sans Arabic","IBM Plex Sans",-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  --measure:70ch;
+  --shadow:0 1px 2px rgba(27,32,39,.05),0 8px 24px -16px rgba(27,32,39,.25);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#13171c;
+    --surface:#1a1f26;
+    --surface-2:#222932;
+    --fg:#e8e6e0;
+    --fg-soft:#b3bac4;
+    --fg-faint:#8a929e;
+    --rule:#333b45;
+    --rule-soft:#272e37;
+
+    --ink-1:#7bb0e8;
+    --ink-2:#4fc4a8;
+    --ink-3:#e2a74e;
+    --ink-4:#d089c2;
+    --accent:#ef7f70;
+
+    --ink-1-wash:#182633;
+    --ink-2-wash:#132a26;
+    --ink-3-wash:#2b2314;
+    --ink-4-wash:#2a1b28;
+    --accent-wash:#2f1c19;
+
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#13171c;
+  --surface:#1a1f26;
+  --surface-2:#222932;
+  --fg:#e8e6e0;
+  --fg-soft:#b3bac4;
+  --fg-faint:#8a929e;
+  --rule:#333b45;
+  --rule-soft:#272e37;
+
+  --ink-1:#7bb0e8;
+  --ink-2:#4fc4a8;
+  --ink-3:#e2a74e;
+  --ink-4:#d089c2;
+  --accent:#ef7f70;
+
+  --ink-1-wash:#182633;
+  --ink-2-wash:#132a26;
+  --ink-3-wash:#2b2314;
+  --ink-4-wash:#2a1b28;
+  --accent-wash:#2f1c19;
+
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{
+  max-width:980px;
+  margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 72px;
+}
+
+/* ---------- masthead ---------- */
+.masthead{
+  padding-block:56px 36px;
+  border-bottom:3px double var(--rule);
+  margin-bottom:36px;
+}
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+}
+h1{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(2.1rem,6vw,3.4rem);
+  line-height:1.08;
+  margin:0 0 10px;
+  letter-spacing:-.015em;
+  text-wrap:balance;
+}
+.subtitle{
+  font-family:var(--display);
+  font-style:italic;
+  font-size:clamp(1.05rem,2.6vw,1.3rem);
+  color:var(--fg-soft);
+  margin:0 0 22px;
+  max-width:var(--measure);
+}
+.meta-strip{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 10px;
+  margin-top:20px;
+}
+.chip{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.04em;
+  padding:5px 10px;
+  border:1px solid var(--rule);
+  border-radius:3px;
+  color:var(--fg-soft);
+  background:var(--surface);
+}
+.chip strong{color:var(--fg);font-weight:600}
+
+/* ---------- nav ---------- */
+nav.toc{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:20px 22px;
+  margin-bottom:44px;
+  box-shadow:var(--shadow);
+}
+nav.toc h2{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+  font-weight:500;
+}
+nav.toc ol{
+  margin:0;padding:0;list-style:none;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:4px 26px;
+}
+nav.toc li{min-width:0}
+nav.toc a{
+  display:flex;
+  gap:10px;
+  align-items:baseline;
+  text-decoration:none;
+  color:var(--fg);
+  padding:5px 0;
+  border-bottom:1px solid var(--rule-soft);
+  font-size:.92rem;
+}
+nav.toc a:hover{color:var(--accent)}
+nav.toc a .num{
+  font-family:var(--mono);
+  font-size:.74rem;
+  color:var(--fg-faint);
+  flex:none;
+  min-width:2.4em;
+}
+
+/* ---------- sections ---------- */
+section{margin-bottom:64px;scroll-margin-top:24px}
+.sec-head{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+  padding-bottom:14px;
+  border-bottom:2px solid var(--sec,var(--fg));
+  margin-bottom:28px;
+}
+.sec-num{
+  font-family:var(--mono);
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.06em;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:5px 9px;
+  border-radius:3px;
+  flex:none;
+  margin-top:6px;
+}
+.sec-head h2{
+  font-family:var(--display);
+  font-size:clamp(1.5rem,4vw,2.05rem);
+  line-height:1.18;
+  margin:0;
+  font-weight:600;
+  text-wrap:balance;
+  min-width:0;
+}
+.sec-head .ar{
+  display:block;
+  font-family:var(--arabic);
+  font-size:.92rem;
+  font-style:normal;
+  color:var(--fg-soft);
+  direction:rtl;
+  margin-top:4px;
+  font-weight:400;
+}
+h3{
+  font-family:var(--body);
+  font-size:1.08rem;
+  font-weight:600;
+  letter-spacing:-.005em;
+  margin:36px 0 12px;
+  color:var(--fg);
+  display:flex;
+  align-items:baseline;
+  gap:9px;
+  flex-wrap:wrap;
+}
+h3::before{
+  content:"";
+  width:18px;height:3px;
+  background:var(--sec,var(--fg));
+  flex:none;
+  border-radius:2px;
+}
+h4{
+  font-family:var(--mono);
+  font-size:.74rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:26px 0 10px;
+  font-weight:500;
+}
+p{margin:0 0 14px;max-width:var(--measure)}
+ul,ol{max-width:var(--measure);padding-left:1.25em;margin:0 0 14px}
+li{margin-bottom:7px}
+li::marker{color:var(--sec,var(--fg-faint))}
+strong{font-weight:600}
+em{font-style:italic}
+code,.v{
+  font-family:var(--mono);
+  font-size:.9em;
+  background:var(--surface-2);
+  padding:1px 5px;
+  border-radius:3px;
+  white-space:nowrap;
+}
+.term{
+  font-weight:600;
+  color:var(--sec,var(--fg));
+}
+a{color:var(--accent)}
+
+/* ---------- maths ---------- */
+.fx{
+  font-family:var(--mono);
+  font-size:1.02rem;
+  line-height:2.1;
+  white-space:nowrap;
+}
+.frac{
+  display:inline-flex;
+  flex-direction:column;
+  vertical-align:middle;
+  text-align:center;
+  font-family:var(--mono);
+  line-height:1.25;
+  margin:0 .22em;
+  position:relative;
+  top:-.08em;
+}
+.frac .num{border-bottom:1.5px solid currentColor;padding:0 .4em .08em}
+.frac .den{padding:.08em .4em 0}
+sub,sup{font-size:.72em}
+
+.formula{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-left:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:18px 20px;
+  margin:18px 0 22px;
+  box-shadow:var(--shadow);
+  overflow-x:auto;
+}
+.formula .label{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg-faint));
+  margin-bottom:10px;
+  font-weight:600;
+}
+.formula .fx{margin:4px 0}
+.formula .note{
+  font-size:.88rem;
+  color:var(--fg-soft);
+  margin:10px 0 0;
+  white-space:normal;
+  max-width:none;
+}
+
+/* ---------- example cards ---------- */
+.ex{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:5px;
+  margin:20px 0;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.ex > .q{
+  padding:16px 20px;
+  border-bottom:1px dashed var(--rule);
+  background:var(--wash,var(--surface-2));
+}
+.ex .tag{
+  font-family:var(--mono);
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg));
+  display:block;
+  margin-bottom:6px;
+}
+.ex .q p{margin:0;max-width:none}
+.ex > .a{padding:16px 20px}
+.ex > .a p{max-width:none}
+.ex > .a p:last-child{margin-bottom:0}
+.ex .steps{margin:0;padding-left:1.2em;max-width:none}
+.ex .steps li{margin-bottom:9px}
+.ans{
+  display:inline-block;
+  font-family:var(--mono);
+  font-weight:600;
+  background:var(--sec,var(--fg));
+  color:#fff;
+  padding:3px 9px;
+  border-radius:3px;
+  font-size:.92em;
+  white-space:nowrap;
+}
+
+/* ---------- callouts ---------- */
+.callout{
+  border-radius:4px;
+  padding:16px 18px;
+  margin:20px 0;
+  border:1px solid;
+  font-size:.95rem;
+}
+.callout p{max-width:none}
+.callout p:last-child{margin-bottom:0}
+.callout .ct{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-weight:600;
+  display:block;
+  margin-bottom:8px;
+}
+.trap{background:var(--accent-wash);border-color:var(--accent)}
+.trap .ct{color:var(--accent)}
+.tip{background:var(--ink-2-wash);border-color:var(--ink-2)}
+.tip .ct{color:var(--ink-2)}
+.note{background:var(--surface-2);border-color:var(--rule)}
+.note .ct{color:var(--fg-faint)}
+
+.ar-note{
+  font-family:var(--arabic);
+  direction:rtl;
+  text-align:right;
+  background:var(--surface-2);
+  border-right:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:13px 16px;
+  margin:16px 0;
+  font-size:.96rem;
+  line-height:1.95;
+  color:var(--fg-soft);
+}
+.ar-note b{color:var(--fg);font-weight:600}
+.ar-note .lbl{
+  display:block;
+  font-size:.72rem;
+  letter-spacing:.04em;
+  color:var(--sec,var(--fg-faint));
+  font-weight:600;
+  margin-bottom:4px;
+}
+.ar-note ul{padding-right:1.2em;padding-left:0;margin:6px 0 0;max-width:none}
+
+.ar-note p{margin:0 0 7px;max-width:none}
+.ar-note p:last-child{margin-bottom:0}
+.ar-note ol{padding-right:1.3em;padding-left:0;margin:6px 0 0;max-width:none}
+.ar-note li{margin-bottom:5px}
+.ar-note .v{font-size:.84em}
+.arn{display:block;font-family:var(--arabic);direction:rtl;unicode-bidi:isolate;text-align:left;font-size:.84rem;color:var(--fg-soft);font-weight:500;margin-top:2px;line-height:1.5}
+.subtitle-ar{font-family:var(--arabic);direction:rtl;text-align:right;color:var(--fg-soft);font-size:1.02rem;margin:0 0 8px;max-width:none;line-height:1.9}
+
+/* ---------- diagrams ---------- */
+figure.dg{margin:22px 0 26px;padding:16px 14px 12px;background:var(--surface);border:1px solid var(--rule);border-radius:4px;break-inside:avoid;page-break-inside:avoid}
+figure.dg svg{display:block;width:100%;height:auto;margin:0 auto;color:var(--fg);overflow:visible}
+figure.dg figcaption{font-size:.86rem;color:var(--fg-soft);margin:10px auto 0;max-width:64ch;text-align:center;line-height:1.5}
+figure.dg figcaption .ar{display:block;font-family:var(--arabic);direction:rtl;margin-top:4px;font-size:.9rem}
+.dg .ln{stroke:currentColor;fill:none;stroke-width:1.4}
+.dg .ln-soft{stroke:var(--fg-faint);fill:none;stroke-width:1.2}
+.dg .dash{stroke-dasharray:4 4}
+.dg .thick{stroke-width:2.6}
+.dg text{fill:currentColor;font-family:var(--body);font-size:13px}
+.dg text.m{font-family:var(--mono);font-size:12.5px}
+.dg text.sm{font-size:11.5px}
+.dg text.big{font-family:var(--mono);font-size:19px;font-weight:600}
+.dg text.soft{fill:var(--fg-soft)}
+.dg text.b{font-weight:600}
+.dg .bg{fill:var(--surface)}
+.dg .wash1{fill:var(--ink-1-wash)} .dg .wash2{fill:var(--ink-2-wash)} .dg .wash3{fill:var(--ink-3-wash)} .dg .wash4{fill:var(--ink-4-wash)} .dg .washA{fill:var(--accent-wash)}
+.dg .f1{fill:var(--ink-1)} .dg .f2{fill:var(--ink-2)} .dg .f3{fill:var(--ink-3)} .dg .f4{fill:var(--ink-4)} .dg .fA{fill:var(--accent)}
+.dg .s1{stroke:var(--ink-1)} .dg .s2{stroke:var(--ink-2)} .dg .s3{stroke:var(--ink-3)} .dg .s4{stroke:var(--ink-4)} .dg .sA{stroke:var(--accent)}
+.dg text.t1{fill:var(--ink-1)} .dg text.t2{fill:var(--ink-2)} .dg text.t3{fill:var(--ink-3)} .dg text.t4{fill:var(--ink-4)} .dg text.tA{fill:var(--accent)}
+
+/* ---------- tables ---------- */
+.tbl-wrap{overflow-x:auto;margin:18px 0 22px;-webkit-overflow-scrolling:touch}
+table{
+  border-collapse:collapse;
+  width:100%;
+  min-width:420px;
+  font-size:.93rem;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+}
+caption{
+  caption-side:top;
+  text-align:left;
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  padding-bottom:9px;
+  font-weight:500;
+}
+th,td{
+  padding:9px 13px;
+  border-bottom:1px solid var(--rule-soft);
+  text-align:left;
+  vertical-align:top;
+}
+thead th{
+  background:var(--sec,var(--surface-2));
+  color:#fff;
+  font-weight:600;
+  font-size:.78rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  border-bottom:none;
+}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even){background:var(--surface-2)}
+td.num,th.num{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+
+/* ---------- misc blocks ---------- */
+.grid2{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:16px;
+  margin:18px 0 22px;
+}
+.card{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-top:3px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:16px 18px;
+  min-width:0;
+}
+.card h5{
+  font-family:var(--body);
+  font-size:.97rem;
+  font-weight:600;
+  margin:0 0 8px;
+}
+.card p{font-size:.92rem;margin-bottom:0;max-width:none;color:var(--fg-soft)}
+
+.flow{
+  list-style:none;
+  padding:0;
+  margin:18px 0 22px;
+  max-width:none;
+  display:grid;
+  gap:10px;
+}
+.flow li{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:13px 16px;
+  margin:0;
+}
+.flow .k{
+  font-family:var(--mono);
+  font-size:.73rem;
+  font-weight:600;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:3px 8px;
+  border-radius:3px;
+  flex:none;
+  margin-top:3px;
+  white-space:nowrap;
+}
+.flow .t{min-width:0;font-size:.95rem}
+.flow .t b{display:block;margin-bottom:2px}
+
+.keypad{
+  font-family:var(--mono);
+  font-size:.86rem;
+  background:var(--surface-2);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:4px 9px;
+  display:inline-block;
+  white-space:nowrap;
+}
+
+hr.soft{border:none;border-top:1px solid var(--rule-soft);margin:34px 0}
+
+footer{
+  border-top:3px double var(--rule);
+  padding-top:24px;
+  margin-top:20px;
+  font-size:.86rem;
+  color:var(--fg-faint);
+}
+footer p{max-width:none}
+
+@media (max-width:520px){
+  .sec-head{gap:11px}
+  .fx{font-size:.94rem}
+  .ex > .q,.ex > .a{padding:14px 15px}
+}
+@media print{
+  body{background:#fff}
+  nav.toc{break-inside:avoid}
+  .ex,.formula,.callout,.card{break-inside:avoid}
+  section{break-before:auto}
+}
+</style>
+
+<style>
+/* Chapter 3: denser setting so pages carry more per sheet */
+body{font-size:14.5px;line-height:1.55}
+p,ul,ol{max-width:none}
+p{margin:0 0 9px}
+li{margin-bottom:4px}
+.masthead{padding-block:34px 18px;margin-bottom:20px}
+section{margin-bottom:30px}
+.sec-head{margin-bottom:16px;padding-bottom:10px}
+h3{margin:22px 0 8px;font-size:1.02rem}
+h4{margin:14px 0 6px}
+.formula{padding:11px 14px;margin:10px 0 12px}
+.formula .fx{margin:1px 0;line-height:1.9}
+.ex{margin:10px 0}
+.ex > .q,.ex > .a{padding:10px 14px}
+.ex .steps li{margin-bottom:5px}
+.callout{padding:10px 13px;margin:10px 0;font-size:.93rem}
+.ar-note{padding:9px 13px;margin:9px 0;line-height:1.8;font-size:.93rem}
+.tbl-wrap{margin:8px 0 12px}
+th,td{padding:6px 10px}
+table{font-size:.9rem;min-width:0}
+figure.dg{margin:12px 0 14px;padding:10px 10px 8px}
+figure.dg figcaption{margin-top:6px;font-size:.84rem}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+.cols2 > *{min-width:0}
+.cols2 .ex{margin:0}
+@media (max-width:640px){.cols2{grid-template-columns:1fr}}
+/* let long formulas wrap inside narrow columns instead of being clipped */
+.fx,.ex .fx,.cols2 .fx,.a .fx{white-space:normal;overflow-x:visible}
+footer{margin-top:10px;padding-top:12px;font-size:.78rem}footer p{margin:0 0 4px}
+/* allow tall example cards to split across pages so no half-empty pages */
+@media print{.ex,.a.long{break-inside:auto!important;page-break-inside:auto!important}.a:not(.long){break-inside:avoid!important}.ex > .q{break-inside:avoid}.cols2{break-inside:auto}}
+.series{list-style:none;padding:0;margin:8px 0 12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2px 22px;max-width:none}
+.series li{margin:0;padding:3px 0;border-bottom:1px solid var(--rule-soft);font-size:.82rem;color:var(--fg-faint)}
+.series li.here{color:var(--fg);font-weight:600}
+.series li.here::after{content:"  ← this file";color:var(--accent);font-weight:500}
+.src{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-faint);border:1px solid var(--rule);border-radius:3px;padding:0 5px;margin-left:6px;white-space:nowrap;font-weight:500}
+</style>
+
+<div class="wrap">
+<header class="masthead">
+  <p class="eyebrow">Sultan Qaboos University · STAT 2101 · Chapter 1: The Nature of Probability and Statistics</p>
+  <div class="meta-strip"><span class="chip"><strong>Week</strong> 1</span><span class="chip"><strong>CLO</strong> 1-C</span><span class="chip"><strong>File</strong> 4 / 7</span></div>
+</header>
+<section id="s13" style="--sec:var(--ink-3);--wash:var(--ink-3-wash)">
+  <div class="sec-head">
+    <span class="sec-num">1-3</span>
+    <h2>Data Collection and Sampling Techniques
+      <span class="ar">جمع البيانات وطرق المعاينة — العشوائية البسيطة والمنتظمة والطبقية والعنقودية وأخطاء المعاينة</span>
+    </h2>
+  </div>
+
+  <h3>1 · How data are collected <span class="src">Ahmed · CLO1-C</span></h3>
+  <div class="cols2">
+    <p>The most common method is the <strong>survey</strong>, done by <strong>telephone survey</strong>, <strong>mailed / emailed / online questionnaire</strong>, or <strong>personal interview</strong>. Data can also come from <strong>surveying records</strong>, <strong>direct observation</strong>, <strong>experiments</strong>, <strong>existing data</strong> (online or archived), <strong>census data</strong>, and <strong>simulation</strong>.</p>
+    <p>Dr. Ahmed's sample instrument, an "Academic Performance Scale", has 8 statements rated SA / A / N / D / SD and scored 5, 4, 3, 2, 1. Each item response is <strong>ordinal</strong> (a Likert scale), even though it is scored with numbers.</p>
+  </div>
+
+  <h3>2 · Unbiased sampling: the four methods <span class="src">Both · CLO1-C</span></h3>
+  <p>An <span class="term">unbiased sample</span> gives each subject in the population an equally likely chance of being selected. The four methods are <strong>simple random</strong>, <strong>systematic</strong>, <strong>stratified</strong> and <strong>cluster</strong>.</p>
+
+  <h4>2.1 Simple random sample (SRS)</h4>
+  <div class="cols2">
+    <div><p>Units are selected by chance, so every member of the population has a known, <strong>equal</strong> probability of selection. Three ways to select one: <span class="src">Amani</span></p>
+      <ol style="margin:0"><li><strong>Lottery method</strong>: number the population 1 to N, write each number on paper, mix in a bowl, draw n pieces without replacement. Disadvantages: uneven mixing causes bias; slow and impractical for large N.</li>
+        <li><strong>Random numbers by computer or calculator</strong>: generate n different random numbers between 1 and N, without replacement.</li>
+        <li><strong>Random-number table</strong> (Table D, Appendix A), used before computers.</li></ol></div>
+    <div class="formula" style="margin:0"><div class="label">Using Table D</div>
+      <p class="note" style="margin:0">(1) Number the population from 1 to N. (2) Fix the sample size n. (3) Start at any cell and move in one fixed direction (row by row or column by column). (4) Read numbers with <strong>the same number of digits as N</strong> (N = 950 → 3-digit groups 001–950). (5) Keep going until n different values are collected; <strong>discard any number greater than N, and any duplicate</strong>.</p></div>
+  </div>
+  <p>Row 2 of Table D, used by both lecturers: <span class="v">06512 07836 88456 36313 30879 51323 76451 25578 15986 50845 57015 53684 57054 93261</span></p>
+  <div class="cols2">
+    <div class="ex"><div class="q"><span class="tag">Laptops · N = 4998, n = 10 <span class="src">Ahmed</span></span><p>Number the laptops 0001–4998 (4 digits) and read 4-digit groups from row 2, column 1.</p></div>
+      <div class="a"><p>Groups: 0651 2078 3688 4563 <s>6313</s> 3087 <s>9513</s> 2376 4512 <s>5578</s> 1598 <s>6508</s> 4557 0155 …</p><p>Selected: <span class="ans">0651, 2078, 3688, 4563, 3087, 2376, 4512, 1598, 4557, 0155</span></p></div></div>
+    <div class="ex"><div class="q"><span class="tag">Dinner invitation · choose 9 students <span class="src">Amani</span></span><p>The notes leave N blank. Solve with a class of <strong>N = 65</strong>: 2-digit numbers 01–65, n = 9.</p></div>
+      <div class="a"><p>2-digit groups: 06 51 20 <s>78</s> 36 <s>88</s> 45 63 <s>63</s> 13 30 <s>87</s> <s>95</s> <s>13</s> 23 …</p><p>Selected: <span class="ans">06, 51, 20, 36, 45, 63, 13, 30, 23</span> (the second 63 and second 13 are repeats, so they are skipped). With a different N only the cut-off changes.</p></div></div>
+  </div>
+  <figure class="dg"><svg viewBox="0 0 650 150" style="max-width:650px" role="img" aria-label="Random-number digits split into four-digit groups with the ten accepted laptop numbers highlighted and rejected groups marked" xmlns="http://www.w3.org/2000/svg">
+<text x="12.0" y="18.0" text-anchor="start" class="sm b">Table D, row 2, read in 4-digit groups (N = 4998, n = 10)</text>
+<rect x="12.0" y="32.0" width="62.0" height="26.0" rx="3" class="wash2 ln s2 thick"/>
+<text x="43.0" y="50.0" text-anchor="middle" class="m b t2">0651</text>
+<rect x="82.0" y="32.0" width="62.0" height="26.0" rx="3" class="wash2 ln s2 thick"/>
+<text x="113.0" y="50.0" text-anchor="middle" class="m b t2">2078</text>
+<rect x="152.0" y="32.0" width="62.0" height="26.0" rx="3" class="wash2 ln s2 thick"/>
+<text x="183.0" y="50.0" text-anchor="middle" class="m b t2">3688</text>
+<rect x="222.0" y="32.0" width="62.0" height="26.0" rx="3" class="wash2 ln s2 thick"/>
+<text x="253.0" y="50.0" text-anchor="middle" class="m b t2">4563</text>
+<rect x="292.0" y="32.0" width="62.0" height="26.0" rx="3" class="bg ln-soft"/>
+<text x="323.0" y="50.0" text-anchor="middle" class="m soft">6313</text>
+<text x="323.0" y="70.0" text-anchor="middle" class="sm tA">> N</text>
+<rect x="362.0" y="32.0" width="62.0" height="26.0" rx="3" class="wash2 ln s2 thick"/>
+<text x="393.0" y="50.0" text-anchor="middle" class="m b t2">3087</text>
+<rect x="432.0" y="32.0" width="62.0" height="26.0" rx="3" class="bg ln-soft"/>
+<text x="463.0" y="50.0" text-anchor="middle" class="m soft">9513</text>
+<text x="463.0" y="70.0" text-anchor="middle" class="sm tA">> N</text>
+<rect x="502.0" y="32.0" width="62.0" height="26.0" rx="3" class="wash2 ln s2 thick"/>
+<text x="533.0" y="50.0" text-anchor="middle" class="m b t2">2376</text>
+<rect x="572.0" y="32.0" width="62.0" height="26.0" rx="3" class="wash2 ln s2 thick"/>
+<text x="603.0" y="50.0" text-anchor="middle" class="m b t2">4512</text>
+<rect x="12.0" y="78.0" width="62.0" height="26.0" rx="3" class="bg ln-soft"/>
+<text x="43.0" y="96.0" text-anchor="middle" class="m soft">5578</text>
+<text x="43.0" y="116.0" text-anchor="middle" class="sm tA">> N</text>
+<rect x="82.0" y="78.0" width="62.0" height="26.0" rx="3" class="wash2 ln s2 thick"/>
+<text x="113.0" y="96.0" text-anchor="middle" class="m b t2">1598</text>
+<rect x="152.0" y="78.0" width="62.0" height="26.0" rx="3" class="bg ln-soft"/>
+<text x="183.0" y="96.0" text-anchor="middle" class="m soft">6508</text>
+<text x="183.0" y="116.0" text-anchor="middle" class="sm tA">> N</text>
+<rect x="222.0" y="78.0" width="62.0" height="26.0" rx="3" class="wash2 ln s2 thick"/>
+<text x="253.0" y="96.0" text-anchor="middle" class="m b t2">4557</text>
+<rect x="292.0" y="78.0" width="62.0" height="26.0" rx="3" class="wash2 ln s2 thick"/>
+<text x="323.0" y="96.0" text-anchor="middle" class="m b t2">0155</text>
+<rect x="362.0" y="78.0" width="62.0" height="26.0" rx="3" class="bg ln-soft"/>
+<text x="393.0" y="96.0" text-anchor="middle" class="m soft">3684</text>
+<text x="393.0" y="116.0" text-anchor="middle" class="sm soft">n reached</text>
+<rect x="432.0" y="78.0" width="62.0" height="26.0" rx="3" class="bg ln-soft"/>
+<text x="463.0" y="96.0" text-anchor="middle" class="m soft">5705</text>
+<text x="463.0" y="116.0" text-anchor="middle" class="sm soft">n reached</text>
+<rect x="502.0" y="78.0" width="62.0" height="26.0" rx="3" class="bg ln-soft"/>
+<text x="533.0" y="96.0" text-anchor="middle" class="m soft">4932</text>
+<text x="533.0" y="116.0" text-anchor="middle" class="sm soft">n reached</text>
+<text x="12.0" y="140.0" text-anchor="start" class="sm soft">leftover digits "61" are not a full group, so the read stops</text>
+</svg><figcaption>Dr. Ahmed's laptop example. Group the digits to the number of digits in N, keep groups from 1 to N, and skip anything larger than N or repeated. The first ten accepted groups are the sample.<span class="ar">مثال الحواسيب: نقسم الأرقام إلى مجموعات بعدد خانات N، ونقبل ما بين 1 و N، ونتجاوز ما هو أكبر من N أو مكرر. أول عشرة مقبولة هي العينة.</span></figcaption></figure>
+
+  <h4>2.2 Systematic sample</h4>
+  <div class="cols2">
+    <div><p>Select <strong>every k-th member</strong> of a population arranged in some natural sequential order (a queue, a list of students, employee records), starting from a <strong>random</strong> point.</p>
+      <div class="formula" style="margin:6px 0"><div class="label">Steps</div><p class="fx">k = <span class="frac"><span class="num">N</span><span class="den">n</span></span> &nbsp;→ round <strong>down</strong> to a whole number</p>
+        <p class="note">(1) Arrange the population in order. (2) Compute k. (3) Choose the first subject at random from 1 to k. (4) Keep adding k: start, start + k, start + 2k, …</p></div></div>
+    <div class="ex" style="margin:0"><div class="q"><span class="tag">86 lemon trees along a fence, select 6 <span class="src">Both</span></span></div>
+      <div class="a"><p>N = 86, n = 6, k = 86/6 = 14.33, rounded <strong>down</strong> to <span class="ans">k = 14</span>. Random start between 1 and 14, say 6:</p><p class="fx">6, 20, 34, 48, 62, 76</p>
+        <p>Dr. Ahmed rounds up to k = 15 with start 8: 8, 23, 38, 53, 68, 83. That happens to work, but a start of 15 gives 15, 30, 45, 60, 75 and then 90 &gt; 86: only five trees. <strong>Round down</strong> and you can never fall short.</p></div></div>
+  </div>
+  <figure class="dg"><svg viewBox="0 0 650 148" style="max-width:650px" role="img" aria-label="Two rows of 86 tree ticks: every 14th from tree 6 gives six trees; every 15th from tree 15 gives only five" xmlns="http://www.w3.org/2000/svg">
+<text x="20.0" y="16.0" text-anchor="start" class="sm b t2">k = 86/6 = 14.33 → round DOWN to 14, start 6 (Dr. Amani)</text>
+<line x1="40.0" y1="30.0" x2="40.0" y2="42.0" class="ln-soft"/>
+<line x1="46.8" y1="30.0" x2="46.8" y2="42.0" class="ln-soft"/>
+<line x1="53.6" y1="30.0" x2="53.6" y2="42.0" class="ln-soft"/>
+<line x1="60.5" y1="30.0" x2="60.5" y2="42.0" class="ln-soft"/>
+<line x1="67.3" y1="30.0" x2="67.3" y2="42.0" class="ln-soft"/>
+<line x1="74.1" y1="30.0" x2="74.1" y2="50.0" class="ln s2 thick"/>
+<text x="74.1" y="64.0" text-anchor="middle" class="sm b t2">6</text>
+<line x1="80.9" y1="30.0" x2="80.9" y2="42.0" class="ln-soft"/>
+<line x1="87.8" y1="30.0" x2="87.8" y2="42.0" class="ln-soft"/>
+<line x1="94.6" y1="30.0" x2="94.6" y2="42.0" class="ln-soft"/>
+<line x1="101.4" y1="30.0" x2="101.4" y2="42.0" class="ln-soft"/>
+<line x1="108.2" y1="30.0" x2="108.2" y2="42.0" class="ln-soft"/>
+<line x1="115.1" y1="30.0" x2="115.1" y2="42.0" class="ln-soft"/>
+<line x1="121.9" y1="30.0" x2="121.9" y2="42.0" class="ln-soft"/>
+<line x1="128.7" y1="30.0" x2="128.7" y2="42.0" class="ln-soft"/>
+<line x1="135.5" y1="30.0" x2="135.5" y2="42.0" class="ln-soft"/>
+<line x1="142.4" y1="30.0" x2="142.4" y2="42.0" class="ln-soft"/>
+<line x1="149.2" y1="30.0" x2="149.2" y2="42.0" class="ln-soft"/>
+<line x1="156.0" y1="30.0" x2="156.0" y2="42.0" class="ln-soft"/>
+<line x1="162.8" y1="30.0" x2="162.8" y2="42.0" class="ln-soft"/>
+<line x1="169.6" y1="30.0" x2="169.6" y2="50.0" class="ln s2 thick"/>
+<text x="169.6" y="64.0" text-anchor="middle" class="sm b t2">20</text>
+<line x1="176.5" y1="30.0" x2="176.5" y2="42.0" class="ln-soft"/>
+<line x1="183.3" y1="30.0" x2="183.3" y2="42.0" class="ln-soft"/>
+<line x1="190.1" y1="30.0" x2="190.1" y2="42.0" class="ln-soft"/>
+<line x1="196.9" y1="30.0" x2="196.9" y2="42.0" class="ln-soft"/>
+<line x1="203.8" y1="30.0" x2="203.8" y2="42.0" class="ln-soft"/>
+<line x1="210.6" y1="30.0" x2="210.6" y2="42.0" class="ln-soft"/>
+<line x1="217.4" y1="30.0" x2="217.4" y2="42.0" class="ln-soft"/>
+<line x1="224.2" y1="30.0" x2="224.2" y2="42.0" class="ln-soft"/>
+<line x1="231.1" y1="30.0" x2="231.1" y2="42.0" class="ln-soft"/>
+<line x1="237.9" y1="30.0" x2="237.9" y2="42.0" class="ln-soft"/>
+<line x1="244.7" y1="30.0" x2="244.7" y2="42.0" class="ln-soft"/>
+<line x1="251.5" y1="30.0" x2="251.5" y2="42.0" class="ln-soft"/>
+<line x1="258.4" y1="30.0" x2="258.4" y2="42.0" class="ln-soft"/>
+<line x1="265.2" y1="30.0" x2="265.2" y2="50.0" class="ln s2 thick"/>
+<text x="265.2" y="64.0" text-anchor="middle" class="sm b t2">34</text>
+<line x1="272.0" y1="30.0" x2="272.0" y2="42.0" class="ln-soft"/>
+<line x1="278.8" y1="30.0" x2="278.8" y2="42.0" class="ln-soft"/>
+<line x1="285.6" y1="30.0" x2="285.6" y2="42.0" class="ln-soft"/>
+<line x1="292.5" y1="30.0" x2="292.5" y2="42.0" class="ln-soft"/>
+<line x1="299.3" y1="30.0" x2="299.3" y2="42.0" class="ln-soft"/>
+<line x1="306.1" y1="30.0" x2="306.1" y2="42.0" class="ln-soft"/>
+<line x1="312.9" y1="30.0" x2="312.9" y2="42.0" class="ln-soft"/>
+<line x1="319.8" y1="30.0" x2="319.8" y2="42.0" class="ln-soft"/>
+<line x1="326.6" y1="30.0" x2="326.6" y2="42.0" class="ln-soft"/>
+<line x1="333.4" y1="30.0" x2="333.4" y2="42.0" class="ln-soft"/>
+<line x1="340.2" y1="30.0" x2="340.2" y2="42.0" class="ln-soft"/>
+<line x1="347.1" y1="30.0" x2="347.1" y2="42.0" class="ln-soft"/>
+<line x1="353.9" y1="30.0" x2="353.9" y2="42.0" class="ln-soft"/>
+<line x1="360.7" y1="30.0" x2="360.7" y2="50.0" class="ln s2 thick"/>
+<text x="360.7" y="64.0" text-anchor="middle" class="sm b t2">48</text>
+<line x1="367.5" y1="30.0" x2="367.5" y2="42.0" class="ln-soft"/>
+<line x1="374.4" y1="30.0" x2="374.4" y2="42.0" class="ln-soft"/>
+<line x1="381.2" y1="30.0" x2="381.2" y2="42.0" class="ln-soft"/>
+<line x1="388.0" y1="30.0" x2="388.0" y2="42.0" class="ln-soft"/>
+<line x1="394.8" y1="30.0" x2="394.8" y2="42.0" class="ln-soft"/>
+<line x1="401.6" y1="30.0" x2="401.6" y2="42.0" class="ln-soft"/>
+<line x1="408.5" y1="30.0" x2="408.5" y2="42.0" class="ln-soft"/>
+<line x1="415.3" y1="30.0" x2="415.3" y2="42.0" class="ln-soft"/>
+<line x1="422.1" y1="30.0" x2="422.1" y2="42.0" class="ln-soft"/>
+<line x1="428.9" y1="30.0" x2="428.9" y2="42.0" class="ln-soft"/>
+<line x1="435.8" y1="30.0" x2="435.8" y2="42.0" class="ln-soft"/>
+<line x1="442.6" y1="30.0" x2="442.6" y2="42.0" class="ln-soft"/>
+<line x1="449.4" y1="30.0" x2="449.4" y2="42.0" class="ln-soft"/>
+<line x1="456.2" y1="30.0" x2="456.2" y2="50.0" class="ln s2 thick"/>
+<text x="456.2" y="64.0" text-anchor="middle" class="sm b t2">62</text>
+<line x1="463.1" y1="30.0" x2="463.1" y2="42.0" class="ln-soft"/>
+<line x1="469.9" y1="30.0" x2="469.9" y2="42.0" class="ln-soft"/>
+<line x1="476.7" y1="30.0" x2="476.7" y2="42.0" class="ln-soft"/>
+<line x1="483.5" y1="30.0" x2="483.5" y2="42.0" class="ln-soft"/>
+<line x1="490.4" y1="30.0" x2="490.4" y2="42.0" class="ln-soft"/>
+<line x1="497.2" y1="30.0" x2="497.2" y2="42.0" class="ln-soft"/>
+<line x1="504.0" y1="30.0" x2="504.0" y2="42.0" class="ln-soft"/>
+<line x1="510.8" y1="30.0" x2="510.8" y2="42.0" class="ln-soft"/>
+<line x1="517.6" y1="30.0" x2="517.6" y2="42.0" class="ln-soft"/>
+<line x1="524.5" y1="30.0" x2="524.5" y2="42.0" class="ln-soft"/>
+<line x1="531.3" y1="30.0" x2="531.3" y2="42.0" class="ln-soft"/>
+<line x1="538.1" y1="30.0" x2="538.1" y2="42.0" class="ln-soft"/>
+<line x1="544.9" y1="30.0" x2="544.9" y2="42.0" class="ln-soft"/>
+<line x1="551.8" y1="30.0" x2="551.8" y2="50.0" class="ln s2 thick"/>
+<text x="551.8" y="64.0" text-anchor="middle" class="sm b t2">76</text>
+<line x1="558.6" y1="30.0" x2="558.6" y2="42.0" class="ln-soft"/>
+<line x1="565.4" y1="30.0" x2="565.4" y2="42.0" class="ln-soft"/>
+<line x1="572.2" y1="30.0" x2="572.2" y2="42.0" class="ln-soft"/>
+<line x1="579.1" y1="30.0" x2="579.1" y2="42.0" class="ln-soft"/>
+<line x1="585.9" y1="30.0" x2="585.9" y2="42.0" class="ln-soft"/>
+<line x1="592.7" y1="30.0" x2="592.7" y2="42.0" class="ln-soft"/>
+<line x1="599.5" y1="30.0" x2="599.5" y2="42.0" class="ln-soft"/>
+<line x1="606.4" y1="30.0" x2="606.4" y2="42.0" class="ln-soft"/>
+<line x1="613.2" y1="30.0" x2="613.2" y2="42.0" class="ln-soft"/>
+<line x1="620.0" y1="30.0" x2="620.0" y2="42.0" class="ln-soft"/>
+<text x="20.0" y="92.0" text-anchor="start" class="sm b tA">k rounded UP to 15 with start 15 → only 5 trees fit (Dr. Ahmed's rounding fails)</text>
+<line x1="40.0" y1="104.0" x2="40.0" y2="116.0" class="ln-soft"/>
+<line x1="46.8" y1="104.0" x2="46.8" y2="116.0" class="ln-soft"/>
+<line x1="53.6" y1="104.0" x2="53.6" y2="116.0" class="ln-soft"/>
+<line x1="60.5" y1="104.0" x2="60.5" y2="116.0" class="ln-soft"/>
+<line x1="67.3" y1="104.0" x2="67.3" y2="116.0" class="ln-soft"/>
+<line x1="74.1" y1="104.0" x2="74.1" y2="116.0" class="ln-soft"/>
+<line x1="80.9" y1="104.0" x2="80.9" y2="116.0" class="ln-soft"/>
+<line x1="87.8" y1="104.0" x2="87.8" y2="116.0" class="ln-soft"/>
+<line x1="94.6" y1="104.0" x2="94.6" y2="116.0" class="ln-soft"/>
+<line x1="101.4" y1="104.0" x2="101.4" y2="116.0" class="ln-soft"/>
+<line x1="108.2" y1="104.0" x2="108.2" y2="116.0" class="ln-soft"/>
+<line x1="115.1" y1="104.0" x2="115.1" y2="116.0" class="ln-soft"/>
+<line x1="121.9" y1="104.0" x2="121.9" y2="116.0" class="ln-soft"/>
+<line x1="128.7" y1="104.0" x2="128.7" y2="116.0" class="ln-soft"/>
+<line x1="135.5" y1="104.0" x2="135.5" y2="124.0" class="ln sA thick"/>
+<text x="135.5" y="138.0" text-anchor="middle" class="sm b tA">15</text>
+<line x1="142.4" y1="104.0" x2="142.4" y2="116.0" class="ln-soft"/>
+<line x1="149.2" y1="104.0" x2="149.2" y2="116.0" class="ln-soft"/>
+<line x1="156.0" y1="104.0" x2="156.0" y2="116.0" class="ln-soft"/>
+<line x1="162.8" y1="104.0" x2="162.8" y2="116.0" class="ln-soft"/>
+<line x1="169.6" y1="104.0" x2="169.6" y2="116.0" class="ln-soft"/>
+<line x1="176.5" y1="104.0" x2="176.5" y2="116.0" class="ln-soft"/>
+<line x1="183.3" y1="104.0" x2="183.3" y2="116.0" class="ln-soft"/>
+<line x1="190.1" y1="104.0" x2="190.1" y2="116.0" class="ln-soft"/>
+<line x1="196.9" y1="104.0" x2="196.9" y2="116.0" class="ln-soft"/>
+<line x1="203.8" y1="104.0" x2="203.8" y2="116.0" class="ln-soft"/>
+<line x1="210.6" y1="104.0" x2="210.6" y2="116.0" class="ln-soft"/>
+<line x1="217.4" y1="104.0" x2="217.4" y2="116.0" class="ln-soft"/>
+<line x1="224.2" y1="104.0" x2="224.2" y2="116.0" class="ln-soft"/>
+<line x1="231.1" y1="104.0" x2="231.1" y2="116.0" class="ln-soft"/>
+<line x1="237.9" y1="104.0" x2="237.9" y2="124.0" class="ln sA thick"/>
+<text x="237.9" y="138.0" text-anchor="middle" class="sm b tA">30</text>
+<line x1="244.7" y1="104.0" x2="244.7" y2="116.0" class="ln-soft"/>
+<line x1="251.5" y1="104.0" x2="251.5" y2="116.0" class="ln-soft"/>
+<line x1="258.4" y1="104.0" x2="258.4" y2="116.0" class="ln-soft"/>
+<line x1="265.2" y1="104.0" x2="265.2" y2="116.0" class="ln-soft"/>
+<line x1="272.0" y1="104.0" x2="272.0" y2="116.0" class="ln-soft"/>
+<line x1="278.8" y1="104.0" x2="278.8" y2="116.0" class="ln-soft"/>
+<line x1="285.6" y1="104.0" x2="285.6" y2="116.0" class="ln-soft"/>
+<line x1="292.5" y1="104.0" x2="292.5" y2="116.0" class="ln-soft"/>
+<line x1="299.3" y1="104.0" x2="299.3" y2="116.0" class="ln-soft"/>
+<line x1="306.1" y1="104.0" x2="306.1" y2="116.0" class="ln-soft"/>
+<line x1="312.9" y1="104.0" x2="312.9" y2="116.0" class="ln-soft"/>
+<line x1="319.8" y1="104.0" x2="319.8" y2="116.0" class="ln-soft"/>
+<line x1="326.6" y1="104.0" x2="326.6" y2="116.0" class="ln-soft"/>
+<line x1="333.4" y1="104.0" x2="333.4" y2="116.0" class="ln-soft"/>
+<line x1="340.2" y1="104.0" x2="340.2" y2="124.0" class="ln sA thick"/>
+<text x="340.2" y="138.0" text-anchor="middle" class="sm b tA">45</text>
+<line x1="347.1" y1="104.0" x2="347.1" y2="116.0" class="ln-soft"/>
+<line x1="353.9" y1="104.0" x2="353.9" y2="116.0" class="ln-soft"/>
+<line x1="360.7" y1="104.0" x2="360.7" y2="116.0" class="ln-soft"/>
+<line x1="367.5" y1="104.0" x2="367.5" y2="116.0" class="ln-soft"/>
+<line x1="374.4" y1="104.0" x2="374.4" y2="116.0" class="ln-soft"/>
+<line x1="381.2" y1="104.0" x2="381.2" y2="116.0" class="ln-soft"/>
+<line x1="388.0" y1="104.0" x2="388.0" y2="116.0" class="ln-soft"/>
+<line x1="394.8" y1="104.0" x2="394.8" y2="116.0" class="ln-soft"/>
+<line x1="401.6" y1="104.0" x2="401.6" y2="116.0" class="ln-soft"/>
+<line x1="408.5" y1="104.0" x2="408.5" y2="116.0" class="ln-soft"/>
+<line x1="415.3" y1="104.0" x2="415.3" y2="116.0" class="ln-soft"/>
+<line x1="422.1" y1="104.0" x2="422.1" y2="116.0" class="ln-soft"/>
+<line x1="428.9" y1="104.0" x2="428.9" y2="116.0" class="ln-soft"/>
+<line x1="435.8" y1="104.0" x2="435.8" y2="116.0" class="ln-soft"/>
+<line x1="442.6" y1="104.0" x2="442.6" y2="124.0" class="ln sA thick"/>
+<text x="442.6" y="138.0" text-anchor="middle" class="sm b tA">60</text>
+<line x1="449.4" y1="104.0" x2="449.4" y2="116.0" class="ln-soft"/>
+<line x1="456.2" y1="104.0" x2="456.2" y2="116.0" class="ln-soft"/>
+<line x1="463.1" y1="104.0" x2="463.1" y2="116.0" class="ln-soft"/>
+<line x1="469.9" y1="104.0" x2="469.9" y2="116.0" class="ln-soft"/>
+<line x1="476.7" y1="104.0" x2="476.7" y2="116.0" class="ln-soft"/>
+<line x1="483.5" y1="104.0" x2="483.5" y2="116.0" class="ln-soft"/>
+<line x1="490.4" y1="104.0" x2="490.4" y2="116.0" class="ln-soft"/>
+<line x1="497.2" y1="104.0" x2="497.2" y2="116.0" class="ln-soft"/>
+<line x1="504.0" y1="104.0" x2="504.0" y2="116.0" class="ln-soft"/>
+<line x1="510.8" y1="104.0" x2="510.8" y2="116.0" class="ln-soft"/>
+<line x1="517.6" y1="104.0" x2="517.6" y2="116.0" class="ln-soft"/>
+<line x1="524.5" y1="104.0" x2="524.5" y2="116.0" class="ln-soft"/>
+<line x1="531.3" y1="104.0" x2="531.3" y2="116.0" class="ln-soft"/>
+<line x1="538.1" y1="104.0" x2="538.1" y2="116.0" class="ln-soft"/>
+<line x1="544.9" y1="104.0" x2="544.9" y2="124.0" class="ln sA thick"/>
+<text x="544.9" y="138.0" text-anchor="middle" class="sm b tA">75</text>
+<line x1="551.8" y1="104.0" x2="551.8" y2="116.0" class="ln-soft"/>
+<line x1="558.6" y1="104.0" x2="558.6" y2="116.0" class="ln-soft"/>
+<line x1="565.4" y1="104.0" x2="565.4" y2="116.0" class="ln-soft"/>
+<line x1="572.2" y1="104.0" x2="572.2" y2="116.0" class="ln-soft"/>
+<line x1="579.1" y1="104.0" x2="579.1" y2="116.0" class="ln-soft"/>
+<line x1="585.9" y1="104.0" x2="585.9" y2="116.0" class="ln-soft"/>
+<line x1="592.7" y1="104.0" x2="592.7" y2="116.0" class="ln-soft"/>
+<line x1="599.5" y1="104.0" x2="599.5" y2="116.0" class="ln-soft"/>
+<line x1="606.4" y1="104.0" x2="606.4" y2="116.0" class="ln-soft"/>
+<line x1="613.2" y1="104.0" x2="613.2" y2="116.0" class="ln-soft"/>
+<line x1="620.0" y1="104.0" x2="620.0" y2="116.0" class="ln-soft"/>
+<text x="647.3" y="138.0" text-anchor="end" class="sm b tA">90 > 86 ✗</text>
+</svg><figcaption>Why round k down: with k = 14, any start from 1 to 14 still reaches six trees within 86. With k = 15, a start of 15 runs past the fence after five trees, so the sample is short.<span class="ar">لماذا نقرّب k لأسفل؟ مع <span dir="ltr" style="white-space:nowrap">k = 14</span> أي بداية من 1 إلى <span dir="ltr" style="white-space:nowrap">14</span> تعطي 6 أشجار ضمن <span dir="ltr" style="white-space:nowrap">86</span>. أما مع <span dir="ltr" style="white-space:nowrap">k = 15</span> فالبداية <span dir="ltr" style="white-space:nowrap">15</span> تتجاوز آخر شجرة بعد 5 أشجار فقط، فتنقص العينة.</span></figcaption></figure>
+
+  <h4>2.3 Stratified and 2.4 cluster samples</h4>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th></th><th>Stratified<span class="arn">طبقية</span></th><th>Cluster<span class="arn">عنقودية</span></th></tr></thead>
+    <tbody>
+      <tr><td>Divide into</td><td><strong>strata</strong>: subgroups of individuals who share a characteristic relevant to the study</td><td><strong>clusters</strong>: ready-made sections, used when the population is very large or spread over a wide area</td></tr>
+      <tr><td>Groups are</td><td>similar <strong>within</strong> each stratum</td><td>clusters similar <strong>to each other</strong> (homogeneous); individuals <strong>within</strong> a cluster diverse (heterogeneous)</td></tr>
+      <tr><td>Then</td><td>take an SRS from <strong>every</strong> stratum; sizes need not be equal (e.g. 12 from Statistics, 24 from Mathematics)</td><td>randomly choose <strong>some</strong> clusters and include <strong>all</strong> members of those clusters</td></tr>
+      <tr><td>Example</td><td>College of Science students, strata = departments: every department is represented</td><td>Muscat primary schools as clusters: pick 5 schools, include every student in them; or SQU colleges as clusters</td></tr>
+    </tbody>
+  </table></div>
+  <figure class="dg"><svg viewBox="0 0 650 168" style="max-width:650px" role="img" aria-label="Two panels: stratified sampling selects a few from each of four groups; cluster sampling selects every member of two whole groups" xmlns="http://www.w3.org/2000/svg">
+<text x="160.0" y="18.0" text-anchor="middle" class="sm b t2">Stratified: some from EVERY group</text>
+<text x="490.0" y="18.0" text-anchor="middle" class="sm b t4">Cluster: ALL from SOME groups</text>
+<rect x="30.0" y="40.0" width="60.0" height="100.0" rx="6" class="wash2 ln s2"/>
+<text x="60.0" y="156.0" text-anchor="middle" class="sm">Stats</text>
+<circle cx="45.0" cy="54.0" r="6" class="bg ln-soft"/>
+<circle cx="75.0" cy="54.0" r="6" class="bg ln-soft"/>
+<circle cx="45.0" cy="76.0" r="6" class="bg ln-soft"/>
+<circle cx="75.0" cy="76.0" r="6" class="bg ln-soft"/>
+<circle cx="45.0" cy="98.0" r="6" class="bg ln-soft"/>
+<circle cx="75.0" cy="98.0" r="6" class="bg ln-soft"/>
+<circle cx="45.0" cy="120.0" r="6" class="bg ln-soft"/>
+<circle cx="75.0" cy="120.0" r="6" class="f2"/>
+<rect x="100.0" y="40.0" width="60.0" height="100.0" rx="6" class="wash2 ln s2"/>
+<text x="130.0" y="156.0" text-anchor="middle" class="sm">Maths</text>
+<circle cx="115.0" cy="54.0" r="6" class="bg ln-soft"/>
+<circle cx="145.0" cy="54.0" r="6" class="f2"/>
+<circle cx="115.0" cy="76.0" r="6" class="f2"/>
+<circle cx="145.0" cy="76.0" r="6" class="bg ln-soft"/>
+<circle cx="115.0" cy="98.0" r="6" class="bg ln-soft"/>
+<circle cx="145.0" cy="98.0" r="6" class="bg ln-soft"/>
+<circle cx="115.0" cy="120.0" r="6" class="bg ln-soft"/>
+<circle cx="145.0" cy="120.0" r="6" class="bg ln-soft"/>
+<rect x="170.0" y="40.0" width="60.0" height="100.0" rx="6" class="wash2 ln s2"/>
+<text x="200.0" y="156.0" text-anchor="middle" class="sm">Physics</text>
+<circle cx="185.0" cy="54.0" r="6" class="bg ln-soft"/>
+<circle cx="215.0" cy="54.0" r="6" class="bg ln-soft"/>
+<circle cx="185.0" cy="76.0" r="6" class="bg ln-soft"/>
+<circle cx="215.0" cy="76.0" r="6" class="bg ln-soft"/>
+<circle cx="185.0" cy="98.0" r="6" class="bg ln-soft"/>
+<circle cx="215.0" cy="98.0" r="6" class="bg ln-soft"/>
+<circle cx="185.0" cy="120.0" r="6" class="bg ln-soft"/>
+<circle cx="215.0" cy="120.0" r="6" class="bg ln-soft"/>
+<rect x="240.0" y="40.0" width="60.0" height="100.0" rx="6" class="wash2 ln s2"/>
+<text x="270.0" y="156.0" text-anchor="middle" class="sm">Chem</text>
+<circle cx="255.0" cy="54.0" r="6" class="bg ln-soft"/>
+<circle cx="285.0" cy="54.0" r="6" class="bg ln-soft"/>
+<circle cx="255.0" cy="76.0" r="6" class="bg ln-soft"/>
+<circle cx="285.0" cy="76.0" r="6" class="bg ln-soft"/>
+<circle cx="255.0" cy="98.0" r="6" class="f2"/>
+<circle cx="285.0" cy="98.0" r="6" class="bg ln-soft"/>
+<circle cx="255.0" cy="120.0" r="6" class="f2"/>
+<circle cx="285.0" cy="120.0" r="6" class="f2"/>
+<rect x="360.0" y="40.0" width="60.0" height="100.0" rx="6" class="wash4 ln s4"/>
+<text x="390.0" y="156.0" text-anchor="middle" class="sm">School 1</text>
+<circle cx="375.0" cy="54.0" r="6" class="f4"/>
+<circle cx="405.0" cy="54.0" r="6" class="f4"/>
+<circle cx="375.0" cy="76.0" r="6" class="f4"/>
+<circle cx="405.0" cy="76.0" r="6" class="f4"/>
+<circle cx="375.0" cy="98.0" r="6" class="f4"/>
+<circle cx="405.0" cy="98.0" r="6" class="f4"/>
+<circle cx="375.0" cy="120.0" r="6" class="f4"/>
+<circle cx="405.0" cy="120.0" r="6" class="f4"/>
+<rect x="430.0" y="40.0" width="60.0" height="100.0" rx="6" class="wash4 ln s4"/>
+<text x="460.0" y="156.0" text-anchor="middle" class="sm">School 2</text>
+<circle cx="445.0" cy="54.0" r="6" class="bg ln-soft"/>
+<circle cx="475.0" cy="54.0" r="6" class="bg ln-soft"/>
+<circle cx="445.0" cy="76.0" r="6" class="bg ln-soft"/>
+<circle cx="475.0" cy="76.0" r="6" class="bg ln-soft"/>
+<circle cx="445.0" cy="98.0" r="6" class="bg ln-soft"/>
+<circle cx="475.0" cy="98.0" r="6" class="bg ln-soft"/>
+<circle cx="445.0" cy="120.0" r="6" class="bg ln-soft"/>
+<circle cx="475.0" cy="120.0" r="6" class="bg ln-soft"/>
+<rect x="500.0" y="40.0" width="60.0" height="100.0" rx="6" class="wash4 ln s4"/>
+<text x="530.0" y="156.0" text-anchor="middle" class="sm">School 3</text>
+<circle cx="515.0" cy="54.0" r="6" class="f4"/>
+<circle cx="545.0" cy="54.0" r="6" class="f4"/>
+<circle cx="515.0" cy="76.0" r="6" class="f4"/>
+<circle cx="545.0" cy="76.0" r="6" class="f4"/>
+<circle cx="515.0" cy="98.0" r="6" class="f4"/>
+<circle cx="545.0" cy="98.0" r="6" class="f4"/>
+<circle cx="515.0" cy="120.0" r="6" class="f4"/>
+<circle cx="545.0" cy="120.0" r="6" class="f4"/>
+<rect x="570.0" y="40.0" width="60.0" height="100.0" rx="6" class="wash4 ln s4"/>
+<text x="600.0" y="156.0" text-anchor="middle" class="sm">School 4</text>
+<circle cx="585.0" cy="54.0" r="6" class="bg ln-soft"/>
+<circle cx="615.0" cy="54.0" r="6" class="bg ln-soft"/>
+<circle cx="585.0" cy="76.0" r="6" class="bg ln-soft"/>
+<circle cx="615.0" cy="76.0" r="6" class="bg ln-soft"/>
+<circle cx="585.0" cy="98.0" r="6" class="bg ln-soft"/>
+<circle cx="615.0" cy="98.0" r="6" class="bg ln-soft"/>
+<circle cx="585.0" cy="120.0" r="6" class="bg ln-soft"/>
+<circle cx="615.0" cy="120.0" r="6" class="bg ln-soft"/>
+</svg><figcaption>Stratified: divide by a characteristic (department), then draw a random sample from every stratum, so every group is represented; sizes need not be equal. Cluster: divide into ready-made groups (schools), randomly pick whole clusters, and include everyone in them.<span class="ar">الطبقية: نقسم حسب خاصية (القسم) ثم نسحب عينة عشوائية من كل طبقة، فتمثَّل كل المجموعات (والأعداد لا يلزم أن تتساوى). العنقودية: نقسم إلى مجموعات جاهزة (مدارس)، نختار بعض العناقيد عشوائيًا، ونأخذ كل أفرادها.</span></figcaption></figure>
+  <div class="ex"><div class="q"><span class="tag">Activity · sampling method <span class="src">Amani</span></span><p>(1) In a large Muscat school, all teachers from two buildings are interviewed about homework. (2) The Oman Traffic Authority groups drivers by experience (&lt; 5, 5–10, &gt; 10 years) and randomly selects drivers from each group. (3) A Muscat Grand Mall supermarket surveys every 10th customer at checkout. (4) The Ministry of Health randomly generates phone numbers from a national database and calls citizens.</p></div>
+    <div class="a"><p>(1) <span class="ans">cluster</span>: buildings are the clusters, and everyone in the chosen ones is included. (2) <span class="ans">stratified</span>: a random sample from every experience group. (3) <span class="ans">systematic</span>: every k-th with k = 10. (4) <span class="ans">simple random</span>: every number in the database has an equal chance.</p></div></div>
+
+  <h3>3 · Other (non-random) sampling methods <span class="src">Ahmed</span></h3>
+  <div class="cols2">
+    <div class="formula" style="margin:0"><div class="label">Convenience sample</div><p class="note" style="margin:0">Subjects who are convenient and readily available, easy to reach. Examples: the first 10 students entering class; interviewing people leaving a local hypermarket.</p></div>
+    <div class="formula" style="margin:0"><div class="label">Volunteer (self-selected) sample</div><p class="note" style="margin:0">Respondents decide for themselves whether to be included. Examples: clinic patients who choose to fill a satisfaction survey; students who choose to complete a course evaluation.</p></div>
+  </div>
+  <p>Neither is an unbiased sample: both usually lead to a <strong>biased</strong> sample, because the people who are easy to reach, or who volunteer, often differ from the rest of the population.</p>
+
+  <h3>4 · Sampling and nonsampling errors <span class="src">Ahmed</span></h3>
+  <div class="cols2">
+    <div class="formula" style="margin:0"><div class="label">Sampling error</div><p class="note" style="margin:0">The difference between a sample result and the population result, caused only by chance in who was sampled. Example: 56% of a sample of full-time students are female, but the admissions office shows 54%. The 2% difference is sampling error.</p></div>
+    <div class="formula" style="margin:0"><div class="label">Nonsampling error</div><p class="note" style="margin:0">The data are obtained incorrectly, or the sample is biased (nonrepresentative). Examples: instrument errors (a defective thermostat reading 1.3° off), data entry or recording errors, measuring errors.</p></div>
+  </div>
+  <div class="ar-note"><span class="lbl">الشرح بالعربي — طرق المعاينة</span>(1) <b>العشوائية البسيطة</b>: كل فرد له نفس الفرصة، بالقرعة أو بالحاسوب أو بجدول الأرقام العشوائية. نقرأ مجموعات بعدد خانات <span class="v" dir="ltr">N</span>، ونتجاوز الأكبر من <span class="v" dir="ltr">N</span> والمكرر. (2) <b>المنتظمة</b>: <span class="v" dir="ltr">k = N/n</span> نقرّبه <b>لأسفل</b>، نختار بداية عشوائية من 1 إلى k ثم نضيف k كل مرة. (3) <b>الطبقية</b>: نقسم حسب خاصية، ونأخذ عينة من <b>كل</b> طبقة. (4) <b>العنقودية</b>: نقسم إلى مجموعات جاهزة، نختار <b>بعضها</b>، ونأخذ <b>كل</b> أفرادها. الفرق الذي يُسأل عنه دائمًا: الطبقية «بعض من الكل»، والعنقودية «كل من البعض». وطرق غير عشوائية: <b>الملاءمة</b> (من يسهل الوصول إليه) و<b>التطوعية</b> (من يختار المشاركة)، وكلاهما متحيز. وخطأ المعاينة = فرق ناتج عن الصدفة في اختيار العينة، أما الخطأ غير المعاينيّ فسببه خطأ في القياس أو التسجيل أو عينة متحيزة.</div>
+</section>
+
+<footer>
+  <p><strong>Chapter 1 study set: 7 files.</strong> One merged source built from Dr. Amani Al-Rubkhi's Fall 2026 notes (course coordinator) and Dr. Ahmed Al-Hadhrami's slide pack, aligned to the SQU STAT 2101 course outline (Fall 2026). Textbook: Bluman, <em>Elementary Statistics</em>, 10th ed.</p>
+  <p>00 · Exam brief · 01 · Lesson 1-1: Descriptive and Inferential Statistics · 02 · Lesson 1-2: Variables and Types of Data · <strong style="color:var(--accent)">03 · Lesson 1-3: Data Collection and Sampling</strong> · 04 · Revision pack · 05 · Exam-style questions · 06 · Full worked answers</p>
+</footer>
+</div>

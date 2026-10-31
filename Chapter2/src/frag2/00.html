@@ -1,0 +1,60 @@
+<section id="brief" style="--sec:var(--accent);--wash:var(--accent-wash)">
+  <div class="sec-head">
+    <span class="sec-num">00</span>
+    <h2>Chapter 2 exam brief
+      <span class="ar">ماذا يطلب الكورس أوت لاين من الفصل الثاني — اقرأ هذا أولًا</span>
+    </h2>
+  </div>
+
+  <p>This set merges <strong>Dr. Amani Al-Rubkhi's Fall 2026 notes</strong> (the course coordinator) and the <strong>STAT 2101 Chapter 2 slides</strong> from Dr. Ahmed's pack (prepared by Iman Al Hasani and Ronald Wesonga, with handwritten lecture marks). Every example from both appears once, tagged with its source. The handwritten marks crossed several topics out as removed; the course outline is used to decide what stays.</p>
+
+  <div class="tbl-wrap"><table>
+    <caption>Chapter 2 in the Fall 2026 schedule</caption>
+    <thead><tr><th>Week</th><th>Lectures</th><th>Lab (R)</th><th>Assessment / exercises</th></tr></thead>
+    <tbody>
+      <tr><td class="num">2</td><td>2-1 Organizing Data · 2-2 Histograms, <strong>Frequency Polygons</strong> and Ogives · 2-3 Other Types of Graphs</td><td>Lab 2: Data Basics</td><td>Exercises Chapter 2, <strong>page 101: {5, 7, 19, 23}</strong> + Moodle exercises</td></tr>
+      <tr><td class="num">4</td><td colspan="2">Lab 4: Tabulation, Graphs</td><td><strong>In-Class Quiz I</strong> (Chapters 1–3)</td></tr>
+      <tr><td class="num">8</td><td colspan="2">—</td><td><strong>Midterm</strong> 25% · 3/11/2026 · Chapters 1–4</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>The outcomes Chapter 2 is graded against</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th style="width:12%">Criterion</th><th>Verbatim from the outline</th><th style="width:26%">Assessed by</th></tr></thead>
+    <tbody>
+      <tr><td><strong>CLO2-B</strong></td><td>Construct frequency distribution and summary tables.</td><td rowspan="2">Tutorial, In-Class Quiz, Active Learning, Midterm, Final</td></tr>
+      <tr><td><strong>CLO2-C</strong></td><td>Display data using various graphs.</td></tr>
+      <tr><td><strong>CLO2-D</strong></td><td>Use R to perform basic descriptive statistics, create tables, and visualize data.</td><td>Active Learning, Lab Quiz</td></tr>
+      <tr><td><strong>CLO3-A</strong></td><td>Recognize the key components of graphs, such as axes, labels, and legends.</td><td rowspan="3">Tutorial, In-Class Quiz, Midterm</td></tr>
+      <tr><td><strong>CLO3-B</strong></td><td>Extract meaningful insights from visual data representations.</td></tr>
+      <tr><td><strong>CLO3-C</strong></td><td>Derive reasoned insights based on the interpretation of graphs and summary statistics.</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout trap"><span class="ct">How Chapter 2 is actually examined</span>
+    <p>Two kinds of mark. <strong>Construction</strong> (CLO2-B, C): build a grouped table (width, limits, boundaries, frequencies, RF, CF) and draw a correctly labelled graph. <strong>Reading</strong> (CLO3): given a table, histogram, ogive, bar, pie or stem-and-leaf, extract values and say something reasoned. Typical reads: "how many values are below 119.5?" from an ogive; "what is the class width?" from a table; "describe the shape" from a histogram; or "build the frequency table from this stacked bar graph", which is Dr. Amani's own activity. Every example here ends with that reading step, because the slides end each graph with "Interpret the graph".</p></div>
+
+  <h3>Topics in and out this semester</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Topic</th><th>Status</th><th>Reason</th></tr></thead>
+    <tbody>
+      <tr><td>Categorical, grouped, ungrouped distributions; CF, RF, CRF</td><td><strong>In</strong></td><td>both decks</td></tr>
+      <tr><td>Histogram, relative frequency histogram, ogive (CF and CRF)</td><td><strong>In</strong></td><td>both decks</td></tr>
+      <tr><td><strong>Frequency polygon</strong> and relative frequency polygon</td><td><strong>In</strong></td><td>crossed out on the old slides and absent from Dr. Amani's notes, but named in the <strong>outline</strong> ("2-2 Histograms, Frequency Polygons and Ogives"). Kept and marked.</td></tr>
+      <tr><td>Bar (vertical, horizontal), compound (grouped, stacked), pie, time series, stem-and-leaf (including split stems)</td><td><strong>In</strong></td><td>both decks</td></tr>
+      <tr><td>Pareto charts, dot plots, back-to-back stem-and-leaf, misleading graphs</td><td><strong>Out</strong></td><td>handwritten "removed / not included" on the slides; not in Dr. Amani's notes. Defined once in the revision pack, in case they appear as a distractor.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Errors in the source material</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th style="width:4%">#</th><th style="width:40%">Point</th><th>What to do</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td><strong>Drivers' ages</strong> (Dr. Amani). The raw data printed in her notes has <strong>79</strong> values, but her frequency table uses n = 71 (19, 20, 16, 14, 0, 1, 1).</td><td>Counting the printed grid gives <strong>21, 22, 18, 16, 0, 1, 1 (n = 79)</strong>. Lesson 2-1 builds the table from the raw data and shows both. The histogram and ogive examples (and her Chapter 3 calculations) use her n = 71 table. In an exam, build from whatever data you are given.</td></tr>
+      <tr><td class="num">2</td><td>Dr. Amani's notes give "class width = (upper class <em>boundary</em> − lower class <em>boundary</em>) + 1".</td><td>Wrong as written: 28.5 − 20.5 + 1 = 9, but the width is 8. Correct versions: <strong>UCL − LCL + 1</strong> = 28 − 21 + 1 = 8, or <strong>UCB − LCB</strong> = 8 (the slide's handwritten version).</td></tr>
+      <tr><td class="num">3</td><td>The slides' Example 2-2 CRF table lists the last class as "130–132 / 129.5–132.5".</td><td>Typo: it is <strong>130–134 / 129.5–134.5</strong>, as in the original table.</td></tr>
+      <tr><td class="num">4</td><td>Trust-in-internet survey (Dr. Amani): the printed responses number <strong>34</strong>.</td><td>The table here uses the 34 printed responses: M 24, A 4, H 4, S 2.</td></tr>
+    </tbody>
+  </table></div>
+  <ar t="الخلاصة بالعربي">الفصل الثاني يُدرَّس في <b>الأسبوع الثاني</b>، ويُختبر في الكويز الصفي الأول والميدتيرم. المطلوب نوعان: <b>البناء</b> (جدول تكراري بالطول والحدود والتكرارات، ورسم صحيح بعناوين محاور) و<b>القراءة والتفسير</b> (استخراج قيمة من منحنى أو جدول، ووصف الشكل). المضلع التكراري <b>مطلوب</b> لأن الكورس أوت لاين يذكره رغم شطبه في الشرائح القديمة. أما Pareto والنقطي والساق والورقة المزدوج والرسوم المضللة فـ<b>محذوفة</b> هذا الفصل. انتبه: بيانات أعمار السائقين في مذكرة د. أماني 79 قيمة، بينما جدولها مبني على 71. التمارين المطلوبة من الكتاب: صفحة 101، الأسئلة <b>5 و 7 و 19 و 23</b>.</ar>
+</section>

@@ -63,7 +63,7 @@ const jobs = JSON.parse(fs.readFileSync(process.argv[2],'utf8'));
 const footerFor = (t) => `
 <div style="width:100%;font-family:Georgia,serif;font-size:8px;color:#78828f;
             padding:0 11mm;display:flex;justify-content:space-between;align-items:center;">
-  <span style="font-size:8px;">STAT 2101 · Chapter 3 · ${t}</span>
+  <span style="font-size:8px;">STAT 2101 · ${t}</span>
   <span style="font-size:8px;"><span class="pageNumber"></span> / <span class="totalPages"></span></span>
 </div>`;
 (async () => {
