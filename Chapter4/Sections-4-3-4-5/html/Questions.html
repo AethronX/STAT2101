@@ -1,0 +1,657 @@
+<title>Probability 4-3 to 4-5 Questions</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+
+<style>
+/* Layout: single reading column with a sticky rail nav; four section inks mirror the
+   overprint of a Venn diagram — the chapter's own governing picture. */
+:root{
+  --bg:#fbfaf7;
+  --surface:#ffffff;
+  --surface-2:#f2f1ec;
+  --fg:#1b2027;
+  --fg-soft:#4c5663;
+  --fg-faint:#78828f;
+  --rule:#dddcd4;
+  --rule-soft:#eceae3;
+
+  --ink-1:#1f4e79;   /* 4-1  sample spaces      */
+  --ink-2:#0f6f5c;   /* 4-2  addition rules     */
+  --ink-3:#9a5b12;   /* 4-3  multiplication     */
+  --ink-4:#7b2d6b;   /* 4-4 / 4-5 counting      */
+  --accent:#b23b2e;  /* alarms, traps, must-know */
+
+  --ink-1-wash:#eaf0f7;
+  --ink-2-wash:#e5f1ee;
+  --ink-3-wash:#f8efe1;
+  --ink-4-wash:#f4e9f2;
+  --accent-wash:#f9eae7;
+
+  --display:"Spectral",Georgia,"Times New Roman",serif;
+  --body:"IBM Plex Sans","IBM Plex Sans Arabic",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --arabic:"IBM Plex Sans Arabic","IBM Plex Sans",-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  --measure:70ch;
+  --shadow:0 1px 2px rgba(27,32,39,.05),0 8px 24px -16px rgba(27,32,39,.25);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#13171c;
+    --surface:#1a1f26;
+    --surface-2:#222932;
+    --fg:#e8e6e0;
+    --fg-soft:#b3bac4;
+    --fg-faint:#8a929e;
+    --rule:#333b45;
+    --rule-soft:#272e37;
+
+    --ink-1:#7bb0e8;
+    --ink-2:#4fc4a8;
+    --ink-3:#e2a74e;
+    --ink-4:#d089c2;
+    --accent:#ef7f70;
+
+    --ink-1-wash:#182633;
+    --ink-2-wash:#132a26;
+    --ink-3-wash:#2b2314;
+    --ink-4-wash:#2a1b28;
+    --accent-wash:#2f1c19;
+
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#13171c;
+  --surface:#1a1f26;
+  --surface-2:#222932;
+  --fg:#e8e6e0;
+  --fg-soft:#b3bac4;
+  --fg-faint:#8a929e;
+  --rule:#333b45;
+  --rule-soft:#272e37;
+
+  --ink-1:#7bb0e8;
+  --ink-2:#4fc4a8;
+  --ink-3:#e2a74e;
+  --ink-4:#d089c2;
+  --accent:#ef7f70;
+
+  --ink-1-wash:#182633;
+  --ink-2-wash:#132a26;
+  --ink-3-wash:#2b2314;
+  --ink-4-wash:#2a1b28;
+  --accent-wash:#2f1c19;
+
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{
+  max-width:980px;
+  margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 72px;
+}
+
+/* ---------- masthead ---------- */
+.masthead{
+  padding-block:56px 36px;
+  border-bottom:3px double var(--rule);
+  margin-bottom:36px;
+}
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+}
+h1{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(2.1rem,6vw,3.4rem);
+  line-height:1.08;
+  margin:0 0 10px;
+  letter-spacing:-.015em;
+  text-wrap:balance;
+}
+.subtitle{
+  font-family:var(--display);
+  font-style:italic;
+  font-size:clamp(1.05rem,2.6vw,1.3rem);
+  color:var(--fg-soft);
+  margin:0 0 22px;
+  max-width:var(--measure);
+}
+.meta-strip{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 10px;
+  margin-top:20px;
+}
+.chip{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.04em;
+  padding:5px 10px;
+  border:1px solid var(--rule);
+  border-radius:3px;
+  color:var(--fg-soft);
+  background:var(--surface);
+}
+.chip strong{color:var(--fg);font-weight:600}
+
+/* ---------- nav ---------- */
+nav.toc{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:20px 22px;
+  margin-bottom:44px;
+  box-shadow:var(--shadow);
+}
+nav.toc h2{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+  font-weight:500;
+}
+nav.toc ol{
+  margin:0;padding:0;list-style:none;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:4px 26px;
+}
+nav.toc li{min-width:0}
+nav.toc a{
+  display:flex;
+  gap:10px;
+  align-items:baseline;
+  text-decoration:none;
+  color:var(--fg);
+  padding:5px 0;
+  border-bottom:1px solid var(--rule-soft);
+  font-size:.92rem;
+}
+nav.toc a:hover{color:var(--accent)}
+nav.toc a .num{
+  font-family:var(--mono);
+  font-size:.74rem;
+  color:var(--fg-faint);
+  flex:none;
+  min-width:2.4em;
+}
+
+/* ---------- sections ---------- */
+section{margin-bottom:64px;scroll-margin-top:24px}
+.sec-head{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+  padding-bottom:14px;
+  border-bottom:2px solid var(--sec,var(--fg));
+  margin-bottom:28px;
+}
+.sec-num{
+  font-family:var(--mono);
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.06em;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:5px 9px;
+  border-radius:3px;
+  flex:none;
+  margin-top:6px;
+}
+.sec-head h2{
+  font-family:var(--display);
+  font-size:clamp(1.5rem,4vw,2.05rem);
+  line-height:1.18;
+  margin:0;
+  font-weight:600;
+  text-wrap:balance;
+  min-width:0;
+}
+.sec-head .ar{
+  display:block;
+  font-family:var(--arabic);
+  font-size:.92rem;
+  font-style:normal;
+  color:var(--fg-soft);
+  direction:rtl;
+  margin-top:4px;
+  font-weight:400;
+}
+h3{
+  font-family:var(--body);
+  font-size:1.08rem;
+  font-weight:600;
+  letter-spacing:-.005em;
+  margin:36px 0 12px;
+  color:var(--fg);
+  display:flex;
+  align-items:baseline;
+  gap:9px;
+  flex-wrap:wrap;
+}
+h3::before{
+  content:"";
+  width:18px;height:3px;
+  background:var(--sec,var(--fg));
+  flex:none;
+  border-radius:2px;
+}
+h4{
+  font-family:var(--mono);
+  font-size:.74rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:26px 0 10px;
+  font-weight:500;
+}
+p{margin:0 0 14px;max-width:var(--measure)}
+ul,ol{max-width:var(--measure);padding-left:1.25em;margin:0 0 14px}
+li{margin-bottom:7px}
+li::marker{color:var(--sec,var(--fg-faint))}
+strong{font-weight:600}
+em{font-style:italic}
+code,.v{
+  font-family:var(--mono);
+  font-size:.9em;
+  background:var(--surface-2);
+  padding:1px 5px;
+  border-radius:3px;
+  white-space:nowrap;
+}
+.term{
+  font-weight:600;
+  color:var(--sec,var(--fg));
+}
+a{color:var(--accent)}
+
+/* ---------- maths ---------- */
+.fx{
+  font-family:var(--mono);
+  font-size:1.02rem;
+  line-height:2.1;
+  white-space:nowrap;
+}
+.frac{
+  display:inline-flex;
+  flex-direction:column;
+  vertical-align:middle;
+  text-align:center;
+  font-family:var(--mono);
+  line-height:1.25;
+  margin:0 .22em;
+  position:relative;
+  top:-.08em;
+}
+.frac .num{border-bottom:1.5px solid currentColor;padding:0 .4em .08em}
+.frac .den{padding:.08em .4em 0}
+sub,sup{font-size:.72em}
+
+.formula{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-left:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:18px 20px;
+  margin:18px 0 22px;
+  box-shadow:var(--shadow);
+  overflow-x:auto;
+}
+.formula .label{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg-faint));
+  margin-bottom:10px;
+  font-weight:600;
+}
+.formula .fx{margin:4px 0}
+.formula .note{
+  font-size:.88rem;
+  color:var(--fg-soft);
+  margin:10px 0 0;
+  white-space:normal;
+  max-width:none;
+}
+
+/* ---------- example cards ---------- */
+.ex{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:5px;
+  margin:20px 0;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.ex > .q{
+  padding:16px 20px;
+  border-bottom:1px dashed var(--rule);
+  background:var(--wash,var(--surface-2));
+}
+.ex .tag{
+  font-family:var(--mono);
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg));
+  display:block;
+  margin-bottom:6px;
+}
+.ex .q p{margin:0;max-width:none}
+.ex > .a{padding:16px 20px}
+.ex > .a p{max-width:none}
+.ex > .a p:last-child{margin-bottom:0}
+.ex .steps{margin:0;padding-left:1.2em;max-width:none}
+.ex .steps li{margin-bottom:9px}
+.ans{
+  display:inline-block;
+  font-family:var(--mono);
+  font-weight:600;
+  background:var(--sec,var(--fg));
+  color:#fff;
+  padding:3px 9px;
+  border-radius:3px;
+  font-size:.92em;
+  white-space:nowrap;
+}
+
+/* ---------- callouts ---------- */
+.callout{
+  border-radius:4px;
+  padding:16px 18px;
+  margin:20px 0;
+  border:1px solid;
+  font-size:.95rem;
+}
+.callout p{max-width:none}
+.callout p:last-child{margin-bottom:0}
+.callout .ct{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-weight:600;
+  display:block;
+  margin-bottom:8px;
+}
+.trap{background:var(--accent-wash);border-color:var(--accent)}
+.trap .ct{color:var(--accent)}
+.tip{background:var(--ink-2-wash);border-color:var(--ink-2)}
+.tip .ct{color:var(--ink-2)}
+.note{background:var(--surface-2);border-color:var(--rule)}
+.note .ct{color:var(--fg-faint)}
+
+.ar-note{
+  font-family:var(--arabic);
+  direction:rtl;
+  text-align:right;
+  background:var(--surface-2);
+  border-right:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:13px 16px;
+  margin:16px 0;
+  font-size:.96rem;
+  line-height:1.95;
+  color:var(--fg-soft);
+}
+.ar-note b{color:var(--fg);font-weight:600}
+.ar-note .lbl{
+  display:block;
+  font-size:.72rem;
+  letter-spacing:.04em;
+  color:var(--sec,var(--fg-faint));
+  font-weight:600;
+  margin-bottom:4px;
+}
+.ar-note ul{padding-right:1.2em;padding-left:0;margin:6px 0 0;max-width:none}
+
+.ar-note p{margin:0 0 7px;max-width:none}
+.ar-note p:last-child{margin-bottom:0}
+.ar-note ol{padding-right:1.3em;padding-left:0;margin:6px 0 0;max-width:none}
+.ar-note li{margin-bottom:5px}
+.ar-note .v{font-size:.84em}
+.arn{display:block;font-family:var(--arabic);direction:rtl;unicode-bidi:isolate;text-align:left;font-size:.84rem;color:var(--fg-soft);font-weight:500;margin-top:2px;line-height:1.5}
+.subtitle-ar{font-family:var(--arabic);direction:rtl;text-align:right;color:var(--fg-soft);font-size:1.02rem;margin:0 0 8px;max-width:none;line-height:1.9}
+
+/* ---------- diagrams ---------- */
+figure.dg{margin:22px 0 26px;padding:16px 14px 12px;background:var(--surface);border:1px solid var(--rule);border-radius:4px;break-inside:avoid;page-break-inside:avoid}
+figure.dg svg{display:block;width:100%;height:auto;margin:0 auto;color:var(--fg);overflow:visible}
+figure.dg figcaption{font-size:.86rem;color:var(--fg-soft);margin:10px auto 0;max-width:64ch;text-align:center;line-height:1.5}
+figure.dg figcaption .ar{display:block;font-family:var(--arabic);direction:rtl;margin-top:4px;font-size:.9rem}
+.dg .ln{stroke:currentColor;fill:none;stroke-width:1.4}
+.dg .ln-soft{stroke:var(--fg-faint);fill:none;stroke-width:1.2}
+.dg .dash{stroke-dasharray:4 4}
+.dg .thick{stroke-width:2.6}
+.dg text{fill:currentColor;font-family:var(--body);font-size:13px}
+.dg text.m{font-family:var(--mono);font-size:12.5px}
+.dg text.sm{font-size:11.5px}
+.dg text.big{font-family:var(--mono);font-size:19px;font-weight:600}
+.dg text.soft{fill:var(--fg-soft)}
+.dg text.b{font-weight:600}
+.dg .bg{fill:var(--surface)}
+.dg .wash1{fill:var(--ink-1-wash)} .dg .wash2{fill:var(--ink-2-wash)} .dg .wash3{fill:var(--ink-3-wash)} .dg .wash4{fill:var(--ink-4-wash)} .dg .washA{fill:var(--accent-wash)}
+.dg .f1{fill:var(--ink-1)} .dg .f2{fill:var(--ink-2)} .dg .f3{fill:var(--ink-3)} .dg .f4{fill:var(--ink-4)} .dg .fA{fill:var(--accent)}
+.dg .s1{stroke:var(--ink-1)} .dg .s2{stroke:var(--ink-2)} .dg .s3{stroke:var(--ink-3)} .dg .s4{stroke:var(--ink-4)} .dg .sA{stroke:var(--accent)}
+.dg text.t1{fill:var(--ink-1)} .dg text.t2{fill:var(--ink-2)} .dg text.t3{fill:var(--ink-3)} .dg text.t4{fill:var(--ink-4)} .dg text.tA{fill:var(--accent)}
+
+/* ---------- tables ---------- */
+.tbl-wrap{overflow-x:auto;margin:18px 0 22px;-webkit-overflow-scrolling:touch}
+table{
+  border-collapse:collapse;
+  width:100%;
+  min-width:420px;
+  font-size:.93rem;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+}
+caption{
+  caption-side:top;
+  text-align:left;
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  padding-bottom:9px;
+  font-weight:500;
+}
+th,td{
+  padding:9px 13px;
+  border-bottom:1px solid var(--rule-soft);
+  text-align:left;
+  vertical-align:top;
+}
+thead th{
+  background:var(--sec,var(--surface-2));
+  color:#fff;
+  font-weight:600;
+  font-size:.78rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  border-bottom:none;
+}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even){background:var(--surface-2)}
+td.num,th.num{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+
+/* ---------- misc blocks ---------- */
+.grid2{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:16px;
+  margin:18px 0 22px;
+}
+.card{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-top:3px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:16px 18px;
+  min-width:0;
+}
+.card h5{
+  font-family:var(--body);
+  font-size:.97rem;
+  font-weight:600;
+  margin:0 0 8px;
+}
+.card p{font-size:.92rem;margin-bottom:0;max-width:none;color:var(--fg-soft)}
+
+.flow{
+  list-style:none;
+  padding:0;
+  margin:18px 0 22px;
+  max-width:none;
+  display:grid;
+  gap:10px;
+}
+.flow li{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:13px 16px;
+  margin:0;
+}
+.flow .k{
+  font-family:var(--mono);
+  font-size:.73rem;
+  font-weight:600;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:3px 8px;
+  border-radius:3px;
+  flex:none;
+  margin-top:3px;
+  white-space:nowrap;
+}
+.flow .t{min-width:0;font-size:.95rem}
+.flow .t b{display:block;margin-bottom:2px}
+
+.keypad{
+  font-family:var(--mono);
+  font-size:.86rem;
+  background:var(--surface-2);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:4px 9px;
+  display:inline-block;
+  white-space:nowrap;
+}
+
+hr.soft{border:none;border-top:1px solid var(--rule-soft);margin:34px 0}
+
+footer{
+  border-top:3px double var(--rule);
+  padding-top:24px;
+  margin-top:20px;
+  font-size:.86rem;
+  color:var(--fg-faint);
+}
+footer p{max-width:none}
+
+@media (max-width:520px){
+  .sec-head{gap:11px}
+  .fx{font-size:.94rem}
+  .ex > .q,.ex > .a{padding:14px 15px}
+}
+@media print{
+  body{background:#fff}
+  nav.toc{break-inside:avoid}
+  .ex,.formula,.callout,.card{break-inside:avoid}
+  section{break-before:auto}
+}
+</style>
+
+<style>
+/* Chapter 3: denser setting so pages carry more per sheet */
+body{font-size:14.5px;line-height:1.55}
+p,ul,ol{max-width:none}
+p{margin:0 0 9px}
+li{margin-bottom:4px}
+.masthead{padding-block:34px 18px;margin-bottom:20px}
+section{margin-bottom:30px}
+.sec-head{margin-bottom:16px;padding-bottom:10px}
+h3{margin:22px 0 8px;font-size:1.02rem}
+h4{margin:14px 0 6px}
+.formula{padding:11px 14px;margin:10px 0 12px}
+.formula .fx{margin:1px 0;line-height:1.9}
+.ex{margin:10px 0}
+.ex > .q,.ex > .a{padding:10px 14px}
+.ex .steps li{margin-bottom:5px}
+.callout{padding:10px 13px;margin:10px 0;font-size:.93rem}
+.ar-note{padding:9px 13px;margin:9px 0;line-height:1.8;font-size:.93rem}
+.tbl-wrap{margin:8px 0 12px}
+th,td{padding:6px 10px}
+table{font-size:.9rem;min-width:0}
+figure.dg{margin:12px 0 14px;padding:10px 10px 8px}
+figure.dg figcaption{margin-top:6px;font-size:.84rem}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+.cols2 > *{min-width:0}
+.cols2 .ex{margin:0}
+@media (max-width:640px){.cols2{grid-template-columns:1fr}}
+/* let long formulas wrap inside narrow columns instead of being clipped */
+.fx,.ex .fx,.cols2 .fx,.a .fx{white-space:normal;overflow-x:visible}
+footer{margin-top:10px;padding-top:12px;font-size:.78rem}footer p{margin:0 0 4px}
+/* allow tall example cards to split across pages so no half-empty pages */
+@media print{.ex,.a.long{break-inside:auto!important;page-break-inside:auto!important}.a:not(.long){break-inside:avoid!important}.ex > .q{break-inside:avoid}.cols2{break-inside:auto}}
+.series{list-style:none;padding:0;margin:8px 0 12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2px 22px;max-width:none}
+.series li{margin:0;padding:3px 0;border-bottom:1px solid var(--rule-soft);font-size:.82rem;color:var(--fg-faint)}
+.series li.here{color:var(--fg);font-weight:600}
+.series li.here::after{content:"  ← this file";color:var(--accent);font-weight:500}
+.src{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-faint);border:1px solid var(--rule);border-radius:3px;padding:0 5px;margin-left:6px;white-space:nowrap;font-weight:500}
+</style>
+<style>
+.q{background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:10px 13px;margin:0 0 9px;display:flex;gap:11px;align-items:flex-start;break-inside:avoid}
+.q .id,.a .id{font-family:var(--mono);font-size:.74rem;font-weight:600;color:#fff;background:var(--sec,var(--fg));padding:3px 7px;border-radius:3px;flex:none;min-width:2.6em;text-align:center}
+.q .bd{min-width:0;flex:1}.q .bd p{margin:6px 0 0}
+.tag{font-family:var(--mono);font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;color:var(--sec,var(--fg));border:1px solid currentColor;border-radius:20px;padding:0 7px;display:inline-block;font-weight:600}
+.opts{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:3px 16px}.opts li{margin:0;font-size:.9rem}
+.subs{margin:6px 0 0;padding-left:1.3em}.subs li{margin-bottom:3px}
+.a{background:var(--surface);border:1px solid var(--rule);border-left:4px solid var(--sec,var(--fg));border-radius:4px;padding:10px 13px;margin:0 0 9px}
+.a:not(.long){break-inside:avoid}
+.a .ahead{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px}
+.a p{margin:0 0 6px}.a p:last-child{margin-bottom:0}
+.why{font-size:.88rem;color:var(--fg-soft);border-top:1px dashed var(--rule);padding-top:6px;margin-top:6px}
+.lead{color:var(--fg-soft);font-size:.92rem;margin:0 0 10px}
+@media (max-width:640px){.opts{grid-template-columns:1fr}}
+</style>
+<div class="wrap"><header class="masthead"><p class="eyebrow">Sultan Qaboos University · STAT 2101 · Chapter 4 · Sections 4-3, 4-4 and 4-5 only</p>
+<div class="meta-strip"><span class="chip"><strong>43</strong> questions</span><span class="chip"><strong>CLO</strong> 4-A</span><span class="chip"><strong>Final</strong> 29/12/2026</span></div></header>
+<section style="--sec:var(--accent);--wash:var(--accent-wash)"><div class="sec-head"><span class="sec-num">Q</span><h2>Exam-style questions: Sections 4-3, 4-4 and 4-5
+<span class="ar">أسئلة بمعايير اختبارات جامعة السلطان قابوس — الاحتمالات 4-3 و 4-4 و 4-5</span></h2></div>
+<p>Covers sections 4-3 (independent and dependent events, multiplication rules 1 and 2, conditional probability, independence tests, two-way tables, tree diagrams, at least one), 4-4 (fundamental counting rule, factorial, permutation rules 1 and 2, combinations) and 4-5 (probability with counting rules). Every question is tagged with its section.</p><div class="ar-note"><span class="lbl">طريقة الاستخدام</span>حل الجزء D أولًا (20 دقيقة) لتعرف مستواك، ثم الأجزاء A و B و C، ثم صحّح من ملف الإجابات. حدّد دائمًا: مع إرجاع أم بدون؟ الترتيب مهم أم لا؟ واكتب القاعدة التي تستخدمها، فعليها درجات.</div>
+</section>
+<section style="--sec:var(--ink-1);--wash:var(--ink-1-wash)"><h3 class="grp">Part A · Multiple choice (16)</h3><p class="lead">Give the letter and a one-line reason, as in a written exam.</p><div class="q"><span class="id">A1</span><div class="bd"><span class="tag">4-3</span> <p>Two cards are drawn from a standard deck <strong>without replacement</strong>. P(both are aces) =</p><ul class="opts"><li>(a) 1/169</li><li>(b) 1/221</li><li>(c) 1/26</li><li>(d) 2/13</li></ul></div></div><div class="q"><span class="id">A2</span><div class="bd"><span class="tag">4-3</span> <p>P(A) = 0.4, P(B) = 0.5 and P(A ∩ B) = 0.2. Which statement is true?</p><ul class="opts"><li>(a) A and B are mutually exclusive</li><li>(b) A and B are independent</li><li>(c) P(A | B) = 0.5</li><li>(d) P(A ∪ B) = 0.9</li></ul></div></div><div class="q"><span class="id">A3</span><div class="bd"><span class="tag">4-3</span> <p>P(A ∩ B) = 0.12 and P(A) = 0.30. Then P(B | A) =</p><ul class="opts"><li>(a) 0.036</li><li>(b) 0.40</li><li>(c) 0.25</li><li>(d) 0.18</li></ul></div></div><div class="q"><span class="id">A4</span><div class="bd"><span class="tag">4-3</span> <p>Two events with non-zero probabilities are mutually exclusive. They must be:</p><ul class="opts"><li>(a) independent</li><li>(b) dependent</li><li>(c) complementary</li><li>(d) equally likely</li></ul></div></div><div class="q"><span class="id">A5</span><div class="bd"><span class="tag">4-3</span> <p>A fair coin is tossed 5 times. P(at least one head) =</p><ul class="opts"><li>(a) 5/32</li><li>(b) 1/2</li><li>(c) 31/32</li><li>(d) 1/32</li></ul></div></div><div class="q"><span class="id">A6</span><div class="bd"><span class="tag">4-3</span> <p>A bag has 4 red and 6 blue balls. Two are drawn <strong>with replacement</strong>. P(red first, then blue) =</p><ul class="opts"><li>(a) 0.24</li><li>(b) 0.2667</li><li>(c) 0.48</li><li>(d) 0.10</li></ul></div></div><div class="q"><span class="id">A7</span><div class="bd"><span class="tag">4-3</span> <p>A and B are independent with P(A) = 0.3 and P(B) = 0.6. P(A ∪ B) =</p><ul class="opts"><li>(a) 0.90</li><li>(b) 0.18</li><li>(c) 0.72</li><li>(d) 0.82</li></ul></div></div><div class="q"><span class="id">A8</span><div class="bd"><span class="tag">4-4</span> <p>The value of 6!/4! is:</p><ul class="opts"><li>(a) 1.5</li><li>(b) 2</li><li>(c) 30</li><li>(d) 720</li></ul></div></div><div class="q"><span class="id">A9</span><div class="bd"><span class="tag">4-4</span> <p>How many 4-letter codes can be made from the 26 English letters if letters may repeat?</p><ul class="opts"><li>(a) 26 × 25 × 24 × 23</li><li>(b) 456,976</li><li>(c) 14,950</li><li>(d) 104</li></ul></div></div><div class="q"><span class="id">A10</span><div class="bd"><span class="tag">4-4</span> <p>From 10 club members, a president, a vice-president and a secretary are chosen. The number of ways is:</p><ul class="opts"><li>(a) 120</li><li>(b) 720</li><li>(c) 30</li><li>(d) 1000</li></ul></div></div><div class="q"><span class="id">A11</span><div class="bd"><span class="tag">4-4</span> <p>₁₀C₇ equals:</p><ul class="opts"><li>(a) ₁₀C₃ = 120</li><li>(b) ₁₀P₇ = 604,800</li><li>(c) 70</li><li>(d) 7!</li></ul></div></div><div class="q"><span class="id">A12</span><div class="bd"><span class="tag">4-4</span> <p>The number of distinct arrangements of the letters of LEVEL is:</p><ul class="opts"><li>(a) 120</li><li>(b) 60</li><li>(c) 30</li><li>(d) 20</li></ul></div></div><div class="q"><span class="id">A13</span><div class="bd"><span class="tag">4-4</span> <p>A student has 3 shirts, 4 trousers and 2 pairs of shoes. How many different outfits are possible?</p><ul class="opts"><li>(a) 9</li><li>(b) 24</li><li>(c) 12</li><li>(d) 6</li></ul></div></div><div class="q"><span class="id">A14</span><div class="bd"><span class="tag">4-5</span> <p>A committee of 3 is chosen at random from 5 men and 4 women. P(all three are women) =</p><ul class="opts"><li>(a) 4/84 = 1/21 ≈ 0.0476</li><li>(b) 4/9</li><li>(c) 1/3</li><li>(d) 1/126</li></ul></div></div><div class="q"><span class="id">A15</span><div class="bd"><span class="tag">4-5</span> <p>A lottery draws 3 different numbers from 1 to 10; order does not matter. The probability that one ticket wins is:</p><ul class="opts"><li>(a) 1/720</li><li>(b) 1/120</li><li>(c) 3/10</li><li>(d) 1/1000</li></ul></div></div><div class="q"><span class="id">A16</span><div class="bd"><span class="tag">4-5</span> <p>The letters of MATH are arranged at random. P(the arrangement starts with M) =</p><ul class="opts"><li>(a) 1/24</li><li>(b) 1/4</li><li>(c) 1/6</li><li>(d) 4/24</li></ul></div></div></section>
+<section style="--sec:var(--ink-2);--wash:var(--ink-2-wash)"><h3 class="grp">Part B · Short structured questions (16)</h3><p class="lead">Typical 2–6 mark midterm items. Write S and E in set notation.</p><div class="q"><span class="id">B1</span><div class="bd"><span class="tag">4-3</span> <p><strong>[5 marks]</strong> 200 SQU students were asked whether they use the university gym:</p><div class="tbl-wrap"><table><thead><tr><th></th><th>Uses gym</th><th>Does not</th><th>Total</th></tr></thead><tbody><tr><td class="num">Male</td><td class="num">48</td><td class="num">52</td><td class="num">100</td></tr><tr><td class="num">Female</td><td class="num">32</td><td class="num">68</td><td class="num">100</td></tr><tr><td class="num"><strong>Total</strong></td><td class="num">80</td><td class="num">120</td><td class="num">200</td></tr></tbody></table></div><p>Find: (a) P(uses gym | male) (b) P(male | uses gym) (c) P(male and uses gym) (d) Are "male" and "uses gym" independent? Justify with numbers.</p></div></div><div class="q"><span class="id">B2</span><div class="bd"><span class="tag">4-3</span> <p><strong>[5 marks]</strong> A box holds 20 phone chargers, 5 of them defective. Two are taken <strong>without replacement</strong>. Find: (a) P(both defective) (b) P(exactly one defective) (c) P(at least one defective). (d) Check that (a), (b) and P(none defective) add to 1.</p></div></div><div class="q"><span class="id">B3</span><div class="bd"><span class="tag">4-3</span> <p><strong>[4 marks]</strong> 60% of students come to SQU by bus. <strong>Of the bus users</strong>, 10% arrive late; of the others, 4% arrive late. Draw a tree diagram, then find: (a) P(bus and late) (b) P(late) (c) P(not bus and on time).</p></div></div><div class="q"><span class="id">B4</span><div class="bd"><span class="tag">4-3</span> <p><strong>[4 marks]</strong> P(A) = 0.5, P(B) = 0.4 and P(A ∪ B) = 0.7. Find P(A ∩ B), P(A | B) and P(B | A). Are A and B independent? Are they mutually exclusive?</p></div></div><div class="q"><span class="id">B5</span><div class="bd"><span class="tag">4-3</span> <p><strong>[3 marks]</strong> A device has 3 components that work independently; each fails with probability 0.05. Find P(all three work) and P(at least one fails).</p></div></div><div class="q"><span class="id">B6</span><div class="bd"><span class="tag">4-3</span> <p><strong>[2 marks] Find the mistake.</strong> Given P(A ∩ B) = 0.15 and P(B) = 0.5, a student writes "P(A | B) = 0.15/P(A)".</p></div></div><div class="q"><span class="id">B7</span><div class="bd"><span class="tag">4-3</span> <p><strong>[3 marks]</strong> Two dice are rolled. A = "the first die is even" and B = "the sum is 7". Show whether A and B are independent.</p></div></div><div class="q"><span class="id">B8</span><div class="bd"><span class="tag">4-4</span> <p><strong>[3 marks]</strong> How many 4-digit PINs (digits 0–9) are possible if (a) repetition is allowed (b) repetition is not allowed (c) no repetition and the first digit cannot be 0?</p></div></div><div class="q"><span class="id">B9</span><div class="bd"><span class="tag">4-4</span> <p><strong>[4 marks]</strong> A club has 12 members, including Ahmed. In how many ways can (a) a president, vice-president and secretary be chosen (b) a committee of 3 be chosen (c) a committee of 3 that includes Ahmed be chosen (d) a committee of 3 that excludes Ahmed be chosen?</p></div></div><div class="q"><span class="id">B10</span><div class="bd"><span class="tag">4-4</span> <p><strong>[3 marks]</strong> How many distinct arrangements can be made from the letters of SULTANATE? How many of them begin with S?</p></div></div><div class="q"><span class="id">B11</span><div class="bd"><span class="tag">4-4</span> <p><strong>[3 marks]</strong> A committee of 5 is formed from 6 men and 5 women. In how many ways can it have (a) exactly 2 men (b) at least 4 women?</p></div></div><div class="q"><span class="id">B12</span><div class="bd"><span class="tag">4-4</span> <p><strong>[2 marks]</strong> Find n if ₙC₂ = 45.</p></div></div><div class="q"><span class="id">B13</span><div class="bd"><span class="tag">4-5</span> <p><strong>[3 marks]</strong> A bag holds 6 red and 4 white balls. Four are drawn at random. Find P(exactly 2 red) and P(at least 1 white).</p></div></div><div class="q"><span class="id">B14</span><div class="bd"><span class="tag">4-5</span> <p><strong>[3 marks]</strong> The letters of BANANA are arranged at random. Find P(the arrangement begins and ends with A).</p></div></div><div class="q"><span class="id">B15</span><div class="bd"><span class="tag">4-5</span> <p><strong>[2 marks]</strong> A 3-digit code is formed with no repeated digits (0–9). Find P(all three digits are odd).</p></div></div><div class="q"><span class="id">B16</span><div class="bd"><span class="tag">4-3</span> <span class="tag">4-5</span> <p><strong>[3 marks]</strong> 12 bulbs include 3 that are defective. Three are chosen at random. Find P(none defective) in two ways: with combinations, and with the multiplication rule. Then find P(at least one defective).</p></div></div></section>
+<section style="--sec:var(--ink-3);--wash:var(--ink-3-wash)"><h3 class="grp">Part C · Long questions (5)</h3><p class="lead">Midterm-style, multi-part. Marks in brackets.</p><div class="q"><span class="id">C1</span><div class="bd"><span class="tag">4-3</span>  <strong>[12 marks]</strong><p>400 adults in Muscat were asked whether they exercise regularly:</p><div class="tbl-wrap"><table><thead><tr><th>Age group</th><th>Yes</th><th>No</th><th>Total</th></tr></thead><tbody><tr><td class="num">18–30</td><td class="num">90</td><td class="num">60</td><td class="num">150</td></tr><tr><td class="num">31–50</td><td class="num">70</td><td class="num">80</td><td class="num">150</td></tr><tr><td class="num">over 50</td><td class="num">40</td><td class="num">60</td><td class="num">100</td></tr><tr><td class="num"><strong>Total</strong></td><td class="num">200</td><td class="num">200</td><td class="num">400</td></tr></tbody></table></div><ol class="subs"><li>P(exercises)</li><li>P(exercises | 18–30)</li><li>P(over 50 | does not exercise)</li><li>P(18–30 and exercises)</li><li>Are "18–30" and "exercises" independent? Justify.</li><li>Two adults are chosen without replacement. Find P(both are over 50).</li></ol></div></div><div class="q"><span class="id">C2</span><div class="bd"><span class="tag">4-3</span>  <strong>[10 marks]</strong><p>Box A has 3 red and 2 blue balls; box B has 1 red and 4 blue. A die is rolled: 1 or 2 → a ball is drawn from box A; otherwise from box B.</p><ol class="subs"><li>Draw the tree diagram with all branch probabilities.</li><li>P(box A and red)</li><li>P(red)</li><li>Given that the ball is red, find the probability it came from box A.</li><li>Are "box A" and "red" independent?</li></ol></div></div><div class="q"><span class="id">C3</span><div class="bd"><span class="tag">4-4</span> <span class="tag">4-5</span>  <strong>[12 marks]</strong><p>A committee of 5 is chosen at random from 7 engineers and 5 doctors.</p><ol class="subs"><li>Find n(S).</li><li>P(exactly 3 engineers)</li><li>P(all members have the same profession)</li><li>P(at least one doctor)</li><li>P(a particular engineer, Salim, is on the committee)</li></ol></div></div><div class="q"><span class="id">C4</span><div class="bd"><span class="tag">4-4</span> <span class="tag">4-5</span>  <strong>[8 marks]</strong><p>SQU student IDs have 6 digits, and the first digit must be 1 or 2.</p><ol class="subs"><li>How many IDs are possible if repetition is allowed?</li><li>How many if no digit may repeat?</li><li>With repetition allowed, find P(a randomly issued ID ends in 0).</li><li>With repetition allowed, find P(all six digits are the same).</li></ol></div></div><div class="q"><span class="id">C5</span><div class="bd"><span class="tag">4-3</span> <span class="tag">4-4</span>  <strong>[8 marks]</strong><p>A multiple-choice quiz has 5 questions, each with 4 options. A student guesses every answer independently.</p><ol class="subs"><li>How many different answer sheets are possible?</li><li>P(all five correct)</li><li>P(none correct)</li><li>P(at least one correct)</li></ol></div></div></section>
+<section style="--sec:var(--accent);--wash:var(--accent-wash)"><h3 class="grp">Part D · 20-minute mini-quiz (16 marks)</h3><p class="lead">Time yourself, closed book, before opening the answers.</p><div class="q"><span class="id">D1</span><div class="bd"><span class="tag">4-3</span> <p><strong>[2 marks]</strong> Define independent and dependent events, with one example each.</p></div></div><div class="q"><span class="id">D2</span><div class="bd"><span class="tag">4-3</span> <p><strong>[3 marks]</strong> 30% of a city's residents own a car; of the car owners, 45% also own a motorbike. Find P(car and motorbike). Is 0.45 a conditional probability?</p></div></div><div class="q"><span class="id">D3</span><div class="bd"><span class="tag">4-4</span> <p><strong>[3 marks]</strong> Evaluate ₈P₃, ₈C₃ and 7!/(5! 2!).</p></div></div><div class="q"><span class="id">D4</span><div class="bd"><span class="tag">4-4</span> <p><strong>[2 marks]</strong> In how many ways can 7 different books be arranged on a shelf if a particular book must be in the middle?</p></div></div><div class="q"><span class="id">D5</span><div class="bd"><span class="tag">4-5</span> <p><strong>[3 marks]</strong> 4 students are chosen at random from 8 males and 6 females. Find P(2 males and 2 females).</p></div></div><div class="q"><span class="id">D6</span><div class="bd"><span class="tag">4-3</span> <p><strong>[3 marks]</strong> P(A) = 0.6, P(B | A) = 0.5 and P(B | Aᶜ) = 0.2. Find P(A ∩ B) and P(B).</p></div></div></section>
+<footer><p>Built to the STAT 2101 Fall 2026 course outline (CLO4-A: calculate probabilities using counting rules and basic probability principles). Sections 4-3 Multiplication Rules and Conditional Probability, 4-4 Counting Rules and 4-5 Probability and Counting Rules only. Every numeric answer was computed by code from the question data.</p></footer></div>
