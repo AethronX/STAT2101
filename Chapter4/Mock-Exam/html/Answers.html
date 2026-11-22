@@ -1,0 +1,742 @@
+<title>Chapter 4 Review Test Answers</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+
+<style>
+/* Layout: single reading column with a sticky rail nav; four section inks mirror the
+   overprint of a Venn diagram — the chapter's own governing picture. */
+:root{
+  --bg:#fbfaf7;
+  --surface:#ffffff;
+  --surface-2:#f2f1ec;
+  --fg:#1b2027;
+  --fg-soft:#4c5663;
+  --fg-faint:#78828f;
+  --rule:#dddcd4;
+  --rule-soft:#eceae3;
+
+  --ink-1:#1f4e79;   /* 4-1  sample spaces      */
+  --ink-2:#0f6f5c;   /* 4-2  addition rules     */
+  --ink-3:#9a5b12;   /* 4-3  multiplication     */
+  --ink-4:#7b2d6b;   /* 4-4 / 4-5 counting      */
+  --accent:#b23b2e;  /* alarms, traps, must-know */
+
+  --ink-1-wash:#eaf0f7;
+  --ink-2-wash:#e5f1ee;
+  --ink-3-wash:#f8efe1;
+  --ink-4-wash:#f4e9f2;
+  --accent-wash:#f9eae7;
+
+  --display:"Spectral",Georgia,"Times New Roman",serif;
+  --body:"IBM Plex Sans","IBM Plex Sans Arabic",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --arabic:"IBM Plex Sans Arabic","IBM Plex Sans",-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  --measure:70ch;
+  --shadow:0 1px 2px rgba(27,32,39,.05),0 8px 24px -16px rgba(27,32,39,.25);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#13171c;
+    --surface:#1a1f26;
+    --surface-2:#222932;
+    --fg:#e8e6e0;
+    --fg-soft:#b3bac4;
+    --fg-faint:#8a929e;
+    --rule:#333b45;
+    --rule-soft:#272e37;
+
+    --ink-1:#7bb0e8;
+    --ink-2:#4fc4a8;
+    --ink-3:#e2a74e;
+    --ink-4:#d089c2;
+    --accent:#ef7f70;
+
+    --ink-1-wash:#182633;
+    --ink-2-wash:#132a26;
+    --ink-3-wash:#2b2314;
+    --ink-4-wash:#2a1b28;
+    --accent-wash:#2f1c19;
+
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#13171c;
+  --surface:#1a1f26;
+  --surface-2:#222932;
+  --fg:#e8e6e0;
+  --fg-soft:#b3bac4;
+  --fg-faint:#8a929e;
+  --rule:#333b45;
+  --rule-soft:#272e37;
+
+  --ink-1:#7bb0e8;
+  --ink-2:#4fc4a8;
+  --ink-3:#e2a74e;
+  --ink-4:#d089c2;
+  --accent:#ef7f70;
+
+  --ink-1-wash:#182633;
+  --ink-2-wash:#132a26;
+  --ink-3-wash:#2b2314;
+  --ink-4-wash:#2a1b28;
+  --accent-wash:#2f1c19;
+
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{
+  max-width:980px;
+  margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 72px;
+}
+
+/* ---------- masthead ---------- */
+.masthead{
+  padding-block:56px 36px;
+  border-bottom:3px double var(--rule);
+  margin-bottom:36px;
+}
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+}
+h1{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(2.1rem,6vw,3.4rem);
+  line-height:1.08;
+  margin:0 0 10px;
+  letter-spacing:-.015em;
+  text-wrap:balance;
+}
+.subtitle{
+  font-family:var(--display);
+  font-style:italic;
+  font-size:clamp(1.05rem,2.6vw,1.3rem);
+  color:var(--fg-soft);
+  margin:0 0 22px;
+  max-width:var(--measure);
+}
+.meta-strip{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 10px;
+  margin-top:20px;
+}
+.chip{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.04em;
+  padding:5px 10px;
+  border:1px solid var(--rule);
+  border-radius:3px;
+  color:var(--fg-soft);
+  background:var(--surface);
+}
+.chip strong{color:var(--fg);font-weight:600}
+
+/* ---------- nav ---------- */
+nav.toc{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:20px 22px;
+  margin-bottom:44px;
+  box-shadow:var(--shadow);
+}
+nav.toc h2{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+  font-weight:500;
+}
+nav.toc ol{
+  margin:0;padding:0;list-style:none;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:4px 26px;
+}
+nav.toc li{min-width:0}
+nav.toc a{
+  display:flex;
+  gap:10px;
+  align-items:baseline;
+  text-decoration:none;
+  color:var(--fg);
+  padding:5px 0;
+  border-bottom:1px solid var(--rule-soft);
+  font-size:.92rem;
+}
+nav.toc a:hover{color:var(--accent)}
+nav.toc a .num{
+  font-family:var(--mono);
+  font-size:.74rem;
+  color:var(--fg-faint);
+  flex:none;
+  min-width:2.4em;
+}
+
+/* ---------- sections ---------- */
+section{margin-bottom:64px;scroll-margin-top:24px}
+.sec-head{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+  padding-bottom:14px;
+  border-bottom:2px solid var(--sec,var(--fg));
+  margin-bottom:28px;
+}
+.sec-num{
+  font-family:var(--mono);
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.06em;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:5px 9px;
+  border-radius:3px;
+  flex:none;
+  margin-top:6px;
+}
+.sec-head h2{
+  font-family:var(--display);
+  font-size:clamp(1.5rem,4vw,2.05rem);
+  line-height:1.18;
+  margin:0;
+  font-weight:600;
+  text-wrap:balance;
+  min-width:0;
+}
+.sec-head .ar{
+  display:block;
+  font-family:var(--arabic);
+  font-size:.92rem;
+  font-style:normal;
+  color:var(--fg-soft);
+  direction:rtl;
+  margin-top:4px;
+  font-weight:400;
+}
+h3{
+  font-family:var(--body);
+  font-size:1.08rem;
+  font-weight:600;
+  letter-spacing:-.005em;
+  margin:36px 0 12px;
+  color:var(--fg);
+  display:flex;
+  align-items:baseline;
+  gap:9px;
+  flex-wrap:wrap;
+}
+h3::before{
+  content:"";
+  width:18px;height:3px;
+  background:var(--sec,var(--fg));
+  flex:none;
+  border-radius:2px;
+}
+h4{
+  font-family:var(--mono);
+  font-size:.74rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:26px 0 10px;
+  font-weight:500;
+}
+p{margin:0 0 14px;max-width:var(--measure)}
+ul,ol{max-width:var(--measure);padding-left:1.25em;margin:0 0 14px}
+li{margin-bottom:7px}
+li::marker{color:var(--sec,var(--fg-faint))}
+strong{font-weight:600}
+em{font-style:italic}
+code,.v{
+  font-family:var(--mono);
+  font-size:.9em;
+  background:var(--surface-2);
+  padding:1px 5px;
+  border-radius:3px;
+  white-space:nowrap;
+}
+.term{
+  font-weight:600;
+  color:var(--sec,var(--fg));
+}
+a{color:var(--accent)}
+
+/* ---------- maths ---------- */
+.fx{
+  font-family:var(--mono);
+  font-size:1.02rem;
+  line-height:2.1;
+  white-space:nowrap;
+}
+.frac{
+  display:inline-flex;
+  flex-direction:column;
+  vertical-align:middle;
+  text-align:center;
+  font-family:var(--mono);
+  line-height:1.25;
+  margin:0 .22em;
+  position:relative;
+  top:-.08em;
+}
+.frac .num{border-bottom:1.5px solid currentColor;padding:0 .4em .08em}
+.frac .den{padding:.08em .4em 0}
+sub,sup{font-size:.72em}
+
+.formula{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-left:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:18px 20px;
+  margin:18px 0 22px;
+  box-shadow:var(--shadow);
+  overflow-x:auto;
+}
+.formula .label{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg-faint));
+  margin-bottom:10px;
+  font-weight:600;
+}
+.formula .fx{margin:4px 0}
+.formula .note{
+  font-size:.88rem;
+  color:var(--fg-soft);
+  margin:10px 0 0;
+  white-space:normal;
+  max-width:none;
+}
+
+/* ---------- example cards ---------- */
+.ex{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:5px;
+  margin:20px 0;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.ex > .q{
+  padding:16px 20px;
+  border-bottom:1px dashed var(--rule);
+  background:var(--wash,var(--surface-2));
+}
+.ex .tag{
+  font-family:var(--mono);
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg));
+  display:block;
+  margin-bottom:6px;
+}
+.ex .q p{margin:0;max-width:none}
+.ex > .a{padding:16px 20px}
+.ex > .a p{max-width:none}
+.ex > .a p:last-child{margin-bottom:0}
+.ex .steps{margin:0;padding-left:1.2em;max-width:none}
+.ex .steps li{margin-bottom:9px}
+.ans{
+  display:inline-block;
+  font-family:var(--mono);
+  font-weight:600;
+  background:var(--sec,var(--fg));
+  color:#fff;
+  padding:3px 9px;
+  border-radius:3px;
+  font-size:.92em;
+  white-space:nowrap;
+}
+
+/* ---------- callouts ---------- */
+.callout{
+  border-radius:4px;
+  padding:16px 18px;
+  margin:20px 0;
+  border:1px solid;
+  font-size:.95rem;
+}
+.callout p{max-width:none}
+.callout p:last-child{margin-bottom:0}
+.callout .ct{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-weight:600;
+  display:block;
+  margin-bottom:8px;
+}
+.trap{background:var(--accent-wash);border-color:var(--accent)}
+.trap .ct{color:var(--accent)}
+.tip{background:var(--ink-2-wash);border-color:var(--ink-2)}
+.tip .ct{color:var(--ink-2)}
+.note{background:var(--surface-2);border-color:var(--rule)}
+.note .ct{color:var(--fg-faint)}
+
+.ar-note{
+  font-family:var(--arabic);
+  direction:rtl;
+  text-align:right;
+  background:var(--surface-2);
+  border-right:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:13px 16px;
+  margin:16px 0;
+  font-size:.96rem;
+  line-height:1.95;
+  color:var(--fg-soft);
+}
+.ar-note b{color:var(--fg);font-weight:600}
+.ar-note .lbl{
+  display:block;
+  font-size:.72rem;
+  letter-spacing:.04em;
+  color:var(--sec,var(--fg-faint));
+  font-weight:600;
+  margin-bottom:4px;
+}
+.ar-note ul{padding-right:1.2em;padding-left:0;margin:6px 0 0;max-width:none}
+
+.ar-note p{margin:0 0 7px;max-width:none}
+.ar-note p:last-child{margin-bottom:0}
+.ar-note ol{padding-right:1.3em;padding-left:0;margin:6px 0 0;max-width:none}
+.ar-note li{margin-bottom:5px}
+.ar-note .v{font-size:.84em}
+.arn{display:block;font-family:var(--arabic);direction:rtl;unicode-bidi:isolate;text-align:left;font-size:.84rem;color:var(--fg-soft);font-weight:500;margin-top:2px;line-height:1.5}
+.subtitle-ar{font-family:var(--arabic);direction:rtl;text-align:right;color:var(--fg-soft);font-size:1.02rem;margin:0 0 8px;max-width:none;line-height:1.9}
+
+/* ---------- diagrams ---------- */
+figure.dg{margin:22px 0 26px;padding:16px 14px 12px;background:var(--surface);border:1px solid var(--rule);border-radius:4px;break-inside:avoid;page-break-inside:avoid}
+figure.dg svg{display:block;width:100%;height:auto;margin:0 auto;color:var(--fg);overflow:visible}
+figure.dg figcaption{font-size:.86rem;color:var(--fg-soft);margin:10px auto 0;max-width:64ch;text-align:center;line-height:1.5}
+figure.dg figcaption .ar{display:block;font-family:var(--arabic);direction:rtl;margin-top:4px;font-size:.9rem}
+.dg .ln{stroke:currentColor;fill:none;stroke-width:1.4}
+.dg .ln-soft{stroke:var(--fg-faint);fill:none;stroke-width:1.2}
+.dg .dash{stroke-dasharray:4 4}
+.dg .thick{stroke-width:2.6}
+.dg text{fill:currentColor;font-family:var(--body);font-size:13px}
+.dg text.m{font-family:var(--mono);font-size:12.5px}
+.dg text.sm{font-size:11.5px}
+.dg text.big{font-family:var(--mono);font-size:19px;font-weight:600}
+.dg text.soft{fill:var(--fg-soft)}
+.dg text.b{font-weight:600}
+.dg .bg{fill:var(--surface)}
+.dg .wash1{fill:var(--ink-1-wash)} .dg .wash2{fill:var(--ink-2-wash)} .dg .wash3{fill:var(--ink-3-wash)} .dg .wash4{fill:var(--ink-4-wash)} .dg .washA{fill:var(--accent-wash)}
+.dg .f1{fill:var(--ink-1)} .dg .f2{fill:var(--ink-2)} .dg .f3{fill:var(--ink-3)} .dg .f4{fill:var(--ink-4)} .dg .fA{fill:var(--accent)}
+.dg .s1{stroke:var(--ink-1)} .dg .s2{stroke:var(--ink-2)} .dg .s3{stroke:var(--ink-3)} .dg .s4{stroke:var(--ink-4)} .dg .sA{stroke:var(--accent)}
+.dg text.t1{fill:var(--ink-1)} .dg text.t2{fill:var(--ink-2)} .dg text.t3{fill:var(--ink-3)} .dg text.t4{fill:var(--ink-4)} .dg text.tA{fill:var(--accent)}
+
+/* ---------- tables ---------- */
+.tbl-wrap{overflow-x:auto;margin:18px 0 22px;-webkit-overflow-scrolling:touch}
+table{
+  border-collapse:collapse;
+  width:100%;
+  min-width:420px;
+  font-size:.93rem;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+}
+caption{
+  caption-side:top;
+  text-align:left;
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  padding-bottom:9px;
+  font-weight:500;
+}
+th,td{
+  padding:9px 13px;
+  border-bottom:1px solid var(--rule-soft);
+  text-align:left;
+  vertical-align:top;
+}
+thead th{
+  background:var(--sec,var(--surface-2));
+  color:#fff;
+  font-weight:600;
+  font-size:.78rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  border-bottom:none;
+}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even){background:var(--surface-2)}
+td.num,th.num{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+
+/* ---------- misc blocks ---------- */
+.grid2{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:16px;
+  margin:18px 0 22px;
+}
+.card{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-top:3px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:16px 18px;
+  min-width:0;
+}
+.card h5{
+  font-family:var(--body);
+  font-size:.97rem;
+  font-weight:600;
+  margin:0 0 8px;
+}
+.card p{font-size:.92rem;margin-bottom:0;max-width:none;color:var(--fg-soft)}
+
+.flow{
+  list-style:none;
+  padding:0;
+  margin:18px 0 22px;
+  max-width:none;
+  display:grid;
+  gap:10px;
+}
+.flow li{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:13px 16px;
+  margin:0;
+}
+.flow .k{
+  font-family:var(--mono);
+  font-size:.73rem;
+  font-weight:600;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:3px 8px;
+  border-radius:3px;
+  flex:none;
+  margin-top:3px;
+  white-space:nowrap;
+}
+.flow .t{min-width:0;font-size:.95rem}
+.flow .t b{display:block;margin-bottom:2px}
+
+.keypad{
+  font-family:var(--mono);
+  font-size:.86rem;
+  background:var(--surface-2);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:4px 9px;
+  display:inline-block;
+  white-space:nowrap;
+}
+
+hr.soft{border:none;border-top:1px solid var(--rule-soft);margin:34px 0}
+
+footer{
+  border-top:3px double var(--rule);
+  padding-top:24px;
+  margin-top:20px;
+  font-size:.86rem;
+  color:var(--fg-faint);
+}
+footer p{max-width:none}
+
+@media (max-width:520px){
+  .sec-head{gap:11px}
+  .fx{font-size:.94rem}
+  .ex > .q,.ex > .a{padding:14px 15px}
+}
+@media print{
+  body{background:#fff}
+  nav.toc{break-inside:avoid}
+  .ex,.formula,.callout,.card{break-inside:avoid}
+  section{break-before:auto}
+}
+</style>
+
+<style>
+/* Chapter 3: denser setting so pages carry more per sheet */
+body{font-size:14.5px;line-height:1.55}
+p,ul,ol{max-width:none}
+p{margin:0 0 9px}
+li{margin-bottom:4px}
+.masthead{padding-block:34px 18px;margin-bottom:20px}
+section{margin-bottom:30px}
+.sec-head{margin-bottom:16px;padding-bottom:10px}
+h3{margin:22px 0 8px;font-size:1.02rem}
+h4{margin:14px 0 6px}
+.formula{padding:11px 14px;margin:10px 0 12px}
+.formula .fx{margin:1px 0;line-height:1.9}
+.ex{margin:10px 0}
+.ex > .q,.ex > .a{padding:10px 14px}
+.ex .steps li{margin-bottom:5px}
+.callout{padding:10px 13px;margin:10px 0;font-size:.93rem}
+.ar-note{padding:9px 13px;margin:9px 0;line-height:1.8;font-size:.93rem}
+.tbl-wrap{margin:8px 0 12px}
+th,td{padding:6px 10px}
+table{font-size:.9rem;min-width:0}
+figure.dg{margin:12px 0 14px;padding:10px 10px 8px}
+figure.dg figcaption{margin-top:6px;font-size:.84rem}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+.cols2 > *{min-width:0}
+.cols2 .ex{margin:0}
+@media (max-width:640px){.cols2{grid-template-columns:1fr}}
+/* let long formulas wrap inside narrow columns instead of being clipped */
+.fx,.ex .fx,.cols2 .fx,.a .fx{white-space:normal;overflow-x:visible}
+footer{margin-top:10px;padding-top:12px;font-size:.78rem}footer p{margin:0 0 4px}
+/* allow tall example cards to split across pages so no half-empty pages */
+@media print{.ex,.a.long{break-inside:auto!important;page-break-inside:auto!important}.a:not(.long){break-inside:avoid!important}.ex > .q{break-inside:avoid}.cols2{break-inside:auto}}
+.series{list-style:none;padding:0;margin:8px 0 12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2px 22px;max-width:none}
+.series li{margin:0;padding:3px 0;border-bottom:1px solid var(--rule-soft);font-size:.82rem;color:var(--fg-faint)}
+.series li.here{color:var(--fg);font-weight:600}
+.series li.here::after{content:"  ← this file";color:var(--accent);font-weight:500}
+.src{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-faint);border:1px solid var(--rule);border-radius:3px;padding:0 5px;margin-left:6px;white-space:nowrap;font-weight:500}
+</style>
+<style>
+body{font-size:12.2px;line-height:1.5}
+.paper{max-width:none}
+.uni{text-align:center;border-bottom:2px solid var(--fg);padding-bottom:6px;margin-bottom:12px}
+.uni .l1{font-family:var(--display);font-size:17px;font-weight:700}
+.uni .l2{font-size:12.5px}.uni .l3{font-size:11.5px;color:var(--fg-soft)}
+.mock{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);text-align:center;margin:0 0 10px}
+.cover{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin:28px 0}
+.who p{margin:16px 0}.who span{display:inline-block;border-bottom:1px dotted var(--fg-soft);min-width:220px}
+.score{border-collapse:collapse;min-width:200px}.score thead th{background:var(--surface-2)!important;color:var(--fg)!important;text-transform:none;letter-spacing:0}.score td,.score th{border:1px solid var(--fg);padding:5px 12px;font-size:12px;text-align:left}
+.center{text-align:center;font-size:14px;margin:30px 0 8px}
+.rules{font-size:11.5px;color:var(--fg-soft);border:1px solid var(--rule);border-radius:4px;padding:8px 12px;margin-top:22px}
+.rules li{margin:2px 0}
+.qh{font-weight:700;margin:0 0 4px}.qh .tag{font-family:var(--mono);font-size:9px;color:var(--fg-faint);font-weight:500;margin-left:8px}
+.qblock{margin:0 0 10px}
+.xt{border-collapse:collapse;margin:6px auto 8px;font-size:11.5px}.xt th,.xt td{border:1px solid var(--fg);padding:3px 12px;text-align:center}
+.xt thead th{background:var(--surface-2);color:var(--fg);font-weight:600;text-transform:none;letter-spacing:0;font-size:11.5px}
+.part{margin:6px 0 0;break-inside:avoid}
+.space{height:var(--h,92px);border-bottom:1px dotted var(--rule);margin:2px 0 6px}
+.pb{break-before:page}
+.sol{border:1px solid var(--rule);border-left:4px solid var(--sec,var(--ink-2));border-radius:4px;padding:7px 10px;margin:6px 0;break-inside:avoid;background:var(--surface)}
+.sol .shead{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.sol .fin{font-family:var(--mono);font-weight:700;background:var(--ink-2-wash);padding:1px 6px;border-radius:3px}
+.sol ol{margin:4px 0 2px;padding-left:1.3em}.sol li{margin:1px 0}
+.sol .ar{font-family:var(--arabic);direction:rtl;text-align:right;color:var(--fg-soft);font-size:11.5px;margin-top:3px}
+.sol .trap{font-size:10.8px;color:var(--accent);margin-top:2px}
+.pts{font-family:var(--mono);font-size:9.5px;color:var(--fg-faint)}
+.sec{border:1px solid var(--rule);border-radius:4px;padding:8px 12px;margin:0 0 10px;background:var(--surface)}
+.sec h3{margin:0 0 6px;font-size:13px}
+.sec .arx{font-family:var(--arabic);direction:rtl;text-align:right;color:var(--fg-soft)}
+.cov td,.cov th{border:1px solid var(--rule);padding:2px 8px;font-size:10.5px}.cov{border-collapse:collapse;width:100%}
+.cov thead th{background:var(--surface-2);color:var(--fg);text-transform:none;letter-spacing:0}
+</style><div class="wrap"><div class="paper"><div class="uni"><div class="l1">Sultan Qaboos University · College of Science</div>
+<div class="l2">Department of Mathematics · STAT 2101 – Introduction to Statistics</div>
+<div class="l3">Chapter 4 Review Test · ANSWERS, MARKING SCHEME AND EXPLANATIONS: Probability and Counting Rules · Time: 90 minutes</div></div>
+<p class="mock">Mock review test in the format of the SQU midterm · for practice only, not an official exam</p>
+<div class="sec"><h3>1 · How SQU midterm questions are built (from the Fall 2014 STAT 1001 Midterm II)</h3>
+<ul><li><b>Format</b>: a cover page with a score table, 4 main questions each split into [A] and [B] with points (40 pts, 1 hour), long real-life scenarios in (a), (b), (c) parts, and "show all your work". This mock copies it: 5 questions, 60 pts, 90 minutes.</li>
+<li><b>Q1[A] style</b>, a two-way table from an SQU survey: one <b>or</b> question across rows, one <b>and not</b> question in a single row, and one <b>given that</b> question. This mock's Q1[A] has the same three, plus independence and mutually-exclusive checks.</li>
+<li><b>Q1[B] style</b>, counting with categories: "how many ways that <b>none</b> of them…" (a combination from the other categories) and "the probability that <b>one</b> of them…" (exactly one: ₖC₁ × ₒₜₕₑᵣC₂ ÷ ₙC₃).</li>
+<li>Points are about 1 per step; the final number alone rarely earns full marks.</li></ul>
+<p class="arx">الأسئلة طويلة وقصصية من بيئة الجامعة، وكل سؤال يختبر قاعدتين أو ثلاثًا بالترتيب. الدرجة على الخطوات: اسم القاعدة، والتعويض، ثم الناتج.</p></div>
+<div class="sec"><h3>2 · The Chapter 4 questions of that midterm, solved</h3>
+<p><b>Q1[A]</b> (100 students; Science 25, Medicine 38, Engineering 37). (a) P(M or E): colleges are mutually exclusive, so (38 + 37)/100 = <b>0.75</b>. (b) P(M and N) = 18/100 = <b>0.18</b>. (c) P(Y | S) = 15/25 = <b>0.6</b>.</p>
+<p><b>Q1[B]</b> (31 customers: blue 12, green 8, gray 4, black 7; 3 selected). (a) None black: ₂₄C₃ = <b>2,024</b> ways. (b) Exactly one green: ₈C₁ × ₂₃C₂ / ₃₁C₃ = 8 × 253 / 4,495 = 2024/4495 ≈ 0.4503.</p>
+<p class="arx">بقية أسئلة ذلك الامتحان (القيمة المتوقعة، ذات الحدين، الطبيعي، فترات الثقة) من الفصول 5 إلى 7، وليست من الفصل الرابع.</p></div>
+<div class="sec"><h3>3 · Coverage: every Chapter 4 point and where it is tested</h3><table class="cov"><thead><tr><th>Point</th><th>Question</th></tr></thead><tbody><tr><td>Sample space, set notation, classical probability</td><td>Q2[A] a, e</td></tr><tr><td>Empirical probability, frequency table</td><td>Q2[B]</td></tr><tr><td>Subjective probability</td><td>Q2[B] e</td></tr><tr><td>Complement, at least / at most / more than</td><td>Q1[B] c · Q2[A] c · Q2[B] · Q3[A] c</td></tr><tr><td>Mutually exclusive events</td><td>Q1[A] f · Q2[A] d · Q3[A] e</td></tr><tr><td>Addition rules 1 and 2</td><td>Q1[A] a · Q2[A] b · Q3[A] a</td></tr><tr><td>Extended addition rule (3 events)</td><td>Q3[C]</td></tr><tr><td>Two-way table: and, or, given</td><td>Q1[A]</td></tr><tr><td>Conditional probability</td><td>Q1[A] c, d · Q2[A] e · Q3[A] d · Q4[A] d</td></tr><tr><td>Independence test</td><td>Q1[A] e · Q3[A] e · Q4[A] e</td></tr><tr><td>Multiplication rule 1 (independent)</td><td>Q3[B] d · Q4[B] a–e</td></tr><tr><td>Multiplication rule 2 (dependent, without replacement, "of those")</td><td>Q3[B] a–c · Q4[A] b · Q4[B] f</td></tr><tr><td>Tree diagram</td><td>Q3[B] c · Q4[A]</td></tr><tr><td>At least one = 1 − none</td><td>Q1[B] c · Q4[B] b · Q5[B] b</td></tr><tr><td>Fundamental counting rule, with and without repetition</td><td>Q5[A] a, b</td></tr><tr><td>Permutation rule 1</td><td>Q5[A] c</td></tr><tr><td>Permutation rule 2 (identical letters)</td><td>Q5[A] e</td></tr><tr><td>Combinations</td><td>Q1[B] a · Q5[A] d</td></tr><tr><td>Probability with counting rules</td><td>Q1[B] b–d · Q5[B]</td></tr></tbody></table></div>
+<p class="qh" style="margin-top:12px">Q1. [A]. [7 pts.] <span class="tag">§ 4-1 · 4-2 · 4-3</span></p>
+<div class="sol" style="--sec:var(--ink-1)"><div class="shead"><span><b>(a)</b> <span class="pts">[2 pts]</span></span><span class="fin">135/200 = 27/40 ≈ 0.675</span></div><ol><li>Engineering and Home are <b>not</b> mutually exclusive (35 students are both), so use addition rule 2.</li><li>P(E ∪ H) = P(E) + P(H) − P(E ∩ H) = 70/200 + 100/200 − 35/200 = 135/200 = 0.675</li></ol><div class="ar">الشرح: «أو» تعني الجمع، ولأن بينهما تداخلًا (35 طالبًا) نطرح التقاطع مرة واحدة.</div><div class="trap">Common mistake: Adding 70 + 100 without subtracting 35 gives 170/200, which counts 35 students twice.</div></div>
+<div class="sol" style="--sec:var(--ink-1)"><div class="shead"><span><b>(b)</b> <span class="pts">[1 pt]</span></span><span class="fin">36/200 = 9/50 ≈ 0.18</span></div><ol><li>"And" in a table means cells inside the Science row: Home + Café = 30 + 6 = 36.</li><li>P = 36/200 = 0.18</li></ol><div class="ar">الشرح: «و» في الجدول = خلايا داخل صف العلوم فقط، والمقام هو المجموع الكلي.</div><div class="trap">Common mistake: Using 1 − 24/60: that answers a conditional question (given Science), not "and".</div></div>
+<div class="sol" style="--sec:var(--ink-1)"><div class="shead"><span><b>(c)</b> <span class="pts">[1 pt]</span></span><span class="fin">15/70 = 3/14 ≈ 0.2143</span></div><ol><li>"Given Economics" shrinks the sample space to the Economics row (70 students).</li><li>P(L | C) = 15/70 = 3/14 ≈ 0.2143</li></ol><div class="ar">الشرح: «بشرط» تجعل المقام مجموع صف الشرط (70) وليس 200.</div><div class="trap">Common mistake: Dividing by 200 (that is P(L and C)) or by 60 (that is P(C | L)).</div></div>
+<div class="sol" style="--sec:var(--ink-1)"><div class="shead"><span><b>(d)</b> <span class="pts">[1 pt]</span></span><span class="fin">6/40 = 3/20 ≈ 0.15</span></div><ol><li>Condition: Café column, total 40.</li><li>P(S | F) = 6/40 = 0.15</li></ol><div class="ar">الشرح: الشرط هنا العمود (المقهى) فالمقام 40.</div><div class="trap">Common mistake: Reversing the condition: P(F | S) = 6/60 = 0.1 is a different question.</div></div>
+<div class="sol" style="--sec:var(--ink-1)"><div class="shead"><span><b>(e)</b> <span class="pts">[1 pt]</span></span><span class="fin">Independent</span></div><ol><li>P(E) · P(H) = (70/200)(100/200) = 0.35 × 0.5 = 0.175</li><li>P(E ∩ H) = 35/200 = 0.175. They are equal, so E and H are independent.</li><li>Equivalently, P(H | E) = 35/70 = 0.5 = P(H).</li></ol><div class="ar">الشرح: الاستقلال: نقارن P(E∩H) مع حاصل ضرب P(E)·P(H). إذا تساويا فهما مستقلان.</div><div class="trap">Common mistake: Answering with "they overlap, so they are dependent": overlap is about mutual exclusivity, not independence.</div></div>
+<div class="sol" style="--sec:var(--ink-1)"><div class="shead"><span><b>(f)</b> <span class="pts">[1 pt]</span></span><span class="fin">No</span></div><ol><li>P(S ∩ F) = 6/200 ≠ 0: six students are both, so they can occur together.</li></ol><div class="ar">الشرح: المتنافيان لا يقعان معًا؛ هنا 6 طلاب في الخليتين معًا، إذن ليسا متنافيين.</div><div class="trap">Common mistake: Mixing up mutually exclusive with independent.</div></div>
+<p class="qh" style="margin-top:12px">Q1. [B]. [5 pts.] <span class="tag">§ 4-4 · 4-5</span></p>
+<div class="sol" style="--sec:var(--ink-1)"><div class="shead"><span><b>(a)</b> <span class="pts">[1 pt]</span></span><span class="fin">3,060</span></div><ol><li>Total customers = 10 + 7 + 5 + 3 = 25; non-Apple = 18.</li><li>Order doesn't matter, so choose 4 of the 18: ₁₈C₄ = 3,060 ways.</li></ol><div class="ar">الشرح: «ولا واحد اشترى Apple» يعني أن الأربعة كلهم من غير Apple، أي ₁₈C₄.</div><div class="trap">Common mistake: Writing 18 × 17 × 16 × 15 (a permutation): the four customers form a group, so order doesn't matter.</div></div>
+<div class="sol" style="--sec:var(--ink-1)"><div class="shead"><span><b>(b)</b> <span class="pts">[2 pts]</span></span><span class="fin">5700/12650 = 114/253 ≈ 0.4506</span></div><ol><li>n(S) = ₂₅C₄ = 12,650.</li><li>"One of them" means exactly one: 1 Huawei <b>and</b> 3 non-Huawei = ₅C₁ × ₂₀C₃ = 5 × 1,140 = 5,700.</li><li>P = 5,700/12,650 = 114/253 ≈ 0.4506</li></ol><div class="ar">الشرح: «واحد منهم» = واحد بالضبط: نختار 1 من 5 و 3 من الباقين (20)، ونضرب.</div><div class="trap">Common mistake: Writing 5/25, or forgetting to choose the other 3 customers from the non-Huawei 20.</div></div>
+<div class="sol" style="--sec:var(--ink-1)"><div class="shead"><span><b>(c)</b> <span class="pts">[1 pt]</span></span><span class="fin">9590/12650 = 959/1265 ≈ 0.7581</span></div><ol><li>Complement of part (a): P = 1 − 3,060/12,650 = 9,590/12,650 ≈ 0.7581</li></ol><div class="ar">الشرح: «على الأقل واحد» = 1 − «ولا واحد»، ونستفيد من نتيجة الفرع (a).</div><div class="trap">Common mistake: Adding exactly 1, 2, 3, 4 Apple cases: correct but long, and easy to slip.</div></div>
+<div class="sol" style="--sec:var(--ink-1)"><div class="shead"><span><b>(d)</b> <span class="pts">[1 pt]</span></span><span class="fin">945/12650 = 189/2530 ≈ 0.0747</span></div><ol><li>₁₀C₂ × ₇C₂ = 45 × 21 = 945.</li><li>P = 945/12,650 ≈ 0.0747</li></ol><div class="ar">الشرح: من كل فئة نختار بالتوافيق ثم نضرب لأن الشرطين معًا («و»).</div><div class="trap">Common mistake: Adding 45 + 21 instead of multiplying.</div></div>
+<p class="qh" style="margin-top:12px">Q2. [A]. [6 pts.] <span class="tag">§ 4-1 · 4-2 · 4-3</span></p>
+<div class="sol" style="--sec:var(--ink-2)"><div class="shead"><span><b>(a)</b> <span class="pts">[1 pt]</span></span><span class="fin">4/36 = 1/9 ≈ 0.1111</span></div><ol><li>n(S) = 6 × 6 = 36 equally likely ordered pairs.</li><li>A = {(3,6), (4,5), (5,4), (6,3)}, n(A) = 4.</li><li>P(A) = 4/36 = 1/9 ≈ 0.1111</li></ol><div class="ar">الشرح: اكتب الحدث بصيغة المجموعات كما يطلب الدكتور، ثم <span dir="ltr">n(A)/n(S)</span>.</div><div class="trap">Common mistake: Treating (3,6) and (6,3) as one outcome: the dice are different, so order counts.</div></div>
+<div class="sol" style="--sec:var(--ink-2)"><div class="shead"><span><b>(b)</b> <span class="pts">[2 pts]</span></span><span class="fin">10/36 = 5/18 ≈ 0.2778</span></div><ol><li>Sum ≥ 10: (4,6) (5,5) (6,4) (5,6) (6,5) (6,6) → 6 outcomes. Doubles: 6 outcomes.</li><li>Both: (5,5), (6,6) → 2. Not mutually exclusive, so P = (6 + 6 − 2)/36 = 10/36 = 5/18 ≈ 0.2778</li></ol><div class="ar">الشرح: «على الأقل 10» تشمل 10 و 11 و 12. وبما أن (5,5) و (6,6) في الحدثين نطرحهما مرة.</div><div class="trap">Common mistake: Taking "at least 10" as sums 11 and 12 only, or forgetting the overlap.</div></div>
+<div class="sol" style="--sec:var(--ink-2)"><div class="shead"><span><b>(c)</b> <span class="pts">[1 pt]</span></span><span class="fin">30/36 = 5/6 ≈ 0.8333</span></div><ol><li>P(sum = 7) = 6/36. Complement: 1 − 6/36 = 30/36 = 5/6 ≈ 0.8333</li></ol><div class="ar">الشرح: «ليس» = المتمّمة: <span dir="ltr">1 − P(E)</span>.</div><div class="trap">Common mistake: Counting the 30 outcomes one by one: correct but slow.</div></div>
+<div class="sol" style="--sec:var(--ink-2)"><div class="shead"><span><b>(d)</b> <span class="pts">[1 pt]</span></span><span class="fin">Yes</span></div><ol><li>Doubles have even sums (2, 4, …, 12), so no double gives 7: the intersection is ∅.</li></ol><div class="ar">الشرح: لا يوجد زوج متشابه مجموعه 7، فالتقاطع فارغ، إذن متنافيان.</div><div class="trap">Common mistake: Saying "independent": that is a different idea.</div></div>
+<div class="sol" style="--sec:var(--ink-2)"><div class="shead"><span><b>(e)</b> <span class="pts">[1 pt]</span></span><span class="fin">1/5 ≈ 0.2</span></div><ol><li>Reduced sample space: sum 8 = {(2,6), (3,5), (4,4), (5,3), (6,2)}, 5 outcomes.</li><li>Only (3,5) has first die 3: P = 1/5 = 0.2.</li><li>By formula: P(first 3 ∩ sum 8)/P(sum 8) = (1/36)/(5/36) = 1/5.</li></ol><div class="ar">الشرح: الشرط يصغّر فضاء العينة إلى النتائج الخمس التي مجموعها 8.</div><div class="trap">Common mistake: Answering 1/6 (ignoring the condition) or 1/36.</div></div>
+<p class="qh" style="margin-top:12px">Q2. [B]. [5 pts.] <span class="tag">§ 4-1</span></p>
+<div class="sol" style="--sec:var(--ink-2)"><div class="shead"><span><b>(a)</b> <span class="pts">[1 pt]</span></span><span class="fin">18/80 = 9/40 ≈ 0.225</span></div><ol><li>Empirical probability f/n = 18/80 = 0.225</li></ol><div class="ar">الشرح: الاحتمال التجريبي = التكرار ÷ المجموع.</div><div class="trap">Common mistake: Using n(S) = 5 classes as if they were equally likely.</div></div>
+<div class="sol" style="--sec:var(--ink-2)"><div class="shead"><span><b>(b)</b> <span class="pts">[1 pt]</span></span><span class="fin">47/80 ≈ 0.5875</span></div><ol><li>0 or 1: (22 + 25)/80 = 47/80 = 0.5875</li></ol><div class="ar">الشرح: «على الأكثر 1» تشمل 0 و 1.</div><div class="trap">Common mistake: Using 1 only (exactly), or 0 only.</div></div>
+<div class="sol" style="--sec:var(--ink-2)"><div class="shead"><span><b>(c)</b> <span class="pts">[1 pt]</span></span><span class="fin">15/80 = 3/16 ≈ 0.1875</span></div><ol><li>3 and 4-or-more: (10 + 5)/80 = 0.1875</li></ol><div class="ar">الشرح: «أكثر من 2» لا تشمل 2.</div><div class="trap">Common mistake: Including the 18 students with exactly 2.</div></div>
+<div class="sol" style="--sec:var(--ink-2)"><div class="shead"><span><b>(d)</b> <span class="pts">[1 pt]</span></span><span class="fin">58/80 = 29/40 ≈ 0.725</span></div><ol><li>Complement of 0 absences: 1 − 22/80 = 58/80 = 0.725</li></ol><div class="ar">الشرح: على الأقل واحد = 1 − ولا مرة.</div><div class="trap">Common mistake: Adding four classes: correct but slow.</div></div>
+<div class="sol" style="--sec:var(--ink-2)"><div class="shead"><span><b>(e)</b> <span class="pts">[1 pt]</span></span><span class="fin">Empirical</span></div><ol><li>Empirical: it is based on observed frequencies (f/n).</li><li>Subjective example: a doctor estimates a 30% chance that a patient needs an operation.</li></ol><div class="ar">الشرح: تجريبي لأنه مبني على بيانات مسجلة. الشخصي = تقدير خبير بلا عدّ ولا بيانات.</div><div class="trap">Common mistake: Calling it classical: the classes are not equally likely.</div></div>
+<p class="qh" style="margin-top:12px">Q3. [A]. [5 pts.] <span class="tag">§ 4-2 · 4-3</span></p>
+<p style="font-size:11px">Venn regions: A only 0.27 · A ∩ B 0.18 · B only 0.17 · neither 0.38 (sum 1 ✓).</p>
+<div class="sol" style="--sec:var(--ink-3)"><div class="shead"><span><b>(a)</b> <span class="pts">[1 pt]</span></span><span class="fin">0.18</span></div><ol><li>Rearrange addition rule 2: P(A ∩ B) = P(A) + P(B) − P(A ∪ B) = 0.45 + 0.35 − 0.62 = 0.18</li></ol><div class="ar">الشرح: نقلب قاعدة الجمع لإيجاد التقاطع.</div><div class="trap">Common mistake: Multiplying 0.45 × 0.35: that assumes independence, which isn't given.</div></div>
+<div class="sol" style="--sec:var(--ink-3)"><div class="shead"><span><b>(b)</b> <span class="pts">[1 pt]</span></span><span class="fin">0.27</span></div><ol><li>P(A ∩ Bᶜ) = P(A) − P(A ∩ B) = 0.45 − 0.18 = 0.27</li></ol><div class="ar">الشرح: A فقط = A ناقص المنطقة المشتركة.</div><div class="trap">Common mistake: Writing P(A) − P(B).</div></div>
+<div class="sol" style="--sec:var(--ink-3)"><div class="shead"><span><b>(c)</b> <span class="pts">[1 pt]</span></span><span class="fin">0.38</span></div><ol><li>P((A ∪ B)ᶜ) = 1 − 0.62 = 0.38</li></ol><div class="ar">الشرح: لا هذا ولا ذاك = متمّمة الاتحاد.</div><div class="trap">Common mistake: Writing 1 − P(A) − P(B) = 0.20, which ignores the overlap.</div></div>
+<div class="sol" style="--sec:var(--ink-3)"><div class="shead"><span><b>(d)</b> <span class="pts">[1 pt]</span></span><span class="fin">18/35 ≈ 0.5143</span></div><ol><li>P(A | B) = P(A ∩ B)/P(B) = 0.18/0.35 = 18/35 ≈ 0.5143</li></ol><div class="ar">الشرح: الشرط B في المقام.</div><div class="trap">Common mistake: Dividing by P(A).</div></div>
+<div class="sol" style="--sec:var(--ink-3)"><div class="shead"><span><b>(e)</b> <span class="pts">[1 pt]</span></span><span class="fin">Dependent; not mutually exclusive</span></div><ol><li>P(A | B) ≈ 0.5143 ≠ P(A) = 0.45 (or 0.45 × 0.35 = 0.1575 ≠ 0.18): dependent.</li><li>P(A ∩ B) = 0.18 ≠ 0: not mutually exclusive.</li></ol><div class="ar">الشرح: سؤالان مختلفان: الاستقلال بمقارنة الاحتمال الشرطي، والتنافي بالنظر إلى التقاطع.</div><div class="trap">Common mistake: Using one test to answer both questions.</div></div>
+<p class="qh" style="margin-top:12px">Q3. [B]. [5 pts.] <span class="tag">§ 4-3</span></p>
+<div class="sol" style="--sec:var(--ink-3)"><div class="shead"><span><b>(a)</b> <span class="pts">[1 pt]</span></span><span class="fin">1/3 ≈ 0.3333</span></div><ol><li>Dependent draws, multiplication rule 2: (6/10)(5/9) = 30/90 = 1/3 ≈ 0.3333</li></ol><div class="ar">الشرح: بدون إرجاع: يقل البسط والمقام في السحبة الثانية.</div><div class="trap">Common mistake: (6/10)² = 0.36: that is with replacement.</div></div>
+<div class="sol" style="--sec:var(--ink-3)"><div class="shead"><span><b>(b)</b> <span class="pts">[2 pts]</span></span><span class="fin">8/15 ≈ 0.5333</span></div><ol><li>Two orders: red-white or white-red.</li><li>(6/10)(4/9) + (4/10)(6/9) = 24/90 + 24/90 = 48/90 = 8/15 ≈ 0.5333</li><li>Check with combinations: ₆C₁·₄C₁/₁₀C₂ = 24/45 = 8/15 ✓</li></ol><div class="ar">الشرح: «واحدة من كل لون» لها ترتيبان: أحمر ثم أبيض، أو أبيض ثم أحمر.</div><div class="trap">Common mistake: Counting only one order, which gives 24/90 (half the answer).</div></div>
+<div class="sol" style="--sec:var(--ink-3)"><div class="shead"><span><b>(c)</b> <span class="pts">[1 pt]</span></span><span class="fin">2/5 ≈ 0.4</span></div><ol><li>Two paths end with white: R then W, or W then W.</li><li>(6/10)(4/9) + (4/10)(3/9) = 24/90 + 12/90 = 36/90 = 0.4</li></ol><div class="ar">الشرح: نجمع مسارات الشجرة التي تنتهي بالأبيض. والنتيجة = 4/10، وهذا ليس صدفة.</div><div class="trap">Common mistake: Writing 4/9 or 3/9: both ignore what the first draw was.</div></div>
+<div class="sol" style="--sec:var(--ink-3)"><div class="shead"><span><b>(d)</b> <span class="pts">[1 pt]</span></span><span class="fin">0.36</span></div><ol><li>Independent draws, multiplication rule 1: (6/10)(6/10) = 0.36</li></ol><div class="ar">الشرح: مع الإرجاع: السحبتان مستقلتان، فيتكرر نفس الاحتمال.</div><div class="trap">Common mistake: Keeping 5/9 from the without-replacement case.</div></div>
+<p class="qh" style="margin-top:12px">Q3. [C]. [3 pts.] <span class="tag">§ 4-2</span></p>
+<div class="sol" style="--sec:var(--ink-3)"><div class="shead"><span><b>(a)</b> <span class="pts">[2 pts]</span></span><span class="fin">115/120 = 23/24 ≈ 0.9583</span></div><ol><li>Extended addition rule: (65 + 50 + 40 − 20 − 15 − 10 + 5)/120 = 115/120 ≈ 0.9583</li></ol><div class="ar">الشرح: نجمع الثلاثة، نطرح الأزواج، ثم نعيد إضافة الثلاثي.</div><div class="trap">Common mistake: Forgetting to add back the 5 who take all three.</div></div>
+<div class="sol" style="--sec:var(--ink-3)"><div class="shead"><span><b>(b)</b> <span class="pts">[1 pt]</span></span><span class="fin">5/120 = 1/24 ≈ 0.0417</span></div><ol><li>1 − 115/120 = 5/120 ≈ 0.0417</li></ol><div class="ar">الشرح: المتمّمة.</div></div>
+<p class="qh" style="margin-top:12px">Q4. [A]. [6 pts.] <span class="tag">§ 4-3</span></p>
+<div class="sol" style="--sec:var(--ink-4)"><div class="shead"><span><b>(a)</b> <span class="pts">[1 pt]</span></span><span class="fin">Tree</span></div><ol><li>Hostel 0.55 → car 0.20 / no car 0.80; not hostel 0.45 → car 0.70 / no car 0.30.</li><li>Each branch pair sums to 1.</li></ol><div class="ar">الشرح: الفرع الأول: السكن، والثاني: السيارة بشرط السكن.</div><div class="trap">Common mistake: Putting 0.20 on the first level: it is conditional, so it belongs on the second level.</div></div>
+<div class="sol" style="--sec:var(--ink-4)"><div class="shead"><span><b>(b)</b> <span class="pts">[1 pt]</span></span><span class="fin">0.11</span></div><ol><li>Multiplication rule 2: P(H) · P(car | H) = 0.55 × 0.20 = 0.11</li></ol><div class="ar">الشرح: «من بين هؤلاء» تعني احتمالًا شرطيًا، فنضرب على طول الفرع.</div><div class="trap">Common mistake: Answering 0.20, which is P(car | H).</div></div>
+<div class="sol" style="--sec:var(--ink-4)"><div class="shead"><span><b>(c)</b> <span class="pts">[2 pts]</span></span><span class="fin">0.425</span></div><ol><li>Add the two paths that end in "car": 0.11 + 0.45 × 0.70 = 0.11 + 0.315 = 0.425</li></ol><div class="ar">الشرح: نجمع كل المسارات المنتهية بـ «سيارة».</div><div class="trap">Common mistake: Averaging 0.20 and 0.70.</div></div>
+<div class="sol" style="--sec:var(--ink-4)"><div class="shead"><span><b>(d)</b> <span class="pts">[1 pt]</span></span><span class="fin">0.2588</span></div><ol><li>P(H | car) = P(H ∩ car)/P(car) = 0.11/0.425 ≈ 0.2588</li></ol><div class="ar">الشرح: السؤال المعكوس: نقسم المسار على مجموع المسارات.</div><div class="trap">Common mistake: Answering 0.20 or 0.55.</div></div>
+<div class="sol" style="--sec:var(--ink-4)"><div class="shead"><span><b>(e)</b> <span class="pts">[1 pt]</span></span><span class="fin">Dependent</span></div><ol><li>P(car | H) = 0.20 ≠ P(car) = 0.425.</li></ol><div class="ar">الشرح: الاحتمال الشرطي لا يساوي العادي، إذن تابعان.</div></div>
+<p class="qh" style="margin-top:12px">Q4. [B]. [6 pts.] <span class="tag">§ 4-3 · 4-5</span></p>
+<div class="sol" style="--sec:var(--ink-4)"><div class="shead"><span><b>(a)</b> <span class="pts">[1 pt]</span></span><span class="fin">0.7164</span></div><ol><li>Multiplication rule 1: 0.92⁴ ≈ 0.7164</li></ol><div class="ar">الشرح: المكونات مستقلة فنضرب احتمال العمل أربع مرات.</div><div class="trap">Common mistake: 0.08⁴: that is P(all fail).</div></div>
+<div class="sol" style="--sec:var(--ink-4)"><div class="shead"><span><b>(b)</b> <span class="pts">[1 pt]</span></span><span class="fin">0.2836</span></div><ol><li>1 − 0.92⁴ ≈ 0.2836</li></ol><div class="ar">الشرح: على الأقل واحد = 1 − ولا واحد.</div><div class="trap">Common mistake: 4 × 0.08 = 0.32.</div></div>
+<div class="sol" style="--sec:var(--ink-4)"><div class="shead"><span><b>(c)</b> <span class="pts">[1 pt]</span></span><span class="fin">1/6 ≈ 0.1667</span></div><ol><li>Independent: (1/2)(2/6) = 1/6 ≈ 0.1667</li></ol><div class="ar">الشرح: أداتان منفصلتان = مستقلتان.</div><div class="trap">Common mistake: Adding instead of multiplying.</div></div>
+<div class="sol" style="--sec:var(--ink-4)"><div class="shead"><span><b>(d)</b> <span class="pts">[1 pt]</span></span><span class="fin">0.65</span></div><ol><li>P(A ∩ B) = 0.3 × 0.5 = 0.15; P(A ∪ B) = 0.3 + 0.5 − 0.15 = 0.65</li></ol><div class="ar">الشرح: الاستقلال يعطي التقاطع، وقاعدة الجمع ما زالت مطلوبة.</div><div class="trap">Common mistake: 0.3 + 0.5 = 0.8.</div></div>
+<div class="sol" style="--sec:var(--ink-4)"><div class="shead"><span><b>(e)</b> <span class="pts">[1 pt]</span></span><span class="fin">0.38</span></div><ol><li>Stat only + Math only = 0.8 × 0.3 + 0.2 × 0.7 = 0.24 + 0.14 = 0.38</li></ol><div class="ar">الشرح: «بالضبط واحدة» لها حالتان، نجمعهما.</div><div class="trap">Common mistake: Computing only one case.</div></div>
+<div class="sol" style="--sec:var(--ink-4)"><div class="shead"><span><b>(f)</b> <span class="pts">[1 pt]</span></span><span class="fin">12/2652 = 1/221 ≈ 0.0045</span></div><ol><li>(4/52)(3/51) = 12/2652 = 1/221 ≈ 0.0045</li></ol><div class="ar">الشرح: بدون إرجاع: 3 آسات من 51 في السحبة الثانية.</div><div class="trap">Common mistake: (4/52)² = 1/169 (with replacement).</div></div>
+<p class="qh" style="margin-top:12px">Q5. [A]. [6 pts.] <span class="tag">§ 4-4</span></p>
+<div class="sol" style="--sec:var(--ink-1)"><div class="shead"><span><b>(a)</b> <span class="pts">[1 pt]</span></span><span class="fin">17,576,000</span></div><ol><li>Fundamental counting rule: 26³ × 10³ = 17,576 × 1,000 = 17,576,000</li></ol><div class="ar">الشرح: مع التكرار: نفس العدد في كل خانة.</div><div class="trap">Common mistake: Using 26 + 10.</div></div>
+<div class="sol" style="--sec:var(--ink-1)"><div class="shead"><span><b>(b)</b> <span class="pts">[1 pt]</span></span><span class="fin">11,232,000</span></div><ol><li>26 × 25 × 24 × 10 × 9 × 8 = 15,600 × 720 = 11,232,000</li></ol><div class="ar">الشرح: بدون تكرار: ينقص العدد واحدًا في كل خانة.</div></div>
+<div class="sol" style="--sec:var(--ink-1)"><div class="shead"><span><b>(c)</b> <span class="pts">[1 pt]</span></span><span class="fin">1,320</span></div><ol><li>Distinct offices, order matters: ₁₂P₃ = 12 × 11 × 10 = 1,320</li></ol><div class="ar">الشرح: مناصب مختلفة = تباديل.</div><div class="trap">Common mistake: ₁₂C₃ = 220 is a committee without titles.</div></div>
+<div class="sol" style="--sec:var(--ink-1)"><div class="shead"><span><b>(d)</b> <span class="pts">[1 pt]</span></span><span class="fin">495</span></div><ol><li>No titles, order doesn't matter: ₁₂C₄ = 495</li></ol><div class="ar">الشرح: لجنة بلا مناصب = توافيق.</div><div class="trap">Common mistake: ₁₂P₄ = 11,880.</div></div>
+<div class="sol" style="--sec:var(--ink-1)"><div class="shead"><span><b>(e)</b> <span class="pts">[2 pts]</span></span><span class="fin">420; 60</span></div><ol><li>7 letters: A ×3, L ×2, S, H. Permutation rule 2: 7!/(3! 2!) = 5040/12 = 420</li><li>Fix H first; arrange S, A, L, A, L, A: 6!/(3! 2!) = 720/12 = 60</li></ol><div class="ar">الشرح: نقسم على مضروب عدد التكرار لكل حرف متكرر.</div><div class="trap">Common mistake: Forgetting to divide by 2! for the two L's.</div></div>
+<p class="qh" style="margin-top:12px">Q5. [B]. [6 pts.] <span class="tag">§ 4-5</span></p>
+<div class="sol" style="--sec:var(--ink-1)"><div class="shead"><span><b>(a)</b> <span class="pts">[2 pts]</span></span><span class="fin">560/2002 = 40/143 ≈ 0.2797</span></div><ol><li>n(S) = ₁₄C₅ = 2,002.</li><li>n(E) = ₆C₃ × ₈C₂ = 20 × 28 = 560.</li><li>P = 560/2,002 = 40/143 ≈ 0.2797</li></ol><div class="ar">الشرح: 3 نساء و 2 رجال: نضرب التوافيق ثم نقسم على الكل.</div><div class="trap">Common mistake: Using ₆C₃/₁₄C₅, which forgets to choose the 2 men.</div></div>
+<div class="sol" style="--sec:var(--ink-1)"><div class="shead"><span><b>(b)</b> <span class="pts">[1 pt]</span></span><span class="fin">1996/2002 = 998/1001 ≈ 0.997</span></div><ol><li>1 − P(all women) = 1 − ₆C₅/₁₄C₅ = 1 − 6/2,002 ≈ 0.997</li></ol><div class="ar">الشرح: المتمّمة: كلهم نساء.</div></div>
+<div class="sol" style="--sec:var(--ink-1)"><div class="shead"><span><b>(c)</b> <span class="pts">[1 pt]</span></span><span class="fin">715/2002 = 5/14 ≈ 0.3571</span></div><ol><li>Salim is in; choose 4 of the other 13: ₁₃C₄ = 715. P = 715/2,002 = 5/14 ≈ 0.3571</li><li>Check: 5 seats among 14 people = 5/14 ✓</li></ol><div class="ar">الشرح: نثبّت سالم ثم نختار الباقين.</div></div>
+<div class="sol" style="--sec:var(--ink-1)"><div class="shead"><span><b>(d)</b> <span class="pts">[1 pt]</span></span><span class="fin">12/24 = 1/2 ≈ 0.5</span></div><ol><li>n(S) = 4! = 24. Start with O or A: 2 × 3! = 12. P = 12/24 = 0.5</li></ol><div class="ar">الشرح: الحرف الأول من حرفين علّة من أصل 4.</div></div>
+<div class="sol" style="--sec:var(--ink-1)"><div class="shead"><span><b>(e)</b> <span class="pts">[1 pt]</span></span><span class="fin">0.72</span></div><ol><li>n(S) = 10³ = 1000; n(E) = 10 × 9 × 8 = 720; P = 0.72</li></ol><div class="ar">الشرح: الكل مع التكرار، والحدث بدون تكرار.</div><div class="trap">Common mistake: Using ₁₀C₃: order matters in a number.</div></div></div></div>

@@ -1,0 +1,761 @@
+<title>Chapter 4 Review Test</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+
+<style>
+/* Layout: single reading column with a sticky rail nav; four section inks mirror the
+   overprint of a Venn diagram — the chapter's own governing picture. */
+:root{
+  --bg:#fbfaf7;
+  --surface:#ffffff;
+  --surface-2:#f2f1ec;
+  --fg:#1b2027;
+  --fg-soft:#4c5663;
+  --fg-faint:#78828f;
+  --rule:#dddcd4;
+  --rule-soft:#eceae3;
+
+  --ink-1:#1f4e79;   /* 4-1  sample spaces      */
+  --ink-2:#0f6f5c;   /* 4-2  addition rules     */
+  --ink-3:#9a5b12;   /* 4-3  multiplication     */
+  --ink-4:#7b2d6b;   /* 4-4 / 4-5 counting      */
+  --accent:#b23b2e;  /* alarms, traps, must-know */
+
+  --ink-1-wash:#eaf0f7;
+  --ink-2-wash:#e5f1ee;
+  --ink-3-wash:#f8efe1;
+  --ink-4-wash:#f4e9f2;
+  --accent-wash:#f9eae7;
+
+  --display:"Spectral",Georgia,"Times New Roman",serif;
+  --body:"IBM Plex Sans","IBM Plex Sans Arabic",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --arabic:"IBM Plex Sans Arabic","IBM Plex Sans",-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  --measure:70ch;
+  --shadow:0 1px 2px rgba(27,32,39,.05),0 8px 24px -16px rgba(27,32,39,.25);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#13171c;
+    --surface:#1a1f26;
+    --surface-2:#222932;
+    --fg:#e8e6e0;
+    --fg-soft:#b3bac4;
+    --fg-faint:#8a929e;
+    --rule:#333b45;
+    --rule-soft:#272e37;
+
+    --ink-1:#7bb0e8;
+    --ink-2:#4fc4a8;
+    --ink-3:#e2a74e;
+    --ink-4:#d089c2;
+    --accent:#ef7f70;
+
+    --ink-1-wash:#182633;
+    --ink-2-wash:#132a26;
+    --ink-3-wash:#2b2314;
+    --ink-4-wash:#2a1b28;
+    --accent-wash:#2f1c19;
+
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#13171c;
+  --surface:#1a1f26;
+  --surface-2:#222932;
+  --fg:#e8e6e0;
+  --fg-soft:#b3bac4;
+  --fg-faint:#8a929e;
+  --rule:#333b45;
+  --rule-soft:#272e37;
+
+  --ink-1:#7bb0e8;
+  --ink-2:#4fc4a8;
+  --ink-3:#e2a74e;
+  --ink-4:#d089c2;
+  --accent:#ef7f70;
+
+  --ink-1-wash:#182633;
+  --ink-2-wash:#132a26;
+  --ink-3-wash:#2b2314;
+  --ink-4-wash:#2a1b28;
+  --accent-wash:#2f1c19;
+
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.8);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{
+  max-width:980px;
+  margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 72px;
+}
+
+/* ---------- masthead ---------- */
+.masthead{
+  padding-block:56px 36px;
+  border-bottom:3px double var(--rule);
+  margin-bottom:36px;
+}
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+}
+h1{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(2.1rem,6vw,3.4rem);
+  line-height:1.08;
+  margin:0 0 10px;
+  letter-spacing:-.015em;
+  text-wrap:balance;
+}
+.subtitle{
+  font-family:var(--display);
+  font-style:italic;
+  font-size:clamp(1.05rem,2.6vw,1.3rem);
+  color:var(--fg-soft);
+  margin:0 0 22px;
+  max-width:var(--measure);
+}
+.meta-strip{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 10px;
+  margin-top:20px;
+}
+.chip{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.04em;
+  padding:5px 10px;
+  border:1px solid var(--rule);
+  border-radius:3px;
+  color:var(--fg-soft);
+  background:var(--surface);
+}
+.chip strong{color:var(--fg);font-weight:600}
+
+/* ---------- nav ---------- */
+nav.toc{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:20px 22px;
+  margin-bottom:44px;
+  box-shadow:var(--shadow);
+}
+nav.toc h2{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:0 0 14px;
+  font-weight:500;
+}
+nav.toc ol{
+  margin:0;padding:0;list-style:none;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:4px 26px;
+}
+nav.toc li{min-width:0}
+nav.toc a{
+  display:flex;
+  gap:10px;
+  align-items:baseline;
+  text-decoration:none;
+  color:var(--fg);
+  padding:5px 0;
+  border-bottom:1px solid var(--rule-soft);
+  font-size:.92rem;
+}
+nav.toc a:hover{color:var(--accent)}
+nav.toc a .num{
+  font-family:var(--mono);
+  font-size:.74rem;
+  color:var(--fg-faint);
+  flex:none;
+  min-width:2.4em;
+}
+
+/* ---------- sections ---------- */
+section{margin-bottom:64px;scroll-margin-top:24px}
+.sec-head{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+  padding-bottom:14px;
+  border-bottom:2px solid var(--sec,var(--fg));
+  margin-bottom:28px;
+}
+.sec-num{
+  font-family:var(--mono);
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.06em;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:5px 9px;
+  border-radius:3px;
+  flex:none;
+  margin-top:6px;
+}
+.sec-head h2{
+  font-family:var(--display);
+  font-size:clamp(1.5rem,4vw,2.05rem);
+  line-height:1.18;
+  margin:0;
+  font-weight:600;
+  text-wrap:balance;
+  min-width:0;
+}
+.sec-head .ar{
+  display:block;
+  font-family:var(--arabic);
+  font-size:.92rem;
+  font-style:normal;
+  color:var(--fg-soft);
+  direction:rtl;
+  margin-top:4px;
+  font-weight:400;
+}
+h3{
+  font-family:var(--body);
+  font-size:1.08rem;
+  font-weight:600;
+  letter-spacing:-.005em;
+  margin:36px 0 12px;
+  color:var(--fg);
+  display:flex;
+  align-items:baseline;
+  gap:9px;
+  flex-wrap:wrap;
+}
+h3::before{
+  content:"";
+  width:18px;height:3px;
+  background:var(--sec,var(--fg));
+  flex:none;
+  border-radius:2px;
+}
+h4{
+  font-family:var(--mono);
+  font-size:.74rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin:26px 0 10px;
+  font-weight:500;
+}
+p{margin:0 0 14px;max-width:var(--measure)}
+ul,ol{max-width:var(--measure);padding-left:1.25em;margin:0 0 14px}
+li{margin-bottom:7px}
+li::marker{color:var(--sec,var(--fg-faint))}
+strong{font-weight:600}
+em{font-style:italic}
+code,.v{
+  font-family:var(--mono);
+  font-size:.9em;
+  background:var(--surface-2);
+  padding:1px 5px;
+  border-radius:3px;
+  white-space:nowrap;
+}
+.term{
+  font-weight:600;
+  color:var(--sec,var(--fg));
+}
+a{color:var(--accent)}
+
+/* ---------- maths ---------- */
+.fx{
+  font-family:var(--mono);
+  font-size:1.02rem;
+  line-height:2.1;
+  white-space:nowrap;
+}
+.frac{
+  display:inline-flex;
+  flex-direction:column;
+  vertical-align:middle;
+  text-align:center;
+  font-family:var(--mono);
+  line-height:1.25;
+  margin:0 .22em;
+  position:relative;
+  top:-.08em;
+}
+.frac .num{border-bottom:1.5px solid currentColor;padding:0 .4em .08em}
+.frac .den{padding:.08em .4em 0}
+sub,sup{font-size:.72em}
+
+.formula{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-left:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:18px 20px;
+  margin:18px 0 22px;
+  box-shadow:var(--shadow);
+  overflow-x:auto;
+}
+.formula .label{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg-faint));
+  margin-bottom:10px;
+  font-weight:600;
+}
+.formula .fx{margin:4px 0}
+.formula .note{
+  font-size:.88rem;
+  color:var(--fg-soft);
+  margin:10px 0 0;
+  white-space:normal;
+  max-width:none;
+}
+
+/* ---------- example cards ---------- */
+.ex{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:5px;
+  margin:20px 0;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.ex > .q{
+  padding:16px 20px;
+  border-bottom:1px dashed var(--rule);
+  background:var(--wash,var(--surface-2));
+}
+.ex .tag{
+  font-family:var(--mono);
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--sec,var(--fg));
+  display:block;
+  margin-bottom:6px;
+}
+.ex .q p{margin:0;max-width:none}
+.ex > .a{padding:16px 20px}
+.ex > .a p{max-width:none}
+.ex > .a p:last-child{margin-bottom:0}
+.ex .steps{margin:0;padding-left:1.2em;max-width:none}
+.ex .steps li{margin-bottom:9px}
+.ans{
+  display:inline-block;
+  font-family:var(--mono);
+  font-weight:600;
+  background:var(--sec,var(--fg));
+  color:#fff;
+  padding:3px 9px;
+  border-radius:3px;
+  font-size:.92em;
+  white-space:nowrap;
+}
+
+/* ---------- callouts ---------- */
+.callout{
+  border-radius:4px;
+  padding:16px 18px;
+  margin:20px 0;
+  border:1px solid;
+  font-size:.95rem;
+}
+.callout p{max-width:none}
+.callout p:last-child{margin-bottom:0}
+.callout .ct{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-weight:600;
+  display:block;
+  margin-bottom:8px;
+}
+.trap{background:var(--accent-wash);border-color:var(--accent)}
+.trap .ct{color:var(--accent)}
+.tip{background:var(--ink-2-wash);border-color:var(--ink-2)}
+.tip .ct{color:var(--ink-2)}
+.note{background:var(--surface-2);border-color:var(--rule)}
+.note .ct{color:var(--fg-faint)}
+
+.ar-note{
+  font-family:var(--arabic);
+  direction:rtl;
+  text-align:right;
+  background:var(--surface-2);
+  border-right:4px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:13px 16px;
+  margin:16px 0;
+  font-size:.96rem;
+  line-height:1.95;
+  color:var(--fg-soft);
+}
+.ar-note b{color:var(--fg);font-weight:600}
+.ar-note .lbl{
+  display:block;
+  font-size:.72rem;
+  letter-spacing:.04em;
+  color:var(--sec,var(--fg-faint));
+  font-weight:600;
+  margin-bottom:4px;
+}
+.ar-note ul{padding-right:1.2em;padding-left:0;margin:6px 0 0;max-width:none}
+
+.ar-note p{margin:0 0 7px;max-width:none}
+.ar-note p:last-child{margin-bottom:0}
+.ar-note ol{padding-right:1.3em;padding-left:0;margin:6px 0 0;max-width:none}
+.ar-note li{margin-bottom:5px}
+.ar-note .v{font-size:.84em}
+.arn{display:block;font-family:var(--arabic);direction:rtl;unicode-bidi:isolate;text-align:left;font-size:.84rem;color:var(--fg-soft);font-weight:500;margin-top:2px;line-height:1.5}
+.subtitle-ar{font-family:var(--arabic);direction:rtl;text-align:right;color:var(--fg-soft);font-size:1.02rem;margin:0 0 8px;max-width:none;line-height:1.9}
+
+/* ---------- diagrams ---------- */
+figure.dg{margin:22px 0 26px;padding:16px 14px 12px;background:var(--surface);border:1px solid var(--rule);border-radius:4px;break-inside:avoid;page-break-inside:avoid}
+figure.dg svg{display:block;width:100%;height:auto;margin:0 auto;color:var(--fg);overflow:visible}
+figure.dg figcaption{font-size:.86rem;color:var(--fg-soft);margin:10px auto 0;max-width:64ch;text-align:center;line-height:1.5}
+figure.dg figcaption .ar{display:block;font-family:var(--arabic);direction:rtl;margin-top:4px;font-size:.9rem}
+.dg .ln{stroke:currentColor;fill:none;stroke-width:1.4}
+.dg .ln-soft{stroke:var(--fg-faint);fill:none;stroke-width:1.2}
+.dg .dash{stroke-dasharray:4 4}
+.dg .thick{stroke-width:2.6}
+.dg text{fill:currentColor;font-family:var(--body);font-size:13px}
+.dg text.m{font-family:var(--mono);font-size:12.5px}
+.dg text.sm{font-size:11.5px}
+.dg text.big{font-family:var(--mono);font-size:19px;font-weight:600}
+.dg text.soft{fill:var(--fg-soft)}
+.dg text.b{font-weight:600}
+.dg .bg{fill:var(--surface)}
+.dg .wash1{fill:var(--ink-1-wash)} .dg .wash2{fill:var(--ink-2-wash)} .dg .wash3{fill:var(--ink-3-wash)} .dg .wash4{fill:var(--ink-4-wash)} .dg .washA{fill:var(--accent-wash)}
+.dg .f1{fill:var(--ink-1)} .dg .f2{fill:var(--ink-2)} .dg .f3{fill:var(--ink-3)} .dg .f4{fill:var(--ink-4)} .dg .fA{fill:var(--accent)}
+.dg .s1{stroke:var(--ink-1)} .dg .s2{stroke:var(--ink-2)} .dg .s3{stroke:var(--ink-3)} .dg .s4{stroke:var(--ink-4)} .dg .sA{stroke:var(--accent)}
+.dg text.t1{fill:var(--ink-1)} .dg text.t2{fill:var(--ink-2)} .dg text.t3{fill:var(--ink-3)} .dg text.t4{fill:var(--ink-4)} .dg text.tA{fill:var(--accent)}
+
+/* ---------- tables ---------- */
+.tbl-wrap{overflow-x:auto;margin:18px 0 22px;-webkit-overflow-scrolling:touch}
+table{
+  border-collapse:collapse;
+  width:100%;
+  min-width:420px;
+  font-size:.93rem;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+}
+caption{
+  caption-side:top;
+  text-align:left;
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  padding-bottom:9px;
+  font-weight:500;
+}
+th,td{
+  padding:9px 13px;
+  border-bottom:1px solid var(--rule-soft);
+  text-align:left;
+  vertical-align:top;
+}
+thead th{
+  background:var(--sec,var(--surface-2));
+  color:#fff;
+  font-weight:600;
+  font-size:.78rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  border-bottom:none;
+}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even){background:var(--surface-2)}
+td.num,th.num{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+
+/* ---------- misc blocks ---------- */
+.grid2{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:16px;
+  margin:18px 0 22px;
+}
+.card{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-top:3px solid var(--sec,var(--fg));
+  border-radius:4px;
+  padding:16px 18px;
+  min-width:0;
+}
+.card h5{
+  font-family:var(--body);
+  font-size:.97rem;
+  font-weight:600;
+  margin:0 0 8px;
+}
+.card p{font-size:.92rem;margin-bottom:0;max-width:none;color:var(--fg-soft)}
+
+.flow{
+  list-style:none;
+  padding:0;
+  margin:18px 0 22px;
+  max-width:none;
+  display:grid;
+  gap:10px;
+}
+.flow li{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:13px 16px;
+  margin:0;
+}
+.flow .k{
+  font-family:var(--mono);
+  font-size:.73rem;
+  font-weight:600;
+  color:#fff;
+  background:var(--sec,var(--fg));
+  padding:3px 8px;
+  border-radius:3px;
+  flex:none;
+  margin-top:3px;
+  white-space:nowrap;
+}
+.flow .t{min-width:0;font-size:.95rem}
+.flow .t b{display:block;margin-bottom:2px}
+
+.keypad{
+  font-family:var(--mono);
+  font-size:.86rem;
+  background:var(--surface-2);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:4px 9px;
+  display:inline-block;
+  white-space:nowrap;
+}
+
+hr.soft{border:none;border-top:1px solid var(--rule-soft);margin:34px 0}
+
+footer{
+  border-top:3px double var(--rule);
+  padding-top:24px;
+  margin-top:20px;
+  font-size:.86rem;
+  color:var(--fg-faint);
+}
+footer p{max-width:none}
+
+@media (max-width:520px){
+  .sec-head{gap:11px}
+  .fx{font-size:.94rem}
+  .ex > .q,.ex > .a{padding:14px 15px}
+}
+@media print{
+  body{background:#fff}
+  nav.toc{break-inside:avoid}
+  .ex,.formula,.callout,.card{break-inside:avoid}
+  section{break-before:auto}
+}
+</style>
+
+<style>
+/* Chapter 3: denser setting so pages carry more per sheet */
+body{font-size:14.5px;line-height:1.55}
+p,ul,ol{max-width:none}
+p{margin:0 0 9px}
+li{margin-bottom:4px}
+.masthead{padding-block:34px 18px;margin-bottom:20px}
+section{margin-bottom:30px}
+.sec-head{margin-bottom:16px;padding-bottom:10px}
+h3{margin:22px 0 8px;font-size:1.02rem}
+h4{margin:14px 0 6px}
+.formula{padding:11px 14px;margin:10px 0 12px}
+.formula .fx{margin:1px 0;line-height:1.9}
+.ex{margin:10px 0}
+.ex > .q,.ex > .a{padding:10px 14px}
+.ex .steps li{margin-bottom:5px}
+.callout{padding:10px 13px;margin:10px 0;font-size:.93rem}
+.ar-note{padding:9px 13px;margin:9px 0;line-height:1.8;font-size:.93rem}
+.tbl-wrap{margin:8px 0 12px}
+th,td{padding:6px 10px}
+table{font-size:.9rem;min-width:0}
+figure.dg{margin:12px 0 14px;padding:10px 10px 8px}
+figure.dg figcaption{margin-top:6px;font-size:.84rem}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+.cols2 > *{min-width:0}
+.cols2 .ex{margin:0}
+@media (max-width:640px){.cols2{grid-template-columns:1fr}}
+/* let long formulas wrap inside narrow columns instead of being clipped */
+.fx,.ex .fx,.cols2 .fx,.a .fx{white-space:normal;overflow-x:visible}
+footer{margin-top:10px;padding-top:12px;font-size:.78rem}footer p{margin:0 0 4px}
+/* allow tall example cards to split across pages so no half-empty pages */
+@media print{.ex,.a.long{break-inside:auto!important;page-break-inside:auto!important}.a:not(.long){break-inside:avoid!important}.ex > .q{break-inside:avoid}.cols2{break-inside:auto}}
+.series{list-style:none;padding:0;margin:8px 0 12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2px 22px;max-width:none}
+.series li{margin:0;padding:3px 0;border-bottom:1px solid var(--rule-soft);font-size:.82rem;color:var(--fg-faint)}
+.series li.here{color:var(--fg);font-weight:600}
+.series li.here::after{content:"  ← this file";color:var(--accent);font-weight:500}
+.src{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-faint);border:1px solid var(--rule);border-radius:3px;padding:0 5px;margin-left:6px;white-space:nowrap;font-weight:500}
+</style>
+<style>
+body{font-size:12.2px;line-height:1.5}
+.paper{max-width:none}
+.uni{text-align:center;border-bottom:2px solid var(--fg);padding-bottom:6px;margin-bottom:12px}
+.uni .l1{font-family:var(--display);font-size:17px;font-weight:700}
+.uni .l2{font-size:12.5px}.uni .l3{font-size:11.5px;color:var(--fg-soft)}
+.mock{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);text-align:center;margin:0 0 10px}
+.cover{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin:28px 0}
+.who p{margin:16px 0}.who span{display:inline-block;border-bottom:1px dotted var(--fg-soft);min-width:220px}
+.score{border-collapse:collapse;min-width:200px}.score thead th{background:var(--surface-2)!important;color:var(--fg)!important;text-transform:none;letter-spacing:0}.score td,.score th{border:1px solid var(--fg);padding:5px 12px;font-size:12px;text-align:left}
+.center{text-align:center;font-size:14px;margin:30px 0 8px}
+.rules{font-size:11.5px;color:var(--fg-soft);border:1px solid var(--rule);border-radius:4px;padding:8px 12px;margin-top:22px}
+.rules li{margin:2px 0}
+.qh{font-weight:700;margin:0 0 4px}.qh .tag{font-family:var(--mono);font-size:9px;color:var(--fg-faint);font-weight:500;margin-left:8px}
+.qblock{margin:0 0 10px}
+.xt{border-collapse:collapse;margin:6px auto 8px;font-size:11.5px}.xt th,.xt td{border:1px solid var(--fg);padding:3px 12px;text-align:center}
+.xt thead th{background:var(--surface-2);color:var(--fg);font-weight:600;text-transform:none;letter-spacing:0;font-size:11.5px}
+.part{margin:6px 0 0;break-inside:avoid}
+.space{height:var(--h,92px);border-bottom:1px dotted var(--rule);margin:2px 0 6px}
+.pb{break-before:page}
+.sol{border:1px solid var(--rule);border-left:4px solid var(--sec,var(--ink-2));border-radius:4px;padding:7px 10px;margin:6px 0;break-inside:avoid;background:var(--surface)}
+.sol .shead{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.sol .fin{font-family:var(--mono);font-weight:700;background:var(--ink-2-wash);padding:1px 6px;border-radius:3px}
+.sol ol{margin:4px 0 2px;padding-left:1.3em}.sol li{margin:1px 0}
+.sol .ar{font-family:var(--arabic);direction:rtl;text-align:right;color:var(--fg-soft);font-size:11.5px;margin-top:3px}
+.sol .trap{font-size:10.8px;color:var(--accent);margin-top:2px}
+.pts{font-family:var(--mono);font-size:9.5px;color:var(--fg-faint)}
+.sec{border:1px solid var(--rule);border-radius:4px;padding:8px 12px;margin:0 0 10px;background:var(--surface)}
+.sec h3{margin:0 0 6px;font-size:13px}
+.sec .arx{font-family:var(--arabic);direction:rtl;text-align:right;color:var(--fg-soft)}
+.cov td,.cov th{border:1px solid var(--rule);padding:2px 8px;font-size:10.5px}.cov{border-collapse:collapse;width:100%}
+.cov thead th{background:var(--surface-2);color:var(--fg);text-transform:none;letter-spacing:0}
+</style><div class="wrap"><div class="paper"><div class="uni"><div class="l1">Sultan Qaboos University · College of Science</div>
+<div class="l2">Department of Mathematics · STAT 2101 – Introduction to Statistics</div>
+<div class="l3">Chapter 4 Review Test: Probability and Counting Rules · Time: 90 minutes</div></div>
+<p class="mock">Mock review test in the format of the SQU midterm · for practice only, not an official exam</p>
+<div class="cover"><div class="who"><p>Student's Name: <span></span></p><p>ID Number: <span></span></p><p>Section: <span style="min-width:80px"></span></p></div>
+<table class="score"><thead><tr><th>Qu. No</th><th>Score</th></tr></thead><tbody><tr><td>Q1. [12 pts.]</td><td style='min-width:70px'></td></tr><tr><td>Q2. [11 pts.]</td><td style='min-width:70px'></td></tr><tr><td>Q3. [13 pts.]</td><td style='min-width:70px'></td></tr><tr><td>Q4. [12 pts.]</td><td style='min-width:70px'></td></tr><tr><td>Q5. [12 pts.]</td><td style='min-width:70px'></td></tr><tr><td><b>Total: 60</b></td><td></td></tr></tbody></table></div>
+<p class="center">Questions start from the next page</p><p class="center" style="margin-top:0">Answer <b>all</b> questions. Show <b>all</b> your work.</p>
+<div class="rules"><b>Instructions.</b><ul><li>Give each probability as a fraction and as a decimal to 4 places.</li>
+<li>Write sample spaces and events in set notation where asked, and name the rule you use. Method marks are given for both.</li>
+<li>Calculators allowed. Sections covered: 4-1 to 4-5.</li></ul></div>
+<div class="pb"></div>
+<div class="qblock"><p class="qh">Q1. [A]. [7 pts.] <span class="tag">§ 4-1 · 4-2 · 4-3</span></p><p>A researcher surveyed <b>200 SQU students</b> from three colleges about where they prefer to study. The results are shown below.</p>
+<table class="xt "><thead><tr><th>College</th><th>Library (L)</th><th>Home (H)</th><th>Café (F)</th></tr></thead><tbody><tr><td>Science (S)</td><td>24</td><td>30</td><td>6</td></tr><tr><td>Engineering (E)</td><td>21</td><td>35</td><td>14</td></tr><tr><td>Economics (C)</td><td>15</td><td>35</td><td>20</td></tr></tbody></table>
+<p>A student is picked at random. Find the probability that the student:</p>
+<div class="part"><p>(a) is from the College of Engineering <b>or</b> prefers to study at home. <span class="pts">[2]</span></p><div class="space" style="--h:138px"></div></div>
+<div class="part"><p>(b) is from the College of Science <b>and</b> does not prefer the library. <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(c) prefers the library, <b>given that</b> the student is from the College of Economics. <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(d) is from the College of Science, <b>given that</b> the student prefers the café. <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(e) Are the events "Engineering" and "Home" independent? Justify. <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(f) Are the events "Science" and "Café" mutually exclusive? Justify. <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+</div>
+
+<div class="qblock"><p class="qh">Q1. [B]. [5 pts.] <span class="tag">§ 4-4 · 4-5</span></p><p>In a phone shop, 10 customers bought Samsung, 7 bought Apple, 5 bought Huawei and 3 bought Xiaomi phones (each customer bought only one phone). If <b>4 customers are selected at random</b>,</p>
+<div class="part"><p>(a) find how many ways that <b>none</b> of them bought an Apple phone. <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(b) find the probability that <b>one</b> of them bought a Huawei phone. <span class="pts">[2]</span></p><div class="space" style="--h:138px"></div></div>
+<div class="part"><p>(c) find the probability that <b>at least one</b> of them bought an Apple phone. <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(d) find the probability that 2 bought Samsung <b>and</b> 2 bought Apple. <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+</div>
+<div class="pb"></div>
+<div class="qblock"><p class="qh">Q2. [A]. [6 pts.] <span class="tag">§ 4-1 · 4-2 · 4-3</span></p><p>Two fair dice are rolled.</p>
+<div class="part"><p>(a) Write the event A = "the sum is 9" using set notation and find P(A). <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(b) Find the probability that the sum is <b>at least 10</b> or the two dice show the same number (doubles). <span class="pts">[2]</span></p><div class="space" style="--h:138px"></div></div>
+<div class="part"><p>(c) Find the probability that the sum is <b>not</b> 7. <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(d) Are the events "the sum is 7" and "doubles" mutually exclusive? Justify. <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(e) Given that the sum is 8, find the probability that the first die shows 3. <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+</div>
+
+<div class="qblock"><p class="qh">Q2. [B]. [5 pts.] <span class="tag">§ 4-1</span></p><p>The number of absences of <b>80 STAT 2101 students</b> last semester is shown below. A student is selected at random.</p>
+<table class="xt "><thead><tr><th>Absences</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4 or more</th><th>Total</th></tr></thead><tbody><tr><td>Students</td><td>22</td><td>25</td><td>18</td><td>10</td><td>5</td><td>80</td></tr></tbody></table>
+<div class="part"><p>(a) Find the probability that the student had exactly 2 absences. <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(b) Find the probability that the student had <b>at most</b> 1 absence. <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(c) Find the probability that the student had <b>more than</b> 2 absences. <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(d) Find the probability that the student had <b>at least one</b> absence. <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(e) What type of probability did you use? Give an example of a <b>subjective</b> probability. <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+</div>
+<div class="pb"></div>
+<div class="qblock"><p class="qh">Q3. [A]. [5 pts.] <span class="tag">§ 4-2 · 4-3</span></p><p>For two events A and B, P(A) = 0.45, P(B) = 0.35 and P(A ∪ B) = 0.62. Find:</p>
+<div class="part"><p>(a) P(A ∩ B) <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(b) the probability that A occurs but B does not. <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(c) the probability that neither A nor B occurs. <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(d) P(A | B) <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(e) Are A and B independent? Are they mutually exclusive? <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+</div>
+
+<div class="qblock"><p class="qh">Q3. [B]. [5 pts.] <span class="tag">§ 4-3</span></p><p>A box contains 6 red and 4 white balls. Two balls are drawn one after the other <b>without replacement</b>.</p>
+<div class="part"><p>(a) Find the probability that both balls are red. <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(b) Find the probability of getting one ball of each colour. <span class="pts">[2]</span></p><div class="space" style="--h:138px"></div></div>
+<div class="part"><p>(c) Find the probability that the <b>second</b> ball is white. <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(d) If the balls were drawn <b>with replacement</b>, find P(both red). <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+</div>
+
+<div class="qblock"><p class="qh">Q3. [C]. [3 pts.] <span class="tag">§ 4-2</span></p><p>Of 120 first-year students, 65 take Math, 50 take Physics and 40 take Chemistry; 20 take Math and Physics, 15 take Math and Chemistry, 10 take Physics and Chemistry, and 5 take all three. A student is chosen at random.</p>
+<div class="part"><p>(a) Find the probability that the student takes at least one of the three courses. <span class="pts">[2]</span></p><div class="space" style="--h:138px"></div></div>
+<div class="part"><p>(b) Find the probability that the student takes none of them. <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+</div>
+<div class="pb"></div>
+<div class="qblock"><p class="qh">Q4. [A]. [6 pts.] <span class="tag">§ 4-3</span></p><p>At SQU, 55% of students live in the university hostels. <b>Of those</b> living in the hostels, 20% own a car; of those not living in the hostels, 70% own a car. A student is selected at random.</p>
+<div class="part"><p>(a) Draw a tree diagram for this situation. <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(b) Find the probability that the student lives in the hostel <b>and</b> owns a car. <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(c) Find the probability that the student owns a car. <span class="pts">[2]</span></p><div class="space" style="--h:138px"></div></div>
+<div class="part"><p>(d) Given that the student owns a car, find the probability that he or she lives in the hostel. <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(e) Are the events "lives in hostel" and "owns a car" independent? Justify. <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+</div>
+
+<div class="qblock"><p class="qh">Q4. [B]. [6 pts.] <span class="tag">§ 4-3 · 4-5</span></p><p>Answer the following.</p>
+<div class="part"><p>(a) A machine has 4 components that work independently; each fails with probability 0.08. Find P(all four work). <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(b) For the same machine, find P(at least one component fails). <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(c) A coin is tossed and a die is rolled. Find P(tail and a number greater than 4). <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(d) A and B are independent with P(A) = 0.3 and P(B) = 0.5. Find P(A ∪ B). <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(e) Ali passes Statistics with probability 0.8 and Math with probability 0.7, independently. Find P(he passes exactly one). <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(f) Two cards are drawn from a standard deck without replacement. Find P(both are aces). <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+</div>
+<div class="pb"></div>
+<div class="qblock"><p class="qh">Q5. [A]. [6 pts.] <span class="tag">§ 4-4</span></p><p>Answer the following counting questions.</p>
+<div class="part"><p>(a) A car plate has 3 letters (A–Z) followed by 3 digits (0–9), repetition allowed. How many plates are possible? <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(b) How many plates are possible if no letter and no digit may repeat? <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(c) In how many ways can a president, a vice-president and a secretary be chosen from 12 club members? <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(d) In how many ways can a committee of 4 be chosen from the 12 members? <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(e) How many different arrangements of the letters of the word SALALAH are there? How many of them begin with H? <span class="pts">[2]</span></p><div class="space" style="--h:138px"></div></div>
+</div>
+
+<div class="qblock"><p class="qh">Q5. [B]. [6 pts.] <span class="tag">§ 4-5</span></p><p>A committee of 5 people is to be chosen at random from 8 men and 6 women.</p>
+<div class="part"><p>(a) Find the probability that exactly 3 women are chosen. <span class="pts">[2]</span></p><div class="space" style="--h:138px"></div></div>
+<div class="part"><p>(b) Find the probability that at least one man is chosen. <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(c) Find the probability that a particular man, Salim, is on the committee. <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(d) The letters of the word OMAN are arranged at random. Find P(the arrangement starts with a vowel). <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+<div class="part"><p>(e) A 3-digit lottery number (000–999) is drawn at random. Find P(all three digits are different). <span class="pts">[1]</span></p><div class="space" style="--h:104px"></div></div>
+</div></div></div>
